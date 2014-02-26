@@ -24,6 +24,8 @@
 # define LIBOPENCIF_H_
 
 # include "command/command.h"
+# include "command/transformation/transformation.h"
 # include "command/controlcommand/controlcommand.h"
+# include "command/controlcommand/callcommand/callcommand.h"
 
 # endif
