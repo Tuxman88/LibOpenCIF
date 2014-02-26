@@ -29,6 +29,7 @@ namespace OpenCIF
    {
       public:
          explicit Point ( void );
+         explicit Point ( const long int& new_x , const long int& new_y );
          virtual ~Point ( void );
          void setX ( const long int& new_x );
          void setY ( const long int& new_y );

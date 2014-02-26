@@ -31,6 +31,14 @@ OpenCIF::Point::Point ( void )
 }
 
 /*
+ * Specialized constructor. Initialices a point with the values specified.
+ */
+OpenCIF::Point::Point ( const long int& new_x , const long int& new_y )
+{
+   set ( new_x , new_y );
+}
+
+/*
  * Nothing to do.
  */
 OpenCIF::Point::~Point ( void )

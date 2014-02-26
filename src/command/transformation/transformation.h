@@ -23,6 +23,8 @@
 # ifndef LIBOPENCIF_TRANSFORMATION_H_
 # define LIBOPENCIF_TRANSFORMATION_H_
 
+# include "../point/point.h"
+
 namespace OpenCIF
 {
    class Transformation
@@ -30,6 +32,19 @@ namespace OpenCIF
       public:
          explicit Transformation ( void );
          virtual ~Transformation ( void );
+         
+         void setType ( const TransformationType& new_type );
+         TransformationType getType ( void ) const;
+         
+         void setRotation ( const OpenCIF::Point& new_rotation );
+         OpenCIF::Point getRotation ( void ) const;
+         
+         void setDisplacement ( const OpenCIF::Point& new_displacement );
+         OpenCIF::Point getDisplacement ( void ) const;
+         
+      private:
+         TransformationType transformation_type;
+         OpenCIF::Point transformation_point;
          
       public:
          enum TransformationType
