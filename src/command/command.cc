@@ -27,6 +27,17 @@
  */
 OpenCIF::Command::Command ( void )
 {
-
+   command_type = PlainCommand;
 }
 
+/*
+ * Nothing to do.
+ */
+OpenCIF::Command::~Command ( void )
+{
+}
+
+OpenCIF::Command::CommandType OpenCIF::Command::type ( void )
+{
+   return ( command_type );
+}

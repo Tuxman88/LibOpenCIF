@@ -42,7 +42,7 @@ namespace OpenCIF
       public:
          explicit Command ( void ); // Main constructor.
          virtual ~Command ( void ); // Destructor
-         virtual CommandType type (); // Returns the type of the instance. In this case, should return "PlainCommand"
+         virtual CommandType type ( void ); // Returns the type of the instance. In this case, should return "PlainCommand"
          
       protected:
          CommandType command_type;
