@@ -19,3 +19,49 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
+
+# include "callcommand.h"
+
+/*
+ * Default constructor. Nothing to do.
+ */
+OpenCIF::CallCommand::CallCommand ( void )
+   : ControlCommand ()
+{
+}
+
+/*
+ * Destructor. Nothing to do.
+ */
+OpenCIF::CallCommand::~CallCommand ( void )
+{
+}
+
+/*
+ * This member function returns a copy of the vector with the transformations.
+ */
+std::vector< OpenCIF::Transformation > OpenCIF::CallCommand::getTransformations ( void ) const
+{
+   return ( call_transformations );
+}
+
+/*
+ * This member function adds a single transformation to the transformation vector.
+ */
+void OpenCIF::CallCommand::addTransformation ( const OpenCIF::Transformation& new_transformation )
+{
+   call_transformations.push_back ( new_transformation );
+   
+   return;
+}
+
+/*
+ * This member functions receives a new vector of transformations, and stores it.
+ */
+void OpenCIF::CallCommand::setTransformations ( const std::vector< OpenCIF::Transformation >& new_transformations )
+{
+   call_transformations.clear ();
+   call_transformations = new_transformations;
+   
+   return;
+}

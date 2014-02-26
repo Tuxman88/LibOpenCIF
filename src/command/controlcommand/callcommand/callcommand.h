@@ -23,7 +23,10 @@
 # ifndef LIBOPENCIF_CALLCOMMAND_H_
 # define LIBOPENCIF_CALLCOMMAND_H_
 
+# include <vector>
+
 # include "../controlcommand.h"
+# include "../../transformation/transformation.h"
 
 namespace OpenCIF
 {
@@ -32,6 +35,13 @@ namespace OpenCIF
       public:
          explicit CallCommand ( void );
          virtual ~CallCommand ( void );
+         
+         void setTransformations ( const std::vector< OpenCIF::Transformation >& new_transformations );
+         void addTransformation ( const OpenCIF::Transformation& new_transformation );
+         std::vector< OpenCIF::Transformation > getTransformations ( void ) const;
+         
+      private:
+         std::vector< OpenCIF::Transformation > call_transformations;
    };
 }
 
