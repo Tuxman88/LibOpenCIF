@@ -28,5 +28,6 @@
 # include "command/point/point.h"
 # include "command/controlcommand/controlcommand.h"
 # include "command/controlcommand/callcommand/callcommand.h"
+# include "command/controlcommand/definitiondeletecommand/definitiondeletecommand.h"
 
 # endif

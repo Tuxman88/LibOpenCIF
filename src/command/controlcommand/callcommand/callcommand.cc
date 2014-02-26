@@ -28,6 +28,7 @@
 OpenCIF::CallCommand::CallCommand ( void )
    : ControlCommand ()
 {
+   command_type = Call;
 }
 
 /*
