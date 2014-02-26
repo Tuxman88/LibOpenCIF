@@ -29,5 +29,6 @@
 # include "command/controlcommand/controlcommand.h"
 # include "command/controlcommand/callcommand/callcommand.h"
 # include "command/controlcommand/definitiondeletecommand/definitiondeletecommand.h"
+# include "command/controlcommand/definitionendcommand/definitionendcommand.h"
 
 # endif
