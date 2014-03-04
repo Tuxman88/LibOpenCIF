@@ -33,5 +33,8 @@
 # include "command/controlcommand/definitionendcommand/definitionendcommand.h"
 # include "command/controlcommand/definitionstartcommand/definitionstartcommand.h"
 # include "command/rawcontentcommand/rawcontentcommand.h"
+# include "command/rawcontentcommand/commentcommand/commentcommand.h"
+# include "command/rawcontentcommand/userextentioncommand/userextentioncommand.h"
+# include "command/primitivecommand/primitivecommand.h"
 
 # endif

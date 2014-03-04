@@ -20,4 +20,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
+# ifndef LIBOPENCIF_COMMENTCOMMAND_H_
+# define LIBOPENCIF_COMMENTCOMMAND_H_
 
+# include "../rawcontentcommand.h"
+
+namespace OpenCIF
+{
+   class CommentCommand : public OpenCIF::RawContentCommand
+   {
+      public:
+         explicit CommentCommand ( void );
+         virtual ~CommentCommand ( void );
+   };
+}
+
+# endif
