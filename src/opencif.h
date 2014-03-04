@@ -32,5 +32,6 @@
 # include "command/controlcommand/definitiondeletecommand/definitiondeletecommand.h"
 # include "command/controlcommand/definitionendcommand/definitionendcommand.h"
 # include "command/controlcommand/definitionstartcommand/definitionstartcommand.h"
+# include "command/rawcontentcommand/rawcontentcommand.h"
 
 # endif
