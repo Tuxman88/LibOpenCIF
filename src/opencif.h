@@ -41,5 +41,7 @@
 # include "command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h"
 # include "command/primitivecommand/pathbasedcommand/wirecommand/wirecommand.h"
 # include "command/primitivecommand/positionbasedcommand/positionbasedcommand.h"
+# include "command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h"
+# include "command/primitivecommand/positionbasedcommand/roundflashcommand/roundflashcommand.h"
 
 # endif
