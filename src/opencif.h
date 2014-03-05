@@ -36,5 +36,9 @@
 # include "command/rawcontentcommand/commentcommand/commentcommand.h"
 # include "command/rawcontentcommand/userextentioncommand/userextentioncommand.h"
 # include "command/primitivecommand/primitivecommand.h"
+# include "command/primitivecommand/pathbasedcommand/pathbasedcommand.h"
+# include "command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h"
+# include "command/primitivecommand/pathbasedcommand/wirecommand/wirecommand.h"
+# include "command/primitivecommand/positionbasedcommand/positionbasedcommand.h"
 
 # endif
