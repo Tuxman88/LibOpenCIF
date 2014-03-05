@@ -26,6 +26,7 @@
 # include "command/command.h"
 # include "command/transformation/transformation.h"
 # include "command/point/point.h"
+# include "command/size/size.h"
 # include "command/fraction/fraction.h"
 # include "command/controlcommand/controlcommand.h"
 # include "command/controlcommand/callcommand/callcommand.h"

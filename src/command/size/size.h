@@ -18,24 +18,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# ifndef LIBOPENCIF_BOXCOMMAND_H_
-# define LIBOPENCIF_BOXCOMMAND_H_
-
-# include "../positionbasedcommand.h"
-# include "../../../point/point.h"
-# include "../../../size/size.h"
+# ifndef LIBOPENCIF_SIZE_H_
+# define LIBOPENCIF_SIZE_H_
 
 namespace OpenCIF
 {
-   class BoxCommand : public OpenCIF::PositionBasedCommand
+   class Size
    {
       public:
-         explicit BoxCommand ( void );
-         virtual ~BoxCommand ( void );
+         explicit Size ( void );
+         virtual ~Size ( void );
+         unsigned long int getWidth ( void ) const;
+         unsigned long int getHeight ( void ) const;
+         void setWidth ( const unsigned long int& new_width );
+         void setHeight ( const unsigned long int& new_height );
+         void set ( const unsigned long int& new_width , const unsigned long int& new_height );
          
-      protected:
+      private:
+         unsigned long int size_width;
+         unsigned long int size_height;
    };
 }
 
