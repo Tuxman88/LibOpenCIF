@@ -34,8 +34,14 @@ namespace OpenCIF
       public:
          explicit BoxCommand ( void );
          virtual ~BoxCommand ( void );
+         void setRotation ( const OpenCIF::Point& new_rotation );
+         void setSize ( const OpenCIF::Size& new_size );
+         OpenCIF::Size getSize ( void ) const;
+         OpenCIF::Point getRotation ( void ) const;
          
       protected:
+         OpenCIF::Size box_size;
+         OpenCIF::Point box_rotation;
    };
 }
 
