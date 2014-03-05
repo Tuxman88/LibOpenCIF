@@ -20,26 +20,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef LIBOPENCIF_ROUNDFLASHCOMMAND_H_
-# define LIBOPENCIF_ROUNDFLASHCOMMAND_H_
+# include "roundflashcommand.h"
 
-# include "../positionbasedcommand.h"
-
-namespace OpenCIF
+/*
+ * Default constructor. Initialize the diameter to a non-zero value.
+ */
+OpenCIF::RoundFlashCommand::RoundFlashCommand ( void )
+   : PositionBasedCommand ()
 {
-   class RoundFlashCommand : public OpenCIF::PositionBasedCommand
-   {
-      public:
-         explicit RoundFlashCommand ( void );
-         virtual ~RoundFlashCommand ( void );
-         void setDiameter ( const unsigned long int& new_diameter );
-         unsigned long int getDiameter ( void ) const;
-         
-      private:
-         unsigned long int round_diameter;
-   };
+   command_type = RoundFlash;
+   setDiameter ( 1 );
 }
 
-# endif
+/*
+ * Destructor. Nothing to do.
+ */
+OpenCIF::RoundFlashCommand::~RoundFlashCommand ( void )
+{
+}
 
+/*
+ * Member function to return the actual diameter of the command.
+ */
+long unsigned int OpenCIF::RoundFlashCommand::getDiameter ( void ) const
+{
+   return ( round_diameter );
+}
 
+/*
+ * Member function to set the command diameter.
+ */
+void OpenCIF::RoundFlashCommand::setDiameter ( const long unsigned int& new_diameter )
+{
+   round_diameter = new_diameter;
+   
+   return;
+}
