@@ -66,7 +66,8 @@ namespace OpenCIF
             Polygon ,
             Wire ,
             Box ,
-            RoundFlash
+            RoundFlash ,
+            Layer
          };
    };
 }
