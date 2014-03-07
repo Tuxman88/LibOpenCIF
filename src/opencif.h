@@ -43,5 +43,11 @@
 # include "command/primitivecommand/positionbasedcommand/positionbasedcommand.h"
 # include "command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h"
 # include "command/primitivecommand/positionbasedcommand/roundflashcommand/roundflashcommand.h"
+# include "command/layercommand/layercommand.h"
+# include "file/file.h"
+# include "finitestatemachine/finitestatemachine.h"
+# include "finitestatemachine/state.h"
+# include "finitestatemachine/ciffsm.h"
+
 
 # endif
