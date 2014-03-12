@@ -196,6 +196,54 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    /*
     * WIRE STATES
     */
+   
+   add ( 40 , BlankChar , 40 );
+   add ( 40 , Digit , 41 );
+   
+   add ( 41 , Digit , 41 );
+   add ( 41 , SeparatorChar , 42 );
+   
+   add ( 42 , SeparatorChar , 42 );
+   add ( 42 , "-" , 43 );
+   add ( 42 , Digit , 44 );
+   
+   add ( 43 , Digit , 44 );
+   
+   add ( 44 , Digit , 44 );
+   add ( 44 , SeparatorChar , 45 );
+   
+   add ( 45 , SeparatorChar , 45 );
+   add ( 45 , "-" , 46 );
+   add ( 45 , Digit , 47 );
+   
+   add ( 46 , Digit , 47 );
+   
+   add ( 47 , Digit , 47 );
+   add ( 47 , SeparatorChar , 48 );
+   add ( 47 , ";" , 1 );
+   
+   add ( 48 , SeparatorChar , 48 );
+   add ( 48 , "-" , 49 );
+   add ( 48 , Digit , 50 );
+   add ( 48 , ";" , 1 );
+   
+   add ( 49 , Digit , 50 );
+   
+   add ( 50 , Digit , 50 );
+   add ( 50 , SeparatorChar , 51 );
+   
+   add ( 51 , SeparatorChar , 51 );
+   add ( 51 , "-" , 52 );
+   add ( 51 , Digit , 53 );
+   
+   add ( 52 , Digit , 53 );
+   
+   add ( 53 , SeparatorChar , 48 );
+   add ( 53 , Digit , 53 );
+   add ( 53 , ";" , 1 );
+   
+   /*
+    */
 }
 
 /*
