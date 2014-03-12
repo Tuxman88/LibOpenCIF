@@ -243,6 +243,76 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 53 , ";" , 1 );
    
    /*
+    * LAYER STATES
+    */
+   
+   add ( 54 , BlankChar , 54 );
+   add ( 54 , LayerNameChar , 55 );
+   
+   add ( 55 , LayerNameChar , 55 );
+   add ( 55 , BlankChar , 56 );
+   add ( 55 , ";" , 1 );
+   
+   add ( 56 , BlankChar , 56 );
+   add ( 56 , ";" , 1 );
+   
+   /*
+    * DEFINITION COMMANDS (DELETE, START, END)
+    */
+   
+   add ( 57 , BlankChar , 57 );
+   add ( 57 , "S" , 58 );
+   add ( 57 , "F" , 66 );
+   add ( 57 , "D" , 67 );
+   
+   // Substates: Definition Start
+   
+   add ( 58 , SeparatorChar , 59 );
+   add ( 58 , Digit , 60 );
+   
+   add ( 59 , SeparatorChar , 59 );
+   add ( 59 , Digit , 60 );
+   
+   add ( 60 , Digit , 60 );
+   add ( 60 , SeparatorChar , 61 );
+   add ( 60 , ";" , 1 );
+   
+   add ( 61 , SeparatorChar , 61 );
+   add ( 61 , Digit , 62 );
+   add ( 61 , ";" , 1 );
+   
+   add ( 62 , Digit , 62 );
+   add ( 62 , SeparatorChar , 63 );
+   
+   add ( 63 , SeparatorChar , 63 );
+   add ( 63 , Digit , 64 );
+   
+   add ( 64 , Digit , 64 );
+   add ( 64 , SeparatorChar , 65 );
+   add ( 64 , ";" , 1 );
+   
+   add ( 65 , SeparatorChar , 65 );
+   add ( 65 , ";" , 1 );
+   
+   // Substates: Definition Finish
+   
+   add ( 66 , SeparatorChar , 66 );
+   add ( 66 , ";" , 1 );
+   
+   // Substates: Definition delete
+   
+   add ( 67 , BlankChar , 67 );
+   add ( 67 , Digit , 68 );
+   
+   add ( 68 , Digit , 68 );
+   add ( 68 , SeparatorChar , 69 );
+   add ( 68 , ";" , 1 );
+   
+   add ( 69 , SeparatorChar , 69 );
+   add ( 69 , ";" , 1 );
+   
+   /*
+    * CALL COMMAND STATES
     */
 }
 
