@@ -164,6 +164,38 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    /*
     * ROUNDFLASH STATES
     */
+   
+   add ( 31 , BlankChar , 31 );
+   add ( 31 , Digit , 32 );
+   
+   add ( 32 , Digit , 32 );
+   add ( 32 , SeparatorChar , 33 );
+   
+   add ( 33 , SeparatorChar , 33 );
+   add ( 33 , "-" , 34 );
+   add ( 33 , Digit , 35 );
+   
+   add ( 34 , Digit , 35 );
+   
+   add ( 35 , Digit , 35 );
+   add ( 35 , SeparatorChar , 36 );
+   
+   add ( 36 , SeparatorChar , 36 );
+   add ( 36 , "-" , 37 );
+   add ( 36 , Digit , 38 );
+   
+   add ( 37 , Digit , 38 );
+   
+   add ( 38 , Digit , 38 );
+   add ( 38 , SeparatorChar , 39 );
+   add ( 38 , ";" , 1 );
+   
+   add ( 39 , SeparatorChar , 39 );
+   add ( 39 , ";" , 1 );
+   
+   /*
+    * WIRE STATES
+    */
 }
 
 /*
