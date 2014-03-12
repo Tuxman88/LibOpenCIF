@@ -314,6 +314,85 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    /*
     * CALL COMMAND STATES
     */
+   
+   add ( 70 , BlankChar , 70 );
+   add ( 70 , Digit , 71 );
+   
+   add ( 71 , Digit , 71 );
+   add ( 71 , ";" , 1 );
+   add ( 71 , BlankChar , 72 );
+   add ( 71 , "T" , 73 );
+   add ( 71 , "M" , 79 );
+   add ( 71 , "R" , 82 );
+   
+   add ( 72 , BlankChar , 72 );
+   add ( 72 , ";" , 1 );
+   add ( 72 , "T" , 73 );
+   add ( 72 , "M" , 79 );
+   add ( 72 , "R" , 82 );
+   
+   add ( 73 , BlankChar , 73 );
+   add ( 73 , "-" , 74 );
+   add ( 73 , Digit , 75 );
+   
+   add ( 74 , Digit , 75 );
+   
+   add ( 75 , Digit , 75 );
+   add ( 75 , SeparatorChar , 76 );
+   
+   add ( 76 , SeparatorChar , 76 );
+   add ( 76 , "-" , 77 );
+   add ( 76 , Digit , 78 );
+   
+   add ( 77 , Digit , 78 );
+   
+   add ( 78 , Digit , 78 );
+   add ( 78 , BlankChar , 72 );
+   add ( 78 , ";" , 1 );
+   add ( 78 , "M" , 79 );
+   add ( 78 , "R" , 82 );
+   
+   add ( 79 , BlankChar , 79 );
+   add ( 79 , "X" , 80 );
+   add ( 79 , "Y" , 81 );
+   
+   add ( 80 , BlankChar , 72 );
+   add ( 80 , ";" , 1 );
+   add ( 80 , "T" , 73 );
+   add ( 80 , "R" , 82 );
+   
+   add ( 81 , BlankChar , 72 );
+   add ( 81 , ";" , 1 );
+   add ( 81 , "T" , 73 );
+   add ( 81 , "R" , 82 );
+   
+   add ( 82 , BlankChar , 82 );
+   add ( 82 , "-" , 83 );
+   add ( 82 , Digit , 84 );
+   
+   add ( 83 , Digit , 84 );
+   
+   add ( 84 , Digit , 84 );
+   add ( 84 , SeparatorChar , 85 );
+   
+   add ( 85 , SeparatorChar , 85 );
+   add ( 85 , "-" , 86 );
+   add ( 85 , Digit , 87 );
+   
+   add ( 86 , Digit , 87 );
+   
+   add ( 87 , Digit , 87 );
+   add ( 87 , BlankChar , 72 );
+   add ( 87 , ";" , 1 );
+   add ( 87 , "T" , 73 );
+   add ( 87 , "M" , 79 );
+   
+   /*
+    * DELETE COMMAND STATES
+    */
+   
+   add ( 88 , ExtentionChar , 88 );
+   add ( 88 , ";" , 1 );
 }
 
 /*
@@ -387,6 +466,16 @@ void OpenCIF::CIFFSM::add ( const int& input_state , const OpenCIF::CIFFSM::Tran
       case LayerNameChar:
          add ( input_state , Digit , output_state );
          add ( input_state , UpperChar , output_state );
+         break;
+         
+      case ExtentionChar:
+         for ( int i = 0; i < 256; i++ )
+         {
+            if ( i != ';' )
+            {
+               add ( input_state , std::string ( char ( i ) ) , output_state );
+            }
+         }
          break;
          
       default:

@@ -51,7 +51,8 @@ namespace OpenCIF
             UserChar ,
             CommentChar ,
             SeparatorChar ,
-            LayerNameChar
+            LayerNameChar ,
+            ExtentionChar
          };
    };
 }
