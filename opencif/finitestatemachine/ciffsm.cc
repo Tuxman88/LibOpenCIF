@@ -101,7 +101,7 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    
    add ( 12 , Digit , 13 );
    
-   add ( 13 , SeparatorChar , 7 );
+   add ( 13 , SeparatorChar , 8 );
    add ( 13 , Digit , 13 );
    add ( 13 , ";" , 1 );
    
