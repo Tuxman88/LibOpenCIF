@@ -37,7 +37,8 @@ namespace OpenCIF
       public:
          enum LoadStatus
          {
-            AllOk = 0 
+            AllOk = 0 ,
+            CantOpenInputFile
             
          };
       

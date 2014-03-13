@@ -23,7 +23,7 @@
 # include "file.h"
 
 /*
- * Default constructor.
+ * Default constructor. Nothing to do.
  */
 OpenCIF::File::File ( void )
 {
@@ -91,6 +91,31 @@ std::vector< std::string > OpenCIF::File::getMessages ( void )
  */
 OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( void )
 {
+   LoadStatus end_status;
+   
+   file_messages.clear ();
+   
+   end_status = openFile ();
+   
+   if ( end_status != AllOk )
+   {
+      return ( end_status );
+   }
+   
+   end_status = validateSintax ();
+   
+   if ( end_status != AllOk )
+   {
+      return ( end_status );
+   }
+   
+   end_status = loadCommands ();
+   
+   if ( end_status != AllOk )
+   {
+      return ( end_status );
+   }
+   
    return ( AllOk );
 }
 
@@ -99,6 +124,21 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( void )
  */
 OpenCIF::File::LoadStatus OpenCIF::File::openFile ( void )
 {
+   if ( file_input.is_open () )
+   {
+      file_messages.push_back ( std::string ( "File:openFile:Warning: Input file already opened. Closing." ) );
+      file_input.close ();
+   }
+   
+   file_input.open ( file_path.c_str () );
+   
+   if ( !file_input.is_open () )
+   {
+      file_messages.push_back ( std::string ( "File:openFile:Error: Can't open input file." ) );
+      
+      return ( CantOpenInputFile );
+   }
+   
    return ( AllOk );
 }
 
