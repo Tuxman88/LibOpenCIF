@@ -171,6 +171,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    int jump_state = 1; // By default, start in 1
    int previous_state; // Previous state.
    char input_char;
+   char previous_char;
    
    fsm = new OpenCIF::CIFFSM ();
    
@@ -179,6 +180,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    
    while ( !file_input.eof () && jump_state != -1 )
    {
+      previous_char = input_char;
       input_char = file_input.get ();
       
       if ( !file_input.eof () )
@@ -193,19 +195,29 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    
    if ( jump_state == -1 )
    {
+      std::string tmp;
+      
       // There is an invalid input.
       file_messages.push_back ( std::string ( "File:validateSintax:Error: Error detected when validating contents of input file." ) );
+      
       oss << previous_state;
+      
       file_messages.push_back ( std::string ( "                           State: " ) + oss.str () );
+      
       oss.str ( std::string ( "" ) );
-      oss << input_char;
-      file_messages.push_back ( std::string ( "                           Input char: " ) +
-                                oss.str () +
-                                std::string ( " (ASCII=" ) +
+      oss << (char)previous_char;
+      
+      tmp = tmp;
+      
+      file_messages.push_back ( std::string ( "                           Input char: \"" ) +
+                                tmp +
+                                std::string ( "\" (ASCII=" ) +
                                 (
-                                   ( oss.str ( std::string ( "" ) ) , oss << (int)input_char ) ,
+                                   ( oss.str ( std::string ( "" ) ) , oss << (int)previous_char ) ,
                                    oss.str ()
-                                ) );
+                                ) +
+                                std::string ( ")" )
+                              );
       
       return ( IncorrectInputFile );
    }

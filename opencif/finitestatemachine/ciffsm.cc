@@ -60,6 +60,7 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 1 , "C" , 70 );
    add ( 1 , Digit , 88 );
    add ( 1 , "(" , 89 );
+   add ( 1 , "E" , 91 );
    
    /*
     * POLYGON STATES
@@ -352,6 +353,7 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 78 , ";" , 1 );
    add ( 78 , "M" , 79 );
    add ( 78 , "R" , 82 );
+   add ( 78 , "T" , 73 );
    
    add ( 79 , BlankChar , 79 );
    add ( 79 , "X" , 80 );
@@ -361,11 +363,13 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 80 , ";" , 1 );
    add ( 80 , "T" , 73 );
    add ( 80 , "R" , 82 );
+   add ( 80 , "M" , 79 );
    
    add ( 81 , BlankChar , 72 );
    add ( 81 , ";" , 1 );
    add ( 81 , "T" , 73 );
    add ( 81 , "R" , 82 );
+   add ( 81 , "M" , 79 );
    
    add ( 82 , BlankChar , 82 );
    add ( 82 , "-" , 83 );
@@ -387,6 +391,7 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 87 , ";" , 1 );
    add ( 87 , "T" , 73 );
    add ( 87 , "M" , 79 );
+   add ( 87 , "R" , 82 );
    
    /*
     * DELETE COMMAND STATES
@@ -477,11 +482,8 @@ void OpenCIF::CIFFSM::add ( const int& input_state , const OpenCIF::CIFFSM::Tran
       case CommentChar:
          for ( int i = 0; i < 256; i++ )
          {
-            if ( !( i == '(' || i == '(' ) )
-            {
-               tmp = (char)i;
-               add ( input_state , tmp , output_state );
-            }
+            tmp = (char)i;
+            add ( input_state , tmp , output_state );
          }
          break;
          
@@ -571,19 +573,26 @@ int OpenCIF::CIFFSM::operator[] ( const char& input_char )
          parentheses++;
          new_state = currentState ();
       }
-      else if ( input_char == ')' && parentheses > 1 )
+      else if ( input_char == ')' )
       {
-         parentheses--;
-         new_state = currentState ();
-      }
-      else if ( input_char == ')' && parentheses == 1 )
-      {
-         parentheses = 0;
-         new_state = FiniteStateMachine::operator[] ( input_char );
+         if ( parentheses > 1 )
+         {
+            parentheses--;
+            new_state = currentState ();
+         }
+         else if ( parentheses == 1 )
+         {
+            parentheses = 0;
+            new_state = FiniteStateMachine::operator[] ( input_char );
+         }
+         else
+         {
+            new_state = -1;
+         }
       }
       else
       {
-         new_state = -1;
+         new_state = FiniteStateMachine::operator[] ( input_char );
       }
    }
    else
