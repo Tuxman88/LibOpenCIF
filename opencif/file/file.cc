@@ -148,6 +148,75 @@ OpenCIF::File::LoadStatus OpenCIF::File::openFile ( void )
  */
 OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
 {
+   /*
+    * The process of validation isn't that complex.
+    * 
+    * I need to create a CIFFSM class instance. Such instance will help me to validate
+    * the file contents. The file is already opened. So, I'll read char by char and feed
+    * them to the CIFFSM instance. The CIFFSM instance will start, by default, in state 1.
+    * 
+    * I'll feed the instance characters until the I reach end of file or the instance reports
+    * an error (jump state equal to -1). After feeding the characters, if I finish feeding the
+    * file and none error was reported, I will check the current state of the instance.
+    * 
+    * The instance should end in state 91 or 92. If the FSM is in such states, the file is 
+    * correct and the format is supported.
+    * 
+    * If the FSM ends in any other state, the file is not neccessarally incorrect, but incomplete.
+    * 
+    * If there is a jump to a negative state, the file is invalid.
+    */
+   
+   OpenCIF::CIFFSM* fsm;
+   int jump_state = 1; // By default, start in 1
+   int previous_state; // Previous state.
+   char input_char;
+   
+   fsm = new OpenCIF::CIFFSM ();
+   
+   // Iterate over the contents of the file, until the file end is
+   // reached or the FSM reports a problem.
+   
+   while ( !file_input.eof () && jump_state != -1 )
+   {
+      input_char = file_input.get ();
+      
+      if ( !file_input.eof () )
+      {
+         previous_state = jump_state;
+         jump_state = fsm->operator[] ( input_char );
+      }
+   }
+   
+   // File validated. What is the result?
+   std::ostringstream oss;
+   
+   if ( jump_state == -1 )
+   {
+      // There is an invalid input.
+      file_messages.push_back ( std::string ( "File:validateSintax:Error: Error detected when validating contents of input file." ) );
+      oss << previous_state;
+      file_messages.push_back ( std::string ( "                           State: " ) + oss.str () );
+      oss.str ( std::string ( "" ) );
+      oss << input_char;
+      file_messages.push_back ( std::string ( "                           Input char: " ) +
+                                oss.str () +
+                                std::string ( " (ASCII=" ) +
+                                (
+                                   ( oss.str ( std::string ( "" ) ) , oss << (int)input_char ) ,
+                                   oss.str ()
+                                ) );
+      
+      return ( IncorrectInputFile );
+   }
+   
+   if ( jump_state != 91 && jump_state != 92 )
+   {
+      file_messages.push_back ( std::string ( "File:validateSintax:Error: The file contents are incomplete (maybe a missing END command)." ) );
+      
+      return ( IncompleteInputFile );
+   }
+   
    return ( AllOk );
 }
 

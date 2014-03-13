@@ -23,9 +23,11 @@
 # ifndef LIBOPENCIF_FILE_H_
 # define LIBOPENCIF_FILE_H_
 
+# include <iostream>
 # include <string>
 # include <vector>
 # include <fstream>
+# include <sstream>
 
 # include "../command/command.h"
 # include "../finitestatemachine/ciffsm.h"
@@ -38,8 +40,9 @@ namespace OpenCIF
          enum LoadStatus
          {
             AllOk = 0 ,
-            CantOpenInputFile
-            
+            CantOpenInputFile ,
+            IncompleteInputFile ,
+            IncorrectInputFile
          };
       
       public:
