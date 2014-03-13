@@ -1,0 +1,20 @@
+roundflashcommand.lo: \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/roundflashcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/roundflashcommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../positionbasedcommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../primitivecommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../../command.h \
+ opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../../point/point.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/roundflashcommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../positionbasedcommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../primitivecommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../../command.h:
+
+opencif/command/primitivecommand/positionbasedcommand/roundflashcommand/../../../point/point.h:

@@ -1,0 +1,14 @@
+definitionendcommand.lo: \
+ opencif/command/controlcommand/definitionendcommand/definitionendcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/controlcommand/definitionendcommand/definitionendcommand.h \
+ opencif/command/controlcommand/definitionendcommand/../controlcommand.h \
+ opencif/command/controlcommand/definitionendcommand/../../command.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/controlcommand/definitionendcommand/definitionendcommand.h:
+
+opencif/command/controlcommand/definitionendcommand/../controlcommand.h:
+
+opencif/command/controlcommand/definitionendcommand/../../command.h:

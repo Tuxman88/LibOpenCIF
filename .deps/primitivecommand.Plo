@@ -1,0 +1,10 @@
+primitivecommand.lo: opencif/command/primitivecommand/primitivecommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/primitivecommand/primitivecommand.h \
+ opencif/command/primitivecommand/../command.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/primitivecommand/primitivecommand.h:
+
+opencif/command/primitivecommand/../command.h:

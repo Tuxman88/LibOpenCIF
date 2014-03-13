@@ -1,0 +1,6 @@
+fraction.lo: opencif/command/fraction/fraction.cc \
+ /usr/include/stdc-predef.h opencif/command/fraction/fraction.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/fraction/fraction.h:

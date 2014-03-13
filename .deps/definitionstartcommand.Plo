@@ -1,0 +1,17 @@
+definitionstartcommand.lo: \
+ opencif/command/controlcommand/definitionstartcommand/definitionstartcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/controlcommand/definitionstartcommand/definitionstartcommand.h \
+ opencif/command/controlcommand/definitionstartcommand/../controlcommand.h \
+ opencif/command/controlcommand/definitionstartcommand/../../command.h \
+ opencif/command/controlcommand/definitionstartcommand/../../fraction/fraction.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/controlcommand/definitionstartcommand/definitionstartcommand.h:
+
+opencif/command/controlcommand/definitionstartcommand/../controlcommand.h:
+
+opencif/command/controlcommand/definitionstartcommand/../../command.h:
+
+opencif/command/controlcommand/definitionstartcommand/../../fraction/fraction.h:

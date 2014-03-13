@@ -1,0 +1,6 @@
+command.lo: opencif/command/command.cc /usr/include/stdc-predef.h \
+ opencif/command/command.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/command.h:

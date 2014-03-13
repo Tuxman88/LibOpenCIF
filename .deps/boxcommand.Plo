@@ -1,0 +1,26 @@
+boxcommand.lo: \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../positionbasedcommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../primitivecommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../command.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h \
+ opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../size/size.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../positionbasedcommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../primitivecommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../command.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h:
+
+opencif/command/primitivecommand/positionbasedcommand/boxcommand/../../../size/size.h:

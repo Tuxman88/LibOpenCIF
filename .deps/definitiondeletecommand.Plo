@@ -1,0 +1,14 @@
+definitiondeletecommand.lo: \
+ opencif/command/controlcommand/definitiondeletecommand/definitiondeletecommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/controlcommand/definitiondeletecommand/definitiondeletecommand.h \
+ opencif/command/controlcommand/definitiondeletecommand/../controlcommand.h \
+ opencif/command/controlcommand/definitiondeletecommand/../../command.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/controlcommand/definitiondeletecommand/definitiondeletecommand.h:
+
+opencif/command/controlcommand/definitiondeletecommand/../controlcommand.h:
+
+opencif/command/controlcommand/definitiondeletecommand/../../command.h:

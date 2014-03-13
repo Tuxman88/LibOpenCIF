@@ -1,0 +1,6 @@
+point.lo: opencif/command/point/point.cc /usr/include/stdc-predef.h \
+ opencif/command/point/point.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/point/point.h:

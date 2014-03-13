@@ -1,0 +1,10 @@
+controlcommand.lo: opencif/command/controlcommand/controlcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/controlcommand/controlcommand.h \
+ opencif/command/controlcommand/../command.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/controlcommand/controlcommand.h:
+
+opencif/command/controlcommand/../command.h:

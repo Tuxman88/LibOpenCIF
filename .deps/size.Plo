@@ -1,0 +1,6 @@
+size.lo: opencif/command/size/size.cc /usr/include/stdc-predef.h \
+ opencif/command/size/size.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/size/size.h:

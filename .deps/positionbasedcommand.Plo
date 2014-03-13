@@ -1,0 +1,17 @@
+positionbasedcommand.lo: \
+ opencif/command/primitivecommand/positionbasedcommand/positionbasedcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/primitivecommand/positionbasedcommand/positionbasedcommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/../primitivecommand.h \
+ opencif/command/primitivecommand/positionbasedcommand/../../command.h \
+ opencif/command/primitivecommand/positionbasedcommand/../../point/point.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/primitivecommand/positionbasedcommand/positionbasedcommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/../primitivecommand.h:
+
+opencif/command/primitivecommand/positionbasedcommand/../../command.h:
+
+opencif/command/primitivecommand/positionbasedcommand/../../point/point.h:

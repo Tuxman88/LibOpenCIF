@@ -1,0 +1,10 @@
+transformation.lo: opencif/command/transformation/transformation.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/transformation/transformation.h \
+ opencif/command/transformation/../point/point.h
+
+/usr/include/stdc-predef.h:
+
+opencif/command/transformation/transformation.h:
+
+opencif/command/transformation/../point/point.h:
