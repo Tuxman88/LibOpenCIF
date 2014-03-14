@@ -49,11 +49,16 @@ namespace OpenCIF
          explicit File ( void );
          virtual ~File ( void );
          void setPath ( const std::string& new_path );
-         void setCommands ( const std::vector< OpenCIF::Command* >& new_commands );
          std::string getPath ( void ) const;
+         
+         void setCommands ( const std::vector< OpenCIF::Command* >& new_commands );
          std::vector< OpenCIF::Command* > getCommands ( void ) const;
+         
          LoadStatus loadFile ( void );
+         
          std::vector< std::string > getMessages ( void );
+         
+         std::vector < std::string > getRawCommands ( void ) const;
          
       private:
          LoadStatus openFile ( void );
@@ -64,6 +69,7 @@ namespace OpenCIF
          std::string file_path;
          std::ifstream file_input;
          std::vector< OpenCIF::Command* > file_commands;
+         std::vector< std::string > file_raw_commands;
          std::vector< std::string > file_messages;
    };
 }

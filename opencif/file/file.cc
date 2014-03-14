@@ -168,12 +168,15 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
     */
    
    OpenCIF::CIFFSM* fsm;
+   std::string command_buffer;
    int jump_state = 1; // By default, start in 1
    int previous_state; // Previous state.
    char input_char;
    char previous_char;
    
    fsm = new OpenCIF::CIFFSM ();
+   
+   file_raw_commands.clear ();
    
    // Iterate over the contents of the file, until the file end is
    // reached or the FSM reports a problem.
@@ -187,6 +190,24 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
       {
          previous_state = jump_state;
          jump_state = fsm->operator[] ( input_char );
+         
+         if ( jump_state == 1 && previous_state != 1 ) // If I'm returning to the first state, the command
+                                                       // is loaded. Just check the previous state. If the
+                                                       // previous state is the state 1, then, do nothing,
+                                                       // since those are characteres to skip.
+         {
+            std::string tmp;
+            tmp = input_char;
+            command_buffer += tmp;
+            file_raw_commands.push_back ( command_buffer );
+            command_buffer = "";
+         }
+         else if ( jump_state != 1 )
+         {
+            std::string tmp;
+            tmp = input_char;
+            command_buffer += tmp;
+         }
       }
    }
    
@@ -219,6 +240,9 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
                                 std::string ( ")" )
                               );
       
+      file_messages.push_back ( std::string ( "                           Current command buffer: \"" ) + command_buffer + std::string ( "\"" ) );
+      file_messages.push_back ( std::string ( "                           The loaded raw commands can be accessed to analize the error and locate the error." ) );
+      
       return ( IncorrectInputFile );
    }
    
@@ -229,6 +253,9 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
       return ( IncompleteInputFile );
    }
    
+   // Everything Ok. Add last command (the END command)
+   file_raw_commands.push_back ( command_buffer );
+   
    return ( AllOk );
 }
 
@@ -238,5 +265,77 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
  */
 OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
 {
+   /*
+    * The raw commands are ready and validated. So, there is only left the process of
+    * turning those strings into commands.
+    */
+   
+   // First, delete and clear the current commands vector
+   for ( int i = 0; i < file_commands.size (); i++ )
+   {
+      delete file_commands[ i ];
+      file_commands[ i ] = 0;
+   }
+   
+   file_commands.clear ();
+   
+   // Iterate over the raw commands. Check the first char of all. The first char will tell me exactly
+   // wich command type is every one.
+   
+   for ( unsigned long int i = 0; i < file_raw_commands.size (); i++ )
+   {
+      std::string str_command;
+      OpenCIF::Command* command;
+      
+      str_command = file_raw_commands[ i ];
+      
+      switch ( str_command[ 0 ] )
+      {
+         case 'B':
+            std::cout << "Box" << std::endl;
+            break;
+            
+         case 'P':
+            std::cout << "Polygon" << std::endl;
+            break;
+            
+         case 'W':
+            std::cout << "Wire" << std::endl;
+            break;
+            
+         case 'R':
+            std::cout << "RoundFlash" << std::endl;
+            break;
+            
+         case '(':
+            std::cout << "Comment" << std::endl;
+            break;
+            
+         case 'C':
+            std::cout << "Call" << std::endl;
+            break;
+            
+         case 'D':
+            std::cout << "Definition" << std::endl;
+            break;
+            
+         case 'L':
+            std::cout << "Layer" << std::endl;
+            break;
+            
+         default:
+            std::cout << "User extention" << std::endl;
+            break;
+      }
+   }
+   
    return ( AllOk );
+}
+
+/*
+ * This member function returns the vector of the raw (string) commands of the file.
+ */
+std::vector< std::string > OpenCIF::File::getRawCommands ( void ) const
+{
+   return ( file_raw_commands );
 }
