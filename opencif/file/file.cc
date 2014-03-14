@@ -369,74 +369,131 @@ std::string OpenCIF::File::cleanCommand ( std::string command )
       case 'B':
       case 'W':
       case 'R':
-      {
-         std::string tmp = " ";
-         
-         // There are only numbers and guides ("-")
-         final_command = command[ 0 ];
-         final_command += tmp;
-         
-         // Remove not-necessary characters
-         for ( int i = 0; i < command.size (); i++ )
          {
-            if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
-            {
-               command[ i ] = ' ';
-            }
-         }
-         
-         std::istringstream iss ( command );
-         
-         while ( !iss.eof () )
-         {
-            iss >> tmp;
+            std::string tmp = " ";
             
-            if ( !iss.eof () )
+            // There are only numbers and guides ("-")
+            final_command = command[ 0 ];
+            final_command += tmp;
+            
+            // Remove not-necessary characters
+            for ( int i = 0; i < command.size (); i++ )
             {
-               final_command += tmp;
-               tmp = " ";
-               final_command += tmp;
+               if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
+               {
+                  command[ i ] = ' ';
+               }
             }
+            
+            std::istringstream iss ( command );
+            
+            while ( !iss.eof () )
+            {
+               iss >> tmp;
+               
+               if ( !iss.eof () )
+               {
+                  final_command += tmp;
+                  tmp = " ";
+                  final_command += tmp;
+               }
+            }
+            
+            final_command += ";";
          }
-         
-         final_command += ";";
-      }
          break;
          
       case 'L':
-      {
-         std::string tmp = " ";
-         
-         // There are only uppercase chars
-         final_command = command[ 0 ];
-         final_command += tmp;
-         
-         // Remove not-necessary characters
-         command[ 0 ] = ' ';
-         for ( int i = 0; i < command.size (); i++ )
          {
-            if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
-            {
-               command[ i ] = ' ';
-            }
-         }
-         
-         std::istringstream iss ( command );
-         
-         while ( !iss.eof () )
-         {
-            iss >> tmp;
+            std::string tmp = " ";
             
-            if ( !iss.eof () )
+            // There are only uppercase chars
+            final_command = command[ 0 ];
+            final_command += tmp;
+            
+            // Remove not-necessary characters
+            command[ 0 ] = ' ';
+            for ( int i = 0; i < command.size (); i++ )
             {
-               final_command += tmp;
-               tmp = " ";
-               final_command += tmp;
+               if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
+               {
+                  command[ i ] = ' ';
+               }
             }
+            
+            std::istringstream iss ( command );
+            
+            while ( !iss.eof () )
+            {
+               iss >> tmp;
+               
+               if ( !iss.eof () )
+               {
+                  final_command += tmp;
+                  tmp = " ";
+                  final_command += tmp;
+               }
+            }
+            
+            final_command += ";";
          }
+         break;
          
-         final_command += ";";
-      }
+      case 'C':
+         {
+            std::string tmp = " ";
+            
+            // There are only uppercase chars
+            final_command = command[ 0 ];
+            final_command += tmp;
+            
+            // Remove not-necessary characters
+            command[ 0 ] = ' ';
+            for ( int i = 0; i < command.size (); i++ )
+            {
+               if ( !std::isdigit ( command[ i ] ) &&
+                    command[ i ] != 'M' &&
+                    command[ i ] != 'X' &&
+                    command[ i ] != 'Y' &&
+                    command[ i ] != 'T' && 
+                    command[ i ] != '-' &&
+                    command[ i ] != 'R'
+                  )
+               {
+                  command[ i ] = ' ';
+               }
+            }
+            
+            for ( int i = 1; i < command.size (); i++ )
+            {
+               tmp = command[ i ];
+               
+               if ( std::isdigit ( command[ i ] ) )
+               {
+                  final_command += tmp;
+               }
+               else if ( command[ i ] != ' ' )
+               {
+                  if ( final_command[ final_command.size () - 1 ] != ' ' )
+                  {
+                     final_command += " ";
+                  }
+                  
+                  final_command += tmp;
+                  
+                  if ( command[ i ] == 'R' || command[ i ] == 'X' || command[ i ] == 'Y' || command[ i ] == 'M' || command[ i ] == 'T' )
+                  {
+                     final_command += " ";
+                  }
+               }
+               else if ( final_command[ final_command.size () - 1 ] != ' ' )
+               {
+                  final_command += " ";
+               }
+            }
+            
+            ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
+         }
          break;
          
       default:
