@@ -251,8 +251,10 @@ OpenCIF::CIFFSM::CIFFSM ( void )
    add ( 54 , BlankChar , 54 );
    add ( 54 , LayerNameChar , 55 );
    
-   add ( 55 , LayerNameChar , 55 );
+   // Don't swap the order of this two lines, of the transition priorities are going to be broken
+   // (the LayerNameChar set overwrites some BlankChar characters)
    add ( 55 , BlankChar , 56 );
+   add ( 55 , LayerNameChar , 55 );
    add ( 55 , ";" , 1 );
    
    add ( 56 , BlankChar , 56 );
@@ -495,6 +497,7 @@ void OpenCIF::CIFFSM::add ( const int& input_state , const OpenCIF::CIFFSM::Tran
       case LayerNameChar:
          add ( input_state , Digit , output_state );
          add ( input_state , UpperChar , output_state );
+         add ( input_state , "_" , output_state );
          break;
          
       case ExtentionChar:

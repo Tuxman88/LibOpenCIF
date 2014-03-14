@@ -199,7 +199,9 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
             std::string tmp;
             tmp = input_char;
             command_buffer += tmp;
-            file_raw_commands.push_back ( command_buffer );
+            
+            // I call the CleanCommand member function to remove unnecesary characters.
+            file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
             command_buffer = "";
          }
          else if ( jump_state != 1 )
@@ -254,7 +256,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    }
    
    // Everything Ok. Add last command (the END command)
-   file_raw_commands.push_back ( command_buffer );
+   file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
    
    return ( AllOk );
 }
@@ -338,4 +340,109 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
 std::vector< std::string > OpenCIF::File::getRawCommands ( void ) const
 {
    return ( file_raw_commands );
+}
+
+/*
+ * This member function takes as argument a command in string form. The command is "not clear". That means
+ * that is in the same way it was readed from the file.
+ * 
+ * The process of cleaning is to delete anything that is not intented to exist and leave only that things that can make
+ * the command easy to parse.
+ * 
+ * For example, from this: "P-100,10000thisisvalid-10000cuac,cuac,cuac,imaduck-20000yolo;"
+ * To this:                "P -100 10000 -10000 -20000 ;"
+ * 
+ * So, such kind of string can be used as an input stream to read easily.
+ * 
+ * There are some commands that I can't clean, like the comment or user expansion commands. Those commands are just returned.
+ * 
+ * At least, I can know what kind of command I'm working with by it's first char.
+ */
+std::string OpenCIF::File::cleanCommand ( std::string command )
+{
+   std::string final_command;
+   
+   switch ( command[ 0 ] )
+   {
+      // All of these commands can be processed as the same, since they only need values.
+      case 'P':
+      case 'B':
+      case 'W':
+      case 'R':
+      {
+         std::string tmp = " ";
+         
+         // There are only numbers and guides ("-")
+         final_command = command[ 0 ];
+         final_command += tmp;
+         
+         // Remove not-necessary characters
+         for ( int i = 0; i < command.size (); i++ )
+         {
+            if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
+            {
+               command[ i ] = ' ';
+            }
+         }
+         
+         std::istringstream iss ( command );
+         
+         while ( !iss.eof () )
+         {
+            iss >> tmp;
+            
+            if ( !iss.eof () )
+            {
+               final_command += tmp;
+               tmp = " ";
+               final_command += tmp;
+            }
+         }
+         
+         final_command += ";";
+      }
+         break;
+         
+      case 'L':
+      {
+         std::string tmp = " ";
+         
+         // There are only uppercase chars
+         final_command = command[ 0 ];
+         final_command += tmp;
+         
+         // Remove not-necessary characters
+         command[ 0 ] = ' ';
+         for ( int i = 0; i < command.size (); i++ )
+         {
+            if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
+            {
+               command[ i ] = ' ';
+            }
+         }
+         
+         std::istringstream iss ( command );
+         
+         while ( !iss.eof () )
+         {
+            iss >> tmp;
+            
+            if ( !iss.eof () )
+            {
+               final_command += tmp;
+               tmp = " ";
+               final_command += tmp;
+            }
+         }
+         
+         final_command += ";";
+      }
+         break;
+         
+      default:
+         final_command = command;
+         break;
+   }
+   
+   return ( final_command );
 }

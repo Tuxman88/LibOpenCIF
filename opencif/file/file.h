@@ -64,6 +64,7 @@ namespace OpenCIF
          LoadStatus openFile ( void );
          LoadStatus validateSintax ( void );
          LoadStatus loadCommands ( void );
+         std::string cleanCommand ( std::string command );
          
       private:
          std::string file_path;
