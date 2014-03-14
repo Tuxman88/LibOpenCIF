@@ -65,6 +65,10 @@ namespace OpenCIF
          LoadStatus validateSintax ( void );
          LoadStatus loadCommands ( void );
          std::string cleanCommand ( std::string command );
+         std::string clearNumericCommand ( std::string command );
+         std::string cleanLayerCommand ( std::string command );
+         std::string cleanCallCommand ( std::string command );
+         std::string cleanDefinitionCommand ( std::string command );
          
       private:
          std::string file_path;

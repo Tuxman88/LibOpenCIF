@@ -369,181 +369,272 @@ std::string OpenCIF::File::cleanCommand ( std::string command )
       case 'B':
       case 'W':
       case 'R':
-         {
-            std::string tmp = " ";
-            
-            // There are only numbers and guides ("-")
-            final_command = command[ 0 ];
-            final_command += tmp;
-            
-            // Remove not-necessary characters
-            for ( int i = 0; i < command.size (); i++ )
-            {
-               if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
-               {
-                  command[ i ] = ' ';
-               }
-            }
-            
-            std::istringstream iss ( command );
-            
-            while ( !iss.eof () )
-            {
-               iss >> tmp;
-               
-               if ( !iss.eof () )
-               {
-                  final_command += tmp;
-                  tmp = " ";
-                  final_command += tmp;
-               }
-            }
-            
-            final_command += ";";
-         }
+         final_command = clearNumericCommand ( command );
          break;
          
-      case 'L':
-         {
-            std::string tmp = " ";
-            
-            // There are only uppercase chars
-            final_command = command[ 0 ];
-            final_command += tmp;
-            
-            // Remove not-necessary characters
-            command[ 0 ] = ' ';
-            for ( int i = 0; i < command.size (); i++ )
-            {
-               if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
-               {
-                  command[ i ] = ' ';
-               }
-            }
-            
-            std::istringstream iss ( command );
-            
-            while ( !iss.eof () )
-            {
-               iss >> tmp;
-               
-               if ( !iss.eof () )
-               {
-                  final_command += tmp;
-                  tmp = " ";
-                  final_command += tmp;
-               }
-            }
-            
-            final_command += ";";
-         }
+      case 'L': // Layer command
+         final_command = cleanLayerCommand ( command );
          break;
          
-      case 'C':
-         {
-            std::string tmp = " ";
-            
-            // There are only uppercase chars
-            final_command = command[ 0 ];
-            final_command += tmp;
-            
-            // Remove not-necessary characters
-            command[ 0 ] = ' ';
-            for ( int i = 0; i < command.size (); i++ )
-            {
-               if ( !std::isdigit ( command[ i ] ) &&
-                    command[ i ] != 'M' &&
-                    command[ i ] != 'X' &&
-                    command[ i ] != 'Y' &&
-                    command[ i ] != 'T' && 
-                    command[ i ] != '-' &&
-                    command[ i ] != 'R'
-                  )
-               {
-                  command[ i ] = ' ';
-               }
-            }
-            
-            for ( int i = 1; i < command.size (); i++ )
-            {
-               tmp = command[ i ];
-               
-               if ( std::isdigit ( command[ i ] ) )
-               {
-                  final_command += tmp;
-               }
-               else if ( command[ i ] != ' ' )
-               {
-                  if ( final_command[ final_command.size () - 1 ] != ' ' )
-                  {
-                     final_command += " ";
-                  }
-                  
-                  final_command += tmp;
-                  
-                  if ( command[ i ] == 'R' || command[ i ] == 'X' || command[ i ] == 'Y' || command[ i ] == 'M' || command[ i ] == 'T' )
-                  {
-                     final_command += " ";
-                  }
-               }
-               else if ( final_command[ final_command.size () - 1 ] != ' ' )
-               {
-                  final_command += " ";
-               }
-            }
-            
-            ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
-         }
+      case 'C': // Call command
+         final_command = cleanCallCommand ( command );
          break;
          
-      case 'D':
-         {
-            std::string tmp = " ";
-            
-            // There are only uppercase chars and digits
-            final_command = command[ 0 ];
-            final_command += tmp;
-            
-            // Remove not-necessary characters
-            command[ 0 ] = ' ';
-            for ( int i = 0; i < command.size (); i++ )
-            {
-               if ( !std::isupper ( command[ i ] ) &&
-                    command[ i ] != 'D' &&
-                    !std::isdigit ( command[ i ] ) &&
-                    command[ i ] != 'S' &&
-                    command[ i ] != 'F'
-                  )
-               {
-                  command[ i ] = ' ';
-               }
-            }
-            
-            for ( int i = 1; i < command.size (); i++ )
-            {
-               if ( std::isdigit ( command[ i ] ) )
-               {
-                  final_command += command[ i ];
-               }
-               else if ( command[ i ] != ' ' )
-               {
-                  final_command += command[ i ];
-                  final_command += " ";
-               }
-               else if ( command[ i ] == ' ' && final_command[ final_command.size () - 1 ] != ' ' )
-               {
-                  final_command += " ";
-               }
-            }
-            
-            ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
-         }
+      case 'D': // Definition {Start|End|Delete} command.
+         final_command = cleanDefinitionCommand ( command );
+         break;
+         
+      case 'E': // End command.
+         final_command = "E ;";
          break;
          
       default:
-         final_command = command;
+         final_command = command.substr ( 0 , command.size () - 1 ) + " ;";
          break;
    }
+   
+   return ( final_command );
+}
+
+/*
+ * This member function takes as argument a Definition command and returns it cleaned.
+ * 
+ * A definition command can be something like this:
+ * 
+ *      "DxxxxxSlol100im,totally,legal;"
+ * 
+ * So, the task of this member function is to turn it into like this:
+ * 
+ *      "D S 100 ;"
+ * 
+ * The process begins with the deletion of any non-digit and non-uppercase characters.
+ * Such operation, is good, can leave a command like this:
+ * 
+ *      "DS100;"
+ * 
+ * To simplify the process of converting commands into instances, the commands must have
+ * whitespaces to separate components (to use the strings as, for example, input streams).
+ * 
+ * So, the next process is to separate the components to turn the command into this:
+ * 
+ *      "D S 100 ;"
+ */
+std::string OpenCIF::File::cleanDefinitionCommand ( std::string command )
+{
+   std::string final_command;
+   std::string tmp = " ";
+            
+   // There are only uppercase chars and digits
+   final_command = command[ 0 ];
+   final_command += tmp;
+   
+   // Remove not-necessary characters
+   command[ 0 ] = ' ';
+   for ( int i = 0; i < command.size (); i++ )
+   {
+      // If the current char is not a 'D', not a digit, not an 'S' and not an 'F'
+      if ( !std::isdigit ( command[ i ] ) && !std::isupper ( command[ i ] ) )
+      {
+         command[ i ] = ' ';
+      }
+   }
+   
+   for ( int i = 1; i < command.size (); i++ )
+   {
+      if ( std::isdigit ( command[ i ] ) )
+      {
+         final_command += command[ i ];
+      }
+      else if ( command[ i ] != ' ' )
+      {
+         final_command += command[ i ];
+         final_command += " ";
+      }
+      else if ( command[ i ] == ' ' && final_command[ final_command.size () - 1 ] != ' ' )
+      {
+         final_command += " ";
+      }
+   }
+   
+   ( final_command[ final_command.size () - 1 ] == ' ' )
+   ? final_command += ";"
+   : final_command += " ;";
+   
+   return ( final_command );
+}
+
+/*
+ * This member function takes as argument a call command and returns it cleaned.
+ * 
+ * A call command can be something like this:
+ * 
+ *      "C1T20000 -20000R1000000 -59999MXlololololololololMY MXMXMXMYMXR100 100R100 100;"
+ * 
+ * So, the task of this member function is to turn it into like this:
+ * 
+ *      "C 1 T 20000 -20000 R 1000000 -59999 M X M Y M X M X M X M Y M X R 100 100 R 100 100;"
+ * 
+ * The process begins with the deletion of any non-digit, non-dash ('-') and non-uppercase characters.
+ * Such operation, is good, can leave a command like this:
+ * 
+ *      "C 1 T 20000 -20000 R 1000000 -59999 MX MY MXMXMXMYMXR100 100R100 100;"
+ * 
+ * To simplify the process of converting commands into instances, the commands must have
+ * whitespaces to separate components (to use the strings as, for example, input streams).
+ * 
+ * So, the next process is to separate the components to turn the command into this:
+ * 
+ *      "C 1 T 20000 -20000 R 1000000 -59999 M X M Y M X M X M X M Y M X R 100 100 R 100 100;"
+ */
+std::string OpenCIF::File::cleanCallCommand ( std::string command )
+{
+   std::string final_command;
+   std::string tmp = " ";
+            
+   // There are only uppercase chars
+   final_command = command[ 0 ];
+   final_command += tmp;
+   
+   // Remove not-necessary characters
+   command[ 0 ] = ' ';
+   for ( int i = 0; i < command.size (); i++ )
+   {
+      if ( !std::isdigit ( command[ i ] ) && !std::isupper( command[ i ] ) && command[ i ] != '-' )
+      {
+         command[ i ] = ' ';
+      }
+   }
+   
+   for ( int i = 1; i < command.size (); i++ )
+   {
+      tmp = command[ i ];
+      
+      if ( std::isdigit ( command[ i ] ) )
+      {
+         final_command += tmp;
+      }
+      else if ( command[ i ] != ' ' )
+      {
+         if ( final_command[ final_command.size () - 1 ] != ' ' )
+         {
+            final_command += " ";
+         }
+         
+         final_command += tmp;
+         
+         if ( std::isupper ( command[ i ] ) )
+         {
+            final_command += " ";
+         }
+      }
+      else if ( final_command[ final_command.size () - 1 ] != ' ' )
+      {
+         final_command += " ";
+      }
+   }
+   
+   ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
+   
+   return ( final_command );
+}
+
+/*
+ * This member function takes as argument a Layer camand and removes any unnecesary character.
+ */
+std::string OpenCIF::File::cleanLayerCommand ( std::string command )
+{
+   std::string tmp = " ";
+   std::string final_command;
+            
+   final_command = command[ 0 ];
+   final_command += tmp;
+   
+   // Remove not-necessary characters
+   command[ 0 ] = ' ';
+   for ( int i = 0; i < command.size (); i++ )
+   {
+      if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
+      {
+         command[ i ] = ' ';
+      }
+   }
+   
+   std::istringstream iss ( command );
+   
+   while ( !iss.eof () )
+   {
+      iss >> tmp;
+      
+      if ( !iss.eof () )
+      {
+         final_command += tmp;
+         tmp = " ";
+         final_command += tmp;
+      }
+   }
+   
+   final_command += ";";
+            
+   return ( final_command );
+}
+
+/*
+ * This member function takes as argument a numeric command (like a Polygon or Box command)
+ * and cleans it.
+ * 
+ * A numeric command can be something like this:
+ * 
+ *      "W1000,muajajajajaja20000,,,this,is,valid20000twerking,so,hard,,,,,,xoxoxoxoxox-10000,-10000,-500 juar juar juarX-4000;"
+ * 
+ * So, the task of this member function is to turn it into like this:
+ * 
+ *      "W 1000 20000 20000 -10000 -10000 -500 -4000 ;"
+ * 
+ * The process begins with the deletion of any non-digit and non-dash ('-') characters.
+ * Such operation, is good, can leave a command like this:
+ * 
+ *      "W1000              20000                20000                                 -10000 -10000 -500                -4000;"
+ * 
+ * To simplify the process of converting commands into instances, the commands must have
+ * whitespaces to separate components (to use the strings as, for example, input streams).
+ * 
+ * So, the next process is to separate the components to turn the command into this:
+ * 
+ *      "W 1000 20000 20000 -10000 -10000 -500 -4000 ;"
+ */
+std::string OpenCIF::File::clearNumericCommand ( std::string command )
+{
+   std::string tmp = " ";
+   std::string final_command;
+            
+   // There are only numbers and guides ("-")
+   final_command = command[ 0 ];
+   final_command += tmp;
+   
+   // Remove not-necessary characters
+   for ( int i = 0; i < command.size (); i++ )
+   {
+      if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
+      {
+         command[ i ] = ' ';
+      }
+   }
+   
+   std::istringstream iss ( command );
+   
+   while ( !iss.eof () )
+   {
+      iss >> tmp;
+      
+      if ( !iss.eof () )
+      {
+         final_command += tmp;
+         tmp = " ";
+         final_command += tmp;
+      }
+   }
+   
+   final_command += ";";
    
    return ( final_command );
 }
