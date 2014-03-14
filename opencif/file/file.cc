@@ -496,6 +496,50 @@ std::string OpenCIF::File::cleanCommand ( std::string command )
          }
          break;
          
+      case 'D':
+         {
+            std::string tmp = " ";
+            
+            // There are only uppercase chars and digits
+            final_command = command[ 0 ];
+            final_command += tmp;
+            
+            // Remove not-necessary characters
+            command[ 0 ] = ' ';
+            for ( int i = 0; i < command.size (); i++ )
+            {
+               if ( !std::isupper ( command[ i ] ) &&
+                    command[ i ] != 'D' &&
+                    !std::isdigit ( command[ i ] ) &&
+                    command[ i ] != 'S' &&
+                    command[ i ] != 'F'
+                  )
+               {
+                  command[ i ] = ' ';
+               }
+            }
+            
+            for ( int i = 1; i < command.size (); i++ )
+            {
+               if ( std::isdigit ( command[ i ] ) )
+               {
+                  final_command += command[ i ];
+               }
+               else if ( command[ i ] != ' ' )
+               {
+                  final_command += command[ i ];
+                  final_command += " ";
+               }
+               else if ( command[ i ] == ' ' && final_command[ final_command.size () - 1 ] != ' ' )
+               {
+                  final_command += " ";
+               }
+            }
+            
+            ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
+         }
+         break;
+         
       default:
          final_command = command;
          break;
