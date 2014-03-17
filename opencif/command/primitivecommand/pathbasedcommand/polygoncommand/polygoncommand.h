@@ -23,7 +23,15 @@
 # ifndef LIBOPENCIF_POLYGONCOMMAND_H_
 # define LIBOPENCIF_POLYGONCOMMAND_H_
 
+# include <iostream>
+# include <string>
+# include <sstream>
+
 # include "../pathbasedcommand.h"
+
+namespace OpenCIF { class PolygonCommand; }
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::PolygonCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand& command );
 
 namespace OpenCIF
 {
@@ -31,7 +39,11 @@ namespace OpenCIF
    {
       public:
          explicit PolygonCommand ( void );
+         explicit PolygonCommand ( const std::string& str_command );
          virtual ~PolygonCommand ( void );
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const PolygonCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , OpenCIF::PolygonCommand& command );
    };
 }
 

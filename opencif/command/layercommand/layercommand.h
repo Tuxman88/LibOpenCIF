@@ -24,8 +24,13 @@
 # define LIBOPENCIF_LAYERCOMMAND_H_
 
 # include <string>
+# include <sstream>
 
 # include "../command.h"
+
+namespace OpenCIF { class LayerCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::LayerCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::LayerCommand& command );
 
 namespace OpenCIF
 {
@@ -33,10 +38,14 @@ namespace OpenCIF
    {
       public:
          explicit LayerCommand ( void );
+         explicit LayerCommand ( const std::string& str_command );
          virtual ~LayerCommand ( void );
          
          void setName ( const std::string& new_name );
          std::string getName ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , LayerCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const LayerCommand& command );
          
       private:
          std::string layer_name;

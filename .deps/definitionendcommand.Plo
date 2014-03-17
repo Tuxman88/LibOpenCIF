@@ -2,8 +2,6 @@ definitionendcommand.lo: \
  opencif/command/controlcommand/definitionendcommand/definitionendcommand.cc \
  /usr/include/stdc-predef.h \
  opencif/command/controlcommand/definitionendcommand/definitionendcommand.h \
- opencif/command/controlcommand/definitionendcommand/../controlcommand.h \
- opencif/command/controlcommand/definitionendcommand/../../command.h \
  /usr/include/c++/4.8.1/string \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/c++config.h \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/os_defines.h \
@@ -60,6 +58,8 @@ definitionendcommand.lo: \
  /usr/include/bits/setjmp.h \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/atomic_word.h \
  /usr/include/c++/4.8.1/bits/basic_string.tcc \
+ opencif/command/controlcommand/definitionendcommand/../controlcommand.h \
+ opencif/command/controlcommand/definitionendcommand/../../command.h \
  /usr/include/c++/4.8.1/sstream /usr/include/c++/4.8.1/istream \
  /usr/include/c++/4.8.1/ios /usr/include/c++/4.8.1/bits/ios_base.h \
  /usr/include/c++/4.8.1/bits/locale_classes.h \
@@ -81,10 +81,6 @@ definitionendcommand.lo: \
 /usr/include/stdc-predef.h:
 
 opencif/command/controlcommand/definitionendcommand/definitionendcommand.h:
-
-opencif/command/controlcommand/definitionendcommand/../controlcommand.h:
-
-opencif/command/controlcommand/definitionendcommand/../../command.h:
 
 /usr/include/c++/4.8.1/string:
 
@@ -229,6 +225,10 @@ opencif/command/controlcommand/definitionendcommand/../../command.h:
 /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/atomic_word.h:
 
 /usr/include/c++/4.8.1/bits/basic_string.tcc:
+
+opencif/command/controlcommand/definitionendcommand/../controlcommand.h:
+
+opencif/command/controlcommand/definitionendcommand/../../command.h:
 
 /usr/include/c++/4.8.1/sstream:
 

@@ -32,6 +32,11 @@
 # include "../command/command.h"
 # include "../finitestatemachine/ciffsm.h"
 # include "../command/controlcommand/callcommand/callcommand.h"
+# include "../command/controlcommand/definitiondeletecommand/definitiondeletecommand.h"
+# include "../command/controlcommand/definitionendcommand/definitionendcommand.h"
+# include "../command/controlcommand/definitionstartcommand/definitionstartcommand.h"
+# include "../command/layercommand/layercommand.h"
+# include "../command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h"
 
 namespace OpenCIF
 {

@@ -299,6 +299,8 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
             
          case 'P':
             std::cout << "Polygon" << std::endl;
+            command = new OpenCIF::PolygonCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case 'W':
@@ -319,11 +321,33 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
             break;
             
          case 'D':
-            std::cout << "Definition" << std::endl;
+            std::cout << "Definition." << std::endl;
+            switch ( str_command[ 2 ] )
+            {
+               case 'D':
+                  std::cout << "\tDelete" << std::endl;
+                  command = new OpenCIF::DefinitionDeleteCommand ( str_command );
+                  file_commands.push_back ( command );
+                  break;
+                  
+               case 'F':
+                  std::cout << "\tEnd" << std::endl;
+                  command = new OpenCIF::DefinitionEndCommand ( str_command );
+                  file_commands.push_back ( command );
+                  break;
+                  
+               case 'S':
+                  std::cout << "\tStart" << std::endl;
+                  command = new OpenCIF::DefinitionStartCommand ( str_command );
+                  file_commands.push_back ( command );
+                  break;
+            }
             break;
             
          case 'L':
             std::cout << "Layer" << std::endl;
+            command = new OpenCIF::LayerCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          default:

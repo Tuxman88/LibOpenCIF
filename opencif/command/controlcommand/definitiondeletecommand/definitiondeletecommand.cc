@@ -32,8 +32,44 @@ OpenCIF::DefinitionDeleteCommand::DefinitionDeleteCommand ( void )
 }
 
 /*
+ * Non-default constructor. Initialice the command based on a string version of itself.
+ */
+OpenCIF::DefinitionDeleteCommand::DefinitionDeleteCommand ( const std::string& str_command ) 
+   : ControlCommand ()
+{
+   command_type = DefinitionDelete;
+   
+   std::string word;
+   unsigned long int id;
+   std::istringstream input_stream ( str_command );
+   
+   input_stream >> word >> word >> id;
+   
+   setID ( id );
+}
+
+/*
  * Default constructor.
  */
 OpenCIF::DefinitionDeleteCommand::~DefinitionDeleteCommand ( void )
 {
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionDeleteCommand& command )
+{
+   output_stream << "D D " << command.getID ();
+   
+   return ( output_stream );
+}
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand& command )
+{
+   // Load the "D D " part to read, after that, the ID
+   std::string word;
+   unsigned long int id;
+   
+   input_stream >> word >> word >> id;
+   
+   command.setID ( id );
+   
+   return ( input_stream );
 }

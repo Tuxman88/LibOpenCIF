@@ -92,7 +92,21 @@ file.lo: opencif/file/file.cc /usr/include/stdc-predef.h \
  opencif/file/../command/controlcommand/callcommand/../controlcommand.h \
  opencif/file/../command/controlcommand/callcommand/../../command.h \
  opencif/file/../command/controlcommand/callcommand/../../transformation/transformation.h \
- opencif/file/../command/controlcommand/callcommand/../../transformation/../point/point.h
+ opencif/file/../command/controlcommand/callcommand/../../transformation/../point/point.h \
+ opencif/file/../command/controlcommand/definitiondeletecommand/definitiondeletecommand.h \
+ opencif/file/../command/controlcommand/definitiondeletecommand/../controlcommand.h \
+ opencif/file/../command/controlcommand/definitionendcommand/definitionendcommand.h \
+ opencif/file/../command/controlcommand/definitionendcommand/../controlcommand.h \
+ opencif/file/../command/controlcommand/definitionstartcommand/definitionstartcommand.h \
+ opencif/file/../command/controlcommand/definitionstartcommand/../controlcommand.h \
+ opencif/file/../command/controlcommand/definitionstartcommand/../../fraction/fraction.h \
+ opencif/file/../command/layercommand/layercommand.h \
+ opencif/file/../command/layercommand/../command.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../pathbasedcommand.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../primitivecommand.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../command.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../point/point.h
 
 /usr/include/stdc-predef.h:
 
@@ -339,3 +353,31 @@ opencif/file/../command/controlcommand/callcommand/../../command.h:
 opencif/file/../command/controlcommand/callcommand/../../transformation/transformation.h:
 
 opencif/file/../command/controlcommand/callcommand/../../transformation/../point/point.h:
+
+opencif/file/../command/controlcommand/definitiondeletecommand/definitiondeletecommand.h:
+
+opencif/file/../command/controlcommand/definitiondeletecommand/../controlcommand.h:
+
+opencif/file/../command/controlcommand/definitionendcommand/definitionendcommand.h:
+
+opencif/file/../command/controlcommand/definitionendcommand/../controlcommand.h:
+
+opencif/file/../command/controlcommand/definitionstartcommand/definitionstartcommand.h:
+
+opencif/file/../command/controlcommand/definitionstartcommand/../controlcommand.h:
+
+opencif/file/../command/controlcommand/definitionstartcommand/../../fraction/fraction.h:
+
+opencif/file/../command/layercommand/layercommand.h:
+
+opencif/file/../command/layercommand/../command.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../pathbasedcommand.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../primitivecommand.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../command.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../point/point.h:

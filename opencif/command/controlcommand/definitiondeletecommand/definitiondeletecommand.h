@@ -23,7 +23,15 @@
 # ifndef LIBOPENCIF_DEFINITIONDELETECOMMAND_H_
 # define LIBOPENCIF_DEFINITIONDELETECOMMAND_H_
 
+# include <iostream>
+# include <sstream>
+# include <string>
+
 # include "../controlcommand.h"
+
+namespace OpenCIF { class DefinitionDeleteCommand; };
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionDeleteCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand& command );
 
 namespace OpenCIF
 {
@@ -31,7 +39,11 @@ namespace OpenCIF
    {
       public:
          explicit DefinitionDeleteCommand ( void );
+         explicit DefinitionDeleteCommand ( const std::string& str_command );
          virtual ~DefinitionDeleteCommand ( void );
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const DefinitionDeleteCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionDeleteCommand& command );
    };
 }
 

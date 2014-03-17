@@ -32,8 +32,34 @@ OpenCIF::DefinitionEndCommand::DefinitionEndCommand ( void )
 }
 
 /*
+ * Non-Default constructor. Nothing to do.
+ */
+OpenCIF::DefinitionEndCommand::DefinitionEndCommand ( const std::string& str_command )
+   : ControlCommand ()
+{
+   command_type = DefinitionEnd;
+   str_command.size ();
+}
+
+/*
  * Destructor. Nothing to do.
  */
 OpenCIF::DefinitionEndCommand::~DefinitionEndCommand ( void )
 {
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionEndCommand& command )
+{
+   output_stream << "D F ;";
+   
+   // Since the command is not needed... well... do nothing...
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand& command )
+{
+   // Well.. do nothing...
+   
+   return ( input_stream );
 }

@@ -23,7 +23,13 @@
 # ifndef LIBOPENCIF_DEFINITIONENDCOMMAND_H_
 # define LIBOPENCIF_DEFINITIONENDCOMMAND_H_
 
+# include <string>
+
 # include "../controlcommand.h"
+
+namespace OpenCIF { class DefinitionEndCommand; }
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionEndCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand& command );
 
 namespace OpenCIF
 {
@@ -31,7 +37,11 @@ namespace OpenCIF
    {
       public:
          explicit DefinitionEndCommand ( void );
+         explicit DefinitionEndCommand ( const std::string& str_command );
          virtual ~DefinitionEndCommand ( void );
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const DefinitionEndCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionEndCommand& command );
          
       private:
          // Turn these member functions into private, since this command doesn't need an ID

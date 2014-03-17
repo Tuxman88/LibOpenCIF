@@ -23,6 +23,12 @@
 # ifndef LIBOPENCIF_FRACTION_H_
 # define LIBOPENCIF_FRACTION_H_
 
+# include <iostream>
+
+namespace OpenCIF { class Fraction; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::Fraction& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::Fraction& command );
+
 namespace OpenCIF
 {
    class Fraction
@@ -38,6 +44,9 @@ namespace OpenCIF
          
          void setDenominator ( const unsigned long int& new_denominator );
          unsigned long int getDenominator ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , Fraction& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const Fraction& command );
          
       private:
          unsigned long int fraction_numerator;

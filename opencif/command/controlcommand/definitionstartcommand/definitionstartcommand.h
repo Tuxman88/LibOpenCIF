@@ -23,8 +23,16 @@
 # ifndef LIBOPENCIF_DEFINITIONSTARTCOMMAND_H_
 # define LIBOPENCIF_DEFINITIONSTARTCOMMAND_H_
 
+# include <iostream>
+# include <sstream>
+# include <string>
+
 # include "../controlcommand.h"
 # include "../../fraction/fraction.h"
+
+namespace OpenCIF { class DefinitionStartCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStartCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionStartCommand& command );
 
 namespace OpenCIF
 {
@@ -32,10 +40,14 @@ namespace OpenCIF
    {
       public:
          explicit DefinitionStartCommand ( void );
+         explicit DefinitionStartCommand ( const std::string& str_command );
          virtual ~DefinitionStartCommand ( void );
          
          void setAB ( const OpenCIF::Fraction& new_ab );
          OpenCIF::Fraction getAB ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionStartCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const DefinitionStartCommand& command );
          
       private:
          OpenCIF::Fraction command_ab;
