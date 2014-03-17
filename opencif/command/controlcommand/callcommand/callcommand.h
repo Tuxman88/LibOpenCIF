@@ -23,10 +23,18 @@
 # ifndef LIBOPENCIF_CALLCOMMAND_H_
 # define LIBOPENCIF_CALLCOMMAND_H_
 
+# include <iostream>
 # include <vector>
+# include <sstream>
+# include <string>
 
 # include "../controlcommand.h"
 # include "../../transformation/transformation.h"
+
+// Forward declarations
+namespace OpenCIF { class CallCommand; }
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::CallCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::CallCommand& command );
 
 namespace OpenCIF
 {
@@ -34,11 +42,15 @@ namespace OpenCIF
    {
       public:
          explicit CallCommand ( void );
+         explicit CallCommand ( const std::string& str_command );
          virtual ~CallCommand ( void );
          
          void setTransformations ( const std::vector< OpenCIF::Transformation >& new_transformations );
          void addTransformation ( const OpenCIF::Transformation& new_transformation );
-         std::vector< OpenCIF::Transformation > getTransformations ( void ) const;
+         std::vector< OpenCIF::Transformation >& getTransformations ( void );
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const CallCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , CallCommand& command );
          
       private:
          std::vector< OpenCIF::Transformation > call_transformations;

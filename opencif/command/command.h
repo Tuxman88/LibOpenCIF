@@ -23,6 +23,9 @@
 # ifndef LIBOPENCIF_COMMAND_H_
 # define LIBOPENCIF_COMMAND_H_
 
+# include <string>
+# include <sstream>
+
 // General namespace for all the library contents.
 namespace OpenCIF
 {     
@@ -69,6 +72,8 @@ namespace OpenCIF
          
       protected:
          CommandType command_type;
+         virtual unsigned long int toULInt ( const std::string& value );
+         virtual long int toLInt ( const std::string& value );
    };
 }
 

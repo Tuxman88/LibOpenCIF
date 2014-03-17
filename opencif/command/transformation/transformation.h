@@ -23,7 +23,13 @@
 # ifndef LIBOPENCIF_TRANSFORMATION_H_
 # define LIBOPENCIF_TRANSFORMATION_H_
 
+# include <iostream>
+
 # include "../point/point.h"
+
+namespace OpenCIF { class Transformation; }
+std::ostream& operator << ( std::ostream& output_stream , const OpenCIF::Transformation& transformation );
+std::istream& operator >> ( std::istream& input_stream , OpenCIF::Transformation& transformation );
 
 namespace OpenCIF
 {
@@ -50,6 +56,9 @@ namespace OpenCIF
          
          void setDisplacement ( const OpenCIF::Point& new_displacement );
          OpenCIF::Point getDisplacement ( void ) const;
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const Transformation& transformation );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , Transformation& transformation );
          
       private:
          TransformationType transformation_type;

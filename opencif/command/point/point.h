@@ -23,6 +23,12 @@
 # ifndef LIBOPENCIF_POINT_H_
 # define LIBOPENCIF_POINT_H_
 
+# include <iostream>
+
+namespace OpenCIF { class Point; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::Point& point );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::Point& point );
+
 namespace OpenCIF
 {
    class Point
@@ -36,6 +42,9 @@ namespace OpenCIF
          void set ( const long int& new_x , const long int& new_y );
          long int getX ( void ) const;
          long int getY ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , Point& point );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const Point& point );
          
       private:
          long int point_x;

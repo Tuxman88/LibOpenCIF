@@ -87,7 +87,12 @@ file.lo: opencif/file/file.cc /usr/include/stdc-predef.h \
  opencif/file/../command/command.h \
  opencif/file/../finitestatemachine/ciffsm.h \
  opencif/file/../finitestatemachine/finitestatemachine.h \
- opencif/file/../finitestatemachine/state.h
+ opencif/file/../finitestatemachine/state.h \
+ opencif/file/../command/controlcommand/callcommand/callcommand.h \
+ opencif/file/../command/controlcommand/callcommand/../controlcommand.h \
+ opencif/file/../command/controlcommand/callcommand/../../command.h \
+ opencif/file/../command/controlcommand/callcommand/../../transformation/transformation.h \
+ opencif/file/../command/controlcommand/callcommand/../../transformation/../point/point.h
 
 /usr/include/stdc-predef.h:
 
@@ -324,3 +329,13 @@ opencif/file/../finitestatemachine/ciffsm.h:
 opencif/file/../finitestatemachine/finitestatemachine.h:
 
 opencif/file/../finitestatemachine/state.h:
+
+opencif/file/../command/controlcommand/callcommand/callcommand.h:
+
+opencif/file/../command/controlcommand/callcommand/../controlcommand.h:
+
+opencif/file/../command/controlcommand/callcommand/../../command.h:
+
+opencif/file/../command/controlcommand/callcommand/../../transformation/transformation.h:
+
+opencif/file/../command/controlcommand/callcommand/../../transformation/../point/point.h:

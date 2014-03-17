@@ -37,7 +37,34 @@ OpenCIF::Command::~Command ( void )
 {
 }
 
+/*
+ * This member function return the type of the current command type.
+ */
 OpenCIF::Command::CommandType OpenCIF::Command::type ( void )
 {
    return ( command_type );
+}
+
+/*
+ * This member function converts a string into a long int value.
+ */
+long int OpenCIF::Command::toLInt ( const std::string& value )
+{
+   long int converted;
+   std::istringstream iss ( value );
+   iss >> converted;
+   
+   return ( converted );
+}
+
+/*
+ * This member function converts a string into a unsigned long int value.
+ */
+unsigned long int OpenCIF::Command::toULInt ( const std::string& value )
+{
+   unsigned long int converted;
+   std::istringstream iss ( value );
+   iss >> converted;
+   
+   return ( converted );
 }

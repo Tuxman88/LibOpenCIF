@@ -31,6 +31,7 @@
 
 # include "../command/command.h"
 # include "../finitestatemachine/ciffsm.h"
+# include "../command/controlcommand/callcommand/callcommand.h"
 
 namespace OpenCIF
 {
@@ -54,16 +55,17 @@ namespace OpenCIF
          void setCommands ( const std::vector< OpenCIF::Command* >& new_commands );
          std::vector< OpenCIF::Command* > getCommands ( void ) const;
          
-         LoadStatus loadFile ( void );
+         LoadStatus loadFile ( void ); // Whole process of loading a CIF file, from opening the file
+                                       // to converting the commands into instances.
+         LoadStatus openFile ( void );
+         LoadStatus validateSintax ( void );
+         LoadStatus loadCommands ( void );
          
          std::vector< std::string > getMessages ( void );
          
          std::vector < std::string > getRawCommands ( void ) const;
          
       private:
-         LoadStatus openFile ( void );
-         LoadStatus validateSintax ( void );
-         LoadStatus loadCommands ( void );
          std::string cleanCommand ( std::string command );
          std::string clearNumericCommand ( std::string command );
          std::string cleanLayerCommand ( std::string command );

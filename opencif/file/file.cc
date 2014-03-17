@@ -314,7 +314,8 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
             break;
             
          case 'C':
-            std::cout << "Call" << std::endl;
+            command = new OpenCIF::CallCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case 'D':
