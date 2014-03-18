@@ -24,7 +24,8 @@ libopencif_la_SOURCES = 	opencif/command/command.cc \
 				opencif/file/file.cc \
 				opencif/finitestatemachine/finitestatemachine.cc \
 				opencif/finitestatemachine/state.cc \
-				opencif/finitestatemachine/ciffsm.cc
+				opencif/finitestatemachine/ciffsm.cc \
+				opencif/command/controlcommand/endcommand/endcommand.cc
 libopencif_la_LDFLAGS = -version-info 1:0:0 -all-static
 nobase_include_HEADERS = 	opencif/opencif.h \
 				opencif/command/command.h \
@@ -51,7 +52,8 @@ nobase_include_HEADERS = 	opencif/opencif.h \
 				opencif/file/file.h \
 				opencif/finitestatemachine/finitestatemachine.h \
 				opencif/finitestatemachine/state.h \
-				opencif/finitestatemachine/ciffsm.h
+				opencif/finitestatemachine/ciffsm.h \
+				opencif/command/controlcommand/endcommand/endcommand.h
 
 EXTRA_DIST = 	doc/ \
 		opencif/opencif.h \
@@ -80,6 +82,7 @@ EXTRA_DIST = 	doc/ \
 		opencif/finitestatemachine/finitestatemachine.h \
 		opencif/finitestatemachine/state.h \
 		opencif/finitestatemachine/ciffsm.h \
+		opencif/command/controlcommand/endcommand/endcommand.h \
 		opencif/command/command.cc \
 		opencif/command/controlcommand/controlcommand.cc \
 		opencif/command/controlcommand/callcommand/callcommand.cc \
@@ -104,7 +107,8 @@ EXTRA_DIST = 	doc/ \
 		opencif/file/file.cc \
 		opencif/finitestatemachine/finitestatemachine.cc \
 		opencif/finitestatemachine/state.cc \
-		opencif/finitestatemachine/ciffsm.cc
+		opencif/finitestatemachine/ciffsm.cc \
+		opencif/command/controlcommand/endcommand/endcommand.cc
 # Specify some flags to be passed to the compiler
 # AM_CFLAGS = -I/some/include/path -L/some/lib/path
 

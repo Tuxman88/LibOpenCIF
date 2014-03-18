@@ -37,6 +37,12 @@
 # include "../command/controlcommand/definitionstartcommand/definitionstartcommand.h"
 # include "../command/layercommand/layercommand.h"
 # include "../command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h"
+# include "../command/primitivecommand/pathbasedcommand/wirecommand/wirecommand.h"
+# include "../command/primitivecommand/positionbasedcommand/roundflashcommand.h"
+# include "../command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h"
+# include "../command/rawcontentcommand/commentcommand/commentcommand.h"
+# include "../command/rawcontentcommand/userextentioncommand/userextentioncommand.h"
+# include "../command/controlcommand/endcommand/endcommand.h"
 
 namespace OpenCIF
 {

@@ -1,5 +1,7 @@
-size.lo: opencif/command/size/size.cc /usr/include/stdc-predef.h \
- opencif/command/size/size.h /usr/include/c++/4.8.1/iostream \
+endcommand.lo: opencif/command/controlcommand/endcommand/endcommand.cc \
+ /usr/include/stdc-predef.h \
+ opencif/command/controlcommand/endcommand/endcommand.h \
+ /usr/include/c++/4.8.1/iostream \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/c++config.h \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/os_defines.h \
  /usr/include/features.h /usr/include/sys/cdefs.h \
@@ -70,11 +72,13 @@ size.lo: opencif/command/size/size.cc /usr/include/stdc-predef.h \
  /usr/include/c++/4.8.1/bits/basic_ios.tcc \
  /usr/include/c++/4.8.1/bits/ostream.tcc /usr/include/c++/4.8.1/istream \
  /usr/include/c++/4.8.1/bits/istream.tcc /usr/include/c++/4.8.1/sstream \
- /usr/include/c++/4.8.1/bits/sstream.tcc
+ /usr/include/c++/4.8.1/bits/sstream.tcc \
+ opencif/command/controlcommand/endcommand/../controlcommand.h \
+ opencif/command/controlcommand/endcommand/../../command.h
 
 /usr/include/stdc-predef.h:
 
-opencif/command/size/size.h:
+opencif/command/controlcommand/endcommand/endcommand.h:
 
 /usr/include/c++/4.8.1/iostream:
 
@@ -263,3 +267,7 @@ opencif/command/size/size.h:
 /usr/include/c++/4.8.1/sstream:
 
 /usr/include/c++/4.8.1/bits/sstream.tcc:
+
+opencif/command/controlcommand/endcommand/../controlcommand.h:
+
+opencif/command/controlcommand/endcommand/../../command.h:

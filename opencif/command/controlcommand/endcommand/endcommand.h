@@ -18,37 +18,35 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */   
+ */ 
 
-# ifndef LIBOOPENCIF_WIRECOMMAND_H_
-# define LIBOOPENCIF_WIRECOMMAND_H_
+# ifndef LIBOPENCIF_ENDCOMMAND_H_
+# define LIBOPENCIF_ENDCOMMAND_H_
 
 # include <iostream>
-# include <sstream>
 # include <string>
+# include <sstream>
 
-# include "../pathbasedcommand.h"
+# include "../controlcommand.h"
 
-namespace OpenCIF { class WireCommand; }
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::WireCommand& command );
-std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& command );
+namespace OpenCIF { class EndCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::EndCommand& command );
 
 namespace OpenCIF
 {
-   class WireCommand : public OpenCIF::PathBasedCommand
+   class EndCommand : public ControlCommand
    {
       public:
-         explicit WireCommand ( void );
-         explicit WireCommand ( const std::string& str_command );
-         virtual ~WireCommand ( void );
-         void setWidth ( const unsigned long int& new_width );
-         unsigned long int getWidth ( void ) const;
+         explicit EndCommand ( void );
+         virtual ~EndCommand ( void );
          
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const WireCommand& command );
-         friend std::istream& (::operator>>) ( std::istream& input_stream , WireCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , EndCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const EndCommand& command );
          
       private:
-         unsigned long int wire_width;
+         void setID ( const unsigned long int& new_id );
+         unsigned long int getID ( void ) const;
    };
 }
 

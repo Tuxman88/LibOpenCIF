@@ -62,7 +62,8 @@ namespace OpenCIF
             Wire ,
             Box ,
             RoundFlash ,
-            Layer
+            Layer ,
+            End
          };
          
       public:

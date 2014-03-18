@@ -23,9 +23,17 @@
 # ifndef LIBOPENCIF_BOXCOMMAND_H_
 # define LIBOPENCIF_BOXCOMMAND_H_
 
+# include <iostream>
+# include <string>
+# include <sstream>
+
 # include "../positionbasedcommand.h"
 # include "../../../point/point.h"
 # include "../../../size/size.h"
+
+namespace OpenCIF { class BoxCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::BoxCommand& command );
 
 namespace OpenCIF
 {
@@ -33,11 +41,15 @@ namespace OpenCIF
    {
       public:
          explicit BoxCommand ( void );
+         explicit BoxCommand ( const std::string& str_command );
          virtual ~BoxCommand ( void );
          void setRotation ( const OpenCIF::Point& new_rotation );
          void setSize ( const OpenCIF::Size& new_size );
          OpenCIF::Size getSize ( void ) const;
          OpenCIF::Point getRotation ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , BoxCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const BoxCommand& command );
          
       protected:
          OpenCIF::Size box_size;

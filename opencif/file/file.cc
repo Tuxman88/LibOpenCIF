@@ -294,25 +294,28 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
       switch ( str_command[ 0 ] )
       {
          case 'B':
-            std::cout << "Box" << std::endl;
+            command = new OpenCIF::BoxCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case 'P':
-            std::cout << "Polygon" << std::endl;
             command = new OpenCIF::PolygonCommand ( str_command );
             file_commands.push_back ( command );
             break;
             
          case 'W':
-            std::cout << "Wire" << std::endl;
+            command = new OpenCIF::WireCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case 'R':
-            std::cout << "RoundFlash" << std::endl;
+            command = new OpenCIF::RoundFlashCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case '(':
-            std::cout << "Comment" << std::endl;
+            command = new OpenCIF::CommentCommand ( str_command );
+            file_commands.push_back ( command );
             break;
             
          case 'C':
@@ -321,23 +324,19 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
             break;
             
          case 'D':
-            std::cout << "Definition." << std::endl;
             switch ( str_command[ 2 ] )
             {
                case 'D':
-                  std::cout << "\tDelete" << std::endl;
                   command = new OpenCIF::DefinitionDeleteCommand ( str_command );
                   file_commands.push_back ( command );
                   break;
                   
                case 'F':
-                  std::cout << "\tEnd" << std::endl;
                   command = new OpenCIF::DefinitionEndCommand ( str_command );
                   file_commands.push_back ( command );
                   break;
                   
                case 'S':
-                  std::cout << "\tStart" << std::endl;
                   command = new OpenCIF::DefinitionStartCommand ( str_command );
                   file_commands.push_back ( command );
                   break;
@@ -345,13 +344,18 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
             break;
             
          case 'L':
-            std::cout << "Layer" << std::endl;
             command = new OpenCIF::LayerCommand ( str_command );
             file_commands.push_back ( command );
             break;
             
+         case 'E':
+            command = new OpenCIF::EndCommand ();
+            file_commands.push_back ( command );
+            break;
+            
          default:
-            std::cout << "User extention" << std::endl;
+            command = new OpenCIF::UserExtentionCommand ( str_command );
+            file_commands.push_back ( command );
             break;
       }
    }

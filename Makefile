@@ -105,7 +105,7 @@ am_libopencif_la_OBJECTS = command.lo controlcommand.lo callcommand.lo \
 	wirecommand.lo positionbasedcommand.lo boxcommand.lo \
 	roundflashcommand.lo rawcontentcommand.lo commentcommand.lo \
 	userextentioncommand.lo size.lo transformation.lo file.lo \
-	finitestatemachine.lo state.lo ciffsm.lo
+	finitestatemachine.lo state.lo ciffsm.lo endcommand.lo
 libopencif_la_OBJECTS = $(am_libopencif_la_OBJECTS)
 libopencif_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -293,7 +293,8 @@ libopencif_la_SOURCES = opencif/command/command.cc \
 				opencif/file/file.cc \
 				opencif/finitestatemachine/finitestatemachine.cc \
 				opencif/finitestatemachine/state.cc \
-				opencif/finitestatemachine/ciffsm.cc
+				opencif/finitestatemachine/ciffsm.cc \
+				opencif/command/controlcommand/endcommand/endcommand.cc
 
 libopencif_la_LDFLAGS = -version-info 1:0:0 -all-static
 nobase_include_HEADERS = opencif/opencif.h \
@@ -321,7 +322,8 @@ nobase_include_HEADERS = opencif/opencif.h \
 				opencif/file/file.h \
 				opencif/finitestatemachine/finitestatemachine.h \
 				opencif/finitestatemachine/state.h \
-				opencif/finitestatemachine/ciffsm.h
+				opencif/finitestatemachine/ciffsm.h \
+				opencif/command/controlcommand/endcommand/endcommand.h
 
 EXTRA_DIST = doc/ \
 		opencif/opencif.h \
@@ -350,6 +352,7 @@ EXTRA_DIST = doc/ \
 		opencif/finitestatemachine/finitestatemachine.h \
 		opencif/finitestatemachine/state.h \
 		opencif/finitestatemachine/ciffsm.h \
+		opencif/command/controlcommand/endcommand/endcommand.h \
 		opencif/command/command.cc \
 		opencif/command/controlcommand/controlcommand.cc \
 		opencif/command/controlcommand/callcommand/callcommand.cc \
@@ -374,7 +377,8 @@ EXTRA_DIST = doc/ \
 		opencif/file/file.cc \
 		opencif/finitestatemachine/finitestatemachine.cc \
 		opencif/finitestatemachine/state.cc \
-		opencif/finitestatemachine/ciffsm.cc
+		opencif/finitestatemachine/ciffsm.cc \
+		opencif/command/controlcommand/endcommand/endcommand.cc
 
 # Specify some flags to be passed to the compiler
 # AM_CFLAGS = -I/some/include/path -L/some/lib/path
@@ -492,6 +496,7 @@ include ./$(DEPDIR)/controlcommand.Plo
 include ./$(DEPDIR)/definitiondeletecommand.Plo
 include ./$(DEPDIR)/definitionendcommand.Plo
 include ./$(DEPDIR)/definitionstartcommand.Plo
+include ./$(DEPDIR)/endcommand.Plo
 include ./$(DEPDIR)/file.Plo
 include ./$(DEPDIR)/finitestatemachine.Plo
 include ./$(DEPDIR)/fraction.Plo
@@ -704,6 +709,13 @@ ciffsm.lo: opencif/finitestatemachine/ciffsm.cc
 #	source='opencif/finitestatemachine/ciffsm.cc' object='ciffsm.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ciffsm.lo `test -f 'opencif/finitestatemachine/ciffsm.cc' || echo '$(srcdir)/'`opencif/finitestatemachine/ciffsm.cc
+
+endcommand.lo: opencif/command/controlcommand/endcommand/endcommand.cc
+	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT endcommand.lo -MD -MP -MF $(DEPDIR)/endcommand.Tpo -c -o endcommand.lo `test -f 'opencif/command/controlcommand/endcommand/endcommand.cc' || echo '$(srcdir)/'`opencif/command/controlcommand/endcommand/endcommand.cc
+	$(am__mv) $(DEPDIR)/endcommand.Tpo $(DEPDIR)/endcommand.Plo
+#	source='opencif/command/controlcommand/endcommand/endcommand.cc' object='endcommand.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o endcommand.lo `test -f 'opencif/command/controlcommand/endcommand/endcommand.cc' || echo '$(srcdir)/'`opencif/command/controlcommand/endcommand/endcommand.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo

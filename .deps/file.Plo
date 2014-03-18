@@ -106,7 +106,24 @@ file.lo: opencif/file/file.cc /usr/include/stdc-predef.h \
  opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../pathbasedcommand.h \
  opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../primitivecommand.h \
  opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../command.h \
- opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../point/point.h
+ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../point/point.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/wirecommand/wirecommand.h \
+ opencif/file/../command/primitivecommand/pathbasedcommand/wirecommand/../pathbasedcommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/roundflashcommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/positionbasedcommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/../primitivecommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/../../point/point.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../positionbasedcommand.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h \
+ opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../../../size/size.h \
+ opencif/file/../command/rawcontentcommand/commentcommand/commentcommand.h \
+ opencif/file/../command/rawcontentcommand/commentcommand/../rawcontentcommand.h \
+ opencif/file/../command/rawcontentcommand/commentcommand/../../command.h \
+ opencif/file/../command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
+ opencif/file/../command/rawcontentcommand/userextentioncommand/../rawcontentcommand.h \
+ opencif/file/../command/controlcommand/endcommand/endcommand.h \
+ opencif/file/../command/controlcommand/endcommand/../controlcommand.h
 
 /usr/include/stdc-predef.h:
 
@@ -381,3 +398,37 @@ opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../p
 opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../command.h:
 
 opencif/file/../command/primitivecommand/pathbasedcommand/polygoncommand/../../../point/point.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/wirecommand/wirecommand.h:
+
+opencif/file/../command/primitivecommand/pathbasedcommand/wirecommand/../pathbasedcommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/roundflashcommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/positionbasedcommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/../primitivecommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/../../point/point.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../positionbasedcommand.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../../../point/point.h:
+
+opencif/file/../command/primitivecommand/positionbasedcommand/boxcommand/../../../size/size.h:
+
+opencif/file/../command/rawcontentcommand/commentcommand/commentcommand.h:
+
+opencif/file/../command/rawcontentcommand/commentcommand/../rawcontentcommand.h:
+
+opencif/file/../command/rawcontentcommand/commentcommand/../../command.h:
+
+opencif/file/../command/rawcontentcommand/userextentioncommand/userextentioncommand.h:
+
+opencif/file/../command/rawcontentcommand/userextentioncommand/../rawcontentcommand.h:
+
+opencif/file/../command/controlcommand/endcommand/endcommand.h:
+
+opencif/file/../command/controlcommand/endcommand/../controlcommand.h:

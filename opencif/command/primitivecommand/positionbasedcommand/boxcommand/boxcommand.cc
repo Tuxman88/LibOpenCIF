@@ -29,6 +29,47 @@ OpenCIF::BoxCommand::BoxCommand ( void )
    : PositionBasedCommand ()
 {
    command_type = Box;
+   box_rotation.set ( 1 , 0 ); // Neutral rotation
+}
+
+/*
+ * Non-default constructor. Initialize the instance using a string that contains the command itself.
+ */
+OpenCIF::BoxCommand::BoxCommand ( const std::string& str_command )
+   : PositionBasedCommand ()
+{
+   command_type = Box;
+   
+   std::string word;
+   OpenCIF::Point position;
+   OpenCIF::Size size;
+   long int x , y;
+   std::istringstream input_stream ( str_command );
+   
+   
+   // Read the B part, then, the size, then the position.
+   input_stream >> word >> size >> position;
+   
+   // Check if there is a rotation
+   input_stream >> word;
+   
+   if ( word != ";" )
+   {
+      std::istringstream iss ( word );
+      iss >> x;
+      input_stream >> y;
+      
+      OpenCIF::Point rotation ( x , y );
+      
+      setRotation ( rotation );
+   }
+   else
+   {
+      box_rotation.set ( 1 , 0 );
+   }
+   
+   setPosition ( position );
+   setSize ( size );
 }
 
 /*
@@ -72,4 +113,43 @@ void OpenCIF::BoxCommand::setSize ( const OpenCIF::Size& new_size )
    box_size = new_size;
    
    return;
+}
+
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand& command )
+{
+   std::string word;
+   OpenCIF::Point position;
+   OpenCIF::Size size;
+   long int x , y;
+   
+   
+   // Read the B part, then, the size, then the position.
+   input_stream >> word >> size >> position;
+   
+   // Check if there is a rotation
+   input_stream >> word;
+   
+   if ( word != ";" )
+   {
+      std::istringstream iss ( word );
+      iss >> x;
+      input_stream >> y;
+      
+      OpenCIF::Point rotation ( x , y );
+      
+      command.setRotation ( rotation );
+   }
+   
+   command.setPosition ( position );
+   command.setSize ( size );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::BoxCommand& command )
+{
+   output_stream << "B " << command.getSize () << " " << command.getPosition () << " " << command.getRotation () << " ;";
+   
+   return ( output_stream );
 }

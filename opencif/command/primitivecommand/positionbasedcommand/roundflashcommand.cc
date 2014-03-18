@@ -33,6 +33,25 @@ OpenCIF::RoundFlashCommand::RoundFlashCommand ( void )
 }
 
 /*
+ * Non-Default constructor. Initialize the command from a string that represents the command itself.
+ */
+OpenCIF::RoundFlashCommand::RoundFlashCommand ( const std::string& str_command )
+   : PositionBasedCommand ()
+{
+   command_type = RoundFlash;
+   
+   std::istringstream input_stream ( str_command );
+   unsigned long int diameter;
+   std::string word;
+   OpenCIF::Point point;
+   
+   input_stream >> word >> diameter >> point;
+   
+   setDiameter ( diameter );
+   setPosition ( point );
+}
+
+/*
  * Destructor. Nothing to do.
  */
 OpenCIF::RoundFlashCommand::~RoundFlashCommand ( void )
@@ -55,4 +74,25 @@ void OpenCIF::RoundFlashCommand::setDiameter ( const long unsigned int& new_diam
    round_diameter = new_diameter;
    
    return;
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand& command )
+{
+   unsigned long int diameter;
+   std::string word;
+   OpenCIF::Point point;
+   
+   input_stream >> word >> diameter >> point;
+   
+   command.setDiameter ( diameter );
+   command.setPosition ( point );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::RoundFlashCommand& command )
+{
+   output_stream << "R " << command.getDiameter () << " " << command.getPosition () << " ;";
+   
+   return ( output_stream );
 }

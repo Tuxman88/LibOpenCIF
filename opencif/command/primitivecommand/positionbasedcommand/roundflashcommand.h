@@ -25,15 +25,23 @@
 
 # include "positionbasedcommand.h"
 
+namespace OpenCIF { class RoundFlashCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::RoundFlashCommand& command );
+
 namespace OpenCIF
 {
    class RoundFlashCommand : public OpenCIF::PositionBasedCommand
    {
       public:
          explicit RoundFlashCommand ( void );
+         explicit RoundFlashCommand ( const std::string& str_command );
          virtual ~RoundFlashCommand ( void );
          void setDiameter ( const unsigned long int& new_diameter );
          unsigned long int getDiameter ( void ) const;
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , RoundFlashCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const RoundFlashCommand& command );
          
       private:
          unsigned long int round_diameter;

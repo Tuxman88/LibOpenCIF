@@ -23,6 +23,14 @@
 # ifndef LIBOPENCIF_SIZE_H_
 # define LIBOPENCIF_SIZE_H_
 
+# include <iostream>
+# include <string>
+# include <sstream>
+
+namespace OpenCIF { class Size; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::Size& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::Size& command );
+
 namespace OpenCIF
 {
    class Size
@@ -35,6 +43,9 @@ namespace OpenCIF
          void setWidth ( const unsigned long int& new_width );
          void setHeight ( const unsigned long int& new_height );
          void set ( const unsigned long int& new_width , const unsigned long int& new_height );
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , Size& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const Size& command );
          
       private:
          unsigned long int size_width;

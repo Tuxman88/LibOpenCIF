@@ -31,6 +31,40 @@ OpenCIF::UserExtentionCommand::UserExtentionCommand ( void )
    command_type = UserExtention;
 }
 
+OpenCIF::UserExtentionCommand::UserExtentionCommand ( const std::string& str_command )
+   : RawContentCommand ()
+{
+   command_type = UserExtention;
+   
+   char character = ' ';
+   std::string contents;
+   std::istringstream input_stream ( str_command );
+   
+   while ( character == ' ' )
+   {
+      character = input_stream.get ();
+   }
+   
+   contents = character;
+   
+   while ( character != ';' )
+   {
+      character = input_stream.get ();
+      
+      if ( character != ';' )
+      {
+         contents += character;
+      }
+   }
+   
+   while ( contents[ contents.size () - 1 ] == ' ' )
+   {
+      contents.erase ( contents.size () - 1 , 1 );
+   }
+   
+   setContent ( contents );
+}
+
 /*
  * Destructor. Nothing to do.
  */
@@ -38,3 +72,42 @@ OpenCIF::UserExtentionCommand::~UserExtentionCommand ( void )
 {
 }
 
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command )
+{
+   char character = ' ';
+   std::string contents;
+   
+   while ( character == ' ' )
+   {
+      character = input_stream.get ();
+   }
+   
+   contents = character;
+   
+   while ( character != ';' )
+   {
+      character = input_stream.get ();
+      
+      if ( character != ';' )
+      {
+         contents += character;
+      }
+   }
+   
+   while ( contents[ contents.size () - 1 ] == ' ' )
+   {
+      contents.erase ( contents.size () - 1 , 1 );
+   }
+   
+   command.setContent ( contents );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::UserExtentionCommand& command )
+{
+   output_stream << command.getContent () << " ;";
+   
+   return ( output_stream );
+}

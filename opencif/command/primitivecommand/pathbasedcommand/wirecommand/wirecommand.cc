@@ -33,6 +33,40 @@ OpenCIF::WireCommand::WireCommand ( void )
 }
 
 /*
+ * Non-Default constructor. Initialize the command instance using a string representing the command itself.
+ */
+OpenCIF::WireCommand::WireCommand ( const std::string& str_command )
+   : PathBasedCommand ()
+{
+   command_type = Wire;
+   
+   std::string word;
+   std::istringstream input_stream ( str_command );
+   unsigned long int width;
+   
+   // Read the W and ID parts
+   input_stream >> word >> width;
+   
+   setWidth ( width );
+   
+   input_stream >> word;
+   
+   while ( word != ";" )
+   {
+      std::istringstream iss ( word );
+      long int x , y;
+      iss >> x;
+      input_stream >> y;
+      
+      OpenCIF::Point point ( x , y );
+      
+      command_points.push_back ( point );
+      
+      input_stream >> word;
+   }
+}
+
+/*
  * Destructor. Nothing to do.
  */
 OpenCIF::WireCommand::~WireCommand ( void )
@@ -55,4 +89,47 @@ void OpenCIF::WireCommand::setWidth ( const long unsigned int& new_width )
    wire_width = new_width;
    
    return;
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::WireCommand& command )
+{
+   output_stream << "W " << command.wire_width << " ";
+   
+   for ( long int i = 0; i < command.command_points.size (); i++ )
+   {
+      output_stream << command.command_points.at ( i ) << " ";
+   }
+   
+   output_stream << ";";
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& command )
+{
+   std::string word;
+   unsigned long int width;
+   
+   // Read the W and ID parts
+   input_stream >> word >> width;
+   
+   command.setWidth ( width );
+   
+   input_stream >> word;
+   
+   while ( word != ";" )
+   {
+      std::istringstream iss ( word );
+      long int x , y;
+      iss >> x;
+      input_stream >> y;
+      
+      OpenCIF::Point point ( x , y );
+      
+      command.command_points.push_back ( point );
+      
+      input_stream >> word;
+   }
+   
+   return ( input_stream );
 }

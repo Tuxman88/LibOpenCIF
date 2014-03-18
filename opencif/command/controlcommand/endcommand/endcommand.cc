@@ -20,31 +20,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef LIBOPENCIF_USEREXTENTIONCOMMAND_H_
-# define LIBOPENCIF_USEREXTENTIONCOMMAND_H_
+# include "endcommand.h"
 
-# include <iostream>
-# include <string>
-# include <sstream>
-
-# include "../rawcontentcommand.h"
-
-namespace OpenCIF { class UserExtentionCommand; }
-std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::UserExtentionCommand& command );
-
-namespace OpenCIF
+/*
+ * Default constructor. Nothing to do.
+ */
+OpenCIF::EndCommand::EndCommand ( void )
+   : ControlCommand ()
 {
-   class UserExtentionCommand : public OpenCIF::RawContentCommand
-   {
-      public:
-         explicit UserExtentionCommand ( void );
-         explicit UserExtentionCommand ( const std::string& str_command );
-         virtual ~UserExtentionCommand ( void );
-         
-         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtentionCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const UserExtentionCommand& command );
-   };
+   command_type = End;
 }
 
-# endif
+/*
+ * Destructor. Nothing to do.
+ */
+OpenCIF::EndCommand::~EndCommand ( void )
+{
+}
+
+unsigned long int OpenCIF::EndCommand::getID ( void ) const
+{
+   return ( ControlCommand::getID () );
+}
+
+void OpenCIF::EndCommand::setID ( const unsigned long int& new_id )
+{
+   ControlCommand::setID ( new_id );
+   return;
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand& command )
+{
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::EndCommand& command )
+{
+   output_stream << "E ;";
+   
+   return ( output_stream );
+}

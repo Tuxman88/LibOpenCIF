@@ -23,7 +23,15 @@
 # ifndef LIBOPENCIF_COMMENTCOMMAND_H_
 # define LIBOPENCIF_COMMENTCOMMAND_H_
 
+# include <iostream>
+# include <string>
+# include <sstream>
+
 # include "../rawcontentcommand.h"
+
+namespace OpenCIF { class CommentCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::CommentCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::CommentCommand& command );
 
 namespace OpenCIF
 {
@@ -31,7 +39,11 @@ namespace OpenCIF
    {
       public:
          explicit CommentCommand ( void );
+         explicit CommentCommand ( const std::string& str_command );
          virtual ~CommentCommand ( void );
+         
+         friend std::istream& (::operator>>) ( std::istream& input_stream , CommentCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const CommentCommand& command );
    };
 }
 

@@ -31,9 +31,90 @@ OpenCIF::CommentCommand::CommentCommand ( void )
    command_type = Comment;
 }
 
+OpenCIF::CommentCommand::CommentCommand ( const std::string& str_command )
+   : RawContentCommand ()
+{
+   command_type = Comment;
+   
+   // Read chars until the parentheses end and I read the semicolon.
+   
+   char character = '_';
+   std::string content;
+   std::istringstream input_stream ( str_command );
+   
+   while ( character != '(' )
+   {
+      character = input_stream.get ();
+   }
+   
+   content = "(";
+   
+   unsigned long int parentheses = 1;
+   
+   while ( parentheses != 0 )
+   {
+      character = input_stream.get ();
+      content += character;
+      
+      parentheses += ( character == '(' ) ? 1 : ( character == ')' ) ? -1 : 0;
+   }
+   
+   // Ok, I have the last parentheses. Read and omit unti the semicolon
+   
+   while ( character != ';' )
+   {
+      character = input_stream.get ();
+   }
+   
+   setContent ( content );
+}
+
 /*
  * Destructor. Nothing to do.
  */
 OpenCIF::CommentCommand::~CommentCommand ( void )
 {
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::CommentCommand& command )
+{
+   // Read chars until the parentheses end and I read the semicolon.
+   
+   char character = '_';
+   std::string content;
+   
+   while ( character != '(' )
+   {
+      character = input_stream.get ();
+   }
+   
+   content = "(";
+   
+   unsigned long int parentheses = 1;
+   
+   while ( parentheses != 0 )
+   {
+      character = input_stream.get ();
+      content += character;
+      
+      parentheses += ( character == '(' ) ? 1 : ( character == ')' ) ? -1 : 0;
+   }
+   
+   // Ok, I have the last parentheses. Read and omit unti the semicolon
+   
+   while ( character != ';' )
+   {
+      character = input_stream.get ();
+   }
+   
+   command.setContent ( content );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::CommentCommand& command )
+{
+   output_stream << command.getContent () << " ;";
+   
+   return ( output_stream );
 }
