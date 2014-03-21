@@ -23,8 +23,13 @@
 # ifndef LIBOPENCIF_COMMAND_H_
 # define LIBOPENCIF_COMMAND_H_
 
+# include <iostream>
 # include <string>
 # include <sstream>
+
+namespace OpenCIF { class Command; }
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::Command* command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::Command* command );
 
 // General namespace for all the library contents.
 namespace OpenCIF
@@ -70,6 +75,13 @@ namespace OpenCIF
          explicit Command ( void ); // Main constructor.
          virtual ~Command ( void ); // Destructor
          virtual CommandType type ( void ); // Returns the type of the instance. In this case, should return "PlainCommand"
+         
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , Command* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , Command* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       protected:
          CommandType command_type;

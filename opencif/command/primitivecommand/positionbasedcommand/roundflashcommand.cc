@@ -41,14 +41,7 @@ OpenCIF::RoundFlashCommand::RoundFlashCommand ( const std::string& str_command )
    command_type = RoundFlash;
    
    std::istringstream input_stream ( str_command );
-   unsigned long int diameter;
-   std::string word;
-   OpenCIF::Point point;
-   
-   input_stream >> word >> diameter >> point;
-   
-   setDiameter ( diameter );
-   setPosition ( point );
+   read ( input_stream );
 }
 
 /*
@@ -78,21 +71,49 @@ void OpenCIF::RoundFlashCommand::setDiameter ( const long unsigned int& new_diam
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand& command )
 {
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::RoundFlashCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::RoundFlashCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::RoundFlashCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "R " << getDiameter () << " " << getPosition () << " ;";
+   
+   return;
+}
+
+void OpenCIF::RoundFlashCommand::read ( std::istream& input_stream )
+{
    unsigned long int diameter;
    std::string word;
    OpenCIF::Point point;
    
    input_stream >> word >> diameter >> point;
    
-   command.setDiameter ( diameter );
-   command.setPosition ( point );
+   setDiameter ( diameter );
+   setPosition ( point );
    
-   return ( input_stream );
-}
-
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::RoundFlashCommand& command )
-{
-   output_stream << "R " << command.getDiameter () << " " << command.getPosition () << " ;";
-   
-   return ( output_stream );
+   return;
 }

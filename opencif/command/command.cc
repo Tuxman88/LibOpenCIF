@@ -68,3 +68,29 @@ unsigned long int OpenCIF::Command::toULInt ( const std::string& value )
    
    return ( converted );
 }
+
+void OpenCIF::Command::print ( std::ostream& output_stream )
+{
+   output_stream << "(OpenCIF:Command:print: Logical error. This function should not be used (maybe the user has instantiated a Command, instread of a leaf class)) ;";
+   
+   return;
+}
+
+void OpenCIF::Command::read ( std::istream& input_stream )
+{
+   return;
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::Command* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::Command* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}

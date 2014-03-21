@@ -36,9 +36,57 @@ OpenCIF::UserExtentionCommand::UserExtentionCommand ( const std::string& str_com
 {
    command_type = UserExtention;
    
+   std::istringstream input_stream ( str_command );
+   
+   read ( input_stream );
+}
+
+/*
+ * Destructor. Nothing to do.
+ */
+OpenCIF::UserExtentionCommand::~UserExtentionCommand ( void )
+{
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command )
+{
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::UserExtentionCommand::print ( std::ostream& output_stream )
+{
+   output_stream << getContent () << " ;";
+   
+   return;
+}
+
+void OpenCIF::UserExtentionCommand::read ( std::istream& input_stream )
+{
    char character = ' ';
    std::string contents;
-   std::istringstream input_stream ( str_command );
    
    while ( character == ' ' )
    {
@@ -63,51 +111,6 @@ OpenCIF::UserExtentionCommand::UserExtentionCommand ( const std::string& str_com
    }
    
    setContent ( contents );
-}
-
-/*
- * Destructor. Nothing to do.
- */
-OpenCIF::UserExtentionCommand::~UserExtentionCommand ( void )
-{
-}
-
-
-std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command )
-{
-   char character = ' ';
-   std::string contents;
    
-   while ( character == ' ' )
-   {
-      character = input_stream.get ();
-   }
-   
-   contents = character;
-   
-   while ( character != ';' )
-   {
-      character = input_stream.get ();
-      
-      if ( character != ';' )
-      {
-         contents += character;
-      }
-   }
-   
-   while ( contents[ contents.size () - 1 ] == ' ' )
-   {
-      contents.erase ( contents.size () - 1 , 1 );
-   }
-   
-   command.setContent ( contents );
-   
-   return ( input_stream );
-}
-
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::UserExtentionCommand& command )
-{
-   output_stream << command.getContent () << " ;";
-   
-   return ( output_stream );
+   return;
 }

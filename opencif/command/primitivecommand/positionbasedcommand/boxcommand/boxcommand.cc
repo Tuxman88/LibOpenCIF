@@ -40,36 +40,9 @@ OpenCIF::BoxCommand::BoxCommand ( const std::string& str_command )
 {
    command_type = Box;
    
-   std::string word;
-   OpenCIF::Point position;
-   OpenCIF::Size size;
-   long int x , y;
    std::istringstream input_stream ( str_command );
    
-   
-   // Read the B part, then, the size, then the position.
-   input_stream >> word >> size >> position;
-   
-   // Check if there is a rotation
-   input_stream >> word;
-   
-   if ( word != ";" )
-   {
-      std::istringstream iss ( word );
-      iss >> x;
-      input_stream >> y;
-      
-      OpenCIF::Point rotation ( x , y );
-      
-      setRotation ( rotation );
-   }
-   else
-   {
-      box_rotation.set ( 1 , 0 );
-   }
-   
-   setPosition ( position );
-   setSize ( size );
+   read ( input_stream );
 }
 
 /*
@@ -115,8 +88,42 @@ void OpenCIF::BoxCommand::setSize ( const OpenCIF::Size& new_size )
    return;
 }
 
-
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand& command )
+{
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::BoxCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::BoxCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::BoxCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "B " << getSize () << " " << getPosition () << " " << getRotation () << " ;";
+   
+   return;
+}
+
+void OpenCIF::BoxCommand::read ( std::istream& input_stream )
 {
    std::string word;
    OpenCIF::Point position;
@@ -138,18 +145,17 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand& com
       
       OpenCIF::Point rotation ( x , y );
       
-      command.setRotation ( rotation );
+      setRotation ( rotation );
+   }
+   else
+   {
+      OpenCIF::Point rotation ( 1 , 0 );
+      
+      setRotation ( rotation );
    }
    
-   command.setPosition ( position );
-   command.setSize ( size );
+   setPosition ( position );
+   setSize ( size );
    
-   return ( input_stream );
-}
-
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::BoxCommand& command )
-{
-   output_stream << "B " << command.getSize () << " " << command.getPosition () << " " << command.getRotation () << " ;";
-   
-   return ( output_stream );
+   return;
 }

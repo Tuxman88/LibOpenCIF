@@ -30,8 +30,10 @@
 # include "../controlcommand.h"
 
 namespace OpenCIF { class DefinitionDeleteCommand; };
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionDeleteCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand& command );
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand* command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand* command );
 
 namespace OpenCIF
 {
@@ -42,8 +44,14 @@ namespace OpenCIF
          explicit DefinitionDeleteCommand ( const std::string& str_command );
          virtual ~DefinitionDeleteCommand ( void );
          
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const DefinitionDeleteCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , DefinitionDeleteCommand& command );
          friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionDeleteCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , DefinitionDeleteCommand* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionDeleteCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
    };
 }
 

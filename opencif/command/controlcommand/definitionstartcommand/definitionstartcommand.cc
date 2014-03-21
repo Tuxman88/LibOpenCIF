@@ -37,28 +37,7 @@ OpenCIF::DefinitionStartCommand::DefinitionStartCommand ( const std::string& str
    command_type = DefinitionStart;
    
    std::istringstream input_stream ( str_command );
-   std::string word;
-   unsigned long int id;
-   
-   input_stream >> word >> word >> id;
-   
-   setID ( id );
-   
-   // Read the next components. If is a semicolon, do nothing. Otherwise, is an AB value
-   input_stream >> word;
-   
-   if ( word != ";" )
-   {
-      std::istringstream iss ( word );
-      unsigned long int a , b;
-      iss >> a;
-      input_stream >> b;
-      
-      OpenCIF::Fraction fraction;
-      fraction.set ( a , b );
-      
-      setAB ( fraction );
-   }
+   read ( input_stream );
 }
 
 /*
@@ -88,13 +67,47 @@ void OpenCIF::DefinitionStartCommand::setAB ( const OpenCIF::Fraction& new_ab )
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStartCommand& command )
 {
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionStartCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStartCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionStartCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::DefinitionStartCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "D S " << getID () << " " << getAB () << " ;";
+   
+   return;
+}
+
+void OpenCIF::DefinitionStartCommand::read ( std::istream& input_stream )
+{
    // Read the first two useless parts and the ID
    std::string word;
    unsigned long int id;
    
    input_stream >> word >> word >> id;
    
-   command.setID ( id );
+   setID ( id );
    
    // Read the next components. If is a semicolon, do nothing. Otherwise, is an AB value
    input_stream >> word;
@@ -109,15 +122,8 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStart
       OpenCIF::Fraction fraction;
       fraction.set ( a , b );
       
-      command.setAB ( fraction );
+      setAB ( fraction );
    }
    
-   return ( input_stream );
-}
-
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionStartCommand& command )
-{
-   output_stream << "D S " << command.getID () << " " << command.getAB () << " ;";
-   
-   return ( output_stream );
+   return;
 }

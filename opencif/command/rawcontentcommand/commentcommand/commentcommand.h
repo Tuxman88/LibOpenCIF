@@ -31,7 +31,9 @@
 
 namespace OpenCIF { class CommentCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::CommentCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::CommentCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::CommentCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::CommentCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::CommentCommand* command );
 
 namespace OpenCIF
 {
@@ -43,7 +45,13 @@ namespace OpenCIF
          virtual ~CommentCommand ( void );
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , CommentCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const CommentCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , CommentCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , CommentCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , CommentCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
    };
 }
 

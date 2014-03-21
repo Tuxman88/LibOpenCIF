@@ -31,7 +31,9 @@
 
 namespace OpenCIF { class EndCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::EndCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::EndCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::EndCommand* command );
 
 namespace OpenCIF
 {
@@ -42,7 +44,13 @@ namespace OpenCIF
          virtual ~EndCommand ( void );
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , EndCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const EndCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , EndCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , EndCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , EndCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          void setID ( const unsigned long int& new_id );

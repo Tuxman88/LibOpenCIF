@@ -33,8 +33,10 @@
 
 // Forward declarations
 namespace OpenCIF { class CallCommand; }
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::CallCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::CallCommand& command );
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::CallCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::CallCommand* command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::CallCommand* command );
 
 namespace OpenCIF
 {
@@ -49,8 +51,14 @@ namespace OpenCIF
          void addTransformation ( const OpenCIF::Transformation& new_transformation );
          std::vector< OpenCIF::Transformation >& getTransformations ( void );
          
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const CallCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , CallCommand& command );
          friend std::istream& (::operator>>) ( std::istream& input_stream , CallCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , CallCommand* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , CallCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          std::vector< OpenCIF::Transformation > call_transformations;

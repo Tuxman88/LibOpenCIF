@@ -27,7 +27,9 @@
 
 namespace OpenCIF { class RoundFlashCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::RoundFlashCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::RoundFlashCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::RoundFlashCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::RoundFlashCommand* command );
 
 namespace OpenCIF
 {
@@ -41,7 +43,13 @@ namespace OpenCIF
          unsigned long int getDiameter ( void ) const;
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , RoundFlashCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const RoundFlashCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , RoundFlashCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , RoundFlashCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , RoundFlashCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          unsigned long int round_diameter;

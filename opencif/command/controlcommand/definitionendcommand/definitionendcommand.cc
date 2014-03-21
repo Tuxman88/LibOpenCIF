@@ -48,11 +48,9 @@ OpenCIF::DefinitionEndCommand::~DefinitionEndCommand ( void )
 {
 }
 
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionEndCommand& command )
-{
-   output_stream << "D F ;";
-   
-   // Since the command is not needed... well... do nothing...
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionEndCommand& command )
+{   
+   command.print ( output_stream );
    
    return ( output_stream );
 }
@@ -62,4 +60,32 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCo
    // Well.. do nothing...
    
    return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionEndCommand* command )
+{   
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand* command )
+{
+   // Well.. do nothing...
+   
+   return ( input_stream );
+}
+
+void OpenCIF::DefinitionEndCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "D F ;";
+   
+   // Since the command is not needed... well... do nothing...
+   
+   return;
+}
+
+void OpenCIF::DefinitionEndCommand::read ( std::istream& input_stream )
+{
+    return;
 }

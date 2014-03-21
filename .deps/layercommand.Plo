@@ -73,7 +73,8 @@ layercommand.lo: opencif/command/layercommand/layercommand.cc \
  /usr/include/c++/4.8.1/bits/ostream.tcc \
  /usr/include/c++/4.8.1/bits/istream.tcc \
  /usr/include/c++/4.8.1/bits/sstream.tcc \
- opencif/command/layercommand/../command.h
+ opencif/command/layercommand/../command.h \
+ /usr/include/c++/4.8.1/iostream
 
 /usr/include/stdc-predef.h:
 
@@ -266,3 +267,5 @@ opencif/command/layercommand/layercommand.h:
 /usr/include/c++/4.8.1/bits/sstream.tcc:
 
 opencif/command/layercommand/../command.h:
+
+/usr/include/c++/4.8.1/iostream:

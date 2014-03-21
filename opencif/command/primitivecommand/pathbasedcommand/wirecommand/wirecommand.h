@@ -30,8 +30,10 @@
 # include "../pathbasedcommand.h"
 
 namespace OpenCIF { class WireCommand; }
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::WireCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::WireCommand& command );
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::WireCommand* command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand* command );
 
 namespace OpenCIF
 {
@@ -44,8 +46,14 @@ namespace OpenCIF
          void setWidth ( const unsigned long int& new_width );
          unsigned long int getWidth ( void ) const;
          
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const WireCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , WireCommand& command );
          friend std::istream& (::operator>>) ( std::istream& input_stream , WireCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , WireCommand* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , WireCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          unsigned long int wire_width;

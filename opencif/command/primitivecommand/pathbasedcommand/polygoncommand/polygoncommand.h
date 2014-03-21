@@ -30,8 +30,10 @@
 # include "../pathbasedcommand.h"
 
 namespace OpenCIF { class PolygonCommand; }
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::PolygonCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::PolygonCommand& command );
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::PolygonCommand* command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand* command );
 
 namespace OpenCIF
 {
@@ -42,8 +44,14 @@ namespace OpenCIF
          explicit PolygonCommand ( const std::string& str_command );
          virtual ~PolygonCommand ( void );
          
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const PolygonCommand& command );
-         friend std::istream& (::operator>>) ( std::istream& input_stream , OpenCIF::PolygonCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , PolygonCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , PolygonCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , PolygonCommand* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , PolygonCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
    };
 }
 

@@ -31,7 +31,9 @@
 
 namespace OpenCIF { class UserExtentionCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::UserExtentionCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand* command );
 
 namespace OpenCIF
 {
@@ -43,7 +45,13 @@ namespace OpenCIF
          virtual ~UserExtentionCommand ( void );
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtentionCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const UserExtentionCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtentionCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtentionCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtentionCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
    };
 }
 

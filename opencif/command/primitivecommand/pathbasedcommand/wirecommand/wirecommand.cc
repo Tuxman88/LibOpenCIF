@@ -91,21 +91,49 @@ void OpenCIF::WireCommand::setWidth ( const long unsigned int& new_width )
    return;
 }
 
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::WireCommand& command )
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::WireCommand& command )
 {
-   output_stream << "W " << command.wire_width << " ";
-   
-   for ( long int i = 0; i < command.command_points.size (); i++ )
-   {
-      output_stream << command.command_points.at ( i ) << " ";
-   }
-   
-   output_stream << ";";
+   command.print ( output_stream );
    
    return ( output_stream );
 }
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& command )
+{
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::WireCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+void OpenCIF::WireCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "W " << wire_width << " ";
+   
+   for ( long int i = 0; i < command_points.size (); i++ )
+   {
+      output_stream << command_points.at ( i ) << " ";
+   }
+   
+   output_stream << ";";
+   
+   return;
+}
+
+void OpenCIF::WireCommand::read ( std::istream& input_stream )
 {
    std::string word;
    unsigned long int width;
@@ -113,7 +141,7 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& co
    // Read the W and ID parts
    input_stream >> word >> width;
    
-   command.setWidth ( width );
+   setWidth ( width );
    
    input_stream >> word;
    
@@ -126,10 +154,10 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::WireCommand& co
       
       OpenCIF::Point point ( x , y );
       
-      command.command_points.push_back ( point );
+      command_points.push_back ( point );
       
       input_stream >> word;
    }
    
-   return ( input_stream );
+   return;
 }

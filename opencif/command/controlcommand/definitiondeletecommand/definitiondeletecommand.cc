@@ -39,13 +39,9 @@ OpenCIF::DefinitionDeleteCommand::DefinitionDeleteCommand ( const std::string& s
 {
    command_type = DefinitionDelete;
    
-   std::string word;
-   unsigned long int id;
    std::istringstream input_stream ( str_command );
    
-   input_stream >> word >> word >> id;
-   
-   setID ( id );
+   read ( input_stream );
 }
 
 /*
@@ -55,13 +51,40 @@ OpenCIF::DefinitionDeleteCommand::~DefinitionDeleteCommand ( void )
 {
 }
 
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionDeleteCommand& command )
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand& command )
 {
-   output_stream << "D D " << command.getID ();
+   command.print ( output_stream );
    
    return ( output_stream );
 }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand& command )
+{
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+void OpenCIF::DefinitionDeleteCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "D D " << getID () << " ;";
+   
+   return;
+}
+
+void OpenCIF::DefinitionDeleteCommand::read ( std::istream& input_stream )
 {
    // Load the "D D " part to read, after that, the ID
    std::string word;
@@ -69,7 +92,7 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDelet
    
    input_stream >> word >> word >> id;
    
-   command.setID ( id );
+   setID ( id );
    
-   return ( input_stream );
+   return;
 }

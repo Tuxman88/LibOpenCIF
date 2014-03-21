@@ -37,12 +37,8 @@ OpenCIF::LayerCommand::LayerCommand ( const std::string& str_command )
    command_type = Layer;
    
    std::istringstream input_stream ( str_command );
-   std::string word;
    
-   // Read the "L" section of the command and the layer name
-   input_stream >> word >> word;
-   
-   setName ( word );
+   read ( input_stream );
 }
 
 /*
@@ -72,19 +68,47 @@ void OpenCIF::LayerCommand::setName ( const std::string& new_name )
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::LayerCommand& command )
 {
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::LayerCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::LayerCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::LayerCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::LayerCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "L " << getName () << " ;";
+   
+   return;
+}
+
+void OpenCIF::LayerCommand::read ( std::istream& input_stream )
+{
    std::string word;
    
    // Read the "L" section of the command and the layer name
    input_stream >> word >> word;
    
-   command.setName ( word );
+   setName ( word );
    
-   return ( input_stream );
-}
-
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::LayerCommand& command )
-{
-   output_stream << "L " << command.getName () << " ;";
-   
-   return ( output_stream );
+   return;
 }

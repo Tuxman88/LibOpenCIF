@@ -30,7 +30,9 @@
 
 namespace OpenCIF { class LayerCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::LayerCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::LayerCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::LayerCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::LayerCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::LayerCommand* command );
 
 namespace OpenCIF
 {
@@ -45,7 +47,13 @@ namespace OpenCIF
          std::string getName ( void ) const;
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , LayerCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const LayerCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , LayerCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , LayerCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , LayerCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          std::string layer_name;

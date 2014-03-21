@@ -33,7 +33,9 @@
 
 namespace OpenCIF { class BoxCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::BoxCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::BoxCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::BoxCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::BoxCommand* command );
 
 namespace OpenCIF
 {
@@ -49,7 +51,13 @@ namespace OpenCIF
          OpenCIF::Point getRotation ( void ) const;
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , BoxCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const BoxCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , BoxCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , BoxCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , BoxCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       protected:
          OpenCIF::Size box_size;

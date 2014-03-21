@@ -32,7 +32,9 @@
 
 namespace OpenCIF { class DefinitionStartCommand; }
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStartCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::DefinitionStartCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionStartCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionStartCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionStartCommand* command );
 
 namespace OpenCIF
 {
@@ -47,7 +49,13 @@ namespace OpenCIF
          OpenCIF::Fraction getAB ( void ) const;
          
          friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionStartCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , const DefinitionStartCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , DefinitionStartCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , DefinitionStartCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , DefinitionStartCommand* command );
+         
+      protected:
+         virtual void print ( std::ostream& output_stream );
+         virtual void read ( std::istream& input_stream );
          
       private:
          OpenCIF::Fraction command_ab;

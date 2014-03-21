@@ -54,9 +54,33 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand& com
    return ( input_stream );
 }
 
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::EndCommand& command )
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::EndCommand& command )
+{
+   command.print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand* command )
+{
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::EndCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+void OpenCIF::EndCommand::print ( std::ostream& output_stream )
 {
    output_stream << "E ;";
    
-   return ( output_stream );
+   return;
+}
+
+void OpenCIF::EndCommand::read ( std::istream& input_stream )
+{
+   return;
 }

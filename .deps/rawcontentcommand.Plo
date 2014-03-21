@@ -59,7 +59,7 @@ rawcontentcommand.lo: \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/atomic_word.h \
  /usr/include/c++/4.8.1/bits/basic_string.tcc \
  opencif/command/rawcontentcommand/../command.h \
- /usr/include/c++/4.8.1/sstream /usr/include/c++/4.8.1/istream \
+ /usr/include/c++/4.8.1/iostream /usr/include/c++/4.8.1/ostream \
  /usr/include/c++/4.8.1/ios /usr/include/c++/4.8.1/bits/ios_base.h \
  /usr/include/c++/4.8.1/bits/locale_classes.h \
  /usr/include/c++/4.8.1/bits/locale_classes.tcc \
@@ -72,9 +72,9 @@ rawcontentcommand.lo: \
  /usr/include/c++/4.8.1/bits/streambuf_iterator.h \
  /usr/include/c++/4.8.1/x86_64-unknown-linux-gnu/bits/ctype_inline.h \
  /usr/include/c++/4.8.1/bits/locale_facets.tcc \
- /usr/include/c++/4.8.1/bits/basic_ios.tcc /usr/include/c++/4.8.1/ostream \
- /usr/include/c++/4.8.1/bits/ostream.tcc \
- /usr/include/c++/4.8.1/bits/istream.tcc \
+ /usr/include/c++/4.8.1/bits/basic_ios.tcc \
+ /usr/include/c++/4.8.1/bits/ostream.tcc /usr/include/c++/4.8.1/istream \
+ /usr/include/c++/4.8.1/bits/istream.tcc /usr/include/c++/4.8.1/sstream \
  /usr/include/c++/4.8.1/bits/sstream.tcc
 
 /usr/include/stdc-predef.h:
@@ -227,9 +227,9 @@ opencif/command/rawcontentcommand/rawcontentcommand.h:
 
 opencif/command/rawcontentcommand/../command.h:
 
-/usr/include/c++/4.8.1/sstream:
+/usr/include/c++/4.8.1/iostream:
 
-/usr/include/c++/4.8.1/istream:
+/usr/include/c++/4.8.1/ostream:
 
 /usr/include/c++/4.8.1/ios:
 
@@ -261,10 +261,12 @@ opencif/command/rawcontentcommand/../command.h:
 
 /usr/include/c++/4.8.1/bits/basic_ios.tcc:
 
-/usr/include/c++/4.8.1/ostream:
-
 /usr/include/c++/4.8.1/bits/ostream.tcc:
 
+/usr/include/c++/4.8.1/istream:
+
 /usr/include/c++/4.8.1/bits/istream.tcc:
+
+/usr/include/c++/4.8.1/sstream:
 
 /usr/include/c++/4.8.1/bits/sstream.tcc:

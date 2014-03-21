@@ -63,21 +63,49 @@ OpenCIF::PolygonCommand::~PolygonCommand ( void )
 {
 }
 
-std::ostream& operator<< ( std::ostream& output_stream , const OpenCIF::PolygonCommand& command )
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::PolygonCommand& command )
 {
-   output_stream << "P ";
-   
-   for ( long int i = 0; i < command.getPoints ().size (); i++ )
-   {
-      output_stream << command.getPoints ()[ i ] << " ";
-   }
-   
-   output_stream << ";";
+   command.print ( output_stream );
    
    return ( output_stream );
 }
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand& command )
+{
+   command.read ( input_stream );
+   
+   return ( input_stream );
+}
+
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::PolygonCommand* command )
+{
+   command->print ( output_stream );
+   
+   return ( output_stream );
+}
+
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand* command )
+{
+   command->read ( input_stream );
+   
+   return ( input_stream );
+}
+
+void OpenCIF::PolygonCommand::print ( std::ostream& output_stream )
+{
+   output_stream << "P ";
+   
+   for ( long int i = 0; i < getPoints ().size (); i++ )
+   {
+      output_stream << getPoints ()[ i ] << " ";
+   }
+   
+   output_stream << ";";
+   
+   return;
+}
+
+void OpenCIF::PolygonCommand::read ( std::istream& input_stream )
 {
    std::string word;
    
@@ -92,10 +120,10 @@ std::istream& operator>> ( std::istream& input_stream , OpenCIF::PolygonCommand&
       input_stream >> y;
       OpenCIF::Point point ( x , y );
       
-      command.command_points.push_back ( point );
+      command_points.push_back ( point );
       
       input_stream >> word;
    }
    
-   return ( input_stream );
+   return;
 }
