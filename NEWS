@@ -1,11 +1,11 @@
 LibOpenCIF - NEWS file
-----------------------
+======================
 
 [1.0]
 
 - Support of the CIF (Caltech Intermediate Form) format, version 2.
-- Validation of input files using a Finite State Machine (refer to
+- Validation   of   input   files  using  a  Finite  State  Machine  (refer  to
   documentation to learn about it).
 - Command cleaning on-load.
-- Modularity of the load process. The validation can be skiped, and
-  the conversion to instances can be ommited.
+- Modularity  of  the  load  process.  The  validation  can  be skiped, and the
+  conversion to instances can be ommited.

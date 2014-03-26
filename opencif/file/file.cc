@@ -89,7 +89,7 @@ std::vector< std::string > OpenCIF::File::getMessages ( void )
  * Member function to load the input file. There is returned a LoadStatus
  * value that indicates the result of the process.
  */
-OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( void )
+OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( const LoadMethod& load_method )
 {
    LoadStatus end_status;
    
@@ -102,21 +102,16 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( void )
       return ( end_status );
    }
    
-   end_status = validateSintax ();
+   end_status = validateSintax ( load_method );
    
-   if ( end_status != AllOk )
+   if ( end_status != AllOk && load_method != ContinueOnError )
    {
       return ( end_status );
    }
    
-   end_status = loadCommands ();
+   loadCommands ();
    
-   if ( end_status != AllOk )
-   {
-      return ( end_status );
-   }
-   
-   return ( AllOk );
+   return ( end_status );
 }
 
 /*
@@ -146,7 +141,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::openFile ( void )
  * This member function validates the contents of the input file using
  * a finite state machine.
  */
-OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
+OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load_method )
 {
    /*
     * The process of validation isn't that complex.
@@ -173,6 +168,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    int previous_state; // Previous state.
    char input_char;
    char previous_char;
+   bool errors_omited = false;
    
    fsm = new OpenCIF::CIFFSM ();
    
@@ -186,10 +182,14 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
       previous_char = input_char;
       input_char = file_input.get ();
       
+      std::cout << "Checando: " << input_char << std::endl;
+      std::cout << "Buffer: " << command_buffer << std::endl;
+      
       if ( !file_input.eof () )
       {
          previous_state = jump_state;
          jump_state = fsm->operator[] ( input_char );
+         std::cout << "Salto: " << jump_state << std::endl;
          
          if ( jump_state == 1 && previous_state != 1 ) // If I'm returning to the first state, the command
                                                        // is loaded. Just check the previous state. If the
@@ -204,11 +204,25 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
             file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
             command_buffer = "";
          }
-         else if ( jump_state != 1 )
+         else if ( jump_state != 1 && jump_state != -1 )
          {
             std::string tmp;
             tmp = input_char;
             command_buffer += tmp;
+         }
+         
+         // Check if the current jump state is to an error. 
+         // If so, and the load method indicates "ContinueOnError", reset the FSM
+         // to state 1, reset the current jumps to 1, clean the command buffer and skip chars until a semicolon
+         
+         if ( jump_state == -1 && load_method == ContinueOnError )
+         {
+            fsm->reset ();
+            jump_state = 1;
+            errors_omited = true;
+            command_buffer = "";
+            
+            file_input.putback ( input_char );
          }
       }
    }
@@ -258,14 +272,14 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( void )
    // Everything Ok. Add last command (the END command)
    file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
    
-   return ( AllOk );
+   return ( ( errors_omited) ? IncorrectInputFile : AllOk );
 }
 
 /*
  * This member function loads the contents of the input file and converts them
  * into Command instances.
  */
-OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
+void OpenCIF::File::loadCommands ( void )
 {
    /*
     * The raw commands are ready and validated. So, there is only left the process of
@@ -360,7 +374,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadCommands ( void )
       }
    }
    
-   return ( AllOk );
+   return;
 }
 
 /*

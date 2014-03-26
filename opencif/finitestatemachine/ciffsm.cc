@@ -453,6 +453,13 @@ void OpenCIF::CIFFSM::add ( const int& input_state , const OpenCIF::CIFFSM::Tran
             add ( input_state , tmp , output_state );
          }
          break;
+      case LowerChar:
+         for ( int i = 'a'; i <= 'z'; i++ )
+         {
+            tmp = (char)i;
+            add ( input_state , tmp , output_state );
+         }
+         break;
          
       case BlankChar:
          for ( int i = 0; i < 256; i++ )
@@ -490,7 +497,7 @@ void OpenCIF::CIFFSM::add ( const int& input_state , const OpenCIF::CIFFSM::Tran
          break;
          
       case SeparatorChar:
-         add ( input_state , UpperChar , output_state );
+         add ( input_state , LowerChar , output_state );
          add ( input_state , BlankChar , output_state );
          break;
          
@@ -567,7 +574,7 @@ int OpenCIF::CIFFSM::operator[] ( const char& input_char )
    if ( currentState () == 1 && input_char == '(' )
    {
       new_state = FiniteStateMachine::operator[] ( input_char );
-      parentheses++;
+      parentheses = 1;
    }
    else if ( currentState () == 89 )
    {

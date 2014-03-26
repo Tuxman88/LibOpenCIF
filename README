@@ -1,4 +1,369 @@
 LibOpenCIF - README file
-------------------------
+========================
 
+The  LibOpenCIF library is a C++ library intented to be used to get easy access
+to  a CIF (Caltech Intermediate Form) file contents. Such contents are commands
+that  describe  the physical layout of an Integrated Circuit design (IC). Those
+commands  follow  the specifications set in the version 2.0 (February 11, 1980)
+of  such format. However, the format, despite setting the rules that define how
+the  commands  are stored, the specification itself set some complicated format
+options,  like  the  separation  characters. As an example, the next command is
+totally valid for the CIF specification, and should be read without problems by
+any tool:
 
+   B100this.is.a.valid.space100i.hope.you.can.use.it-50,50blasmskdjaisj1,-1;
+   
+So, the previous command can be "cleaned" to this:
+
+   B 100 100 -50 50 1 -1 ;
+   
+As  you  can  see,  here  the  "problem" are the valid representations of white
+spaces.  So,  the main complication using the CIF files is not the usage of the
+information  itself,  but the correct reading of the file. So, LibOpenCIF bring
+to the user the posibility of loading a CIF file without effort.
+
+The technology
+--------------
+
+LibOpenCIF implements  a  finite  state machine, built with 92 states, that can
+validate the contents of a CIF file. The FSM is designed to support some common
+command  changes that can be found in some professional CAD tools, like support
+for  unserlines,  digits  and  more  than  4 characters in layer names, and end
+commands with semicolons.
+
+   The  library,  apart from validating the contents of a CIF file, can load it
+for  the  user.  The loading process can store in memory all the commands found
+in  the  file  in  plain  text,  and,  also,  convert  such commands into class
+instances that the user can use as needed. The string-based commands stored are
+correctly cleaned, so, a string command like this:
+
+   B100this.is.a.valid.space100i.hope.you.can.use.it-50,50blasmskdjaisj1,-1;
+   
+Can be found in memory as this:
+
+   B 100 100 -50 50 1 -1 ;
+   
+All  those  spaces  (specially  the  last  whitespace before the semicolon) are
+intented  to  help  use  user  to manage the commands in any form he wants. One
+approach  is  reading  the contents of the string command using an input string
+stream  (as  the  library  do),  or, if needed, to split the command in pieces,
+using as reference the whitespaces to separate the components.
+
+   The  library  is  programmed using pure C++ code. The code doesn't depend on
+any  other  library,  so,  the  compilation  process  can be done only with the
+compiler.  This  means  that, sadly, this library is not intented to be used in
+pure  C code projects. However, the project is beign ported to other languages,
+like  Python  or  Java,  all  of  them  open source as this one, so any kind of
+user can use the library with the language he wants or need.
+
+Library usage
+-------------
+
+Using  the  library  is very easy, in fact. To review the installation process,
+see at the INSTALL file.
+
+   The  first point to check is the compilation process. Next, is a very simple
+C++ example code to start:
+
+1    # include <iostream>
+2   
+3    using namespace std;
+4   
+5    int main ()
+6    {
+7       cout << "LibOpenCIF: Test program" << endl;
+8       return ( 0 );
+9    }
+   
+With  this  example,  we can start adding code to review the main components of
+the  library  itself.  Lets  assume  the previous code is saved in a file named
+"example.cc".  To  compile  the  program  in  GNU/Linux, we will use G++, using
+a command line. So, to compile the code is needed to use the next command:
+
+   $ g++ example.cc -o binary_file -lopencif
+   
+What we can see in the command are these components:
+
+$   <- This  simbol  only  represents  the  terminal prompt. Is not part of the
+       command. Also, it indicates that the command should be used as a regular
+       user, not as root user (using sudo nor su).
+       
+g++ <- This component is the name of the compiler we are using.
+
+example.cc <- This  part  is the name of the file that contains the code of the
+              program.
+              
+-o  <- This  component  is  used  by  G++. It helps to indicate the name of the
+       binary file to create. The binary file is the executable of the program.
+       
+binary_file <- This  is the name of the binary that will be created if there is
+               none error compiling.
+               
+-lopencif  <- This part is critical. If a program uses any part of the library,
+              it  must  include  this  option. Without it, the compilation will
+              fail.
+              
+Of course, there is possible to use more compilation flags to make the compiler
+more  agressive  with  the errors found. Such kind of flags where used with the
+test programs for the library.
+
+   So,  you have your first test program compiled and running. The next step is
+to,  actually,  use  the  library. To do so, you need to include the LibOpenCIF
+header file. You just need to add the line "# include <opencif/opencif.h":
+
+1    # include <iostream>
+2    # include <opencif/opencif.h>
+3
+4    using namespace std;
+5   
+6    int main ()
+7    {
+8       cout << "LibOpenCIF: Test program" << endl;
+9       return ( 0 );
+10   }
+
+In the example code, the line 2 where added. Now, lets assume the task you need
+you  complete  is  load  a  specific  CIF  file, and print it's commands to the
+terminal.  You  can do it. The first step of such operation is to create a File
+class instance. Such instance will help in the loading/validation of the file.
+
+   All  the  classes  of the library are stored in a namespace named "OpenCIF".
+So, to access the File class, you need to instantiate like this:
+
+1    # include <iostream>
+2    # include <opencif/opencif.h>
+3
+4    using namespace std;
+5   
+6    int main ()
+7    {
+8       cout << "LibOpenCIF: Test program" << endl;
+9       OpenCIF::File my_cif_file;
+10      return ( 0 );
+11   }
+
+As  you  can see, in line 9, there where created an instance of the File class.
+To  work with the real file, you need to specify the path of the file. The path
+can  be  complete  or  relative. You do it using the "setPath" member function.
+Such  member  function  needs a C++ string class instance, with the path to the
+file, so, we need to add a new header: string
+
+1    # include <iostream>
+2    # include <string>
+3    # include <opencif/opencif.h>
+4
+5    using namespace std;
+6   
+7    int main ()
+8    {
+9       cout << "LibOpenCIF: Test program" << endl;
+10      OpenCIF::File my_cif_file;
+11      return ( 0 );
+12   }
+
+As  can  be  seen  on  line 2, the string header was added. Now, we can use the
+member function of the File class instance:
+
+1    # include <iostream>
+2    # include <string>
+3    # include <opencif/opencif.h>
+4
+5    using namespace std;
+6   
+7    int main ()
+8    {
+9       cout << "LibOpenCIF: Test program" << endl;
+10
+11      OpenCIF::File my_cif_file;
+12      string file_path;
+13
+14      file_path = "design.cif";
+15      my_cif_file.setPath ( file_path );
+16
+17      return ( 0 );
+18   }
+
+Now,  after  adding  some  empty lines to make the code more clear, the line 12
+shows  that we created a string class instance named "file_path". In line 14 we
+setted  to  it the name of the imaginary CIF file we want to read, and, in line
+15,  we  set such file name to the File class instance using the setPath member
+function.
+
+   That  is  all  the  information the File class needs to operate. Now, we can
+order  the  load  of the file. Such operation can success or fail, depending if
+the  file  exists or not, if the file has invalid/incomplete CIF contents, etc.
+So,  the  member function to load the file, named "loadFile", returns a special
+value.  Such  value  is an enumeration. As such, we can create a variable of it
+and  store  the  return  value  of  the  operation, and check, in a switch, for
+example, what happened with the operation:
+
+1    # include <iostream>
+2    # include <string>
+3    # include <opencif/opencif.h>
+4
+5    using namespace std;
+6   
+7    int main ()
+8    {
+9       cout << "LibOpenCIF: Test program" << endl;
+10
+11      OpenCIF::File my_cif_file;
+12      string file_path;
+13
+14      file_path = "design.cif";
+15      my_cif_file.setPath ( file_path );
+16
+17      OpenCIF::File::LoadStatus end_status;
+18   
+19      end_status = my_cif_file.loadFile ();
+20
+21      switch ( end_status )
+22      {
+23         case OpenCIF::File::AllOk:
+24            break;
+25         
+26         case OpenCIF::File::CantOpenInputFile:
+27            cout << "Error opening file" << endl;
+28            break;
+29         
+30         case OpenCIF::File::IncompleteInputFile:
+31            cout << "Incomplete input file contents" << endl;
+32            break;
+33         
+34         case OpenCIF::File::IncorrectInputFile:
+35            cout << "Bad input file format" << endl;
+36            break;
+37      }
+38
+39      return ( 0 );
+40   }
+
+The  enumeration  is  named "LoadStatus", and can be accessed throught the File
+class itself (line 17). After calling the loadFile member function, and storing
+the operation result (line 19), we can check if the input file is correct or no
+using,  as  example, a simple switch. Of course, can be used a series of nested
+if  statements  and  omit  the  need to consider all the possible values of the
+result,  as  requested  by  the  language  rules.  The  possible  values of the
+"LoadStatus" are:
+
+- AllOk: This  value  is  returned  if  all the operations performed where done
+         correctly, and none error was found.
+         
+- CantOpenInputFile: This  value  is returned if there is a problem opening the
+                     input  file.  This  error  can  be related to an incorrect
+                     file  name  (a file that doesn't exist) or a file that was
+                     renamed/deleted/moved just before trying to open it.
+                     
+- IncompleteInputFile: This  value  is returned if the file doesn't contain, at
+                       least, the End command. This means that, valid CIF file,
+                       at  least  for  the  implementation  done, must have, at
+                       least,  one  command.  The  End command. So, if the file
+                       contents  are  totally  scanned,  but  no End command is
+                       found, then, the file is considered incomplete.
+                       
+                          There  is  important  to  mention, that an incomplete
+                       file, might not necessarily means the file is incorrect.
+                       Some professional tools support the lack of such command
+                       and assume that, anything found in the file, must be the
+                       whole  design.  There must be known that the call to the
+                       "loadFile"  member  function  performs, internally, only
+                       the  call  to  other  member  functions, that, actually,
+                       perform  the  validation, load and transformation of the
+                       design  contents.  So, when an incomplete file is found,
+                       the  load process is stoped, but, all the commands found
+                       to  such point, are still stored, and still can be used.
+                       Such  process  will  be discussed in later parts of this
+                       text.
+                       
+- IncorrectInputFile: This  value  is  returned if the input file has incorrect
+                      contents  that  can't be validated. Such incorrect values
+                      correspond  to those rules stablished by design, and that
+                      are  being  applied  while  analysing the input file with
+                      the  finite state machine. So, if this value is returned,
+                      that  means  that  the  input  file  is incorrect (from a
+                      missing semicolon to a new and unsupported command).
+                      
+So,  lets  assume  your file is correctly loaded (you received the AllOk return
+value).  After  that,  all  the  commands found in file are already loaded into
+memory as a C++ vector of strings (correctly cleaned and formated) and a vector
+of Command class pointers.
+
+   The  vector of strings, represents the commands already contained in the CIF
+file.  The  difference  with  the  file  itself, is that the strings stored are
+cleaned and formated in a way that they can be processed as the user as needed.
+Such  special  format  allows  the  user to use the strings as input streams to
+get the values of the commands, or to split the components of them using only
+white spaces as separator.
+
+   The  vector of Command class pointers is used to store all the commands (the
+same  commands, and in the same order as foun in the input file), but converted
+into  instances  of  classes  designed  to represent the commands. For example,
+there  is  a BoxCommand class, that represents a Box command. The instance have
+the  same  attributes  as  the  CIF  counterpart. It has position, a size and a
+rotation point. So, the same is for the rest of the commands.
+
+   The  instances  are  stored as pointers of the base class Command class. So,
+to  use  the  commands as their derivated parts, the commands must be casted to
+a  pointer of the correspondent derivated class. To ease this task, the Command
+class  has a virtual member function, called "type", that return a value from a
+enumeration,  found  in  the  Command  class  itself.  Such enumeration help to
+distinguish from one command and another.
+
+   Once  casted,  the  commands can be used as needed by the user. To know more
+about  the  classes  included in the library, you can refer to the "doc" folder
+contained  in  the  package.  In  such  folder,  you  can  find  a  file called
+"Classes.dia",  wich can be opened using Dia or Inkscape. Also, you can see the
+"Classes.png"  file,  found  in the same folder, wich is the same design as the
+Dia file, but exported to a PNG image format.
+
+   There  must  be  told that there are classes only intented to be used by the
+library  itself,  not  by the user, since they doesn't represent any working or
+usable  class,  but  just  a transition in the class hierarchy. The only usable
+classes are:
+
+- File
+- PolygonCommand
+- WireCommand
+- BoxCommand
+- RoundFlashCommand
+- DefinitionStartCommand
+- DefinitionDeleteCommand
+- CallCommand
+- DefinitionEndCommand
+- CommentCommand
+- UserExtentionCommand
+- LayerCommand
+
+Also,  there  are  special classes used by the commands, that represents common
+and used pieces of the commands, such classes are:
+
+- Transformation: This  class is used by the CallCommand class to represent the
+                  transformations  that  can be performed to a definition. Such
+                  transfomrations are:
+                  
+                  - Rotation
+                  - Horizontal Mirroring
+                  - Vertical Mirroring
+                  - Displacement
+                  
+- Point: This  class  is  used  by  various  classes,  like the Box command, to
+         represent  it's  position or rotation. By a Polygon, storing them in a
+         vector, to represent the points that form the figure, etc.
+         
+- Size: This  class  is used by commands that depends on a size attribute, like
+        the RoundFlash command.
+        
+- Fraction: Used   only   by   the  DefinitionStartCommand  class,  this  class
+            represents  the AB fraction used to transform the integer values of
+            the classes, loaded by the library, into floating point values.
+            
+- Command: This  class  is  the base class for most of the other classes of the
+           library.  It's  used,  also,  as  the storing component for the File
+           class.  This  class  must be used only as a pointer to store derived
+           instances.
+
+Detailed information
+--------------------
+
+To  get  detailed  information in a user manual and a technical manual, you can
+refer to the PDF documents found in the "doc" folder withing the package.

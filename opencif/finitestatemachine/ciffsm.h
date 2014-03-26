@@ -38,6 +38,7 @@ namespace OpenCIF
          {
             Digit = 0 ,
             UpperChar ,
+            LowerChar ,
             BlankChar ,
             UserChar ,
             CommentChar ,

@@ -56,6 +56,12 @@ namespace OpenCIF
             IncompleteInputFile ,
             IncorrectInputFile
          };
+         
+         enum LoadMethod
+         {
+            StopOnError = 0 ,
+            ContinueOnError
+         };
       
       public:
          explicit File ( void );
@@ -66,11 +72,11 @@ namespace OpenCIF
          void setCommands ( const std::vector< OpenCIF::Command* >& new_commands );
          std::vector< OpenCIF::Command* > getCommands ( void ) const;
          
-         LoadStatus loadFile ( void ); // Whole process of loading a CIF file, from opening the file
+         LoadStatus loadFile ( const LoadMethod& load_method = StopOnError ); // Whole process of loading a CIF file, from opening the file
                                        // to converting the commands into instances.
          LoadStatus openFile ( void );
-         LoadStatus validateSintax ( void );
-         LoadStatus loadCommands ( void );
+         LoadStatus validateSintax ( const LoadMethod& load_method = StopOnError );
+         void loadCommands ( void );
          
          std::vector< std::string > getMessages ( void );
          
