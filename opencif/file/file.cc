@@ -223,6 +223,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load
             command_buffer = "";
             
             file_input.putback ( input_char );
+            file_raw_commands.push_back ( "(LibOpenCIF: Incorrect command here) ;" );
          }
       }
    }
