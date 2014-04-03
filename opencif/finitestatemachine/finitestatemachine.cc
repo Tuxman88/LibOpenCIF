@@ -25,9 +25,9 @@
 /*
  * Constructor. Initialice the FSM.
  */
-OpenCIF::FiniteStateMachine::FiniteStateMachine ( const int& state_account )
+OpenCIF::FiniteStateMachine::FiniteStateMachine ( const int& state_amount )
 {
-   for ( int i = 0; i < ( state_account + 1 ); i++ )
+   for ( int i = 0; i < ( state_amount + 1 ); i++ )
    {
       OpenCIF::State state;
       fsm_states.push_back ( state );

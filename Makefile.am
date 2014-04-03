@@ -1,4 +1,5 @@
 # General settings
+AUTOMAKE_OPTIONS = subdir-objects
 lib_LTLIBRARIES = libopencif.la
 libopencif_la_SOURCES = 	opencif/command/command.cc \
 				opencif/command/controlcommand/controlcommand.cc \

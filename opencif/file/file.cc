@@ -102,14 +102,15 @@ OpenCIF::File::LoadStatus OpenCIF::File::loadFile ( const LoadMethod& load_metho
       return ( end_status );
    }
    
-   end_status = validateSintax ( load_method );
+   end_status = validateSyntax ( load_method );
+   cleanCommands ();
    
    if ( end_status != AllOk && load_method != ContinueOnError )
    {
       return ( end_status );
    }
    
-   loadCommands ();
+   convertCommands ();
    
    return ( end_status );
 }
@@ -141,7 +142,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::openFile ( void )
  * This member function validates the contents of the input file using
  * a finite state machine.
  */
-OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load_method )
+OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load_method )
 {
    /*
     * The process of validation isn't that complex.
@@ -181,15 +182,11 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load
    {
       previous_char = input_char;
       input_char = file_input.get ();
-      
-      std::cout << "Checando: " << input_char << std::endl;
-      std::cout << "Buffer: " << command_buffer << std::endl;
-      
+   
       if ( !file_input.eof () )
       {
          previous_state = jump_state;
          jump_state = fsm->operator[] ( input_char );
-         std::cout << "Salto: " << jump_state << std::endl;
          
          if ( jump_state == 1 && previous_state != 1 ) // If I'm returning to the first state, the command
                                                        // is loaded. Just check the previous state. If the
@@ -201,7 +198,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load
             command_buffer += tmp;
             
             // I call the CleanCommand member function to remove unnecesary characters.
-            file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
+            file_raw_commands.push_back ( command_buffer );
             command_buffer = "";
          }
          else if ( jump_state != 1 && jump_state != -1 )
@@ -276,11 +273,21 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSintax ( const LoadMethod& load
    return ( ( errors_omited) ? IncorrectInputFile : AllOk );
 }
 
+void OpenCIF::File::cleanCommands ( void )
+{
+   for ( unsigned long int i = 0; i < file_raw_commands.size (); i++ )
+   {
+      file_raw_commands[ i ] = cleanCommand ( file_raw_commands[ i ] );
+   }
+   
+   return;
+}
+
 /*
  * This member function loads the contents of the input file and converts them
  * into Command instances.
  */
-void OpenCIF::File::loadCommands ( void )
+void OpenCIF::File::convertCommands ( void )
 {
    /*
     * The raw commands are ready and validated. So, there is only left the process of

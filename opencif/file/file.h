@@ -73,10 +73,11 @@ namespace OpenCIF
          std::vector< OpenCIF::Command* > getCommands ( void ) const;
          
          LoadStatus loadFile ( const LoadMethod& load_method = StopOnError ); // Whole process of loading a CIF file, from opening the file
-                                       // to converting the commands into instances.
+                                                                              // to converting the commands into instances.
          LoadStatus openFile ( void );
-         LoadStatus validateSintax ( const LoadMethod& load_method = StopOnError );
-         void loadCommands ( void );
+         LoadStatus validateSyntax ( const LoadMethod& load_method = StopOnError );
+         void cleanCommands ( void );
+         void convertCommands ( void );
          
          std::vector< std::string > getMessages ( void );
          

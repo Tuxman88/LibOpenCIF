@@ -33,7 +33,7 @@ namespace OpenCIF
    class FiniteStateMachine
    {
       public:
-         explicit FiniteStateMachine ( const int& state_account );
+         explicit FiniteStateMachine ( const int& state_amount );
          virtual ~FiniteStateMachine ( void );
          
          void reset ( void );
