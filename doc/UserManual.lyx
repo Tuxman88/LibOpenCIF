@@ -1,0 +1,3189 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\family typewriter
+\size huge
+LibOpenCIF
+\end_layout
+
+\begin_layout Standard
+\align center
+User manual 1.0
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+This section shows to the user the information needed to understand the
+ idea and concept behind this library and the reasons to use it.
+\end_layout
+
+\begin_layout Subsection
+What is a CIF file?
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+\shape italic
+CIF
+\series default
+\shape default
+ file (
+\shape italic
+Caltech Intermediate Form
+\shape default
+) is a special format designed to be used in 
+\series bold
+\shape italic
+IC
+\series default
+\shape default
+ (
+\shape italic
+Integrated Circuit
+\shape default
+) design.
+ Such format stores the physical layout of a design using basic figures
+ (squares, metal stripes, polygons, circles).
+ This format is used by various professional 
+\series bold
+CAD
+\series default
+ (
+\shape italic
+Computer Aided Design
+\shape default
+) tools, both open source and private, like 
+\series bold
+\shape italic
+Alliance VLSI
+\series default
+\shape default
+ (open source) and 
+\series bold
+\shape italic
+Tanner Tools
+\series default
+\shape default
+ (private).
+\end_layout
+
+\begin_layout Standard
+One characteristic to keep in mind is that, in 
+\shape italic
+IC
+\shape default
+ designs, one important aspect is precision.
+ All the values managed (positions and sizes, for example), must have an
+ incredible precision, since all the components must be precisely positioned
+ and defined.
+ To avoid problems relative to precision loss using floating point values,
+ the values are defined as integers in the file.
+ Also, the format doesn't limit the length of the values, so, the format
+ of the values supported are defined by the applications that manipulate
+ those values, not by the format itself (an application can support only
+ 32 bit integers, but, others, can provide support for 64 bit values).
+ That is the purpose of the AB fractions found in the definition start commands.
+ Since there is still needed to use floating point values, the use of such
+ special fractions help to translate the integer values to the exact floating
+ values they are meant to be, and so, leaving the possible precision loss
+ to the hands of the applications.
+\end_layout
+
+\begin_layout Standard
+Such file format stores all the information of the design in plain text
+ using commands.
+ There are different kinds of commands that define and control different
+ components of the design.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Box commands
+\end_layout
+
+\begin_layout Standard
+Such commands define boxes (or rectangles) to be placed in the design.
+ Such commands has three properties: position, size and an optional rotation
+ vector, represented by a point.
+\end_layout
+
+\begin_layout Subsubsection*
+Roundflash commands
+\end_layout
+
+\begin_layout Standard
+Such commands define circles.
+ The circles, however, normally are used as a piece component for the wire
+ figures.
+ The roundflash command has two properties: position and diameter.
+\end_layout
+
+\begin_layout Subsubsection*
+Wire commands
+\end_layout
+
+\begin_layout Standard
+Such commands define continuous stripes of material.
+ The command is defined by a specific width and a list of points on which
+ the stripe cross.
+\end_layout
+
+\begin_layout Subsubsection*
+Polygon commands
+\end_layout
+
+\begin_layout Standard
+Such commands represent arbitrary figures formed by a list of points.
+\end_layout
+
+\begin_layout Subsubsection*
+Definition start commands
+\end_layout
+
+\begin_layout Standard
+These commands represent the start of special groups of commands, named
+ definitions.
+ Those definitions can represent anything, from a small cell of a design,
+ to a whole design.
+ Such commands specify an identification ID (a number), and, also, an optional
+ AB fraction that can be used to transform all the values of the commands
+ contained in the definition itself, from integers to floating point values.
+\end_layout
+
+\begin_layout Subsubsection*
+Layer commands
+\end_layout
+
+\begin_layout Standard
+The layer commands specify the material used by the commands that follow
+ them.
+\end_layout
+
+\begin_layout Subsubsection*
+Definition end commands
+\end_layout
+
+\begin_layout Standard
+These commands help to set the end boundaries of the definitions.
+\end_layout
+
+\begin_layout Subsubsection*
+Definition delete commands
+\end_layout
+
+\begin_layout Standard
+The definitions already specified can be used as needed, all the times needed.
+ If, for some reason, is needed to use an identification ID already used,
+ is possible to use this command to delete from memory a used definition.
+\end_layout
+
+\begin_layout Subsubsection*
+Call commands
+\end_layout
+
+\begin_layout Standard
+The format itself defines that nothing in the file does something for the
+ design until there is a call to a definition (that means that there can
+ be things defined but never used).
+ The call commands specifies the usage of a specific definition.
+ The calls support the specification of some transformations to be applied
+ to such definitions, like rotation, displacement and mirroring.
+ Also, the calls can be put inside of the definitions, so, a big cell in
+ a design can be split into smaller pieces, called as needed.
+\end_layout
+
+\begin_layout Subsubsection*
+End command
+\end_layout
+
+\begin_layout Standard
+The end command defines the end of the file.
+\end_layout
+
+\begin_layout Subsection
+What is LibOpenCIF?
+\end_layout
+
+\begin_layout Standard
+LibOpenCIF is an open source library intended to aid the programmers to
+ be able to load a 
+\shape italic
+CIF
+\shape default
+ file into memory.
+ The library provides basic validation of the contents.
+ All the validations are performed using a special designed finite state
+ machine.
+\end_layout
+
+\begin_layout Standard
+The 
+\shape italic
+CIF
+\shape default
+ file format, even defining a syntax of how to write a correct file, an
+ input file can be hard to read, since the white spaces can be a lot of
+ things, from real white spaces (spaces, tabs, enter) to lower case chars
+ (all the lower case letters, from 'a' to 'z').
+ That means that there is possible to found a command like this one:
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset Quotes eld
+\end_inset
+
+B100xjnjzncjjajnja,,,as,c,cac,,,,ac,csc,100,,,ca,ca,cas,s,,,,gh,h50,-50,,,as-1,-
+1;
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That, surprisingly, is a completely valid command.
+ So, all the applications that need to load a CIF file, needs a way to load
+ the contents and extract the real information from the commands.
+ LibOpenCIF provides the ways to easily validate and load the contents of
+ the input files.
+ In this example, the library will provide the user with two basic things:
+ A cleaned and easy to manage string, containing the same command and a
+ class instance that provides direct and instant access to the values of
+ the command.
+ So, as an example, the previous command can be loaded with the library
+ in the following form:
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset Quotes eld
+\end_inset
+
+B 100 100 50 -50 -1 -1 ;
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, the library gives to the user two different mechanisms to work with
+ the information of a 
+\shape italic
+CIF
+\shape default
+ file.
+\end_layout
+
+\begin_layout Subsection
+Why use LibOpenCIF?
+\end_layout
+
+\begin_layout Standard
+LibOpenCIF can be used by everyone.
+ From small programs, to big ones.
+ These are some of the advantages of using LibOpenCIF on your system:
+\end_layout
+
+\begin_layout Itemize
+Pure and standard C++ code: The library is self contained.
+ That means that, from the compilation process, to the usage, there is no
+ dependence in any other library or special tool.
+ All of the capabilities of the library are provided using only C++ code
+ and none system-call.
+\end_layout
+
+\begin_layout Itemize
+Input file validations: The contents of a CIF file must be validated to
+ ensure that the contents are complete and correct commands.
+ Such validations are performed by the library using a special finite state
+ machine, designed to validate and support various command formats found
+ in use in professional tools (like layer names with more than 4 characters,
+ digits and underscores).
+ All of this ensures that the load process is performed according to the
+ CIF specifications, but being compatible with industrial applications.
+\end_layout
+
+\begin_layout Itemize
+Contents formatted for the user: After validating the input file contents,
+ the library perform a buffering of the commands.
+ This means that all the commands found in the input file can be accessed
+ as a vector of strings.
+ Also, the commands are not just copied from the input file.
+ The string commands buffered are cleaned.
+ That means, that all the separation chars are replaced by single white
+ spaces.
+ This formatting helps to have all the components of the command separated
+ by a white space, allowing the user to use, for example, the strings as
+ input streams.
+\end_layout
+
+\begin_layout Itemize
+Contents ready to use: The library also offers to the user a ready-to-use
+ vector of pointers.
+ Such pointers, of a basic class, are instances of specialized classes that
+ represent the commands of the file.
+\end_layout
+
+\begin_layout Itemize
+Output and input operators: The classes used by the library provide the
+ mechanisms to let the user send and read the commands from wherever he
+ wants
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Read the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Usage-of-the-overloaded-operators"
+
+\end_inset
+
+ for more about such topics.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Using LibOpenCIF
+\end_layout
+
+\begin_layout Standard
+The following sections shows the user how to use the library, from installing
+ and uninstalling, to the common usage of the loaded results from the 
+\family typewriter
+CIF
+\family default
+ files.
+\end_layout
+
+\begin_layout Subsection
+Installing
+\end_layout
+
+\begin_layout Standard
+The installation is very straight forward.
+ First, you need to get the library package, a compressed file containing
+ all the sources and other specific files needed to install it.
+ You need a file named 
+\shape italic
+libopencif-X.Y.tar.gz
+\shape default
+, where X and Y goes for the mayor and minor release number of the package.
+\end_layout
+
+\begin_layout Standard
+Once you get the package, extract it in a new folder with full permissions
+ of the actual user (like a folder in your home folder or any extra partition
+ with write permissions, but, preferably not in a removable device like
+ a USB stick or an external hard disk).
+\end_layout
+
+\begin_layout Standard
+After extracting the package, open a terminal and change it's active working
+ directory to the folder where the contents of the package are (so, that
+ when you execute the 
+\family typewriter
+ls
+\family default
+ command, you can see listed the contents).
+\end_layout
+
+\begin_layout Standard
+On the extracted folder, with a terminal window opened, run the following
+ commands, one by one, as a normal user (not as root nor using 
+\shape italic
+sudo
+\shape default
+, except for the last one).
+ Don't forget to check the output of the commands to find any problem:
+\end_layout
+
+\begin_layout LyX-Code
+$ ./configure
+\end_layout
+
+\begin_layout LyX-Code
+$ make
+\end_layout
+
+\begin_layout LyX-Code
+$ sudo make install
+\end_layout
+
+\begin_layout Standard
+Remember, the 
+\begin_inset Quotes eld
+\end_inset
+
+$
+\begin_inset Quotes erd
+\end_inset
+
+ simbol is not part of the command.
+ After running the commands, the library should be correctly installed in
+ your system.
+\end_layout
+
+\begin_layout Subsection
+Uninstalling
+\end_layout
+
+\begin_layout Standard
+If the library needs to be uninstalled, you can do it using the library
+ package itself.
+ To uninstall, get the package file, extract it's contents (as done in the
+ installation procedure) and run these commands:
+\end_layout
+
+\begin_layout LyX-Code
+$ ./configure
+\end_layout
+
+\begin_layout LyX-Code
+$ sudo make uninstall
+\end_layout
+
+\begin_layout Standard
+The following sections demonstrate the usage of the library.
+ All of the relevant components of the library, from a user point of view,
+ are covered.
+ If you need more information, refer to the Technical Manual.
+\end_layout
+
+\begin_layout Subsection
+Compiling a program with the library
+\end_layout
+
+\begin_layout Standard
+The first important point to learn how to do is the compilation of a program
+ using the library.
+ The compilation is very simple.
+\end_layout
+
+\begin_layout Standard
+Let's assume you have only one source file, named 
+\family typewriter
+program.cc
+\family default
+, a C++ program source code.
+ So, the compilation can be done with this command:
+\end_layout
+
+\begin_layout LyX-Code
+$ g++ program.cc -o binary_name -lopencif
+\end_layout
+
+\begin_layout Standard
+Such command calls the compiler, named 
+\family typewriter
+g++
+\family default
+, followed by the source program file 
+\family typewriter
+program.cc
+\family default
+.
+ After that, the 
+\family typewriter
+-o binary_name
+\family default
+ option specifies the name of the final binary file.
+ Finally, there can be found the option that will add the library itself
+ to the compilation process: 
+\family typewriter
+-lopencif
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+After running such command, the program will be compiled and ready to run.
+ Please, refer to the documentation of your compiler or IDE to be able to
+ add the needed option (
+\family typewriter
+-lopencif
+\family default
+) to the compilation process.
+\end_layout
+
+\begin_layout Subsection
+Opening a CIF file
+\end_layout
+
+\begin_layout Standard
+After learning how to compile your program, the first important task to
+ perform, when using the library, is how to open a 
+\shape italic
+CIF
+\shape default
+ file.
+ For this example, we will assume that your application source file is named
+ 
+\family typewriter
+main.cc
+\family default
+ and your design file is named 
+\family typewriter
+design.cif
+\family default
+.
+ Also, there is the assumption that both files are located in the same folder.
+\end_layout
+
+\begin_layout Standard
+First, lets introduce the basic C++ program code that will help to demonstrate
+ the usage of the library on the algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Initial-test-program"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "numbers=left"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# include <iostream>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+using namespace std;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+int main ()
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+   cout << "Test program" << endl;
+\end_layout
+
+\begin_layout Plain Layout
+
+   return ( 0 );
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Initial test program source.
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Initial-test-program"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Such code is a standard C++ program.
+ The program, by itself, does nothing but print a simple message on the
+ terminal.
+ To use the library, the first step is to include the library itself.
+ To do it, add this include instruction:
+\end_layout
+
+\begin_layout LyX-Code
+# include <opencif/opencif>
+\end_layout
+
+\begin_layout Standard
+After including such line, all the components of the library are now available
+ to use in the program.
+ All the components of the library can be found within a namespace named
+ 
+\family typewriter
+OpenCIF
+\family default
+.
+ To open our design, you need to create an instance of the class 
+\family typewriter
+File
+\family default
+.
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::File design;
+\end_layout
+
+\begin_layout Standard
+The instance can also be created using dynamic memory allocation (using
+ 
+\family typewriter
+new
+\family default
+ and pointers).
+\end_layout
+
+\begin_layout Standard
+After such instance is ready, we need to set the actual path to the file
+ to open.
+ The path can be relative or full.
+ To set the path, the
+\family typewriter
+ File
+\family default
+ class have a member function named 
+\family typewriter
+setPath
+\family default
+, which takes as argument a C++ 
+\family typewriter
+string
+\family default
+ class instance or a direct string.
+\end_layout
+
+\begin_layout LyX-Code
+design.setPath ( "design.cif" );
+\end_layout
+
+\begin_layout Standard
+After that, the instance is ready to be used.
+ The next step is loading the file.
+\end_layout
+
+\begin_layout Subsection
+Loading the whole file
+\end_layout
+
+\begin_layout Standard
+After setting the file path, we can now order the 
+\family typewriter
+File
+\family default
+ class instance to load the contents of the file.
+ 
+\end_layout
+
+\begin_layout Standard
+The library uses, by default, an automated process of loading.
+ Such process performs the following tasks in order:
+\end_layout
+
+\begin_layout Enumerate
+Open the file.
+\end_layout
+
+\begin_layout Enumerate
+Using a finite state machine, start validating the contents of the file,
+ char by char.
+ At the same time, the library is buffering the commands found and validated
+ in a string form.
+\end_layout
+
+\begin_layout Enumerate
+After loading the file into memory, the library performs a cleaning process
+ to the commands loaded, replacing the separation chars with single white
+ spaces.
+\end_layout
+
+\begin_layout Enumerate
+Finally, the library converts the commands buffered into class instances.
+\end_layout
+
+\begin_layout Standard
+Those 4 steps are performed automatically with a single member function
+ call, named 
+\family typewriter
+loadFile
+\family default
+.
+ The 
+\family typewriter
+loadFile
+\family default
+ member function calls the needed member functions of the 
+\family typewriter
+File
+\family default
+ class to perform the previous four tasks
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+To learn more about a manual load process, please, refer to the section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Manual-loading-process"
+
+\end_inset
+
+ on this document.
+\end_layout
+
+\end_inset
+
+.
+ Of course, the tasks one and two can fail by some reasons.
+ So, the library has implemented a special value type that is returned when
+ calling the 
+\family typewriter
+loadFile
+\family default
+ member function and helps the user to know if there is any kind of problem
+ with the process.
+\end_layout
+
+\begin_layout Standard
+The possible values of the return value are constants that can be found
+ within the 
+\family typewriter
+File
+\family default
+ class.
+ The type of such constants is 
+\family typewriter
+LoadStatus
+\family default
+.
+ So, to ask the 
+\family typewriter
+File
+\family default
+ instance to load the file and store the result of the operation, you need
+ to create a variable of type 
+\family typewriter
+LoadStatus
+\family default
+ and call the 
+\family typewriter
+loadFile
+\family default
+ member function from your instance:
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::File::LoadStatus end_status;
+\end_layout
+
+\begin_layout LyX-Code
+end_status = design.loadFile ();
+\end_layout
+
+\begin_layout Standard
+The possible values of the 
+\family typewriter
+LoadStatus
+\family default
+ type are four constants found in the 
+\family typewriter
+File
+\family default
+ class definition.
+ The following piece of code checks the result of the operation.
+ Take in mind that this is only an example, so, you can use a different
+ approach to perform a validation of the result:
+\end_layout
+
+\begin_layout LyX-Code
+switch ( end_status )
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+   case OpenCIF::File::AllOk:
+\end_layout
+
+\begin_layout LyX-Code
+      cout << "None error detected" << endl;
+\end_layout
+
+\begin_layout LyX-Code
+      break;
+\end_layout
+
+\begin_layout LyX-Code
+   case OpenCIF::File::CantOpenInputFile:
+\end_layout
+
+\begin_layout LyX-Code
+      cout << "Error opening file" << endl;
+\end_layout
+
+\begin_layout LyX-Code
+      break;
+\end_layout
+
+\begin_layout LyX-Code
+   case OpenCIF::File::IncompleteInputFile:
+\end_layout
+
+\begin_layout LyX-Code
+      cout << "Incomplete file, no End Command found" << endl;
+\end_layout
+
+\begin_layout LyX-Code
+      break;
+\end_layout
+
+\begin_layout LyX-Code
+   case OpenCIF::File::IncorrectInputFile:
+\end_layout
+
+\begin_layout LyX-Code
+      cout << "Incorrect file" << endl;
+\end_layout
+
+\begin_layout LyX-Code
+      break;
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout Standard
+These are the four possible values of the 
+\family typewriter
+LoadStatus
+\family default
+ type:
+\end_layout
+
+\begin_layout Description
+AllOk This value is returned if all the operations where performed correctly.
+ That means: The file can be opened, the contents of the file are correct
+ and the end command was found.
+\end_layout
+
+\begin_layout Description
+CantOpenInputFile This value is returned if there was a problem opening
+ the input file.
+ Such problem can be related to the file path (the path can be incorrect,
+ the file was removed before opening, etc).
+\end_layout
+
+\begin_layout Description
+IncompleteInputFile This value is returned if the input file is 
+\shape italic
+correct
+\shape default
+, but there was not found the end command.
+ Even when this command is returned, all the validated and cleaned commands
+ (in string form) are still stored and accessible for the user.
+ If the user needs, he can manually call the member function related to
+ transform the loaded string commands into class instances.
+ The user must be aware that the contents, being incomplete, can be not
+ useful at all.
+\end_layout
+
+\begin_layout Description
+IncorrectInputFile This value is returned if the validation process has
+ reached an unexpected character in the file.
+ In this case, in a similar way that the previous return value, the validated
+ commands are still buffered and accessible to the user.
+ Of course, there is a way to force the complete loading of a file, even
+ when incorrect commands can be found.
+ Such option will be explained in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Manual-loading-process"
+
+\end_inset
+
+ found in this document.
+\end_layout
+
+\begin_layout Subsection
+Using the strings loaded
+\end_layout
+
+\begin_layout Standard
+If you have a file already loaded, that means that you have received either
+ an 
+\family typewriter
+AllOk
+\family default
+ value (a complete loaded file) or any other value (a partial load, at best)
+ from the 
+\family typewriter
+loadFile
+\family default
+ member function, then you can make use of the loaded commands as you need.
+ The commands are stored by the library in a C++ 
+\family typewriter
+vector
+\family default
+ class that stores 
+\family typewriter
+string
+\family default
+ class instances.
+ Each 
+\family typewriter
+string
+\family default
+ instance contains a full and valid 
+\shape italic
+CIF
+\shape default
+ command.
+ For every command in the 
+\shape italic
+CIF
+\shape default
+ file, there is a 
+\family typewriter
+string
+\family default
+ counterpart on the vector, in the same order.
+\end_layout
+
+\begin_layout Standard
+To gather access to such commands, you must use the member function 
+\family typewriter
+getRawCommands
+\family default
+.
+\end_layout
+
+\begin_layout LyX-Code
+vector< string > commands;
+\end_layout
+
+\begin_layout LyX-Code
+commands = design.getRawCommands ();
+\end_layout
+
+\begin_layout Standard
+After getting the commands, you can use them as needed.
+ The format of the commands is very clear and easy to understand
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Refer to the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+, or in the Technical Manual, to learn more about the cleaning process of
+ the commands.
+\end_layout
+
+\end_inset
+
+.
+ All the commands have it's components separated by single white spaces,
+ so, all the separation characters are replaced.
+ The next are two valid commands in CIF format (the first one is an exaggeration
+, but yet correct, the second one is as can be found in some professional
+ tools):
+\end_layout
+
+\begin_layout LyX-Code
+Pthis,is,an,example100,-100,,,200,100more,text,100,0,,,;
+\end_layout
+
+\begin_layout LyX-Code
+P100,100 200,100 100,0;
+\end_layout
+
+\begin_layout Standard
+So, the library transform such command to this:
+\end_layout
+
+\begin_layout LyX-Code
+P 100 -100 200 200 100 0 ;
+\end_layout
+
+\begin_layout Standard
+All the components (included the identification character, the 'P' char
+ and the semicolon) are separated with single white spaces.
+ This format is intended to let the user use any process he wants to extract
+ the information.
+ The white spaces are used since they can be easily identified and can be
+ used in common algorithms for splitting strings.
+ Also, this command format is useful if the user wants to read the values
+ of the command using a C++ input stream, like a 
+\family typewriter
+istringstream
+\family default
+ class instance.
+\end_layout
+
+\begin_layout Subsection
+Using the instances created
+\end_layout
+
+\begin_layout Standard
+If the file is correctly loaded or the partial loaded contents are manually
+ ordered to be converted into instances (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Manual-loading-process"
+
+\end_inset
+
+), the user can have access to a C++ 
+\family typewriter
+vector
+\family default
+ class instance that stores class pointers.
+ Those pointers are of the 
+\family typewriter
+Command
+\family default
+ class, a special common base class used in most of the hierarchy of the
+ classes defined in the library, so, using polymorphism, the user can ask,
+ pointer by pointer, which command type is (a Box, Wire, Polygon, etc) and
+ cast the pointer as needed (only the member function that returns the type
+ of the command is polymorphic).
+ The next example code shows how to get access to the vector of pointers
+ from the 
+\family typewriter
+File
+\family default
+ class instance using the 
+\family typewriter
+getCommands
+\family default
+ member function.
+\end_layout
+
+\begin_layout LyX-Code
+vector< OpenCIF::Command* > commands;
+\end_layout
+
+\begin_layout LyX-Code
+commands = design.getCommands ();
+\end_layout
+
+\begin_layout Standard
+After getting the commands, you can use the polymorphic member function
+ 
+\family typewriter
+type
+\family default
+ to get a constant value that represent the command type.
+ The next example code, shows a simple process where the commands are already
+ stored in a vector named 
+\family typewriter
+commands
+\family default
+.
+ The code uses a 
+\family typewriter
+for
+\family default
+ cycle to check all the commands stored and ask them their types using a
+ switch structure.
+ In every case, the pointer is casted to a derived class pointer and then
+ printed to the console.
+\end_layout
+
+\begin_layout LyX-Code
+vector< OpenCIF::Command* > commands;
+\end_layout
+
+\begin_layout LyX-Code
+commands = design.getCommands ();
+\end_layout
+
+\begin_layout LyX-Code
+for ( int i = 0; i < commands.size (); i++ )
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+   OpenCIF::BoxCommand* box;
+\end_layout
+
+\begin_layout LyX-Code
+   /*...
+ More class pointers of every type ...*/
+\end_layout
+
+\begin_layout LyX-Code
+   OpenCIF::Command* cmd;
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+   cmd = commands[ i ];
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+   switch ( cmd->type () )
+\end_layout
+
+\begin_layout LyX-Code
+   {
+\end_layout
+
+\begin_layout LyX-Code
+      case OpenCIF::Command::Box:
+\end_layout
+
+\begin_layout LyX-Code
+         box = dynamic_cast< OpenCIF::BoxCommand* > ( cmd );
+\end_layout
+
+\begin_layout LyX-Code
+         cout << box << endl;
+\end_layout
+
+\begin_layout LyX-Code
+         break;
+\end_layout
+
+\begin_layout LyX-Code
+      /*...
+ More Switch cases ...*/
+\end_layout
+
+\begin_layout LyX-Code
+      default:
+\end_layout
+
+\begin_layout LyX-Code
+         break;
+\end_layout
+
+\begin_layout LyX-Code
+   }
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout Standard
+In this little example, a 
+\family typewriter
+for
+\family default
+ cycle traverse over all the commands loaded from the file.
+ For every command, it's pointer is copied into a 
+\family typewriter
+Command
+\family default
+ class pointer (only to reduce the name from 
+\family typewriter
+
+\begin_inset Quotes eld
+\end_inset
+
+commands[ i ]
+\family default
+
+\begin_inset Quotes erd
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+
+\family typewriter
+cmd
+\family default
+
+\begin_inset Quotes erd
+\end_inset
+
+).
+ After that, a switch is used to check the command type.
+\end_layout
+
+\begin_layout Standard
+To access the command type, there is possible to use the polymorphic member
+ function 
+\family typewriter
+type
+\family default
+.
+ Such call will return a constant value of an enumeration type.
+ Since, in C++, if a 
+\family typewriter
+switch
+\family default
+ structure is used to check the value of a 
+\family typewriter
+enumeration
+\family default
+ type, all the possible values of such 
+\family typewriter
+enumeration
+\family default
+ should be used.
+ That is the reason to use the empty 
+\family typewriter
+default
+\family default
+ statement, to avoid the need to include unnecessary cases (there are various
+ class types defined in the library that are not intended to be used by
+ the user).
+\end_layout
+
+\begin_layout Standard
+In this case, there only appears to be used one value of such enumeration
+ (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Classes-intended-to-be-used"
+
+\end_inset
+
+ to learn more about the classes intended to be used by a user), the 
+\family typewriter
+Box
+\family default
+ value (all the values that represent the type of a command are stored in
+ the 
+\family typewriter
+Command
+\family default
+ class within the 
+\family typewriter
+OpenCIF
+\family default
+ namespace).
+\end_layout
+
+\begin_layout Standard
+In this case, the 
+\family typewriter
+cmd
+\family default
+ pointer is dynamically casted into a 
+\family typewriter
+BoxCommand
+\family default
+ class pointer.
+ With such casted pointer, the command can be printed
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The commands are designed to be printable from 3 states: base pointer (as
+ 
+\family typewriter
+Command
+\family default
+ class pointers), class pointers (as in this example) and as regular class
+ instances (not pointers).
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Sadly, the member functions of the classes are not available using the base
+ pointer beyond the 
+\family typewriter
+type
+\family default
+ member function (they are not polymorphic).
+ That means that there is needed to perform the casting to derived pointer
+ in order to use the needed member functions.
+\end_layout
+
+\begin_layout Subsection
+Manual loading process
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Manual-loading-process"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is possible that you need or want to load a CIF file until some specific
+ step and/or want to force the load of the file even when facing errors
+ in the contents.
+ The LibOpenCIF library provides such facilities to the user.
+\end_layout
+
+\begin_layout Subsubsection
+Opening the input file
+\end_layout
+
+\begin_layout Standard
+The first process to review is the manual loading.
+ To manually load a file, the first step, as in the automatic method, is
+ to set the file path using the 
+\family typewriter
+setPath
+\family default
+ member function:
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::File design;
+\end_layout
+
+\begin_layout LyX-Code
+design.setPath ( "design.cif" );
+\end_layout
+
+\begin_layout Standard
+After that, the first manual operation to do is opening the input file.
+ To manually open the file, use the 
+\family typewriter
+openFile
+\family default
+ member function.
+\end_layout
+
+\begin_layout LyX-Code
+design.openFile ();
+\end_layout
+
+\begin_layout Standard
+Such call can return two different results:
+\end_layout
+
+\begin_layout Description
+AllOk The file was opened correctly.
+\end_layout
+
+\begin_layout Description
+CantOpenInputFile The file can't be opened.
+ In this case, the user must perform some kind of validation of the file
+ path, from checking that it is correct, to validate the existence and permissio
+ns of the file itself.
+\end_layout
+
+\begin_layout Standard
+The user must be aware that this step is needed for the rest of the steps.
+\end_layout
+
+\begin_layout Subsubsection
+Validating/buffering file
+\end_layout
+
+\begin_layout Standard
+The next step, once the input file is opened, is to validate the file.
+ The user must remember that, while validating, the library performs a buffering
+ of the commands found, storing them as strings.
+ This process is performed by the call to the 
+\family typewriter
+validateSyntax
+\family default
+ member function.
+\end_layout
+
+\begin_layout LyX-Code
+design.validateSyntax ();
+\end_layout
+
+\begin_layout Standard
+Such call can return three possible values:
+\end_layout
+
+\begin_layout Description
+AllOk The input file is correct and complete.
+\end_layout
+
+\begin_layout Description
+IncompleteInputFile The input file is correct, but there was not found the
+ End command.
+ This may result in an incomplete and useless design file
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+There must be pointed that some professional applications support such lack
+ of command, but that doesn't mean that a valid CIF file must not have an
+ End Command.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+IncorrectInputFile The input file has errors.
+ Normally, after detecting an unexpected character, the validation/bufferin
+ process stops.
+\end_layout
+
+\begin_layout Standard
+In all the three cases, the commands buffered and validated are accessible
+ through the call to the 
+\family typewriter
+getRawCommands
+\family default
+ member function.
+ Such call will return a vector of strings.
+ Such strings are the commands found in the input file, but they are still
+ not cleaned, so, you will find them exactly as you can see them in the
+ file.
+ If you need exactly that, this is the point when you can retrieve the commands.
+\end_layout
+
+\begin_layout Subsubsection
+Cleaning the commands
+\end_layout
+
+\begin_layout Standard
+After loading the input file, a call to the 
+\family typewriter
+cleanCommands
+\family default
+ member function is recommended, since it performs the cleaning of all the
+ commands loaded (no matter if the file was correct nor complete).
+\end_layout
+
+\begin_layout LyX-Code
+design.cleanCommands ();
+\end_layout
+
+\begin_layout Standard
+All the buffered commands are replaced with their cleaned counterparts (to
+ reduce memory usage).
+ If there is needed to keep a copy of the original commands of the file,
+ is recommended to perform a call to the 
+\family typewriter
+getRawCommands
+\family default
+ member function and storing them in a string vector before calling the
+ member function to clean the commands.
+\end_layout
+
+\begin_layout Standard
+This member function doesn't return any value and can't fail (since it only
+ works with the commands loaded, if there is none, will do nothing).
+\end_layout
+
+\begin_layout Subsubsection
+Converting the commands into instances
+\end_layout
+
+\begin_layout Standard
+The last step of the load process.
+ If there are commands loaded and cleaned, the member function 
+\family typewriter
+convertCommands
+\family default
+ can be called to convert them into class instances.
+\end_layout
+
+\begin_layout LyX-Code
+design.convertCommands ();
+\end_layout
+
+\begin_layout Standard
+After calling it, the command class pointers can be accessed using the 
+\family typewriter
+getCommands
+\family default
+ member function.
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+convertCommands
+\family default
+ member function doesn't return anything, but the user must be aware that
+ this member function is the most prone to errors, since it's design and
+ work flow depends on the string commands stored.
+ The commands must be already cleaned.
+ 
+\series bold
+\shape italic
+\bar under
+If the commands are not cleaned, the call to this member function can lead
+ to logical or even critical errors (program crashes)
+\series default
+\shape default
+\bar default
+.
+ Remember: The member function assumes that the commands are clean, so it
+ can work a little bit more faster and prevent bottlenecks.
+\end_layout
+
+\begin_layout Standard
+If the user is totally sure about the nature of the input files and their
+ formats, the cleaning operation can be skipped to increase the overall
+ speed of the load process.
+\end_layout
+
+\begin_layout Subsubsection
+Forcing load of file
+\end_layout
+
+\begin_layout Standard
+There is possible to force the process of validation of a file, so it skips
+ the incorrect commands and load as much as possible of a file.
+ The user must be aware that doing this may result in an incorrect design
+ that may not be useful at all.
+\end_layout
+
+\begin_layout Standard
+The process is simple, and can be used when automatically or manually loading
+ a file.
+\end_layout
+
+\begin_layout Standard
+When using the automatic process, calling the 
+\family typewriter
+loadFile
+\family default
+ member function of the 
+\family typewriter
+File
+\family default
+ class, you can pass a constant value to it to specify what to do when encounter
+ing an error.
+ By default, a call to such member function in this way:
+\end_layout
+
+\begin_layout LyX-Code
+design.loadFile ();
+\end_layout
+
+\begin_layout Standard
+Will automatically pass the constant value 
+\family typewriter
+StopOnError
+\family default
+ that specify the behavior of the process when confronting an incorrect
+ or incomplete file.
+ Such value is located within the 
+\family typewriter
+File
+\family default
+ class.
+ So, to explicitly order the automatic load process to stop when facing
+ errors, you can use this call:
+\end_layout
+
+\begin_layout LyX-Code
+design.loadFile ( OpenCIF::File::StopOnError );
+\end_layout
+
+\begin_layout Standard
+Also, you can force the automatic process to continue loading and processing
+ the commands found even when facing an incomplete or incorrect command.
+ To do it, you can use the constant value 
+\family typewriter
+ContinueOnError
+\family default
+ that is also found within the 
+\family typewriter
+File
+\family default
+ class.
+ To use it when automatically loading a file, you can use a call like this
+ one:
+\end_layout
+
+\begin_layout LyX-Code
+design.loadFile ( OpenCIF::File::ContinueOnError );
+\end_layout
+
+\begin_layout Standard
+Doing this, the process will ignore the fact that a file is incomplete and
+ will try to skip incorrect commands and read as many as possible
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+There must be noted that the error CantOpenInputFile will still stop all
+ the process, since is a critical error that can't be ignored.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Even using this two constants, the 
+\family typewriter
+loadFile
+\family default
+ member function will still return the correspondent value after loading,
+ either 
+\family typewriter
+AllOk
+\family default
+, 
+\family typewriter
+IncompleteInputFile
+\family default
+ or 
+\family typewriter
+IncorrectInputFile
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Those constants (
+\family typewriter
+StopOnError
+\family default
+ and 
+\family typewriter
+ContinueOnError
+\family default
+) can also be used when manually loading a file.
+ From all the member functions that can be used, the only one that accept
+ such values is the 
+\family typewriter
+validateSyntax
+\family default
+ member function.
+ All the other member functions don't need such control, since they operate
+ on previous results or are truly critical processes (like the 
+\family typewriter
+openFile
+\family default
+ member function), so, the 
+\family typewriter
+validateSyntax
+\family default
+ member function, by default, uses the 
+\family typewriter
+StopOnError
+\family default
+ constant, but you can use the specific constant that you need.
+ You can specify an instruction like this one:
+\end_layout
+
+\begin_layout LyX-Code
+design.validateSyntax ( OpenCIF::File::StopOnError );
+\end_layout
+
+\begin_layout Standard
+So, the call to such member function will behave normally.
+ After finding an unexpected input char, the process will stop.
+ But, you can specify other constant to force the validation of the file,
+ even when facing errors in the input file:
+\end_layout
+
+\begin_layout LyX-Code
+design.validateSyntax ( OpenCIF::File::ContinueOnError );
+\end_layout
+
+\begin_layout Standard
+In this case, the member function will continue and skip as many errors
+ as possible.
+\end_layout
+
+\begin_layout Subsubsection
+Classes intended to be used by the user
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Classes-intended-to-be-used"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When loading a CIF file, you can use the 
+\family typewriter
+OpenCIF
+\family default
+ library to automatically convert the CIF string commands into OpenCIF class
+ instances.
+ As explained before, you can do it when loading a file in automatic mode,
+ or when manually loading it's contents.
+\end_layout
+
+\begin_layout Standard
+Remember that all of this classes can be found within the 
+\family typewriter
+OpenCIF
+\family default
+ namespace.
+ The most important and useful classes for the user are the next ones.
+\end_layout
+
+\begin_layout Subsubsection*
+Command
+\end_layout
+
+\begin_layout Standard
+This is the base for most of the class hierarchy in the library.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+Command: Constructor of the class.
+ Takes no arguments and initialize the instance type as a 
+\family typewriter
+Command
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+type: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+PlainCommand
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined two operator functions that let the class be
+ written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Those operators expect a class pointer, not a normal instance.
+ This is due that this class is intended to be used only to store to other
+ classes (base-class-pointer to derived-class mechanism).
+ These two operators are not polymorphic for themselves, but they call internal
+ private member functions that are polymorphic.
+ So, sending a class instance using a Command pointer to an output stream,
+ will call the needed function to convert the instance into a string and
+ write it to the stream, or, if extracting from a stream, the operator will
+ call the relevant polymorphic function to read an instance.
+\end_layout
+
+\begin_layout Subsubsection*
+Point
+\end_layout
+
+\begin_layout Standard
+This class represents a CIF point in the file and is used in various classes
+ in the library.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+Point: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with values 0 in X and
+ Y (the origin).
+ The other constructor takes as argument two 
+\family typewriter
+long int
+\family default
+ integers representing X and Y, in that order (first X, then Y).
+\end_layout
+
+\begin_layout Itemize
+set: Public member function that helps to set the coordinates of the point
+ in a single call.
+ Takes as argument two 
+\family typewriter
+long int
+\family default
+ integers, representing X and Y, in that order.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+setX: Public member function that sets the X component of the point.
+ Takes as argument a 
+\family typewriter
+long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+setY: Public member function that sets the Y component of the point.
+ Takes as argument a 
+\family typewriter
+long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getX: Public member function that returns the X component of the point.
+ Returns a 
+\family typewriter
+long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getY: Public member function that returns the Y component of the point.
+ Returns a 
+\family typewriter
+long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined two operator functions that let the class be
+ written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Those operators expect a normal instance, not a pointer.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (point initialized to 0,0)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Point point;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, overloaded constructor (point initialized to 100,100)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Point point ( 100 , 100 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually setting the point values
+\end_layout
+
+\begin_layout LyX-Code
+point.set ( -100 , 200 );
+\end_layout
+
+\begin_layout LyX-Code
+point.setX ( -100 );
+\end_layout
+
+\begin_layout LyX-Code
+point.setY ( 200 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually getting the point values
+\end_layout
+
+\begin_layout LyX-Code
+long int x , y;
+\end_layout
+
+\begin_layout LyX-Code
+x = point.getX ();
+\end_layout
+
+\begin_layout LyX-Code
+y = point.getY ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Reading a point from an input file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> point;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing a point to an output file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << point;
+\end_layout
+
+\begin_layout Subsubsection*
+Size
+\end_layout
+
+\begin_layout Standard
+This class represents a CIF size in the file and is used in various classes
+ in the library.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+Size: Constructor of the class.
+ Initialize the size to 1,1 by default.
+\end_layout
+
+\begin_layout Itemize
+set: Public member function that helps to set the component size in a single
+ call.
+ Takes as argument two 
+\family typewriter
+unsigned long int
+\family default
+ integers, representing width and height, in that order.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+setWidth: Public member function that sets the width component of the size.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+setHeight: Public member function that sets the height component of the
+ size.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getWidth: Public member function that returns the width component of the
+ size.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getHeight: Public member function that returns the height component of the
+ point.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined two operator functions that let the class be
+ written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Those operators expect a normal instance, not a pointer.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (size initialized to 1,1)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Size size;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually setting the size values
+\end_layout
+
+\begin_layout LyX-Code
+size.set ( 100 , 200 );
+\end_layout
+
+\begin_layout LyX-Code
+size.setWidth ( 100 );
+\end_layout
+
+\begin_layout LyX-Code
+size.setHeight ( 200 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually getting the size values
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int x , y;
+\end_layout
+
+\begin_layout LyX-Code
+x = size.getWidth ();
+\end_layout
+
+\begin_layout LyX-Code
+y = size.getHeight ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Reading a size from an input file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> size;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing a size to an output file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << size;
+\end_layout
+
+\begin_layout Subsubsection*
+PolygonCommand
+\end_layout
+
+\begin_layout Standard
+This class represents the Polygon Command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+PolygonCommand: Constructor of the class.
+ It is overloaded, so you can call it with without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance without points.
+ The other constructor takes as argument a C++ string.
+ Such string must represent a complete CIF command with a format as defined
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+ Such constructor will initialize the instance with the points defined in
+ the string command.
+ Both constructors set the command type as 
+\family typewriter
+Polygon
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+type: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Polygon
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+setPoints: Public member function that helps the user to manually set a
+ C++ vector of Point class instances.
+ Such vector represent the points of the polygon.
+ The call to this member function replace the previously stored polygon
+ points.
+\end_layout
+
+\begin_layout Itemize
+getPoints: Public member function that helps the user to retrieve the points
+ used by the polygon.
+ The return value is a C++ vector containing Point class instances.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined four operator functions that let the class
+ be written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+PolygonCommand
+\family default
+ class pointers.
+ The other two works to read and write PolygonCommand class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::PolygonCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::PolygonCommand* pointer_instance = new OpenCIF::PolygonCommand
+ ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::PolygonCommand normal_points ( 
+\begin_inset Quotes eld
+\end_inset
+
+P 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::PolygonCommand* pointer_points;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_points = new OpenCIF::PolygonCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+P 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting points manually
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > points;
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 0 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 100 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+normal_instance.setPoints ( points );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->setPoints ( points );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting points
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > retrieved_points;
+\end_layout
+
+\begin_layout LyX-Code
+retrieved_points = normal_points.getPoints ();
+\end_layout
+
+\begin_layout LyX-Code
+retrieved_points = pointer_points->getPoints ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_points;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_points;
+\end_layout
+
+\begin_layout Subsubsection*
+WireCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a CIF Wire command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+WireCommand: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance without points and a width
+ of 0.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent an valid and clean CIF wire command.
+\end_layout
+
+\begin_layout Itemize
+setWidth: Public member function that helps to set the width of the wire.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getWidth: Public member function that returns the width of the wire.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+setPoints: Public member function that helps the user to manually set a
+ C++ vector of Point class instances.
+ Such vector represent the points of the wire.
+ The call to this member function replace the previously stored wire points.
+\end_layout
+
+\begin_layout Itemize
+getPoints: Public member function that helps the user to retrieve the points
+ used by the wire.
+ The return value is a C++ vector containing Point class instances.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined four operator functions that let the class
+ be written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+WireCommand
+\family default
+ class pointers.
+ The other two works to read and write WireCommand class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand* pointer_instance = new OpenCIF::WireCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand normal_points ( 
+\begin_inset Quotes eld
+\end_inset
+
+W 100 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand* pointer_points;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_points = new OpenCIF::WireCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+W 100 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > points;
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 0 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 100 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+normal_instance.setPoints ( points );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setWidth ( 100 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setPoints ( points );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->setWidth ( 100 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > retrieved_points;
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int width;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+retrieved_points = normal_points.getPoints ();
+\end_layout
+
+\begin_layout LyX-Code
+width = normal_points.getWidth ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+retrieved_points = pointer_points->getPoints ();
+\end_layout
+
+\begin_layout LyX-Code
+width = pointer_points->getWidth ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_points;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_points;
+\end_layout
+
+\begin_layout Subsubsection*
+BoxCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a CIF Wire command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+WireCommand: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance without points and a width
+ of 0.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent an valid and clean CIF wire command.
+\end_layout
+
+\begin_layout Itemize
+setWidth: Public member function that helps to set the width of the wire.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+getWidth: Public member function that returns the width of the wire.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+\end_layout
+
+\begin_layout Itemize
+setPoints: Public member function that helps the user to manually set a
+ C++ vector of Point class instances.
+ Such vector represent the points of the wire.
+ The call to this member function replace the previously stored wire points.
+\end_layout
+
+\begin_layout Itemize
+getPoints: Public member function that helps the user to retrieve the points
+ used by the wire.
+ The return value is a C++ vector containing Point class instances.
+\end_layout
+
+\begin_layout Standard
+The class has, also, defined four operator functions that let the class
+ be written and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+WireCommand
+\family default
+ class pointers.
+ The other two works to read and write WireCommand class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor (no points set)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand* pointer_instance = new OpenCIF::WireCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand normal_points ( 
+\begin_inset Quotes eld
+\end_inset
+
+W 100 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::WireCommand* pointer_points;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_points = new OpenCIF::WireCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+W 100 0 0 100 0 100 100 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > points;
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 0 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 0 ) );
+\end_layout
+
+\begin_layout LyX-Code
+points.push_back ( Point ( 100 , 100 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+normal_instance.setPoints ( points );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setWidth ( 100 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setPoints ( points );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->setWidth ( 100 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+vector< Point > retrieved_points;
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int width;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+retrieved_points = normal_points.getPoints ();
+\end_layout
+
+\begin_layout LyX-Code
+width = normal_points.getWidth ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+retrieved_points = pointer_points->getPoints ();
+\end_layout
+
+\begin_layout LyX-Code
+width = pointer_points->getWidth ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_points;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_points;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_points;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+About LibOpenCIF
+\end_layout
+
+\begin_layout Subsection
+Using LibOpenCIF in different operating systems
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Using-LibOpenCIF-in-other-sos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Usage of the overloaded operators on the classes
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Usage-of-the-overloaded-operators"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cleaning process of the string commands
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
