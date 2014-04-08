@@ -20,8 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef LIBOPENCIF_USEREXTENTIONCOMMAND_H_
-# define LIBOPENCIF_USEREXTENTIONCOMMAND_H_
+# ifndef LIBOPENCIF_USEREXTENSIONCOMMAND_H_
+# define LIBOPENCIF_USEREXTENSIONCOMMAND_H_
 
 # include <iostream>
 # include <string>
@@ -29,25 +29,25 @@
 
 # include "../rawcontentcommand.h"
 
-namespace OpenCIF { class UserExtentionCommand; }
-std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand& command );
-std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand& command );
-std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtentionCommand* command );
-std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtentionCommand* command );
+namespace OpenCIF { class UserExtensionCommand; }
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtensionCommand& command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtensionCommand& command );
+std::istream& operator>> ( std::istream& input_stream , OpenCIF::UserExtensionCommand* command );
+std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::UserExtensionCommand* command );
 
 namespace OpenCIF
 {
-   class UserExtentionCommand : public OpenCIF::RawContentCommand
+   class UserExtensionCommand : public OpenCIF::RawContentCommand
    {
       public:
-         explicit UserExtentionCommand ( void );
-         explicit UserExtentionCommand ( const std::string& str_command );
-         virtual ~UserExtentionCommand ( void );
+         explicit UserExtensionCommand ( void );
+         explicit UserExtensionCommand ( const std::string& str_command );
+         virtual ~UserExtensionCommand ( void );
          
-         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtentionCommand& command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtentionCommand& command );
-         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtentionCommand* command );
-         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtentionCommand* command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtensionCommand& command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtensionCommand& command );
+         friend std::istream& (::operator>>) ( std::istream& input_stream , UserExtensionCommand* command );
+         friend std::ostream& (::operator<<) ( std::ostream& output_stream , UserExtensionCommand* command );
          
       protected:
          virtual void print ( std::ostream& output_stream );

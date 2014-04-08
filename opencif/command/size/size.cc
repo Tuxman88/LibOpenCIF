@@ -32,6 +32,14 @@ OpenCIF::Size::Size ( void )
 }
 
 /*
+ * Non-Default constructor. Initialize the values of the size.
+ */
+OpenCIF::Size::Size ( const unsigned long int& new_width , const unsigned long int& new_height )
+{
+   set ( new_width , new_height );
+}
+
+/*
  * Destructor. Nothing to do.
  */
 OpenCIF::Size::~Size ( void )

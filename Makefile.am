@@ -19,7 +19,7 @@ libopencif_la_SOURCES = 	opencif/command/command.cc \
 				opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.cc \
 				opencif/command/rawcontentcommand/rawcontentcommand.cc \
 				opencif/command/rawcontentcommand/commentcommand/commentcommand.cc \
-				opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.cc \
+				opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.cc \
 				opencif/command/size/size.cc \
 				opencif/command/transformation/transformation.cc \
 				opencif/file/file.cc \
@@ -47,7 +47,7 @@ nobase_include_HEADERS = 	opencif/opencif.h \
 				opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.h \
 				opencif/command/rawcontentcommand/rawcontentcommand.h \
 				opencif/command/rawcontentcommand/commentcommand/commentcommand.h \
-				opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
+				opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.h \
 				opencif/command/size/size.h \
 				opencif/command/transformation/transformation.h \
 				opencif/file/file.h \
@@ -76,7 +76,7 @@ EXTRA_DIST = 	doc/ \
 		opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.h \
 		opencif/command/rawcontentcommand/rawcontentcommand.h \
 		opencif/command/rawcontentcommand/commentcommand/commentcommand.h \
-		opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
+		opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.h \
 		opencif/command/size/size.h \
 		opencif/command/transformation/transformation.h \
 		opencif/file/file.h \
@@ -102,7 +102,7 @@ EXTRA_DIST = 	doc/ \
 		opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.cc \
 		opencif/command/rawcontentcommand/rawcontentcommand.cc \
 		opencif/command/rawcontentcommand/commentcommand/commentcommand.cc \
-		opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.cc \
+		opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.cc \
 		opencif/command/size/size.cc \
 		opencif/command/transformation/transformation.cc \
 		opencif/file/file.cc \

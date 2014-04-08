@@ -37,6 +37,7 @@ namespace OpenCIF
    {
       public:
          explicit Size ( void );
+         explicit Size ( const unsigned long int& new_width , const unsigned long int& new_height );
          virtual ~Size ( void );
          unsigned long int getWidth ( void ) const;
          unsigned long int getHeight ( void ) const;

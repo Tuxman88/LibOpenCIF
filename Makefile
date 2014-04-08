@@ -145,7 +145,7 @@ am_libopencif_la_OBJECTS = opencif/command/command.lo \
 	opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.lo \
 	opencif/command/rawcontentcommand/rawcontentcommand.lo \
 	opencif/command/rawcontentcommand/commentcommand/commentcommand.lo \
-	opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.lo \
+	opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.lo \
 	opencif/command/size/size.lo \
 	opencif/command/transformation/transformation.lo \
 	opencif/file/file.lo \
@@ -384,7 +384,7 @@ libopencif_la_SOURCES = opencif/command/command.cc \
 				opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.cc \
 				opencif/command/rawcontentcommand/rawcontentcommand.cc \
 				opencif/command/rawcontentcommand/commentcommand/commentcommand.cc \
-				opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.cc \
+				opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.cc \
 				opencif/command/size/size.cc \
 				opencif/command/transformation/transformation.cc \
 				opencif/file/file.cc \
@@ -413,7 +413,7 @@ nobase_include_HEADERS = opencif/opencif.h \
 				opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.h \
 				opencif/command/rawcontentcommand/rawcontentcommand.h \
 				opencif/command/rawcontentcommand/commentcommand/commentcommand.h \
-				opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
+				opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.h \
 				opencif/command/size/size.h \
 				opencif/command/transformation/transformation.h \
 				opencif/file/file.h \
@@ -442,7 +442,7 @@ EXTRA_DIST = doc/ \
 		opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.h \
 		opencif/command/rawcontentcommand/rawcontentcommand.h \
 		opencif/command/rawcontentcommand/commentcommand/commentcommand.h \
-		opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
+		opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.h \
 		opencif/command/size/size.h \
 		opencif/command/transformation/transformation.h \
 		opencif/file/file.h \
@@ -468,7 +468,7 @@ EXTRA_DIST = doc/ \
 		opencif/command/primitivecommand/positionbasedcommand/roundflashcommand.cc \
 		opencif/command/rawcontentcommand/rawcontentcommand.cc \
 		opencif/command/rawcontentcommand/commentcommand/commentcommand.cc \
-		opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.cc \
+		opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.cc \
 		opencif/command/size/size.cc \
 		opencif/command/transformation/transformation.cc \
 		opencif/file/file.cc \
@@ -722,14 +722,14 @@ opencif/command/rawcontentcommand/commentcommand/$(DEPDIR)/$(am__dirstamp):
 	@: > opencif/command/rawcontentcommand/commentcommand/$(DEPDIR)/$(am__dirstamp)
 opencif/command/rawcontentcommand/commentcommand/commentcommand.lo: opencif/command/rawcontentcommand/commentcommand/$(am__dirstamp) \
 	opencif/command/rawcontentcommand/commentcommand/$(DEPDIR)/$(am__dirstamp)
-opencif/command/rawcontentcommand/userextentioncommand/$(am__dirstamp):
-	@$(MKDIR_P) opencif/command/rawcontentcommand/userextentioncommand
-	@: > opencif/command/rawcontentcommand/userextentioncommand/$(am__dirstamp)
-opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)
-	@: > opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)/$(am__dirstamp)
-opencif/command/rawcontentcommand/userextentioncommand/userextentioncommand.lo: opencif/command/rawcontentcommand/userextentioncommand/$(am__dirstamp) \
-	opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)/$(am__dirstamp)
+opencif/command/rawcontentcommand/userextensioncommand/$(am__dirstamp):
+	@$(MKDIR_P) opencif/command/rawcontentcommand/userextensioncommand
+	@: > opencif/command/rawcontentcommand/userextensioncommand/$(am__dirstamp)
+opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)
+	@: > opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)/$(am__dirstamp)
+opencif/command/rawcontentcommand/userextensioncommand/userextensioncommand.lo: opencif/command/rawcontentcommand/userextensioncommand/$(am__dirstamp) \
+	opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)/$(am__dirstamp)
 opencif/command/size/$(am__dirstamp):
 	@$(MKDIR_P) opencif/command/size
 	@: > opencif/command/size/$(am__dirstamp)
@@ -821,8 +821,8 @@ mostlyclean-compile:
 	-rm -f opencif/command/rawcontentcommand/*.lo
 	-rm -f opencif/command/rawcontentcommand/commentcommand/*.$(OBJEXT)
 	-rm -f opencif/command/rawcontentcommand/commentcommand/*.lo
-	-rm -f opencif/command/rawcontentcommand/userextentioncommand/*.$(OBJEXT)
-	-rm -f opencif/command/rawcontentcommand/userextentioncommand/*.lo
+	-rm -f opencif/command/rawcontentcommand/userextensioncommand/*.$(OBJEXT)
+	-rm -f opencif/command/rawcontentcommand/userextensioncommand/*.lo
 	-rm -f opencif/command/size/*.$(OBJEXT)
 	-rm -f opencif/command/size/*.lo
 	-rm -f opencif/command/transformation/*.$(OBJEXT)
@@ -854,7 +854,7 @@ include opencif/command/primitivecommand/positionbasedcommand/$(DEPDIR)/roundfla
 include opencif/command/primitivecommand/positionbasedcommand/boxcommand/$(DEPDIR)/boxcommand.Plo
 include opencif/command/rawcontentcommand/$(DEPDIR)/rawcontentcommand.Plo
 include opencif/command/rawcontentcommand/commentcommand/$(DEPDIR)/commentcommand.Plo
-include opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)/userextentioncommand.Plo
+include opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)/userextensioncommand.Plo
 include opencif/command/size/$(DEPDIR)/size.Plo
 include opencif/command/transformation/$(DEPDIR)/transformation.Plo
 include opencif/file/$(DEPDIR)/file.Plo
@@ -909,7 +909,7 @@ clean-libtool:
 	-rm -rf opencif/command/primitivecommand/positionbasedcommand/boxcommand/.libs opencif/command/primitivecommand/positionbasedcommand/boxcommand/_libs
 	-rm -rf opencif/command/rawcontentcommand/.libs opencif/command/rawcontentcommand/_libs
 	-rm -rf opencif/command/rawcontentcommand/commentcommand/.libs opencif/command/rawcontentcommand/commentcommand/_libs
-	-rm -rf opencif/command/rawcontentcommand/userextentioncommand/.libs opencif/command/rawcontentcommand/userextentioncommand/_libs
+	-rm -rf opencif/command/rawcontentcommand/userextensioncommand/.libs opencif/command/rawcontentcommand/userextensioncommand/_libs
 	-rm -rf opencif/command/size/.libs opencif/command/size/_libs
 	-rm -rf opencif/command/transformation/.libs opencif/command/transformation/_libs
 	-rm -rf opencif/file/.libs opencif/file/_libs
@@ -1233,8 +1233,8 @@ distclean-generic:
 	-rm -f opencif/command/rawcontentcommand/$(am__dirstamp)
 	-rm -f opencif/command/rawcontentcommand/commentcommand/$(DEPDIR)/$(am__dirstamp)
 	-rm -f opencif/command/rawcontentcommand/commentcommand/$(am__dirstamp)
-	-rm -f opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR)/$(am__dirstamp)
-	-rm -f opencif/command/rawcontentcommand/userextentioncommand/$(am__dirstamp)
+	-rm -f opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR)/$(am__dirstamp)
+	-rm -f opencif/command/rawcontentcommand/userextensioncommand/$(am__dirstamp)
 	-rm -f opencif/command/size/$(DEPDIR)/$(am__dirstamp)
 	-rm -f opencif/command/size/$(am__dirstamp)
 	-rm -f opencif/command/transformation/$(DEPDIR)/$(am__dirstamp)
@@ -1254,7 +1254,7 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf opencif/command/$(DEPDIR) opencif/command/controlcommand/$(DEPDIR) opencif/command/controlcommand/callcommand/$(DEPDIR) opencif/command/controlcommand/definitiondeletecommand/$(DEPDIR) opencif/command/controlcommand/definitionendcommand/$(DEPDIR) opencif/command/controlcommand/definitionstartcommand/$(DEPDIR) opencif/command/controlcommand/endcommand/$(DEPDIR) opencif/command/fraction/$(DEPDIR) opencif/command/layercommand/$(DEPDIR) opencif/command/point/$(DEPDIR) opencif/command/primitivecommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/polygoncommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/wirecommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/boxcommand/$(DEPDIR) opencif/command/rawcontentcommand/$(DEPDIR) opencif/command/rawcontentcommand/commentcommand/$(DEPDIR) opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR) opencif/command/size/$(DEPDIR) opencif/command/transformation/$(DEPDIR) opencif/file/$(DEPDIR) opencif/finitestatemachine/$(DEPDIR)
+	-rm -rf opencif/command/$(DEPDIR) opencif/command/controlcommand/$(DEPDIR) opencif/command/controlcommand/callcommand/$(DEPDIR) opencif/command/controlcommand/definitiondeletecommand/$(DEPDIR) opencif/command/controlcommand/definitionendcommand/$(DEPDIR) opencif/command/controlcommand/definitionstartcommand/$(DEPDIR) opencif/command/controlcommand/endcommand/$(DEPDIR) opencif/command/fraction/$(DEPDIR) opencif/command/layercommand/$(DEPDIR) opencif/command/point/$(DEPDIR) opencif/command/primitivecommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/polygoncommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/wirecommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/boxcommand/$(DEPDIR) opencif/command/rawcontentcommand/$(DEPDIR) opencif/command/rawcontentcommand/commentcommand/$(DEPDIR) opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR) opencif/command/size/$(DEPDIR) opencif/command/transformation/$(DEPDIR) opencif/file/$(DEPDIR) opencif/finitestatemachine/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -1302,7 +1302,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf opencif/command/$(DEPDIR) opencif/command/controlcommand/$(DEPDIR) opencif/command/controlcommand/callcommand/$(DEPDIR) opencif/command/controlcommand/definitiondeletecommand/$(DEPDIR) opencif/command/controlcommand/definitionendcommand/$(DEPDIR) opencif/command/controlcommand/definitionstartcommand/$(DEPDIR) opencif/command/controlcommand/endcommand/$(DEPDIR) opencif/command/fraction/$(DEPDIR) opencif/command/layercommand/$(DEPDIR) opencif/command/point/$(DEPDIR) opencif/command/primitivecommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/polygoncommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/wirecommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/boxcommand/$(DEPDIR) opencif/command/rawcontentcommand/$(DEPDIR) opencif/command/rawcontentcommand/commentcommand/$(DEPDIR) opencif/command/rawcontentcommand/userextentioncommand/$(DEPDIR) opencif/command/size/$(DEPDIR) opencif/command/transformation/$(DEPDIR) opencif/file/$(DEPDIR) opencif/finitestatemachine/$(DEPDIR)
+	-rm -rf opencif/command/$(DEPDIR) opencif/command/controlcommand/$(DEPDIR) opencif/command/controlcommand/callcommand/$(DEPDIR) opencif/command/controlcommand/definitiondeletecommand/$(DEPDIR) opencif/command/controlcommand/definitionendcommand/$(DEPDIR) opencif/command/controlcommand/definitionstartcommand/$(DEPDIR) opencif/command/controlcommand/endcommand/$(DEPDIR) opencif/command/fraction/$(DEPDIR) opencif/command/layercommand/$(DEPDIR) opencif/command/point/$(DEPDIR) opencif/command/primitivecommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/polygoncommand/$(DEPDIR) opencif/command/primitivecommand/pathbasedcommand/wirecommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/$(DEPDIR) opencif/command/primitivecommand/positionbasedcommand/boxcommand/$(DEPDIR) opencif/command/rawcontentcommand/$(DEPDIR) opencif/command/rawcontentcommand/commentcommand/$(DEPDIR) opencif/command/rawcontentcommand/userextensioncommand/$(DEPDIR) opencif/command/size/$(DEPDIR) opencif/command/transformation/$(DEPDIR) opencif/file/$(DEPDIR) opencif/finitestatemachine/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

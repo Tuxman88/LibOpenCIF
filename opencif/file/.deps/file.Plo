@@ -120,8 +120,8 @@ opencif/file/file.lo: opencif/file/file.cc /usr/include/stdc-predef.h \
  opencif/file/../command/rawcontentcommand/commentcommand/commentcommand.h \
  opencif/file/../command/rawcontentcommand/commentcommand/../rawcontentcommand.h \
  opencif/file/../command/rawcontentcommand/commentcommand/../../command.h \
- opencif/file/../command/rawcontentcommand/userextentioncommand/userextentioncommand.h \
- opencif/file/../command/rawcontentcommand/userextentioncommand/../rawcontentcommand.h \
+ opencif/file/../command/rawcontentcommand/userextensioncommand/userextensioncommand.h \
+ opencif/file/../command/rawcontentcommand/userextensioncommand/../rawcontentcommand.h \
  opencif/file/../command/controlcommand/endcommand/endcommand.h \
  opencif/file/../command/controlcommand/endcommand/../controlcommand.h
 
@@ -425,9 +425,9 @@ opencif/file/../command/rawcontentcommand/commentcommand/../rawcontentcommand.h:
 
 opencif/file/../command/rawcontentcommand/commentcommand/../../command.h:
 
-opencif/file/../command/rawcontentcommand/userextentioncommand/userextentioncommand.h:
+opencif/file/../command/rawcontentcommand/userextensioncommand/userextensioncommand.h:
 
-opencif/file/../command/rawcontentcommand/userextentioncommand/../rawcontentcommand.h:
+opencif/file/../command/rawcontentcommand/userextensioncommand/../rawcontentcommand.h:
 
 opencif/file/../command/controlcommand/endcommand/endcommand.h:
 

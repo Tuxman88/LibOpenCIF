@@ -35,6 +35,7 @@ namespace OpenCIF
    {
       public:
          explicit Fraction ( void );
+         explicit Fraction ( const unsigned long int& new_enumerator , const unsigned long int& new_denominator );
          virtual ~Fraction ( void );
          
          void set ( const unsigned long int& new_numerator , const unsigned long int& new_denominator );

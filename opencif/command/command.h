@@ -62,7 +62,7 @@ namespace OpenCIF
             Call ,
             DefinitionEnd ,
             Comment ,
-            UserExtention , 
+            UserExtension , 
             Polygon ,
             Wire ,
             Box ,

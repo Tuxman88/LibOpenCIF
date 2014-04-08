@@ -376,7 +376,7 @@ void OpenCIF::File::convertCommands ( void )
             break;
             
          default:
-            command = new OpenCIF::UserExtentionCommand ( str_command );
+            command = new OpenCIF::UserExtensionCommand ( str_command );
             file_commands.push_back ( command );
             break;
       }

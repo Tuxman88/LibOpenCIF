@@ -36,7 +36,7 @@
 # include "command/controlcommand/endcommand/endcommand.h"
 # include "command/rawcontentcommand/rawcontentcommand.h"
 # include "command/rawcontentcommand/commentcommand/commentcommand.h"
-# include "command/rawcontentcommand/userextentioncommand/userextentioncommand.h"
+# include "command/rawcontentcommand/userextensioncommand/userextensioncommand.h"
 # include "command/primitivecommand/primitivecommand.h"
 # include "command/primitivecommand/pathbasedcommand/pathbasedcommand.h"
 # include "command/primitivecommand/pathbasedcommand/polygoncommand/polygoncommand.h"

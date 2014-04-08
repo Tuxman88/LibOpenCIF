@@ -31,6 +31,14 @@ OpenCIF::Fraction::Fraction ( void )
 }
 
 /*
+ * Non-Default constructor.
+ */
+OpenCIF::Fraction::Fraction ( const unsigned long int& new_numerator , const unsigned long int& new_denominator )
+{
+   set ( new_numerator , new_denominator );
+}
+
+/*
  * Destructor. Nothing to do.
  */
 OpenCIF::Fraction::~Fraction(void)

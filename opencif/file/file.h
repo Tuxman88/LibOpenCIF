@@ -41,7 +41,7 @@
 # include "../command/primitivecommand/positionbasedcommand/roundflashcommand.h"
 # include "../command/primitivecommand/positionbasedcommand/boxcommand/boxcommand.h"
 # include "../command/rawcontentcommand/commentcommand/commentcommand.h"
-# include "../command/rawcontentcommand/userextentioncommand/userextentioncommand.h"
+# include "../command/rawcontentcommand/userextensioncommand/userextensioncommand.h"
 # include "../command/controlcommand/endcommand/endcommand.h"
 
 namespace OpenCIF
