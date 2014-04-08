@@ -269,6 +269,44 @@ The format itself defines that nothing in the file does something for the
 \end_layout
 
 \begin_layout Subsubsection*
+Extension commands
+\end_layout
+
+\begin_layout Standard
+The extension commands are used to expand the possibilities of a 
+\shape italic
+CIF
+\shape default
+ file.
+ Such commands can be anything, and are application dependent.
+ So, if a toolset A defines an expansion command with some special format
+ to display text within the design, such command will likely only work in
+ that toolset A, but not in the toolset B, that, maybe, has the same functionali
+ty, but the internal command used to do the same job is incompatible.
+\end_layout
+
+\begin_layout Standard
+There are some basic extension commands that are widely used across various
+ 
+\shape italic
+CAD
+\shape default
+ tools, like the cell name command (
+\begin_inset Quotes eld
+\end_inset
+
+9 name;
+\begin_inset Quotes erd
+\end_inset
+
+).
+ This library doesn't validate the extension commands, since there is none
+ standard regulation for them.
+ So, they are used as regular comments, and the validation of their contents
+ are left to the user.
+\end_layout
+
+\begin_layout Subsubsection*
 End command
 \end_layout
 
@@ -1869,11 +1907,15 @@ Command
 \begin_layout Standard
 This is the base for most of the class hierarchy in the library.
  The next list shows all the relevant member functions, constructors and
- destructors that the user might need.
+ destructors that the user might need when using this class.
 \end_layout
 
 \begin_layout Itemize
-Command: Constructor of the class.
+
+\family typewriter
+Command
+\family default
+: Constructor of the class.
  Takes no arguments and initialize the instance type as a 
 \family typewriter
 Command
@@ -1882,7 +1924,11 @@ Command
 \end_layout
 
 \begin_layout Itemize
-type: Public member function that is polymorphic.
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
  Takes no arguments and returns a value of type 
 \family typewriter
 CommandType
@@ -1918,7 +1964,7 @@ reference "sub:Cleaning-process-of-the-string-commands"
 
 .
  Those operators expect a class pointer, not a normal instance.
- This is due that this class is intended to be used only to store to other
+ This is due that this class is intended to be used only to store other
  classes (base-class-pointer to derived-class mechanism).
  These two operators are not polymorphic for themselves, but they call internal
  private member functions that are polymorphic.
@@ -1933,27 +1979,36 @@ Point
 \end_layout
 
 \begin_layout Standard
-This class represents a CIF point in the file and is used in various classes
+This class represents a point in the file and is used in various classes
  in the library.
+ The points can have any value in their X,Y coordinates, negative and positive.
  The next list shows all the relevant member functions, constructors and
  destructors that the user might need.
 \end_layout
 
 \begin_layout Itemize
-Point: Constructor of the class.
+
+\family typewriter
+Point
+\family default
+: Constructor of the class.
  It is overloaded, so you can call it with or without arguments.
  Calling without arguments will use the default constructor.
  The default constructor initialize the instance with values 0 in X and
- Y (the origin).
+ Y (the origin of a design).
  The other constructor takes as argument two 
 \family typewriter
 long int
 \family default
- integers representing X and Y, in that order (first X, then Y).
+ integers representing X and Y, in that order.
 \end_layout
 
 \begin_layout Itemize
-set: Public member function that helps to set the coordinates of the point
+
+\family typewriter
+set
+\family default
+: Public member function that helps to set the coordinates of the point
  in a single call.
  Takes as argument two 
 \family typewriter
@@ -1964,44 +2019,68 @@ long int
 \end_layout
 
 \begin_layout Itemize
-setX: Public member function that sets the X component of the point.
+
+\family typewriter
+setX
+\family default
+: Public member function that sets the X component of the point.
  Takes as argument a 
 \family typewriter
 long int
 \family default
  integer value.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-setY: Public member function that sets the Y component of the point.
+
+\family typewriter
+setY
+\family default
+: Public member function that sets the Y component of the point.
  Takes as argument a 
 \family typewriter
 long int
 \family default
  integer value.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getX: Public member function that returns the X component of the point.
+
+\family typewriter
+getX
+\family default
+: Public member function that returns the X component of the point.
  Returns a 
 \family typewriter
 long int
 \family default
  integer value.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Itemize
-getY: Public member function that returns the Y component of the point.
+
+\family typewriter
+getY
+\family default
+: Public member function that returns the Y component of the point.
  Returns a 
 \family typewriter
 long int
 \family default
  integer value.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Standard
-The class has, also, defined two operator functions that let the class be
- written and read to and from an input and output stream, respectively
+The 
+\family typewriter
+Point
+\family default
+ class has, also, defined two operator functions that let the instances
+ be written and read to and from an input and output stream, respectively
 \begin_inset Foot
 status collapsed
 
@@ -2132,19 +2211,39 @@ Size
 \end_layout
 
 \begin_layout Standard
-This class represents a CIF size in the file and is used in various classes
- in the library.
+This class represents the size of some figures in a 
+\shape italic
+CIF
+\shape default
+ file and is used in some classes in the library.
+ The size has two components: width and height.
+ As can be expected, both values can't be negative.
  The next list shows all the relevant member functions, constructors and
  destructors that the user might need.
 \end_layout
 
 \begin_layout Itemize
-Size: Constructor of the class.
- Initialize the size to 1,1 by default.
+
+\family typewriter
+Size
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with a size of 1,1.
+ The other constructor takes as argument two 
+\family typewriter
+unsigned long int
+\family default
+ integers representing width and height, in that order.
 \end_layout
 
 \begin_layout Itemize
-set: Public member function that helps to set the component size in a single
+
+\family typewriter
+set
+\family default
+: Public member function that helps to set the component size in a single
  call.
  Takes as argument two 
 \family typewriter
@@ -2155,47 +2254,64 @@ unsigned long int
 \end_layout
 
 \begin_layout Itemize
-setWidth: Public member function that sets the width component of the size.
+
+\family typewriter
+setWidth
+\family default
+: Public member function that sets the width component of the size.
  Takes as argument an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-setHeight: Public member function that sets the height component of the
- size.
+
+\family typewriter
+setHeight
+\family default
+: Public member function that sets the height component of the size.
  Takes as argument an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getWidth: Public member function that returns the width component of the
- size.
+
+\family typewriter
+getWidth
+\family default
+: Public member function that returns the width component of the size.
  Returns an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Itemize
-getHeight: Public member function that returns the height component of the
- point.
+
+\family typewriter
+getHeight
+\family default
+: Public member function that returns the height component of the point.
  Returns an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Standard
-The class has, also, defined two operator functions that let the class be
- written and read to and from an input and output stream, respectively
+The class has defined two operator functions that let the class be written
+ and read to and from an input and output stream, respectively
 \begin_inset Foot
 status collapsed
 
@@ -2225,6 +2341,18 @@ reference "sub:Cleaning-process-of-the-string-commands"
 
 \begin_layout LyX-Code
 OpenCIF::Size size;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, overloaded constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Size size ( 100 , 100 );
 \begin_inset Newline newline
 \end_inset
 
@@ -2310,23 +2438,560 @@ file << size;
 \end_layout
 
 \begin_layout Subsubsection*
-PolygonCommand
+Fraction
 \end_layout
 
 \begin_layout Standard
-This class represents the Polygon Command.
+This class represents an AB fraction.
+ The AB fractions are used within the definition start commands in the file.
  The next list shows all the relevant member functions, constructors and
  destructors that the user might need.
 \end_layout
 
 \begin_layout Itemize
-PolygonCommand: Constructor of the class.
+
+\family typewriter
+Fraction
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with a neutral value of
+ 
+\begin_inset Formula $\frac{1}{1}$
+\end_inset
+
+ (neutral since, when applied, does not affect any value).
+ The other constructor takes as argument two 
+\family typewriter
+unsigned long int
+\family default
+ integers representing the numerator and denominator, in that order.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+set
+\family default
+: Public member function that helps to set the fraction value.
+ Takes as argument two 
+\family typewriter
+unsigned long int
+\family default
+ integers, representing numerator and denominator, in that order.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setNumerator
+\family default
+: Public member function that sets the numerator component of the fraction.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setDenominator
+\family default
+: Public member function that sets the denominator component of the fraction.
+ Takes as argument an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getNumerator
+\family default
+: Public member function that returns the numerator component of the fraction.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Take no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getDenominator
+\family default
+: Public member function that returns the denominator component of the fraction.
+ Returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined two operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Those operators expect a normal instance, not a pointer.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor (size initialized to 1/1)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Fraction fraction;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, overloaded constructor (initialized as one half)
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Fraction fraction ( 1 , 2 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually setting the fraction values (setting values as one half)
+\end_layout
+
+\begin_layout LyX-Code
+fraction.set ( 1 , 2 );
+\end_layout
+
+\begin_layout LyX-Code
+fraction.setNumerator ( 1 );
+\end_layout
+
+\begin_layout LyX-Code
+fraction.setDenominator ( 2 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually getting the fraction values
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int n , d;
+\end_layout
+
+\begin_layout LyX-Code
+n = fraction.getNumerator ();
+\end_layout
+
+\begin_layout LyX-Code
+d = fraction.getDenominator ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Reading a fraction from an input file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> fraction;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing a fraction to an output file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << fraction;
+\end_layout
+
+\begin_layout Subsubsection*
+Transformation
+\end_layout
+
+\begin_layout Standard
+This class represents a transformation.
+ The transformation can be found in the call commands.
+ The class doesn't have any special member function to represent the mirroring,
+ since there is only needed to know in witch direction the transformation
+ is going, and that is configured with the transformation type.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+Transformation
+\family default
+: Constructor of the class.
+ The constructor, by default, creates the transformation as a neutral displaceme
+nt (a 0,0 displacement).
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setType
+\family default
+: Public member function that helps to set the transformation type (a single
+ transformation instance can be configured to be either a displacement,
+ rotation or mirroring).
+ Takes as argument a constant value from an enumeration defined within the
+ Transformation class.
+ The possible values are:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+Displacement
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+Rotation
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+HorizontalMirroring
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+VerticalMirroring
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+getType
+\family default
+: Public member function that returns the type of the Transformation.
+ The possible values to be returned are:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+Displacement
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+Rotation
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+HorizontalMirroring
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+VerticalMirroring
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+setRotation
+\family default
+: If the Transformation instance is configured as a 
+\family typewriter
+Rotation
+\family default
+, this public member function sets the 
+\family typewriter
+Point
+\family default
+ class instance that represents the rotation vector of the transformation.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getRotation
+\family default
+: Public member function that returns the 
+\family typewriter
+Point
+\family default
+ class instance representing the rotation vector of the transformation.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setDisplacement
+\family default
+: If the Transformation instance is configured as a 
+\family typewriter
+Displacement
+\family default
+, this public member function sets the Point class instance that represents
+ the displacement itself.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getDisplacement
+\family default
+: Public member function that returns the 
+\family typewriter
+Point
+\family default
+ class instance representing the displacement point of the transformation.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined two operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Those operators expect a normal instance, not a pointer.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::Transformation trans;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually setting the transformation values
+\end_layout
+
+\begin_layout LyX-Code
+trans.setType ( Transformation::Displacement );
+\end_layout
+
+\begin_layout LyX-Code
+trans.setDisplacement ( Point ( 10 , 10 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+trans.setType ( Transformation::Rotation );
+\end_layout
+
+\begin_layout LyX-Code
+trans.setRotation ( Point ( 10 , 10 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+trans.setType ( Transformation::VerticalMirroring );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+trans.setType ( Transformation::HorizontalMirroring );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Manually getting the transformation values
+\end_layout
+
+\begin_layout LyX-Code
+Point point;
+\end_layout
+
+\begin_layout LyX-Code
+point = trans.getRotation ();
+\end_layout
+
+\begin_layout LyX-Code
+point = trans.getDisplacement ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Reading a fraction from an input file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> point;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing a fraction to an output file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << point;
+\end_layout
+
+\begin_layout Subsubsection*
+PolygonCommand
+\end_layout
+
+\begin_layout Standard
+This class represents the polygon command.
+ The polygon commands in the 
+\shape italic
+CIF
+\shape default
+ format are defined by a list of points that represents the figure itself.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+PolygonCommand
+\family default
+: Constructor of the class.
  It is overloaded, so you can call it with without arguments.
  Calling without arguments will use the default constructor.
  The default constructor initialize the instance without points.
  The other constructor takes as argument a C++ string.
- Such string must represent a complete CIF command with a format as defined
- in section 
+ Such string must represent a complete 
+\shape italic
+CIF
+\shape default
+ command with a format as defined in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Cleaning-process-of-the-string-commands"
@@ -2344,7 +3009,11 @@ Polygon
 \end_layout
 
 \begin_layout Itemize
-type: Public member function that is polymorphic.
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
  Takes no arguments and returns a value of type 
 \family typewriter
 CommandType
@@ -2355,25 +3024,43 @@ CommandType
 Polygon
 \family default
 .
+ Takes no arguments.
 \end_layout
 
 \begin_layout Itemize
-setPoints: Public member function that helps the user to manually set a
- C++ vector of Point class instances.
- Such vector represent the points of the polygon.
- The call to this member function replace the previously stored polygon
- points.
+
+\family typewriter
+setPoints
+\family default
+: Public member function that helps the user to manually set a C++ vector
+ of 
+\family typewriter
+Point
+\family default
+ class instances.
+ Such vector represents the points of the polygon itself.
+ The call to this member function replace the previously stored points.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getPoints: Public member function that helps the user to retrieve the points
- used by the polygon.
- The return value is a C++ vector containing Point class instances.
+
+\family typewriter
+getPoints
+\family default
+: Public member function that helps the user to retrieve the points used
+ by the polygon.
+ The return value is a C++ vector containing 
+\family typewriter
+Point
+\family default
+ class instances.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Standard
-The class has, also, defined four operator functions that let the class
- be written and read to and from an input and output stream, respectively
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
 \begin_inset Foot
 status collapsed
 
@@ -2398,7 +3085,11 @@ reference "sub:Cleaning-process-of-the-string-commands"
 PolygonCommand
 \family default
  class pointers.
- The other two works to read and write PolygonCommand class instances.
+ The other two works to read and write 
+\family typewriter
+PolygonCommand
+\family default
+ class instances.
  The next code lines represent the calls presented.
 \end_layout
 
@@ -2578,50 +3269,105 @@ WireCommand
 \end_layout
 
 \begin_layout Standard
-This class represents a CIF Wire command.
+This class represents a wire command.
  The next list shows all the relevant member functions, constructors and
  destructors that the user might need.
 \end_layout
 
 \begin_layout Itemize
-WireCommand: Constructor of the class.
+
+\family typewriter
+WireCommand
+\family default
+: Constructor of the class.
  It is overloaded, so you can call it with or without arguments.
  Calling without arguments will use the default constructor.
  The default constructor initialize the instance without points and a width
  of 0.
  The other constructor takes as argument a C++ string class instance.
- The string must represent an valid and clean CIF wire command.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ wire command.
 \end_layout
 
 \begin_layout Itemize
-setWidth: Public member function that helps to set the width of the wire.
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Wire
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setWidth
+\family default
+: Public member function that helps to set the width of the wire.
  Takes as argument an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getWidth: Public member function that returns the width of the wire.
+
+\family typewriter
+getWidth
+\family default
+: Public member function that returns the width of the wire.
  Returns an 
 \family typewriter
 unsigned long int
 \family default
  integer value.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Itemize
-setPoints: Public member function that helps the user to manually set a
- C++ vector of Point class instances.
+
+\family typewriter
+setPoints
+\family default
+: Public member function that helps the user to manually set a C++ vector
+ of 
+\family typewriter
+Point
+\family default
+ class instances.
  Such vector represent the points of the wire.
  The call to this member function replace the previously stored wire points.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getPoints: Public member function that helps the user to retrieve the points
- used by the wire.
- The return value is a C++ vector containing Point class instances.
+
+\family typewriter
+getPoints
+\family default
+: Public member function that helps the user to retrieve the points used
+ by the wire.
+ The return value is a C++ vector containing 
+\family typewriter
+Point
+\family default
+ class instances.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Standard
@@ -2651,7 +3397,11 @@ reference "sub:Cleaning-process-of-the-string-commands"
 WireCommand
 \family default
  class pointers.
- The other two works to read and write WireCommand class instances.
+ The other two works to read and write 
+\family typewriter
+WireCommand
+\family default
+ class instances.
  The next code lines represent the calls presented.
 \end_layout
 
@@ -2862,55 +3612,137 @@ BoxCommand
 \end_layout
 
 \begin_layout Standard
-This class represents a CIF Wire command.
+This class represents a box command.
  The next list shows all the relevant member functions, constructors and
  destructors that the user might need.
 \end_layout
 
 \begin_layout Itemize
-WireCommand: Constructor of the class.
+
+\family typewriter
+BoxCommand
+\family default
+: Constructor of the class.
  It is overloaded, so you can call it with or without arguments.
  Calling without arguments will use the default constructor.
- The default constructor initialize the instance without points and a width
- of 0.
+ The default constructor initialize the instance with a size of 1,1, a position
+ in 0,0 and a neutral rotation of 1,0.
  The other constructor takes as argument a C++ string class instance.
- The string must represent an valid and clean CIF wire command.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ Box command.
 \end_layout
 
 \begin_layout Itemize
-setWidth: Public member function that helps to set the width of the wire.
- Takes as argument an 
+
 \family typewriter
-unsigned long int
+type
 \family default
- integer value.
-\end_layout
-
-\begin_layout Itemize
-getWidth: Public member function that returns the width of the wire.
- Returns an 
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
 \family typewriter
-unsigned long int
+CommandType
 \family default
- integer value.
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Box
+\family default
+.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Itemize
-setPoints: Public member function that helps the user to manually set a
- C++ vector of Point class instances.
- Such vector represent the points of the wire.
- The call to this member function replace the previously stored wire points.
+
+\family typewriter
+setRotation
+\family default
+: Public member function that helps to set the rotation point of the box.
+ The argument needed must be a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Has no return value.
 \end_layout
 
 \begin_layout Itemize
-getPoints: Public member function that helps the user to retrieve the points
- used by the wire.
- The return value is a C++ vector containing Point class instances.
+
+\family typewriter
+getRotation
+\family default
+: Public member function that returns the rotation point applied to the
+ box.
+ The call to this member function returns a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setSize
+\family default
+: Public member function that helps to set the size of the box.
+ The argument needed must be a 
+\family typewriter
+Size
+\family default
+ class instance.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getSize
+\family default
+: Public member function that returns the size of the box.
+ The call to this member function returns a 
+\family typewriter
+Size
+\family default
+ class instance.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setPosition
+\family default
+: Public member function that helps to set the position (center) of the
+ box.
+ The argument needed must be a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getPosition
+\family default
+: Public member function that returns the position of the box.
+ The call to this member function returns a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Takes no arguments.
 \end_layout
 
 \begin_layout Standard
-The class has, also, defined four operator functions that let the class
- be written and read to and from an input and output stream, respectively
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
 \begin_inset Foot
 status collapsed
 
@@ -2932,19 +3764,23 @@ reference "sub:Cleaning-process-of-the-string-commands"
 .
  Two operators works to read and write 
 \family typewriter
-WireCommand
+BoxCommand
 \family default
  class pointers.
- The other two works to read and write WireCommand class instances.
+ The other two works to read and write 
+\family typewriter
+BoxCommand
+\family default
+ class instances.
  The next code lines represent the calls presented.
 \end_layout
 
 \begin_layout LyX-Code
-// Normal instance, default constructor (no points set)
+// Normal instance, default constructor
 \end_layout
 
 \begin_layout LyX-Code
-OpenCIF::WireCommand normal_instance;
+OpenCIF::BoxCommand normal_instance;
 \begin_inset Newline newline
 \end_inset
 
@@ -2952,11 +3788,11 @@ OpenCIF::WireCommand normal_instance;
 \begin_inset Newline newline
 \end_inset
 
-// Pointer instance, default constructor (no points set)
+// Pointer instance, default constructor
 \end_layout
 
 \begin_layout LyX-Code
-OpenCIF::WireCommand* pointer_instance = new OpenCIF::WireCommand ();
+OpenCIF::BoxCommand* pointer_instance = new OpenCIF::BoxCommand ();
 \begin_inset Newline newline
 \end_inset
 
@@ -2968,11 +3804,11 @@ OpenCIF::WireCommand* pointer_instance = new OpenCIF::WireCommand ();
 \end_layout
 
 \begin_layout LyX-Code
-OpenCIF::WireCommand normal_points ( 
+OpenCIF::BoxCommand normal_points ( 
 \begin_inset Quotes eld
 \end_inset
 
-W 100 0 0 100 0 100 100 ;
+B 100 100 50 50 1 0 ;
 \begin_inset Quotes erd
 \end_inset
 
@@ -2988,15 +3824,15 @@ W 100 0 0 100 0 100 100 ;
 \end_layout
 
 \begin_layout LyX-Code
-OpenCIF::WireCommand* pointer_points;
+OpenCIF::BoxCommand* pointer_points;
 \end_layout
 
 \begin_layout LyX-Code
-pointer_points = new OpenCIF::WireCommand ( 
+pointer_points = new OpenCIF::BoxCommand ( 
 \begin_inset Quotes eld
 \end_inset
 
-W 100 0 0 100 0 100 100 ;
+B 100 100 50 50 1 0 ;
 \begin_inset Quotes erd
 \end_inset
 
@@ -3012,19 +3848,15 @@ W 100 0 0 100 0 100 100 ;
 \end_layout
 
 \begin_layout LyX-Code
-vector< Point > points;
+normal_instance.setSize ( Size ( 100 , 100 ) );
 \end_layout
 
 \begin_layout LyX-Code
-points.push_back ( Point ( 0 , 0 ) );
+normal_instance.setPosition ( Point ( 50 , 50 ) );
 \end_layout
 
 \begin_layout LyX-Code
-points.push_back ( Point ( 100 , 0 ) );
-\end_layout
-
-\begin_layout LyX-Code
-points.push_back ( Point ( 100 , 100 ) );
+normal_instance.setRotation ( Point ( 1 , 0 ) );
 \begin_inset Newline newline
 \end_inset
 
@@ -3032,23 +3864,15 @@ points.push_back ( Point ( 100 , 100 ) );
 \begin_inset Newline newline
 \end_inset
 
-normal_instance.setPoints ( points );
+pointer_instance->setSize ( Size ( 100 , 100 ) );
 \end_layout
 
 \begin_layout LyX-Code
-normal_instance.setWidth ( 100 );
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-pointer_instance->setPoints ( points );
+pointer_instance->setPosition ( Point ( 50 , 50 ) );
 \end_layout
 
 \begin_layout LyX-Code
-pointer_instance->setWidth ( 100 );
+pointer_instance->setRotation ( Point ( 1 , 0 ) );
 \begin_inset Newline newline
 \end_inset
 
@@ -3060,23 +3884,15 @@ pointer_instance->setWidth ( 100 );
 \end_layout
 
 \begin_layout LyX-Code
-vector< Point > retrieved_points;
+Point rotation;
 \end_layout
 
 \begin_layout LyX-Code
-unsigned long int width;
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-retrieved_points = normal_points.getPoints ();
+Size size;
 \end_layout
 
 \begin_layout LyX-Code
-width = normal_points.getWidth ();
+Point position;
 \begin_inset Newline newline
 \end_inset
 
@@ -3084,11 +3900,31 @@ width = normal_points.getWidth ();
 \begin_inset Newline newline
 \end_inset
 
-retrieved_points = pointer_points->getPoints ();
+position = normal_instance.getPosition ();
 \end_layout
 
 \begin_layout LyX-Code
-width = pointer_points->getWidth ();
+size = normal_instance.getSize ();
+\end_layout
+
+\begin_layout LyX-Code
+rotation = normal_instance.getRotation ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+position = pointer_instance->getPosition ();
+\end_layout
+
+\begin_layout LyX-Code
+size = pointer_instance->getSize ();
+\end_layout
+
+\begin_layout LyX-Code
+rotation = pointer_instance->getRotation ();
 \begin_inset Newline newline
 \end_inset
 
@@ -3109,11 +3945,11 @@ ifstream file;
 \end_layout
 
 \begin_layout LyX-Code
-file >> normal_points;
+file >> normal_instance;
 \end_layout
 
 \begin_layout LyX-Code
-file >> pointer_points;
+file >> pointer_instance;
 \begin_inset Newline newline
 \end_inset
 
@@ -3134,11 +3970,2345 @@ ofstream file;
 \end_layout
 
 \begin_layout LyX-Code
-file << normal_points;
+file << normal_instance;
 \end_layout
 
 \begin_layout LyX-Code
-file << pointer_points;
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+RoundFlashCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a round flash command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+RoundFlashCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with a diameter of 1 and
+ a position in 0,0.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ round flash command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+RoundFlash
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setDiameter
+\family default
+: Public member function that helps to set the diameter of the circle.
+ The argument needed must be an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getDiameter
+\family default
+: Public member function that returns the diameter of the circle.
+ The call to this member function returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setPosition
+\family default
+: Public member function that helps to set the position (center) of the
+ circle.
+ The argument needed must be a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getPosition
+\family default
+: Public member function that returns the position of the circle.
+ The call to this member function returns a 
+\family typewriter
+Point
+\family default
+ class instance.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+RoundFlashCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+RoundFlashCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::RoundFlashCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::RoundFlashCommand* pointer_instance = new OpenCIF::RoundFlashCommand
+ ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::RoundFlashCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+R 100 50 50 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::RoundFlashCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::RoundFlashCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+R 100 50 50 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setDiameter ( 100 );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setPosition ( Point ( 50 , 50 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setDiameter ( 100 );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->setPosition ( Point ( 50 , 50 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int diameter;
+\end_layout
+
+\begin_layout LyX-Code
+Point position;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+position = normal_instance.getPosition ();
+\end_layout
+
+\begin_layout LyX-Code
+diameter = normal_instance.getDiameter ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+position = pointer_instance->getPosition ();
+\end_layout
+
+\begin_layout LyX-Code
+diameter = pointer_instance->getDiameter ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+DefinitionStartCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a definition start command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+DefinitionStartCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with and ID of 0 (zero)
+ and a neutral AB fraction of 
+\begin_inset Formula $\frac{1}{1}$
+\end_inset
+
+.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ definition start command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+DefinitionStart
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setID
+\family default
+: Public member function that helps to set the ID of the definition.
+ The argument needed must be an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getID
+\family default
+: Public member function that returns the ID of the definition.
+ The call to this member function returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setAB
+\family default
+: Public member function that helps to set the AB fraction of the definition.
+ The argument needed must be a 
+\family typewriter
+Fraction
+\family default
+ class instance.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getAB
+\family default
+: Public member function that returns the AB fraction of the definition.
+ The call to this member function returns a 
+\family typewriter
+Fraction
+\family default
+ class instance.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+DefinitionStartCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+DefinitionStartCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionStartCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionStartCommand* pointer_instance = new OpenCIF::DefinitionStart
+Command ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+// The command defines an ID equal to 5 and an AB value of 1/2
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionStartCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+D S 5 1 2 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionStartCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::DefinitionStartCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+D S 5 1 2 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setID ( 5 );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setAB ( Fraction ( 1 , 2 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setID ( 5 );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->setAB ( Fraction ( 1 , 2 ) );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int id;
+\end_layout
+
+\begin_layout LyX-Code
+Fraction ab;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+id = normal_instance.getID ();
+\end_layout
+
+\begin_layout LyX-Code
+ab = normal_instance.getAB ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+id = pointer_instance->getID ();
+\end_layout
+
+\begin_layout LyX-Code
+ab = pointer_instance->getAB ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+DefinitionDeleteCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a definition delete command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+DefinitionDeleteCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with and ID of 0 (zero).
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean CIF definition start command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+DefinitionDelete
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setID
+\family default
+: Public member function that helps to set the ID of the definition.
+ The argument needed must be an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getID
+\family default
+: Public member function that returns the ID of the definition.
+ The call to this member function returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+DefinitionStartCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+DefinitionStartCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionDeleteCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionDeleteCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::DefinitionDeleteCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionDeleteCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+D D 5 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionDeleteCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::DefinitionDeleteCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+D D 5 ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setID ( 5 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setID ( 5 );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+unsigned long int id;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+id = normal_instance.getID ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+id = pointer_instance->getID ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+CallCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a call command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+CallCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with and ID of 0 (zero)
+ and none transformation.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ definition start command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Call
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setID
+\family default
+: Public member function that helps to set the ID of the definition to call.
+ The argument needed must be an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getID
+\family default
+: Public member function that returns the ID of the definition to call.
+ The call to this member function returns an 
+\family typewriter
+unsigned long int
+\family default
+ integer value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setTransformations
+\family default
+: Public member function that helps to set the transformations to be applied
+ to the call.
+ The transformations are set using a C++ vector class instance containing
+ 
+\family typewriter
+Transformation
+\family default
+ class instances.
+ These transformations replaces the transformations that can be already
+ been set.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getTransformations
+\family default
+: Public member function that returns a vector of the transformations to
+ be applied to the call.
+ The returned value is a C++ vector class instance containing 
+\family typewriter
+Transformation
+\family default
+ class instances.
+ If there is none transformation configured, the vector will be empty.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+addTransformation
+\family default
+: Public member function that helps to add transformations, one by one.
+ Takes as argument a 
+\family typewriter
+Transformation
+\family default
+ class instance.
+ The transformation is added to the list of transformations of the call.
+ Has no return value.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+CallCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+CallCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CallCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CallCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::CallCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CallCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+C 5 R 10 10 T 100 100 M X M Y ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CallCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::CallCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+C 5 R 10 10 T 100 100 M X M Y ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+Transformation trans;
+\end_layout
+
+\begin_layout LyX-Code
+trans.setType ( Transformation::Displacement );
+\end_layout
+
+\begin_layout LyX-Code
+trans.setDisplacement ( Point ( 100 , 100 ) );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setID ( 5 );
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.addTransformation ( trans );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+pointer_instance->setID ( 5 );
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance->addTransformation ( trans );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+vector< Transformation > transformations;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+transformations = normal_instance.getTransformation ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+transformations = pointer_instance->getTransformation ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+DefinitionEndCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a definition end command.
+ The class, by itself, doesn't have any member function.
+ It, as the previous commands, has an overloaded constructor that can be
+ used to convert a string command into instance, but is possible to create
+ the instance without it, since the instance itself doesn't contain any
+ information beyond it's type (calling the 
+\family typewriter
+getType
+\family default
+ member function returns a 
+\family typewriter
+CommandType
+\family default
+ value, in this case, the value 
+\family typewriter
+DefinitionEnd
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+DefinitionEndCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+DefinitionEndCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionEndCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionEndCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::DefinitionEndCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionEndCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+D F ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::DefinitionEndCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::DefinitionEndCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+D F ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+EndCommand
+\end_layout
+
+\begin_layout Standard
+This class represents an end command.
+ This command must be found only once in the whole design.
+ The class, by itself, doesn't have any member function beyond it's type
+ (calling the 
+\family typewriter
+getType
+\family default
+ member function returns a 
+\family typewriter
+CommandType
+\family default
+ value, in this case, the value 
+\family typewriter
+End
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write 
+\family typewriter
+EndCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+EndCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::EndCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::EndCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::EndCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+UserExtensionCommand
+\end_layout
+
+\begin_layout Standard
+This class represents an user extension command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+UserExtensionCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with empty contents.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean 
+\shape italic
+CIF
+\shape default
+ definition start command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+UserExtention
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setContents
+\family default
+: Public member function that helps to set the contents of the extension.
+ The argument needed must be a string value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getContents
+\family default
+: Public member function that returns the contents of the extension.
+ The call to this member function returns a C++ string value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write
+\family typewriter
+ UserExtensionCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+UserExtensionCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::UserExtensionCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::UserExtensionCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::UserExtensionCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::UserExtensionCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+9 cell_name ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::UserExtensionCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::UserExtensionCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+9 cell_name ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setContents ( 
+\begin_inset Quotes eld
+\end_inset
+
+9 cell_name
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+string contents;
+\end_layout
+
+\begin_layout LyX-Code
+contents = normal_instance.getContents ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+CommentCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a comment command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+CommentCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance with empty contents.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean CIF comment command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Comment
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setContents
+\family default
+: Public member function that helps to set the contents of the comment.
+ The argument needed must be a C++ string value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getContents
+\family default
+: Public member function that returns the contents of the comment.
+ The call to this member function returns a C++ string value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write
+\family typewriter
+ CommentCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+CommentCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CommentCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CommentCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::CommentCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CommentCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+(This is a comment) ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::CommentCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::CommentCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+(This is a comment) ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setContents ( 
+\begin_inset Quotes eld
+\end_inset
+
+(This is a comment)
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+string contents;
+\end_layout
+
+\begin_layout LyX-Code
+contents = normal_instance.getContents ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
+\end_layout
+
+\begin_layout Subsubsection*
+LayerCommand
+\end_layout
+
+\begin_layout Standard
+This class represents a layer command.
+ The next list shows all the relevant member functions, constructors and
+ destructors that the user might need.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+LayerCommand
+\family default
+: Constructor of the class.
+ It is overloaded, so you can call it with or without arguments.
+ Calling without arguments will use the default constructor.
+ The default constructor initialize the instance without name.
+ The other constructor takes as argument a C++ string class instance.
+ The string must represent a valid and clean CIF comment command.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+type
+\family default
+: Public member function that is polymorphic.
+ Takes no arguments and returns a value of type 
+\family typewriter
+CommandType
+\family default
+.
+ In the case of this class, the value returned is 
+\family typewriter
+Layer
+\family default
+.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+setName
+\family default
+: Public member function that helps to set the name of the layer.
+ The argument needed must be a C++ string value.
+ Has no return value.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+getName
+\family default
+: Public member function that returns the name of the layer.
+ The call to this member function returns a C++ string value.
+ Takes no arguments.
+\end_layout
+
+\begin_layout Standard
+The class has defined four operator functions that let the class be written
+ and read to and from an input and output stream, respectively
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The user must be aware that the reading process depends heavily on the format
+ of the input stream.
+ The input stream must have a clean format as defined in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Cleaning-process-of-the-string-commands"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Two operators works to read and write
+\family typewriter
+ LayerCommand
+\family default
+ class pointers.
+ The other two works to read and write 
+\family typewriter
+LayerCommand
+\family default
+ class instances.
+ The next code lines represent the calls presented.
+\end_layout
+
+\begin_layout LyX-Code
+// Normal instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::LayerCommand normal_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, default constructor
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::LayerCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::LayerCommand ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Normal instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::LayerCommand normal_instance ( 
+\begin_inset Quotes eld
+\end_inset
+
+CCP ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Pointer instance, initializing using string
+\end_layout
+
+\begin_layout LyX-Code
+OpenCIF::LayerCommand* pointer_instance;
+\end_layout
+
+\begin_layout LyX-Code
+pointer_instance = new OpenCIF::LayerCommand ( 
+\begin_inset Quotes eld
+\end_inset
+
+CCP ;
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Setting values manually
+\end_layout
+
+\begin_layout LyX-Code
+normal_instance.setName ( 
+\begin_inset Quotes eld
+\end_inset
+
+CCP
+\begin_inset Quotes erd
+\end_inset
+
+ );
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Getting values
+\end_layout
+
+\begin_layout LyX-Code
+string contents;
+\end_layout
+
+\begin_layout LyX-Code
+contents = normal_instance.getName ();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Loading instances from a file
+\end_layout
+
+\begin_layout LyX-Code
+ifstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file >> normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file >> pointer_instance;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+// Writing instances to a file
+\end_layout
+
+\begin_layout LyX-Code
+ofstream file;
+\end_layout
+
+\begin_layout LyX-Code
+/*...
+ Opens file ...*/
+\end_layout
+
+\begin_layout LyX-Code
+file << normal_instance;
+\end_layout
+
+\begin_layout LyX-Code
+file << pointer_instance;
 \end_layout
 
 \begin_layout Standard
@@ -3152,8 +6322,15 @@ file << pointer_points;
 About LibOpenCIF
 \end_layout
 
+\begin_layout Standard
+In this section will be shown to the user some extra information that can
+ be useful in some special cases.
+ It is recommended that the user reads the previous section before checking
+ this one.
+\end_layout
+
 \begin_layout Subsection
-Using LibOpenCIF in different operating systems
+Using LibOpenCIF in different operating systems and languages
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Using-LibOpenCIF-in-other-sos"
@@ -3163,15 +6340,31 @@ name "sub:Using-LibOpenCIF-in-other-sos"
 
 \end_layout
 
-\begin_layout Subsection
-Usage of the overloaded operators on the classes
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Usage-of-the-overloaded-operators"
+\begin_layout Standard
+LibOpenCIF is going to be ported to various systems.
+ The first system is GNU/Linux and the next system must be Microsoft Windows.
+ Finally, the last system will be Apple Mac OS.
+ This is due to the available access to different systems that the main
+ developer has.
+\end_layout
 
-\end_inset
+\begin_layout Standard
+It is recommended to stay checking the download page of the library in it's
+ official SourceForge download section (SECTION HERE), since all the versions
+ will be available there.
+ Also, being open source, the project can be forked and anyone can perform
+ tests to port the library to other systems as needed.
+ In this case, is recommended to fork from the official Git project (PATH
+ HERE).
+\end_layout
 
-
+\begin_layout Standard
+LibOpenCIF, as indicated, is a C++ library.
+ There is work in progress to port the library to other languages, like
+ Python and Java.
+ Such ports will be separated projects due to name changes (for example,
+ in Python, the project name is expected to be pyOpenCIF), but there is
+ expected to be references between project pages in SourceForge and Git.
 \end_layout
 
 \begin_layout Subsection
@@ -3183,6 +6376,217 @@ name "sub:Cleaning-process-of-the-string-commands"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The cleaning process that the library performs to the commands buffered
+ is not complex, in fact.
+ The process works over the fact that the commands are valid (the cleaning
+ process comes after the validation step), so, various assumptions are being
+ considered when cleaning.
+\end_layout
+
+\begin_layout Subsubsection
+Numeric commands
+\end_layout
+
+\begin_layout Standard
+The numeric commands are those commands that depends only on values to form
+ themselves.
+ Such commands are:
+\end_layout
+
+\begin_layout Itemize
+Polygon
+\end_layout
+
+\begin_layout Itemize
+Box
+\end_layout
+
+\begin_layout Itemize
+Wire
+\end_layout
+
+\begin_layout Itemize
+Round Flash
+\end_layout
+
+\begin_layout Standard
+Those commands are cleaned with the same process.
+ The cleaning method is this:
+\end_layout
+
+\begin_layout Enumerate
+Backup the identification char (P, B, W or R) on the cleaned command and
+ add a single white space.
+ This will create a previous and incomplete final command like this: 
+\begin_inset Quotes eld
+\end_inset
+
+P 
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+W 
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+R 
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+B 
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The original command to clean is still not modified.
+\end_layout
+
+\begin_layout Enumerate
+Replace, in the command to clean, all the characters that are not digits
+ or minus chars (
+\begin_inset Quotes eld
+\end_inset
+
+-
+\begin_inset Quotes erd
+\end_inset
+
+) with whitespaces.
+ This will erase all the separation chars in the command and replace them
+ with white spaces.
+ Also, the identification char will be replaced, but it is already saved
+ in the final command.
+ Also, the final semicolon is not saved, but is added at the end.
+\end_layout
+
+\begin_layout Enumerate
+Using a C++ input string stream, all the components of the command (all
+ the values) are extracted one by one and concatenated to the final command
+ with a single white space at the end of such values.
+\end_layout
+
+\begin_layout Enumerate
+After extracting all the values, a semicolon is concatenated to the final
+ command.
+\end_layout
+
+\begin_layout Standard
+Such process is performed really quickly since is not complex.
+\end_layout
+
+\begin_layout Subsubsection
+Layer commands
+\end_layout
+
+\begin_layout Standard
+The layer commands are cleaned in an separated process since they need a
+ special treatment.
+ The layer commands works in a similar way to the numeric commands, but
+ with some differences.
+ The main difference is the replacement process.
+ In the numeric commands, all the characters of the commands are replaced
+ with white spaces, except digits and minus chars (
+\begin_inset Quotes eld
+\end_inset
+
+-
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In the case for the layers, all the characters are replaced, except uppercase
+ characters, underscores (
+\begin_inset Quotes eld
+\end_inset
+
+_
+\begin_inset Quotes erd
+\end_inset
+
+) and digits.
+\end_layout
+
+\begin_layout Standard
+There is important to note that the process first save the identification
+ char of the command (the 
+\begin_inset Quotes eld
+\end_inset
+
+L
+\begin_inset Quotes erd
+\end_inset
+
+ char) in the final command, and then, before replacing chars, deletes explicitl
+y the identification char from the command to clean.
+ This is due to the fact that such char is not going to be deleted but is
+ not useful anymore.
+\end_layout
+
+\begin_layout Standard
+As the numeric commands, after replacing chars with white spaces, the command
+ to clean is put in an input stream and the components (the layer name)
+ is extracted and concatenated to the final command.
+\end_layout
+
+\begin_layout Subsubsection
+Call commands
+\end_layout
+
+\begin_layout Standard
+The call commands need their own cleaning process, as the layers do need
+ a special process.
+ This is due to the special and unique process needed to clean the command
+ and to separate the components of the command that are put together (like
+ the mirroring chars, that can be put together).
+\end_layout
+
+\begin_layout Standard
+The first step of the cleaning process is to replace any character that
+ is not a digit, upper case or minus char (
+\begin_inset Quotes eld
+\end_inset
+
+-
+\begin_inset Quotes erd
+\end_inset
+
+) with white spaces.
+\end_layout
+
+\begin_layout Standard
+After that, comes a special process where the components of the commands
+ are buffered char by char, to separate the components and, after detecting
+ the end of one component, it is concatenated to the final command.
+\end_layout
+
+\begin_layout Subsubsection
+Definition control commands
+\end_layout
+
+\begin_layout Standard
+Such commands controls the start, end and deletion of definitions within
+ a design.
+ All of them are cleaned with the same process.
+ Such process is different from the previous ones.
+ First, the process replaces all the characters that are not digits or upper
+ case with white spaces.
+ After that, comes a buffering process, similar to the one find on the call
+ command cleaning process.
 \end_layout
 
 \end_body
