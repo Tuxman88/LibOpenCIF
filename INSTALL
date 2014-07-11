@@ -8,6 +8,7 @@ The  library  was  designed  to need no special dependences to compile. So, you
 just need to meet this points to be able to compile it:
 
 - G++ (GCC) >= 4.8
+- CMake >= 2.6
 - Linux kernel >= 3.0
 
 If  you  comply  to  the dependences, the package should be able to be compiled
@@ -15,7 +16,9 @@ without problems.
 
 First, configure the package. To do it, run in a terminal, as normal user:
 
-   ./configure
+   mkdir build
+   cd build
+   cmake ..
 
 Then,  if  there  is no problems with the configuration, you can try to compile
 the  library.  To do it, in the same terminal, run this other command, also, as
@@ -28,10 +31,5 @@ developer,  Moises Chavez,  to moises.chavez.martinez@gmail.com), just run this
 command as normal user:
 
    sudo make install
-   
-To uninstall the library (if you need to), just run this command as normal user
-in the package:
-
-   sudo make uninstall
    
 And, thats all.

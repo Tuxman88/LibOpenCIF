@@ -1,7 +1,12 @@
 LibOpenCIF - NEWS file
 ======================
 
-[1.0]
+[1.0.1]
+
+- Migration from Autotools to CMake.
+- Changed versioning scheme from two to three digits.
+
+[1.0.0]
 
 - Support of the CIF (Caltech Intermediate Form) format, version 2.
 - Validation   of   input   files  using  a  Finite  State  Machine  (refer  to

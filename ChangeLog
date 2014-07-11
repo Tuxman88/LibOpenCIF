@@ -1,6 +1,10 @@
 LibOpenCIF - ChangeLog file
 ===========================
 
-[1.0]
+[1.0.1]
+
+* General: Migration from Autotools to CMake.
+
+[1.0.0]
 
 - None change. First release.
