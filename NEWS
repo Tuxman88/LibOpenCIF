@@ -1,6 +1,11 @@
 LibOpenCIF - NEWS file
 ======================
 
+[1.0.2]
+
+- Updated documentation.
+- Fixed errors in the installation process with CMake.
+
 [1.0.1]
 
 - Migration from Autotools to CMake.

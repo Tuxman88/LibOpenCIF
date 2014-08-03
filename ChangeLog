@@ -1,6 +1,12 @@
 LibOpenCIF - ChangeLog file
 ===========================
 
+[1.0.2]
+
+* CMake: The CMake targets where incomplete. The library header files not are beign correctly installed.
+* CMake: Changed compression format, from bz2 to tar.gz.
+* Documentation: Updated documentation in the doc/ folder.
+
 [1.0.1]
 
 * General: Migration from Autotools to CMake.

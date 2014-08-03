@@ -1,6 +1,6 @@
 CMake_Minimum_Required ( VERSION 2.6 )
-project ( libopencif )
-Add_Library ( libopencif STATIC
+Project ( libopencif )
+Add_Library ( opencif STATIC
                                  src/opencif.h
                                  src/command/command.h
                                  src/command/controlcommand/controlcommand.h
@@ -56,12 +56,18 @@ Add_Library ( libopencif STATIC
                                  src/command/controlcommand/endcommand/endcommand.cc
             )
 
-Install ( TARGETS libopencif DESTINATION lib )
+Install ( TARGETS opencif
+          DESTINATION lib
+        )
+Install ( DIRECTORY src/
+          DESTINATION include/opencif
+          FILES_MATCHING PATTERN "*.h"
+        )
 
 Set ( CPACK_PACKAGE_VERSION_MAJOR "1" )
 Set ( CPACK_PACKAGE_VERSION_MINOR "0" )
-Set ( CPACK_PACKAGE_VERSION_PATCH "1" )
-Set ( CPACK_SOURCE_GENERATOR "TBZ2" )
+Set ( CPACK_PACKAGE_VERSION_PATCH "2" )
+Set ( CPACK_SOURCE_GENERATOR "TGZ" )
 Set ( CPACK_SOURCE_PACKAGE_FILE_NAME
       "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}" )
 Set ( CPACK_SOURCE_IGNORE_FILES

@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -12,13 +12,13 @@
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -29,15 +29,24 @@
 \use_hyperref false
 \papersize default
 \use_geometry true
-\use_amsmath 1
-\use_esint 1
-\use_mhchem 1
-\use_mathdots 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -73,11 +82,49 @@ LibOpenCIF
 
 \begin_layout Standard
 \align center
-User manual 1.0
+User manual 1.1
 \end_layout
 
 \begin_layout Standard
 \begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Version history
+\end_layout
+
+\begin_layout Standard
+These are the changes done to this document and the version of the library
+ it came with first.
+\end_layout
+
+\begin_layout Description
+1.1 (1.0.2) Updated installation and removing procedures to adapt to the migration
+ of the library from Autotools to CMake and performed some corrections to
+ the document.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -441,24 +488,7 @@ Contents ready to use: The library also offers to the user a ready-to-use
 \begin_layout Itemize
 Output and input operators: The classes used by the library provide the
  mechanisms to let the user send and read the commands from wherever he
- wants
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Read the section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Usage-of-the-overloaded-operators"
-
-\end_inset
-
- for more about such topics.
-\end_layout
-
-\end_inset
-
-.
+ wants.
 \end_layout
 
 \begin_layout Standard
@@ -524,7 +554,15 @@ sudo
 \end_layout
 
 \begin_layout LyX-Code
-$ ./configure
+$ mkdir build
+\end_layout
+
+\begin_layout LyX-Code
+$ cd build
+\end_layout
+
+\begin_layout LyX-Code
+$ cmake ..
 \end_layout
 
 \begin_layout LyX-Code
@@ -554,18 +592,36 @@ Uninstalling
 \end_layout
 
 \begin_layout Standard
-If the library needs to be uninstalled, you can do it using the library
- package itself.
- To uninstall, get the package file, extract it's contents (as done in the
- installation procedure) and run these commands:
+If the library needs to be uninstalled, you can do it by removing the files
+ and folders installed.
+ The files must be located in
+\series bold
+ /usr/local/lib/
+\series default
+ and
+\series bold
+ /usr/local/include/
+\series default
+.
+ In the first folder you must find a file named
+\series bold
+ libopencif.a
+\series default
+, delete it.
+ In the second folder you should see a folder named 
+\series bold
+opencif/
+\series default
+, delete it and its contents.
+ To perform these two deletions, use the following commands:
 \end_layout
 
 \begin_layout LyX-Code
-$ ./configure
+$ sudo rm /usr/local/lib/libopencif.a
 \end_layout
 
 \begin_layout LyX-Code
-$ sudo make uninstall
+$ sudo rm -R /usr/local/include/opencif/
 \end_layout
 
 \begin_layout Standard
@@ -729,7 +785,7 @@ int main ()
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Initial test program source.
@@ -1169,7 +1225,7 @@ P100,100 200,100 100,0;
 \end_layout
 
 \begin_layout Standard
-So, the library transform such command to this:
+So, the library transform such commands to this:
 \end_layout
 
 \begin_layout LyX-Code
@@ -6350,12 +6406,12 @@ LibOpenCIF is going to be ported to various systems.
 
 \begin_layout Standard
 It is recommended to stay checking the download page of the library in it's
- official SourceForge download section (SECTION HERE), since all the versions
- will be available there.
+ official SourceForge download section (https://sourceforge.net/projects/libopenc
+if/), since all the versions will be available there.
  Also, being open source, the project can be forked and anyone can perform
  tests to port the library to other systems as needed.
- In this case, is recommended to fork from the official Git project (PATH
- HERE).
+ In this case, is recommended to fork from the official Git project (https://git
+hub.com/Tuxman88/LibOpenCIF).
 \end_layout
 
 \begin_layout Standard

@@ -27,6 +27,12 @@ values (if needed) is left to the user.
 Version
 =======
 
+1.0.2 - 2014/08/03
+
+* CMake: The CMake targets where incomplete. The library header files not are beign correctly installed.
+* CMake: Changed compression format, from bz2 to tar.gz.
+* Documentation: Updated documentation in the doc/ folder.
+
 1.0.1 - 2014/07/07
 
 * General: Migration from Autotools to CMake.
