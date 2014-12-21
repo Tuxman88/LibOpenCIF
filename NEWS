@@ -1,6 +1,13 @@
 LibOpenCIF - NEWS file
 ======================
 
+[1.1.0]
+
+- Improved documentation.
+- Improved user interface for the user.
+- Added two-file version of the library for Microsoft Windows users.
+- Added two basic examples.
+
 [1.0.2]
 
 - Updated documentation.

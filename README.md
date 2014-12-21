@@ -27,6 +27,13 @@ values (if needed) is left to the user.
 Version
 =======
 
+1.1.0 - 2014/12/20
+
+* Interface: Improved user interface.
+* Documentation: Improved documentation.
+* Code: Added a two-file version of the library for Microsoft Windows users.
+* Examples: Added two basic examples of how to use the library.
+
 1.0.2 - 2014/08/03
 
 * CMake: The CMake targets where incomplete. The library header files not are beign correctly installed.

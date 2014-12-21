@@ -26,9 +26,9 @@ normal user:
 
    make
    
-If  there  is  no  problems  (any  compilation problem,  report  it to the main
-developer,  Moises Chavez,  to moises.chavez.martinez@gmail.com), just run this
-command as normal user:
+If  there is no problems (report any compilation problem to the main developer,
+Moises  Chavez,  to moises.chavez.martinez@gmail.com), just run this command as
+normal user:
 
    sudo make install
    

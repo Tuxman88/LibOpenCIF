@@ -50,5 +50,16 @@
 # include "finitestatemachine/state.h"
 # include "finitestatemachine/ciffsm.h"
 
+# include <string>
+
+namespace OpenCIF
+{
+   const std::string LibraryVersion = "1.0.3";
+   const std::string LibraryName = "LibOpenCIF";
+   const std::string LibraryAuthor = "Moises Chavez-Martinez";
+   const std::string LibrarySupport = "moises.chavez.martinez@gmail.com";
+   const std::string LibraryCIFVersion = "2.0";
+}
+
 
 # endif

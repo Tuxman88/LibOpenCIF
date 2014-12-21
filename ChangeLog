@@ -1,9 +1,16 @@
 LibOpenCIF - ChangeLog file
 ===========================
 
+[1.1.0]
+
+* Interface: Improved interface for user.
++ Code: Added static two-file version of the library.
++ Documentation: Documentation improved.
++ Documentation: Added examples.
+
 [1.0.2]
 
-* CMake: The CMake targets where incomplete. The library header files not are beign correctly installed.
+* CMake: The CMake targets were incomplete. The library header files not are beign correctly installed.
 * CMake: Changed compression format, from bz2 to tar.gz.
 * Documentation: Updated documentation in the doc/ folder.
 

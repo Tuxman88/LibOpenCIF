@@ -151,7 +151,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
     * the file contents. The file is already opened. So, I'll read char by char and feed
     * them to the CIFFSM instance. The CIFFSM instance will start, by default, in state 1.
     * 
-    * I'll feed the instance characters until the I reach end of file or the instance reports
+    * I'll feed the instance characters until I reach the end of file or the instance reports
     * an error (jump state equal to -1). After feeding the characters, if I finish feeding the
     * file and none error was reported, I will check the current state of the instance.
     * 
@@ -459,7 +459,7 @@ std::string OpenCIF::File::cleanCommand ( std::string command )
  *      "D S 100 ;"
  * 
  * The process begins with the deletion of any non-digit and non-uppercase characters.
- * Such operation, is good, can leave a command like this:
+ * Such operation, if good, can leave a command like this:
  * 
  *      "DS100;"
  * 
@@ -508,8 +508,8 @@ std::string OpenCIF::File::cleanDefinitionCommand ( std::string command )
    }
    
    ( final_command[ final_command.size () - 1 ] == ' ' )
-   ? final_command += ";"
-   : final_command += " ;";
+      ? final_command += ";"
+      : final_command += " ;";
    
    return ( final_command );
 }
@@ -526,7 +526,7 @@ std::string OpenCIF::File::cleanDefinitionCommand ( std::string command )
  *      "C 1 T 20000 -20000 R 1000000 -59999 M X M Y M X M X M X M Y M X R 100 100 R 100 100;"
  * 
  * The process begins with the deletion of any non-digit, non-dash ('-') and non-uppercase characters.
- * Such operation, is good, can leave a command like this:
+ * Such operation, if good, can leave a command like this:
  * 
  *      "C 1 T 20000 -20000 R 1000000 -59999 MX MY MXMXMXMYMXR100 100R100 100;"
  * 
@@ -584,7 +584,9 @@ std::string OpenCIF::File::cleanCallCommand ( std::string command )
       }
    }
    
-   ( final_command[ final_command.size () - 1 ] == ' ' ) ? final_command += ";" : final_command += " ;";
+   ( final_command[ final_command.size () - 1 ] == ' ' )
+      ? final_command += ";"
+      : final_command += " ;";
    
    return ( final_command );
 }
@@ -642,7 +644,7 @@ std::string OpenCIF::File::cleanLayerCommand ( std::string command )
  *      "W 1000 20000 20000 -10000 -10000 -500 -4000 ;"
  * 
  * The process begins with the deletion of any non-digit and non-dash ('-') characters.
- * Such operation, is good, can leave a command like this:
+ * Such operation, if good, can leave a command like this:
  * 
  *      "W1000              20000                20000                                 -10000 -10000 -500                -4000;"
  * 

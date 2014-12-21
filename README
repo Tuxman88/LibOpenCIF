@@ -1,7 +1,7 @@
 LibOpenCIF - README file
 ========================
 
-The  LibOpenCIF library is a C++ library intented to be used to get easy access
+The  LibOpenCIF library is a C++ library intended to be used to get easy access
 to  a CIF (Caltech Intermediate Form) file contents. Such contents are commands
 that  describe  the physical layout of an Integrated Circuit design (IC). Those
 commands  follow  the specifications set in the version 2.0 (February 11, 1980)
@@ -17,9 +17,9 @@ So, the previous command can be "cleaned" to this:
 
    B 100 100 -50 50 1 -1 ;
    
-As  you  can  see,  here  the  "problem" are the valid representations of white
+As  you  can  see,  here  the  "problem"  is  the valid representation of white
 spaces.  So,  the main complication using the CIF files is not the usage of the
-information  itself,  but the correct reading of the file. So, LibOpenCIF bring
+information  itself, but the correct reading of the file. So, LibOpenCIF brings
 to the user the posibility of loading a CIF file without effort.
 
 The technology
@@ -122,8 +122,8 @@ header file. You just need to add the line "# include <opencif/opencif.h":
 9       return ( 0 );
 10   }
 
-In the example code, the line 2 where added. Now, lets assume the task you need
-you  complete  is  load  a  specific  CIF  file, and print it's commands to the
+In  the  example code, the line 2 was added. Now, lets assume the task you need
+to  complete  is  load  a  specific  CIF  file,  and print it's commands to the
 terminal.  You  can do it. The first step of such operation is to create a File
 class instance. Such instance will help in the loading/validation of the file.
 
@@ -142,7 +142,7 @@ So, to access the File class, you need to instantiate like this:
 10      return ( 0 );
 11   }
 
-As  you  can see, in line 9, there where created an instance of the File class.
+As  you  can  see,  in line 9, there was created an instance of the File class.
 To  work with the real file, you need to specify the path of the file. The path
 can  be  complete  or  relative. You do it using the "setPath" member function.
 Such  member  function  needs a C++ string class instance, with the path to the
@@ -185,7 +185,7 @@ member function of the File class instance:
 
 Now,  after  adding  some  empty lines to make the code more clear, the line 12
 shows  that we created a string class instance named "file_path". In line 14 we
-setted  to  it the name of the imaginary CIF file we want to read, and, in line
+assigned to it the name of the imaginary CIF file we want to read, and, in line
 15,  we  set such file name to the File class instance using the setPath member
 function.
 

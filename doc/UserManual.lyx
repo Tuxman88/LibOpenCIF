@@ -82,7 +82,7 @@ LibOpenCIF
 
 \begin_layout Standard
 \align center
-User manual 1.1
+User manual 1.2
 \end_layout
 
 \begin_layout Standard
@@ -121,6 +121,13 @@ These are the changes done to this document and the version of the library
 1.1 (1.0.2) Updated installation and removing procedures to adapt to the migration
  of the library from Autotools to CMake and performed some corrections to
  the document.
+\end_layout
+
+\begin_layout Description
+1.2 (1.0.3) Updated documentation, minor improvement on the user interface
+ of the library, added two-file version of the library for those users willing
+ to include the library but don't want or can't compile the library (specially
+ for Windows users).
 \end_layout
 
 \begin_layout Standard
@@ -6412,6 +6419,14 @@ if/), since all the versions will be available there.
  tests to port the library to other systems as needed.
  In this case, is recommended to fork from the official Git project (https://git
 hub.com/Tuxman88/LibOpenCIF).
+\end_layout
+
+\begin_layout Standard
+The library already have a two-file version in the same package.
+ Those two files (a .cc source and a .h header files) are the only files needed
+ to add the library to an existing project.
+ This usage is specially useful for the Microsoft Windows users willing
+ to use the library without the need to compile it in DLL or another form.
 \end_layout
 
 \begin_layout Standard
