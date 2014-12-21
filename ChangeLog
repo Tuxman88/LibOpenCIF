@@ -1,6 +1,10 @@
 LibOpenCIF - ChangeLog file
 ===========================
 
+[1.1.1]
+
+* CMake: Fixed version in CMake file.
+
 [1.1.0]
 
 * Interface: Improved interface for user.

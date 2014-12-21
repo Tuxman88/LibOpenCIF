@@ -27,6 +27,10 @@ values (if needed) is left to the user.
 Version
 =======
 
+1.1.1 - 2014/12/20
+
+* CMake: Fixed minor error in configuration.
+
 1.1.0 - 2014/12/20
 
 * Interface: Improved user interface.
