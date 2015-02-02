@@ -81,10 +81,11 @@ namespace OpenCIF
          
          std::vector< std::string > getMessages ( void );
          
-         std::vector < std::string > getRawCommands ( void ) const;
+         std::vector< std::string > getRawCommands ( void ) const;
+         
+         std::string cleanCommand ( std::string command );
          
       private:
-         std::string cleanCommand ( std::string command );
          std::string clearNumericCommand ( std::string command );
          std::string cleanLayerCommand ( std::string command );
          std::string cleanCallCommand ( std::string command );

@@ -165,6 +165,8 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
    
    OpenCIF::CIFFSM* fsm;
    std::string command_buffer;
+   std::string error_block; // This string will help me to give a more clear indication of where is an error.
+                            // That will be done storing the previous 100 characters to the current loading point.
    int jump_state = 1; // By default, start in 1
    int previous_state; // Previous state.
    char input_char;
@@ -182,6 +184,12 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
    {
       previous_char = input_char;
       input_char = file_input.get ();
+      error_block += input_char;
+      
+      if ( error_block.size () > 100 ) // If there are more than 100 chars in the error block, remove 1
+      {
+         error_block = error_block.substr ( 1 , 100 );
+      }
    
       if ( !file_input.eof () )
       {
@@ -255,6 +263,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
                               );
       
       file_messages.push_back ( std::string ( "                           Current command buffer: \"" ) + command_buffer + std::string ( "\"" ) );
+      file_messages.push_back ( std::string ( "                           Previous 100 chars to error (including invalid char): \"" ) + error_block + std::string ( "\"" ) );
       file_messages.push_back ( std::string ( "                           The loaded raw commands can be accessed to analize the error and locate the error." ) );
       
       return ( IncorrectInputFile );

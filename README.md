@@ -27,6 +27,12 @@ values (if needed) is left to the user.
 Version
 =======
 
+1.2.0 - 2014/12/21
+
+* Interface: Improved interface for user.
+* Code: Improved error information provided to the user once a invalid char is found.
+* Documentation: Documentation re-worked.
+
 1.1.1 - 2014/12/20
 
 * CMake: Fixed minor error in configuration.

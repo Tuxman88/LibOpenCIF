@@ -841,8 +841,9 @@ namespace OpenCIF
          
          std::vector < std::string > getRawCommands ( void ) const;
          
-      private:
          std::string cleanCommand ( std::string command );
+         
+      private:
          std::string clearNumericCommand ( std::string command );
          std::string cleanLayerCommand ( std::string command );
          std::string cleanCallCommand ( std::string command );
