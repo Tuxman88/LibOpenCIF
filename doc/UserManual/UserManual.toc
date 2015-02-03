@@ -24,8 +24,7 @@
 \contentsline {subsection}{\numberline {2.4.2}Manual loading}{21}
 \contentsline {section}{\numberline {2.5}Using the strings loaded}{25}
 \contentsline {section}{\numberline {2.6}Using the class instances created}{33}
-\contentsline {section}{\numberline {2.7}Classes intended to be used by the user}{36}
-\contentsline {section}{\numberline {2.8}Extra components accesible by the user}{36}
+\contentsline {section}{\numberline {2.7}Extra components accesible by the user}{36}
 \contentsline {chapter}{\chapternumberline {3}Technical documentation}{37}
 \contentsline {section}{\numberline {3.1}The CIF format}{38}
 \contentsline {section}{\numberline {3.2}Validation of a CIF file}{38}

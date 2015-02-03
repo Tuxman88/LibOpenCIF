@@ -1478,21 +1478,33 @@ The next working example shows how to perform the same task as the previous two 
 
 \lstinputlisting[caption={Using the class instances to print all the Box commands}, style=CPPStyle]{examples/chapter2-example11.cc}
 
-Using the class instances, the usage of the information found within a CIF file becomes easier.
-
-In the section \ref{Classes-intended-to-be-used-by-the-user}, the reader will find a description of all the classes intended to be used by the user (those representing CIF commands, and classes that represent values of the commands, like position, size and transformations). In section \ref{Extra-components-accesible-by-the-user}, the reader will learn about extra components found within the library that can be used, such as member functions of the \textbf{\texttt{File}} class that can be used directly to manually validate and convert commands and informative fields found inside the \textbf{\texttt{OpenCIF}} namespace.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Classes intended to be used by the user}\label{Classes-intended-to-be-used-by-the-user}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Classes intended to be used by the user
+Using the class instances, the usage of the information found within a CIF file becomes easier. To learn more about the classes provided in the library, please, refer to the section \ref{Converting-strings-into-class-instances}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Extra components accesible by the user}\label{Extra-components-accesible-by-the-user}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Extra components accesible by the user
+The LibOpenCIF library provides to the user some special fields defined under the \textbf{\texttt{OpenCIF}} namespace. These fields are string constants intended to help the reader to identify important information about the library itself. These fields are:
+
+\begin{itemize}
+	\item \textbf{\texttt{LibraryVersion}}: This field of constant type \textbf{\texttt{string}}, holds the complete version of the library. As an example, the string can store the version as "1.2.0".
+	
+	\item \textbf{\texttt{LibraryVersionMajor}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{major} number of the version of the library. If the library version is "1.2.0", this field will store the value "1".
+	
+	\item \textbf{\texttt{LibraryVersionMinor}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{minor} number of the version of the library. If the library version is "1.2.0", this field will store the value "2".
+	
+	\item \textbf{\texttt{LibraryVersionPatch}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{patch} number of the version of the library. If the library version is "1.2.0", this field will store the value "0".
+	
+	\item \textbf{\texttt{LibraryName}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{official name} of the library. In this case, the string will be "LibOpenCIF".
+	
+	\item \textbf{\texttt{LibraryAuthor}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{author name} of the library. The expected value of such string is "Moises Chavez-Martinez".
+	
+	\item \textbf{\texttt{LibrarySupport}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{support e-mail} intended to the used to contact the author about the library.
+	
+	\item \textbf{\texttt{LibraryCIFVersion}}: This field of constant type \textbf{\texttt{string}}, holds the \textbf{CIF format version} used to design the library. The expected value is "2.0".
+\end{itemize}
+
+All these fields are intended to provide extra information to the reader when using the library, and to be able to identify the library if needed.
 
 \renewcommand\chapterillustration{images/chapter03-cover}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

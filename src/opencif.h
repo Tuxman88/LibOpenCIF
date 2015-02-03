@@ -55,6 +55,9 @@
 namespace OpenCIF
 {
    const std::string LibraryVersion = "1.2.0";
+   const std::string LibraryVersionMajor = "1";
+   const std::string LibraryVersionMinor = "2";
+   const std::string LibraryVersionPatch = "0";
    const std::string LibraryName = "LibOpenCIF";
    const std::string LibraryAuthor = "Moises Chavez-Martinez";
    const std::string LibrarySupport = "moises.chavez.martinez@gmail.com";
