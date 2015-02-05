@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "file.h"
+# include "file.hh"
 
 /*
  * Default constructor. Nothing to do.
@@ -34,7 +34,7 @@ OpenCIF::File::File ( void )
  */
 OpenCIF::File::~File ( void )
 {
-   for ( int i = 0; i < file_commands.size (); i++ )
+   for ( unsigned int i = 0; i < file_commands.size (); i++ )
    {
       delete file_commands[ i ];
       file_commands[ i ] = 0;
@@ -205,7 +205,6 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
             tmp = input_char;
             command_buffer += tmp;
             
-            // I call the CleanCommand member function to remove unnecesary characters.
             file_raw_commands.push_back ( command_buffer );
             command_buffer = "";
          }
@@ -277,7 +276,7 @@ OpenCIF::File::LoadStatus OpenCIF::File::validateSyntax ( const LoadMethod& load
    }
    
    // Everything Ok. Add last command (the END command)
-   file_raw_commands.push_back ( cleanCommand ( command_buffer ) );
+   file_raw_commands.push_back ( command_buffer );
    
    return ( ( errors_omited) ? IncorrectInputFile : AllOk );
 }
@@ -304,7 +303,7 @@ void OpenCIF::File::convertCommands ( void )
     */
    
    // First, delete and clear the current commands vector
-   for ( int i = 0; i < file_commands.size (); i++ )
+   for ( unsigned int i = 0; i < file_commands.size (); i++ )
    {
       delete file_commands[ i ];
       file_commands[ i ] = 0;
@@ -457,6 +456,60 @@ std::string OpenCIF::File::cleanCommand ( std::string command )
 }
 
 /*
+ * This member function takes as argument a string that, maybe, is a CIF command.
+ * 
+ * The operation done is similar to the one performed when loading a CIF file, but
+ * applied directly to a string. The idea is to validate a single string as a service
+ * for the user.
+ */
+bool OpenCIF::File::isCommandValid ( std::string command )
+{
+   /*
+    * The process of validation isn't that complex.
+    * 
+    * I need to create a CIFFSM class instance. Such instance will help me to validate
+    * the command contents. I'll read char by char and feed them to the CIFFSM instance.
+    * The CIFFSM instance will start, by default, in state 1.
+    * 
+    * I'll feed the instance characters until I reach the end of the command or the instance reports
+    * an error (jump state equal to -1). After feeding the characters, if I finish feeding the
+    * command and none error was reported, I will check the current state of the instance.
+    * 
+    * The instance should end in state 91 or 92. If the FSM is in such states, the command is 
+    * correct and the format is supported.
+    * 
+    * If there is a jump to a negative state, the command is invalid.
+    */
+   
+   OpenCIF::CIFFSM* fsm;
+   
+   int jump_state = 1; // By default, start in 1
+   char input_char;   
+   
+   fsm = new OpenCIF::CIFFSM ();
+   
+   // Iterate over the contents of the string, until the string end is
+   // reached or the FSM reports a problem.
+   
+   for ( unsigned int i = 0; i < command.size () && jump_state != -1; i++ )
+   {
+      input_char = command[ i ];
+      
+      jump_state = fsm->operator[] ( input_char );
+   }
+   
+   // String validated. What is the result?
+   if ( jump_state == -1 )
+   {      
+      return ( false );
+   }
+   
+   // Everything Ok. The string is a valid according to the CIF format.
+   
+   return ( true );
+}
+
+/*
  * This member function takes as argument a Definition command and returns it cleaned.
  * 
  * A definition command can be something like this:
@@ -490,7 +543,7 @@ std::string OpenCIF::File::cleanDefinitionCommand ( std::string command )
    
    // Remove not-necessary characters
    command[ 0 ] = ' ';
-   for ( int i = 0; i < command.size (); i++ )
+   for ( unsigned int i = 0; i < command.size (); i++ )
    {
       // If the current char is not a 'D', not a digit, not an 'S' and not an 'F'
       if ( !std::isdigit ( command[ i ] ) && !std::isupper ( command[ i ] ) )
@@ -499,7 +552,7 @@ std::string OpenCIF::File::cleanDefinitionCommand ( std::string command )
       }
    }
    
-   for ( int i = 1; i < command.size (); i++ )
+   for ( unsigned int i = 1; i < command.size (); i++ )
    {
       if ( std::isdigit ( command[ i ] ) )
       {
@@ -557,7 +610,7 @@ std::string OpenCIF::File::cleanCallCommand ( std::string command )
    
    // Remove not-necessary characters
    command[ 0 ] = ' ';
-   for ( int i = 0; i < command.size (); i++ )
+   for ( unsigned int i = 0; i < command.size (); i++ )
    {
       if ( !std::isdigit ( command[ i ] ) && !std::isupper( command[ i ] ) && command[ i ] != '-' )
       {
@@ -565,7 +618,7 @@ std::string OpenCIF::File::cleanCallCommand ( std::string command )
       }
    }
    
-   for ( int i = 1; i < command.size (); i++ )
+   for ( unsigned int i = 1; i < command.size (); i++ )
    {
       tmp = command[ i ];
       
@@ -613,7 +666,7 @@ std::string OpenCIF::File::cleanLayerCommand ( std::string command )
    
    // Remove not-necessary characters
    command[ 0 ] = ' ';
-   for ( int i = 0; i < command.size (); i++ )
+   for ( unsigned int i = 0; i < command.size (); i++ )
    {
       if ( !std::isupper ( command[ i ] ) && command[ i ] != '_' && ! std::isdigit ( command[ i ] ) )
       {
@@ -674,7 +727,7 @@ std::string OpenCIF::File::clearNumericCommand ( std::string command )
    final_command += tmp;
    
    // Remove not-necessary characters
-   for ( int i = 0; i < command.size (); i++ )
+   for ( unsigned int i = 0; i < command.size (); i++ )
    {
       if ( !std::isdigit ( command[ i ] ) && command[ i ] != '-' )
       {

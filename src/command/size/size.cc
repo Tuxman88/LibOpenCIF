@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "size.h"
+# include "size.hh"
 
 /*
  * Default constructor. Initialize the values of the size to a non-zero value.

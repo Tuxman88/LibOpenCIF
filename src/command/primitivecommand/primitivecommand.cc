@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-# include "primitivecommand.h"
+# include "primitivecommand.hh"
 
 /*
  * Default constructor. Nothing to do.

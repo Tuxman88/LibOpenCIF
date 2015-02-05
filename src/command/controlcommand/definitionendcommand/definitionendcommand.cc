@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "definitionendcommand.h"
+# include "definitionendcommand.hh"
 
 /*
  * Default constructor. Nothing to do.
@@ -57,7 +57,11 @@ std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionEndC
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand& command )
 {
-   // Well.. do nothing...
+   // Dummy call to prevent warnings about command not being used
+   if ( (&command) == 0 )
+   {
+      return ( input_stream );
+   }
    
    return ( input_stream );
 }
@@ -71,7 +75,11 @@ std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionEndC
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand* command )
 {
-   // Well.. do nothing...
+   // Dummy call to prevent warnings about command not being used
+   if ( command == 0 )
+   {
+      return ( input_stream );
+   }
    
    return ( input_stream );
 }
@@ -87,5 +95,7 @@ void OpenCIF::DefinitionEndCommand::print ( std::ostream& output_stream )
 
 void OpenCIF::DefinitionEndCommand::read ( std::istream& input_stream )
 {
-    return;
+   input_stream.gcount ();
+   
+   return;
 }

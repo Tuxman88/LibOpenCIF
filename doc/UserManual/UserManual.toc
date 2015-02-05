@@ -38,7 +38,7 @@
 \contentsline {subsubsection}{Definition control commands}{38}
 \contentsline {subsection}{\numberline {3.3.2}Considerations}{38}
 \contentsline {section}{\numberline {3.4}Converting strings into class instances}{38}
-\contentsline {subsection}{\numberline {3.4.1}Validation group of classes}{38}
+\contentsline {subsection}{\numberline {3.4.1}Validation group of classes}{39}
 \contentsline {subsubsection}{Class: State}{39}
 \contentsline {subsubsection}{Class: FiniteStateMachine}{39}
 \contentsline {subsubsection}{Class: CIFFSM}{39}
@@ -51,7 +51,7 @@
 \contentsline {subsubsection}{Class: PrimitiveCommand}{39}
 \contentsline {subsubsection}{Class: PathBasedCommand}{39}
 \contentsline {subsubsection}{Class: PolygonCommand}{39}
-\contentsline {subsubsection}{Class: WireCommand}{39}
+\contentsline {subsubsection}{Class: WireCommand}{40}
 \contentsline {subsubsection}{Class: PositionBasedCommand}{40}
 \contentsline {subsubsection}{Class: BoxCommand}{40}
 \contentsline {subsubsection}{Class: RoundFlashCommand}{40}
@@ -64,6 +64,6 @@
 \contentsline {subsubsection}{Class: RawContentCommand}{40}
 \contentsline {subsubsection}{Class: UserExtentionCommand}{40}
 \contentsline {subsubsection}{Class: CommentCommand}{40}
-\contentsline {subsubsection}{Class: LayerCommand}{40}
+\contentsline {subsubsection}{Class: LayerCommand}{41}
 \contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{41}
 \contentsline {subsubsection}{Class: File}{41}

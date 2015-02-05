@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-# include "layercommand.h"
+# include "layercommand.hh"
 
 /*
  * Default constructor. Nothing to do.

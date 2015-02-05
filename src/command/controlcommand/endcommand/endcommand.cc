@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "endcommand.h"
+# include "endcommand.hh"
 
 /*
  * Default constructor. Nothing to do.
@@ -51,6 +51,9 @@ void OpenCIF::EndCommand::setID ( const unsigned long int& new_id )
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand& command )
 {
+   // Dummy call to prevent warnings about command not being used
+   command.getID ();
+   
    return ( input_stream );
 }
 
@@ -63,6 +66,9 @@ std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::EndCommand& co
 
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::EndCommand* command )
 {
+   // Dummy call to prevent warnings about command not being used
+   command->getID ();
+   
    return ( input_stream );
 }
 
@@ -82,5 +88,8 @@ void OpenCIF::EndCommand::print ( std::ostream& output_stream )
 
 void OpenCIF::EndCommand::read ( std::istream& input_stream )
 {
+   // Dummy call to prevent warnings about input_stream not being used
+   input_stream.gcount ();
+   
    return;
 }

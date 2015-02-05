@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "callcommand.h"
+# include "callcommand.hh"
 
 /*
  * Default constructor. Nothing to do.
@@ -137,7 +137,7 @@ void OpenCIF::CallCommand::print ( std::ostream& output_stream )
    output_stream << "C "; // Start of the command
    output_stream << getID () << " "; // ID of the call command.
    
-   for ( int i = 0; i < call_transformations.size (); i++ )
+   for ( unsigned int i = 0; i < call_transformations.size (); i++ )
    {
       output_stream << call_transformations.at ( i ) << " ";
    }

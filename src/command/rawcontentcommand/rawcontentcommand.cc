@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "rawcontentcommand.h"
+# include "rawcontentcommand.hh"
 
 /*
  * Default contructor. Nothing to do.

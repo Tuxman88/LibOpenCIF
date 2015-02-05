@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */   
 
-# include "wirecommand.h"
+# include "wirecommand.hh"
 
 /*
  * Default constructor. Initialize command. The wire must have a size not equal to 0.
@@ -123,7 +123,7 @@ void OpenCIF::WireCommand::print ( std::ostream& output_stream )
 {
    output_stream << "W " << wire_width << " ";
    
-   for ( long int i = 0; i < command_points.size (); i++ )
+   for ( unsigned long int i = 0; i < command_points.size (); i++ )
    {
       output_stream << command_points.at ( i ) << " ";
    }

@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "controlcommand.h"
+# include "controlcommand.hh"
 
 /*
  * Default constuctor. Initialices the command ID with a value

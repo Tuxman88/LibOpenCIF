@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */   
 
-# include "point.h"
+# include "point.hh"
 
 /*
  * Default constructor. Initialices the point with a 0,0 value.

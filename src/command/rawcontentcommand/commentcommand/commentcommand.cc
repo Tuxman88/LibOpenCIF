@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "commentcommand.h"
+# include "commentcommand.hh"
 
 /*
  * Default contructor. Nothing to do.

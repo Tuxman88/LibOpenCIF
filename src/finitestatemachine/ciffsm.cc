@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "ciffsm.h"
+# include "ciffsm.hh"
 
 /*
  * Default contructor. This constructor prepares the FSM to have enough

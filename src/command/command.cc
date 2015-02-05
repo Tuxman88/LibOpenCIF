@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-# include "command.h"
+# include "command.hh"
 
 /*
  * This constructor initialice the "command_type" attribute.
@@ -78,6 +78,9 @@ void OpenCIF::Command::print ( std::ostream& output_stream )
 
 void OpenCIF::Command::read ( std::istream& input_stream )
 {
+   // Dummy call to prevent a warning when compiling about input_stream not being used.
+   input_stream.gcount ();
+   
    return;
 }
 

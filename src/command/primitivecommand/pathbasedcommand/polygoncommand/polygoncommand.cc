@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "polygoncommand.h"
+# include "polygoncommand.hh"
 
 /*
  * Default constructor. Nothing to do.
@@ -95,7 +95,7 @@ void OpenCIF::PolygonCommand::print ( std::ostream& output_stream )
 {
    output_stream << "P ";
    
-   for ( long int i = 0; i < getPoints ().size (); i++ )
+   for ( unsigned long int i = 0; i < getPoints ().size (); i++ )
    {
       output_stream << getPoints ()[ i ] << " ";
    }

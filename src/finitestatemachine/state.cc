@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "state.h"
+# include "state.hh"
 
 /*
  * Default constructor. Initialice the vector of states.
@@ -55,9 +55,9 @@ void OpenCIF::State::reset ( void )
  */
 void OpenCIF::State::addOptions ( const std::string& new_options , const int& exit_state )
 {
-   for ( int i = 0; i < new_options.size (); i++ )
+   for ( unsigned int i = 0; i < new_options.size (); i++ )
    {
-      state_options[ new_options[ i ] ] = exit_state;
+      state_options[ (int)(new_options[ i ]) ] = exit_state;
    }
    
    return;
@@ -68,5 +68,5 @@ void OpenCIF::State::addOptions ( const std::string& new_options , const int& ex
  */
 int OpenCIF::State::operator[] ( const char& input_char )
 {
-   return ( state_options[ input_char ] );
+   return ( state_options[ (int)input_char ] );
 }

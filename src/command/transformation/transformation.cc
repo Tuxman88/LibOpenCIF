@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "transformation.h"
+# include "transformation.hh"
 
 /*
  * Constructor. Initialices the instance as a Displacement transformation,

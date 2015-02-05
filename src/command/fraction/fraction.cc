@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# include "fraction.h"
+# include "fraction.hh"
 
 /*
  * Default constructor. Sets the default values of 1/1 (a neutral fraction).

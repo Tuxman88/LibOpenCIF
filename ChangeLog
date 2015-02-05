@@ -4,7 +4,13 @@ LibOpenCIF - ChangeLog file
 [1.2.0]
 
 * Interface: Improved interface for user.
-* Code: Improved error information provided to the user once a invalid char is found.
+* Code: Improved error information provided to the user once an invalid char is found.
+* Code: Fixed logical error in File class, where the last command loaded into memory from the CIF file was cleaned, even when was not intended to be to.
++ Code: Added public static member function to the File class to validate a single string.
++ Code: Added public static member function to the File class to clean a single string.
+* Code: Fixed various warnings when compiling the library using flags to improve correcteness of code (-Wall -Werror -Wextra -pedantic -ansi).
+* Code: Header files renamed from "*.h" to "*.hh". This change is done to make more evident that they are headers of C++, not of C.
+* CMake: When installing the library into the system, only one header is copied into /usr/local/include/, named "opencif", instead of the folder hierarchy used previously.
 * Documentation: Documentation re-worked.
 
 [1.1.1]
