@@ -1,7 +1,7 @@
 # include <iostream>
 # include <string>
 # include <vector>
-# include <opencif/opencif.h>
+# include <opencif>
 
 using std::cout;
 using std::endl;

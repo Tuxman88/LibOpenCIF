@@ -1,5 +1,5 @@
 # include <iostream>
-# include "libopencif.h"
+# include "libopencif.hh"
 
 using std::cout;
 using std::endl;

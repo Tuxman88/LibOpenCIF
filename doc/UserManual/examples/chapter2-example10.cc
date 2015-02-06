@@ -2,7 +2,7 @@
 # include <string>
 # include <vector>
 # include <sstream>
-# include <opencif/opencif.h>
+# include <opencif>
 
 using std::cout;
 using std::endl;
