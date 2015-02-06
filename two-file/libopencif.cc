@@ -3165,12 +3165,24 @@ bool OpenCIF::File::isCommandValid ( std::string command )
     * correct and the format is supported.
     * 
     * If there is a jump to a negative state, the command is invalid.
+    * 
+    * Also, I'm considering an invalid a string like this one:
+    * 
+    * this.is.an.invalid.string
+    * 
+    * Such string, according to the FSM used, is valid, since all of those characters are considered
+    * "Black characters", they are chars used to add spaces between commands.
+    * 
+    * So, what I'm considering a valid command? A string that *has* a valid command. If none valid
+    * command is found, then, even if the FSM says no invalid char is found, I'm going to return
+    * false, since a technically empty string doesn't count as a command.
     */
    
    OpenCIF::CIFFSM* fsm;
    
    int jump_state = 1; // By default, start in 1
-   char input_char;   
+   char input_char;
+   bool cif_command_found = false; // Flag to prevent validating strings that are, technically speaking, empty.
    
    fsm = new OpenCIF::CIFFSM ();
    
@@ -3182,11 +3194,22 @@ bool OpenCIF::File::isCommandValid ( std::string command )
       input_char = command[ i ];
       
       jump_state = fsm->operator[] ( input_char );
+      
+      if ( jump_state > 1 )
+      {
+         cif_command_found = true;
+      }
    }
    
    // String validated. What is the result?
    if ( jump_state == -1 )
    {      
+      return ( false );
+   }
+   
+   // If no command found, is considered invalid
+   if ( !cif_command_found )
+   {
       return ( false );
    }
    
