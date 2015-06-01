@@ -381,7 +381,7 @@ Version 1.2.0\par}
 \chapter{Introduction}\label{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, the user will learn the background needed to understand crucial concepts related to the usage of this library. Some of these concepts are basic definitions of what is a CIF file and what is a library.
+In this chapter, the user will learn the background needed to understand crucial concepts related to the usage of the library LibOpenCIF. Some of these concepts are basic definitions of what is a CIF file and what is a library (in the context of the intended usage).
 
 Also, there is recommended that the user takes the time to read this chapter, since here is explained how the contents are organized and how the information is provided (for example, is explained how to identify a command and how to read the example code).
 \newpage 
@@ -390,11 +390,11 @@ Also, there is recommended that the user takes the time to read this chapter, si
 \section{Who must read this document?}\label{Who-must-read-this-document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This document is intended to be read by any user that needs to read a CIF file and wants or need to understand how to use the LibOpenCIF library. This document makes big assumptions about the reader. One of the most important is that the reader must be already aware and is familiarized with the concepts related to integrated circuit designs, what are they and what is a layout.
+This document is intended to be read by any user that needs to read a CIF file and wants or need to understand how to use the LibOpenCIF library. This document makes big assumptions about the user. One of the most important is that the user must be already aware of, and is familiarized with, the concepts related to integrated circuit designs, what are they and what is a layout.
 
-Also, is important to note that this document is intended to be read by a user that already has knowledge about how to program in the C++ language, since will not be explained, for example, what is a class, what is a variable, what is a class instance, and other core concepts of the Object Oriented Programming. This is the reason that this document might be easier to read for a programmer rather than a specialist in circuit design.
+Also, is important to note that this document is intended to be read by a user that already has knowledge about how to program in the C++ language, since here will not be explained, for example, what is a class, a variable, a class instance, and other core concepts of the Object Oriented Programming. This is the reason that this document might be easier to read for a programmer rather than a specialist in circuit design.
 
-Finally, in this document we assume that the user is already familiarized with the use of the operative system on which is desired to use the library. Among other operations, the user must be already capable of opening a terminal emulator, run commands on it, move itself between folders using commands and manipulate files using a file viewer (like Explorer on Microsoft Windows systems, Dolphin or Nautilus on GNU/Linux systems or Finder on Apple Mac OS X systems).
+Finally, in this document we assume that the user is already familiarized with the use of the operative system on which is desired the use of the library. Among other operations, the user must be already capable of opening a terminal emulator, run commands on it, move itself between folders using commands and manipulate files using a file viewer (like Explorer on Microsoft Windows systems, Dolphin or Nautilus on GNU/Linux systems or Finder on Apple Mac OS X systems).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What is a CIF file?}\label{What-is-a-CIF-file}
@@ -495,13 +495,13 @@ Is expected that the user reads all the contents of this document, and even in t
 	\item Chapter 3 (Technical documentation): In this chapter, the user will learn advanced topics related to the operation and design of the library. Among other themes, will be explained in detail how the library loads and validates the contents of the files (complete Finite State Machine included), how the commands are cleaned, the reasons behind the design desicions and a complete UML map of the classes and their relations.
 \end{itemize}
 
-In the document, when speaking about code, the reader can expect to see sections like this one:
+In the document, when speaking about code, the user can expect to see sections like this one:
 
 \lstinputlisting[caption={Example program}, style=CPPStyle]{examples/chapter1-example1.cc}
 
-In the previous example, you can see how the code will look once an example is provided to you. The code is in C++ (most of the examples in this document will be about C++ code). The code examples are intended to be stored in plain text files. Those code files can have various filename extentions, depending if they are source or header files. Some of the supported file extentions for C++ source files are \textbf{.cc, .C,} and \textbf{.cpp}. All of them are valid (the second one has the problem of being easily confused with a C language source code file). In this document, we will be using the \textbf{.cc} file extention for source files, and the \textbf{.hh} file extention for the header files (instead of the popular \textbf{.hpp} used by some projects). 
+In the previous example, can be seen how the code will look once an example is provided. The code is in C++. The code examples are intended to be stored in plain text files. Those code files can have various filename extentions, depending if they are source or header files. Some of the supported file extentions for C++ source files are \textbf{.cc, .C,} and \textbf{.cpp}. All of them are valid (the second one has the problem of being easily confused with a C language source code file). In this document, we will be using the \textbf{.cc} file extention for source files, and the \textbf{.hh} file extention for the header files (instead of the popular \textbf{.hpp} used by some projects). 
 
-In this document, you will also find system commands. Those system commands are intented to be entered and executed in terminal emulators. In GNU/Linux, Apple Mac OS X and similar systems, some examples of those systems are Konsole, Gnome Terminal, XTERM and Terminal. In Microsoft Windows systems, there are, at least, two options to use by the reader: the Windows CMD or Windows PowerShell are the most common choices on terminals on these systems.
+In this document, the user will also find system commands. Those system commands are intented to be entered and executed in terminal emulators. In GNU/Linux, Apple Mac OS X and similar systems, some examples of those terminal emulators are Konsole, Gnome Terminal, XTERM and Terminal. In Microsoft Windows systems, there are, at least, two options to use by the user: the Windows CMD or Windows PowerShell are the most common choices on terminals on these systems.
 
 When needed, there will be shown to the user system commands. The next is an example of a command for GNU/Linux, Apple Mac OS X or similar systems:
 
@@ -521,22 +521,22 @@ The previous example shows how a command can be executed and some of the output.
 
 The previous example shows how a command can be exeucted for Microsoft Windows systems. These commands can be identified as to be executed in such systems because the command starts with a \textbf{\textgreater} character. Such caracter is commonly used in terminals of these systems.
 
-Finally, in this document, the reader will find some special notes intended to help understanding some special concepts or critical information. The next boxes take care of various information types:
+Finally, in this document, the user will find some special notes intended to help understanding some special concepts or critical information. The next boxes take care of various information types:
 
 \IconNote
 	{info}
 	{This is an information message}
-	{When reading this document, the reader is recommended to pay attention to these messages, since these may contain non-critical information, like reminders about important paths or recommended usages about the library components.}
+	{When reading this document, the user is recommended to pay attention to these messages, since these may contain non-critical information, like reminders about important paths or recommended usages about the library components.}
 
 \IconNote
 	{warning}
 	{This is a warning message}
-	{When reading this document, the reader is expected to pay attention to these messages, since these may contain information about important details that might cause problems if ignored, like possible errors, common mistakes and more.}
+	{When reading this document, the user is expected to pay attention to these messages, since these may contain information about important details that might cause problems if ignored, like possible errors, common mistakes and more.}
 
 \IconNote
 	{error}
 	{This is a critical or error message}
-	{When reading this document, the reader is expected to pay special attention to these messages, since these may contain information about critical errors and mistakes that might affect in a very negative way your work.}
+	{When reading this document, the user is expected to pay special attention to these messages, since these may contain information about critical errors and mistakes that might affect in a very negative way your work.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{About the author}\label{About-The-Author}
@@ -546,12 +546,14 @@ The author of this document is Moises Chavez-Martinez. He is a Computer Engineer
 
 During his career, he has worked in various professional applications aimed to help the task of designing Integrated Circuits. This granted him some knowledge of this work area, and shown him some deficiencies related to the work of applications for this industry area.
 
+If you want to contact the autor to tell him something about the library, or to report a problem/bug, yo can use this e-mail: \texttt{moises.chavez.martinez@gmail.com}
+
 \renewcommand\chapterillustration{images/chapter02-cover}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{User documentation}\label{User-documentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, the reader will learn all the concepts and procedures needed to understand how to install, uninstall and use the library in various operating systems. Among other details, will be discussed:
+In this chapter, the user will learn all the concepts and procedures needed to understand how to install, uninstall and use the library in various operating systems. Among other details, will be discussed:
 
 \begin{itemize}
 	\item How to compile the source code in GNU/Linux and Mac OS X to create a static library.
@@ -574,11 +576,11 @@ In this chapter, the reader will learn all the concepts and procedures needed to
 \section{Installing the library}\label{Installing-The-Library}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The installation procedure is used only when a static library is needed, and such version is intended to be used only on the GNU/Linux and Apple Mac OS X systems. The library  is not intended to be installed on Microsoft Windows systems, since in such systems the library must be used as a two-file part of the reader's project (see section \ref{Compiling-On-Windows} to learn how to compile a project using the library).
+The installation procedure is used only when a static library is needed, and such version is intended to be used only on the GNU/Linux and Apple Mac OS X systems. The library  is not intended to be installed on Microsoft Windows systems, since in such systems the library must be used as a two-file part of the user projects (see section \ref{Compiling-On-Windows} to learn how to compile a project using the library).
 
-These installation steps are intended to be used with the source version of the library. If the reader already have a pre-compiled version (as static or dinamic library), follow its specific steps to install the library.
+These installation steps are intended to be used with the source version of the library. If the user already have a pre-compiled version (as static or dinamic library), follow its specific steps to install the library.
 
-To being able to install the library, the reader need to have some components before starting.
+To being able to install the library, the user need to have some components before starting.
 
 The first element is a package with the source code of the library. The needed file has a name like \textbf{\texttt{libopencif-X.Y.Z.tar.gz}}, where \textbf{\texttt{X}}, \textbf{\texttt{Y}} and \textbf{\texttt{Z}} are the major, minor and patch version numbers of the library. Is recommended to always look for the latest version of the library at SourceForge\footnote{https://sourceforge.net/projects/libopencif/} or GitHub\footnote{https://github.com/Tuxman88/LibOpenCIF/}.
 
@@ -591,7 +593,7 @@ compilation complete.
 $
 \end{lstlisting}
 
-As can be seen, the idea is to open a terminal emulator and run the command \textbf{\texttt{g++}} to see the output. If the compiler is installed, the reader must see an output similar to the one in the previous example. If the reader sees an output like this one:
+As can be seen, the idea is to open a terminal emulator and run the command \textbf{\texttt{g++}} to see the output. If the compiler is installed, the user must see an output similar to the one in the previous example. If the user sees an output like this one:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ g++
@@ -599,9 +601,9 @@ bash: g++: command not found
 $
 \end{lstlisting}
 
-Then the GCC compiler is not installed. In such case, please, follow the specific instructions of the reader's system to install the program.
+Then the GCC compiler is not installed. In such case, please, follow the specific instructions of the user system to install the program.
 
-After the compiler is installed and ready, the next application needed is \textbf{CMake v2.6} or newer. In a similar way, to check if it is installed, the command \textbf{\texttt{cmake}} can be executed and its output checked. If the reader see lots of text, then the application is installed (the output is a help message from the utility). But, if an output like this can be seen:
+After the compiler is installed and ready, the next application needed is \textbf{CMake v2.6} or newer. In a similar way, to check if it is installed, the command \textbf{\texttt{cmake}} can be executed and its output checked. If the user see lots of text, then the application is installed (the output is a help message from the utility). But, if an output like this can be seen:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ cmake
@@ -609,9 +611,9 @@ bash: cmake: command not found
 $
 \end{lstlisting}
 
-Then the application is not installed. Again, please, follow the specific steps in the reader's system to install the utility.
+Then the application is not installed. Again, please, follow the specific steps in the user system to install the utility.
 
-After these steps, everyting that is needed to compile and install the library is ready.
+After these steps, everything that is needed to compile and install the library is ready.
 
 The first step is to extract the contents of the source package into a folder. To extract the contents of the package, run this command in the folder on which the package file is:
 
@@ -654,7 +656,7 @@ $
 \IconNote
 	{info}
 	{Compilling in 32 bit and 64 bit systems}
-	{As can be noticed, the command output in the example displays some references to \textbf{\texttt{lib64}}. Such references can be different if the reader is compiling for a 32 bit system (these examples where captured in a 64 bit machine).}
+	{As can be noticed, the command output in the example displays some references to \textbf{\texttt{lib64}}. Such references can be different if the user is compiling for a 32 bit system (these examples where captured in a 64 bit machine).}
 
 After running the command, run this new one in the same folder:
 
@@ -662,7 +664,7 @@ After running the command, run this new one in the same folder:
 $ make
 \end{lstlisting}
 
-Now, the reader will be able to see output like this one (the example is not complete):
+Now, the user will be able to see output like this one (the example is not complete):
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ make
@@ -682,13 +684,13 @@ $
 	{Compilation errors}
 	{The library must be error-free for compilation (not even warning messages should appear). If any error is found, please contact with the author of the library (see section \ref{About-The-Author}).}
 
-The reader will now be able to install the library into its system. Run the following command and, when prompted, enter your user password to gain temporal root access:
+The user will now be able to install the library into its system. Run the following command and, when prompted, enter your user password to gain temporal root access:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ sudo make install
 \end{lstlisting}
 
-After running the command, the reader should see an output like this one:
+After running the command, the user should see an output like this one:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ sudo make install
@@ -704,9 +706,9 @@ $
 \IconNote
 	{warning}
 	{Installation errors}
-	{If the reader finds any installation error, read carefully the output of the command to check for trivial problems. If the errors can't be solved by the reader, please, contact the author of the library (see section \ref{About-The-Author}).}
+	{If the user finds any installation error, read carefully the output of the command to check for trivial problems. If the errors can't be solved by the user, please, contact the author of the library (see section \ref{About-The-Author}).}
 
-After the previous command, the library is expected to be correctly installed in the reader's system.
+After the previous command, the library is expected to be correctly installed in the user system.
 
 \IconNote
 	{info}
@@ -716,7 +718,7 @@ After the previous command, the library is expected to be correctly installed in
 \IconNote
 	{info}
 	{Different paths}
-	{The installation paths might be different in the reader's system. When installing, is recommended to check and store the paths used by CMake to install the library for later use when uninstalling.}
+	{The installation paths might be different in the user system. When installing, is recommended to check and store the paths used by CMake to install the library for later use when uninstalling.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uninstalling the library}\label{Uninstalling-the-library}
@@ -731,7 +733,7 @@ The process of uninstalling the LibOpenCIF library is intended to be performed o
 
 The uninstall process only requires removing the installed files of the system. Since this process requires root access, is recommended to do this operation using commands, or, if the user has file navigators with root access, can use them to ease the process.
 
-The first element to remove from the system is the library file itself. By default, the file can be found in the folder \textbf{\texttt{/usr/local/lib/}}. The file name must be \textbf{\texttt{libopencif.a}}. Using a terminal emulator, the reader can use these commands to go to the desired folder and remove the file:
+The first element to remove from the system is the library file itself. By default, the file can be found in the folder \textbf{\texttt{/usr/local/lib/}}. The file name must be \textbf{\texttt{libopencif.a}}. Using a terminal emulator, the user can use these commands to go to the desired folder and remove the file:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ cd /usr/local/lib
@@ -750,7 +752,7 @@ $
 \IconNote
 	{info}
 	{Deleting the library file}
-	{When removing the library file, remove it directly (using the full file name). Is not recommended to use wildcards, since in the folder might be files with similar names.}
+	{When removing the library file, remove it directly (using the full file name). Is not recommended to use wild-cards, since in the folder might be files with similar names.}
 
 As can be seen, the \textbf{\texttt{ls}} command was used to see the contents of the folder and see if the file is there.
 
@@ -780,28 +782,28 @@ If the previous steps were performed correctly and none error was found, the lib
 \section{Compiling a program with the library}\label{Compiling-a-program}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, the reader will learn how to compile a program with LibOpenCIF support. Such procedure can vary depending on two factors:
+In this section, the user will learn how to compile a program with LibOpenCIF support. Such procedure can vary depending on two factors:
 
 \begin{itemize}
 	\item Operating system used.
 	\item Library mode used (static pre-compiled or two-file version).
 \end{itemize}
 
-In the next sub-sections, the reader will learn how to compile an example program in Microsoft Windows, GNU/Linux and Apple Mac OS X using the pre-compiled or two-file version of the library.
+In the next sub-sections, the user will learn how to compile an example program in Microsoft Windows, GNU/Linux and Apple Mac OS X using the pre-compiled or two-file version of the library.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Microsoft Windows}\label{Compiling-On-Windows}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
-For Microsoft Windows systems, the compilation can be done only in one way\footnote{The library is not intended to be pre-compiled on Microsoft Windows systems. If the reader finds a guide on how to pre-compile the library into, for example, a DLL file, then the reader will be the only responsible of the success of such alternatives. The author will not provide support on non-official compilation methods.}: Using the two file version of the library.
+For Microsoft Windows systems, the compilation can be done only in one way\footnote{The library is not intended to be pre-compiled on Microsoft Windows systems. If the user finds a guide on how to pre-compile the library into, for example, a DLL file, then the user will be the only responsible of the success of such alternatives. The author will not provide support on non-official compilation methods.}: Using the two file version of the library.
 
-To get access to the two-file version of the library, the reader can download the regular source package of the library found in SourceForge or GitHub (see section \ref{Installing-The-Library} to find the URLs on which the package can be found). The downloaded file must be named \textbf{\texttt{libopencif-X.Y.Z.tar.gz}}, where \textbf{\texttt{X}}, \textbf{\texttt{Y}} and \textbf{\texttt{Z}} are the major, minor and patch version numbers of the package. Is recommended to always download the latest version of the library.
+To get access to the two-file version of the library, the user can download the regular source package of the library found in SourceForge or GitHub (see section \ref{Installing-The-Library} to find the URLs on which the package can be found). The downloaded file must be named \textbf{\texttt{libopencif-X.Y.Z.tar.gz}}, where \textbf{\texttt{X}}, \textbf{\texttt{Y}} and \textbf{\texttt{Z}} are the major, minor and patch version numbers of the package. Is recommended to always download the latest version of the library.
 
-After getting the source package, uncompress it on your system (the reader can use various applications to extract the contents of a \textbf{\texttt{tar.gz}} file on these systems, like 7-ZIP). Enter the new folder created after the uncompress process and look for the folder named \textbf{\texttt{two-file}}. Such folder must contain two files: \textbf{\texttt{libopencif.cc}} and \textbf{\texttt{libopencif.hh}}. Those two files are the only files needed for Microsoft Windows systems.
+After getting the source package, uncompress it on your system (the user can use various applications to extract the contents of a \textbf{\texttt{tar.gz}} file on these systems, like 7-ZIP). Enter the new folder created after the uncompress process and look for the folder named \textbf{\texttt{two-file}}. Such folder must contain two files: \textbf{\texttt{libopencif.cc}} and \textbf{\texttt{libopencif.hh}}. Those two files are the only files needed for Microsoft Windows systems.
 
 By default, those two files of the library requires to be together all the time, since the source file (the \textbf{\texttt{.cc}} file) has an \textbf{\texttt{include}} statement calling the header file (the \textbf{\texttt{.hh}} file). If you require to use a different structure on the files, like placing the source and header files in different folders, you can edit the source file and change the include path. Such instruction can be found right after the GNU license preamble in line 24, approximately.
 
-From this point, we are assuming that the reader has already a compilation mechanism in the intended system. In the case of the next examples, we use the MinGW\footnote{The installer can be found at \textbf{http://sourceforge.net/projects/mingw/files/Installer/}.} compiler for Microsoft Windows, being executed in a PowerShell window of Microsoft Windows 8.
+From this point, we are assuming that the user has already a compilation mechanism in the intended system. In the case of the next examples, we use the MinGW\footnote{The installer can be found at \textbf{http://sourceforge.net/projects/mingw/files/Installer/}.} compiler for Microsoft Windows, being executed in a PowerShell window of Microsoft Windows 8.
 
 For the next example, we created a temporal folder named \textbf{test1} in our \textbf{My Documents} path. Inside such folder, we copied the two files of the library and created a new file named \textbf{main.cc}. After the creation of the new file, the folder ended with these contents:
 
@@ -831,7 +833,7 @@ The previous command will instruct GCC to compile the source file of the library
 
 \lstinputlisting[caption={Include statement for Microsoft Windows the two-file version of the library.}, style=CPPStyle]{examples/chapter2-example1.cc}
 
-As can be noticed, in line 2 can be found an include statement looking for the header file of the library. After adding the code and saving the changes, the reader can compile the whole program using this command:
+As can be noticed, in line 2 can be found an include statement looking for the header file of the library. After adding the code and saving the changes, the user can compile the whole program using this command:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 > g++ .\main.cc -o main.exe libopencif.o
@@ -848,49 +850,49 @@ LibOpenCIF: Example about compilation.
 >
 \end{lstlisting}
 
-If the output of the command is as expected, then, the compilation process were done correctly.
+If the output of the command is as expected, then, the compilation process was done correctly.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{GNU/Linux}\label{GNU-Linux}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In GNU/Linux, the reader has two options to include the library into his project. The first option is using the static library after installing it in the system. The second option is using the two-file version of the library.
+In GNU/Linux, the user has two options to include the library into his project. The first option is using the static library after installing it in the system. The second option is using the two-file version of the library.
 
 \IconNote
 	{info}
 	{Best usage method}
-	{The recommended usage method for the library is installing the library, and then, linking your program with the static library. However, the reader is free to use the two-file version of the library. There is no major difference when using one option or another.}
+	{The recommended usage method for the library is installing the library, and then, linking your program with the static library. However, the user is free to use the two-file version of the library. There is no major difference when using one option or another.}
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Using the installed library}\label{Using-the-installed-library}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-To use the first option, the installed library, you first need to install the library. To do so, the reader needs to follow the steps found in the section \ref{Installing-The-Library}.
+To use the first option, the installed library, you first need to install the library. To do so, the user needs to follow the steps found in the section \ref{Installing-The-Library}.
 
-From this point, we are assuming that the reader has already a compilation mechanism in the intended system. In the case of the next examples, we use the GCC compiler (with its C++ module) for GNU/Linux, available in most GNU/Linux distributions, being executed in a Konsole terminal emulator, running Bash on a Fedora 21 system.
+From this point, we are assuming that the user has already a compilation mechanism in the intended system. In the case of the next examples, we use the GCC compiler (with its C++ module) for GNU/Linux, available in most GNU/Linux distributions, being executed in a Konsole terminal emulator, running Bash on a Fedora 21 system.
 
 For the next example, we created a temporal folder named \textbf{\texttt{test1}} in our  \textbf{\texttt{Home}} folder. After that, we created a test file named \textbf{\texttt{main.cc}}, so that the folder, after the creation of the elements, ended with these contents:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ pwd
-/home/user/Projects/test1
+/home/user/test1
 $ ls
 main.cc
 $
 \end{lstlisting}
 
-Then , the reader needs to add code to the example program. In this case, the example code is as follows:
+Then , the user needs to add code to the example program. In this case, the example code is as follows:
 
 \lstinputlisting[caption={Include statement for GNU/Linux with installed library}, style=CPPStyle]{examples/chapter2-example2.cc}
 
-In the previous example, in line 2, the reader can see the include statement for the library. Being installed, the library must be referenced as a regular header file.
+In the previous example, in line 2, the user can see the include statement for the library. Being installed, the library must be referenced as a regular header file.
 
 \IconNote
 	{warning}
 	{Common incorrect include path}
 	{Pay special attention to the include path. The file name is \textbf{\texttt{opencif}}, not \textbf{\texttt{libopencif}}. This is a common error when adding the library to the source code.}
 	
-The next step is to compile the code. To do so, in the terminal emulator, the reader needs to run these commands:
+The next step is to compile the code. To do so, in the terminal emulator, the user needs to run these commands:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ gcc main.cc -o program.bin -lopencif
@@ -913,26 +915,26 @@ $
 	{Common incorrect library name}
 	{Pay special attention to the library name used in the compilation command. The name of the library is \textbf{\texttt{opencif}}, not \textbf{\texttt{libopencif}}. This is a common error when compiling with the library.}
 	
-As can be seen, the compilation process, using the installed version of the library, isn't complex nor difficult. The biggest problems on which the reader can incur might be errors when typing names on the source code or the compilation commands.
+As can be seen, the compilation process, using the installed version of the library, isn't complex nor difficult. The biggest problems on which the user can incur might be errors when typing names on the source code or the compilation commands.
 
 \IconNote
 	{info}
 	{Right time to compile with the library}
-	{No matter if the reader's project has one or multiple files, is recommended to compile with the library only when linking the final binary file to prevent extra time compiling.}
+	{No matter if the user project has one or multiple files, is recommended to compile with the library only when linking the final binary file to prevent extra time compiling.}
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Using the two-file version of the library}\label{Using-the-two-file-version-of-the-library}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In GNU/Linux, the second option that the reader has to compile its program with the library, is using the two-file version of the library. First, the reader needs to get the needed files of the library. To do so, follow the steps found in the section \ref{Compiling-On-Windows}, right until the compilation process. Those steps will instruct the reader about how to obtain the needed library files.
+In GNU/Linux, the second option that the user has to compile its program with the library, is using the two-file version of the library. First, the user needs to get the needed files of the library. To do so, follow the steps found in the section \ref{Compiling-On-Windows}, right until the compilation process. Those steps will instruct the user about how to obtain the needed library files.
 
-From this point, we are assuming that the reader already has the needed two files of the library. Also, the reader needs to already have a compilation mechanism ready on its system. In this case, for the next examples, we are using the GCC compiler, with its C++ module installed.
+From this point, we are assuming that the user already has the needed two files of the library. Also, the user needs to already have a compilation mechanism ready on its system. In this case, for the next examples, we are using the GCC compiler, with its C++ module installed.
 
-First, we created a test folder in our Home, named \textbf{\texttt{test1}}. In such folder, we copied the two library files (\textbf{\texttt{libopencif.cc}} and \textbf{\texttt{libopencif.hh}}) and created a new source file named \textbf{\texttt{main.cc}}. Using the next commands, the reader can see the new contents found in the folder:
+First, we created a test folder in our Home, named \textbf{\texttt{test1}}. In such folder, we copied the two library files (\textbf{\texttt{libopencif.cc}} and \textbf{\texttt{libopencif.hh}}) and created a new source file named \textbf{\texttt{main.cc}}. Using the next commands, the user can see the new contents found in the folder:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ pwd
-/home/user/Projects/test1/
+/home/user/test1/
 $ ls
 libopencif.cc
 libopencif.hh
@@ -946,7 +948,7 @@ When the files are ready, open the file \textbf{\texttt{main.cc}} and add the fo
 
 As can be seen, in the line 2 of the code, can be found an include statement pointing to the  header file of the library. In this case, the header is a local file.
 
-The compilation process is similar to the one described for Microsoft Windows. In a terminal emulator, the reader needs to run the following commands:
+The compilation process is similar to the one described for Microsoft Windows. In a terminal emulator, the user needs to run the following commands:
 
 \begin{lstlisting}[frame=single,style=SystemCommandStyle]
 $ gcc -c libopencif.cc
@@ -968,19 +970,19 @@ $
 \subsection{Mac OS X}\label{Mac-OS-X}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Mac OS X
+Mac OS X: This is a test.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The loading of a file}\label{The-loading-of-a-file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-After the reader is able to compile a program using the library, the next needed step to learn is how to read the contents of a CIF file. The library provides to the user two ways to do the loading. The first one is the automatic procedure. The automatic operation tries to perform a series of operations, in order, to end with as much useful information as possible. The second one is a manual operation sequence. In this second mode, the reader needs to perform the calls to the specific operations needed to open, load, validate and convert the information found within a CIF file.
+After the user is able to compile a program using the library, the next needed step to learn is how to read the contents of a CIF file. The library provides to the user two ways to do the loading. The first one is the automatic procedure. The automatic operation tries to perform a series of operations, in order, to end with as much useful information as possible. The second one is a manual operation sequence. In this second mode, the user needs to perform the calls to the specific operations needed to open, load, validate and convert the information found within a CIF file.
 
-The first option is useful if the reader is confident about the operation of the library and if the expected result is really needed (more of this on later sections). The second option is useful if the reader needs to keep control of the operation, step by step, and be able to perform some operation if, for example, an error ocurrs or if not all the steps are completed correctly.
+The first option is useful if the user is confident about the operation of the library and if the expected result is really needed (more of this on later sections). The second option is useful if the user needs to keep control of the operation, step by step, and be able to perform some operation if, for example, an error occurs or if not all the steps are completed correctly.
 
 For the next examples we are going to use a CIF file named \textbf{\texttt{inv\_x1.cif}}. Such file is part of the examples found in Alliance VLSI 5.0, a set of CAD tools for Integrated Circuit designers, being such toolset Open Source.
 
-The following examples will contain code that might only work for GNU/Linux, having the library installed in the system. The reader must be aware of this. To make the examples work in other systems, the reader needs to modify the include statement of the examples to the one needed for the target system. To know the difference between include statements in various systems, check the section \ref{Compiling-a-program}.
+The following examples will contain code that might only work for GNU/Linux, having the library installed in the system. The user must be aware of this. To make the examples work in other systems, the user needs to modify the include statement of the examples to the one needed for the target system. To know the difference between include statements in various systems, check the section \ref{Compiling-a-program}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Automatic loading}\label{Automatic-loading}
@@ -988,13 +990,13 @@ The following examples will contain code that might only work for GNU/Linux, hav
 
 The library provides two loading methods: Automatic and manual. To learn how to use the manual method, please, refer to the next section. To learn how to use the automatic method, continue reading.
 
-In the next example, the reader can assume that we have a single \textbf{\texttt{main.cc}} file, located in our test folder \textbf{\texttt{test}}. Also, located in the same folder, the reader can find our test CIF file \textbf{\texttt{inv\_x1.cif}}.
+In the next example, the user can assume that we have a single \textbf{\texttt{main.cc}} file, located in our test folder \textbf{\texttt{test}}. Also, located in the same folder, the user can find our test CIF file \textbf{\texttt{inv\_x1.cif}}.
 
 The first step is to have a basic program that is ready to use the library. The following example already has the needed statement to include the library into the program.
 
 \lstinputlisting[caption={Base program for the automatic loading.}, style=CPPStyle]{examples/chapter2-example4.cc}
 
-To read a CIF file, the library provides to the reader a special class named \textbf{\texttt{File}}. Such class definition, and everything else provided by the library, can be found under a namespace named \textbf{\texttt{OpenCIF}}. The next step to load a CIF file is to create an instance of the class \textbf{\texttt{File}}. To create such class instance, we are using the following line of code:
+To read a CIF file, the library provides to the user a special class named \textbf{\texttt{File}}. Such class definition, and everything else provided by the library, can be found under a namespace named \textbf{\texttt{OpenCIF}}. The next step to load a CIF file is to create an instance of the class \textbf{\texttt{File}}. To create such class instance, we are using the following line of code:
 
 \begin{lstlisting}[frame=single,style=CPPStyle]
 OpenCIF::File cif_file;
@@ -1002,12 +1004,12 @@ OpenCIF::File cif_file;
 
 \IconNote
 	{info}
-	{Using dinamic memory}
-	{The reader can use dinamic memory if needed. All the classes support the creation of instances as pointers. In our examples, we are using regular variables just for simplicity.}
+	{Using dynamic memory}
+	{The user can use dynamic memory if needed. All the classes support the creation of instances as pointers. In our examples, we are using regular variables just for simplicity.}
 
 In this case, we are creating a variable named \textbf{\texttt{cif\_file}}. Such class instance will help us to load the CIF file.
 
-After creating the instance, the reader needs to tell to the instance where is located the CIF file. To do so, the reader must use a member function named \textbf{\texttt{setPath}}. Such member function expects a \textbf{\texttt{string}} class instance:
+After creating the instance, the user needs to tell to the instance where is located the CIF file. To do so, the user must use a member function named \textbf{\texttt{setPath}}. Such member function expects a \textbf{\texttt{string}} class instance:
 
 \begin{lstlisting}[frame=single,style=CPPStyle]
 std::string file_path;
@@ -1015,13 +1017,13 @@ file_path = "inv_x1.cif";
 cif_file.setPath ( file_path );
 \end{lstlisting}
 
-After doing this, the class instance has all the needed information to try to automatically load the file. To do so, the reader can use the member function \textbf{\texttt{loadFile}}. Such member function will try to perform all the operations related to the load of the file, from opening the file to converting the loaded information into class instances. A very basic (but not recommended) way to call such member function is to just perform the call:
+After doing this, the class instance has all the needed information to try to automatically load the file. To do so, the user can use the member function \textbf{\texttt{loadFile}}. Such member function will try to perform all the operations related to the load of the file, from opening the file to converting the loaded information into class instances. A very basic (but not recommended) way to call such member function is to just perform the call:
 
 \begin{lstlisting}[frame=single,style=CPPStyle]
 cif_file.loadFile ();
 \end{lstlisting}
 
-However, problems can be found when loading the file. The member function \textbf{\texttt{loadFile}} has a return value that can inform to the reader of the result of the loading process. The returned value is a member of an enum structure, named \textbf{\texttt{LoadStatus}}. Such enum is declared inside the \textbf{\texttt{File}} class, and is accesible without an instance. By design, there are only four possible return values of the call to load the file. Those possible values are:
+However, problems can be found when loading the file. The member function \textbf{\texttt{loadFile}} has a return value that can inform to the user of the result of the loading process. The returned value is a member of an enum structure, named \textbf{\texttt{LoadStatus}}. Such enum is declared inside the \textbf{\texttt{File}} class, and is accessible without an instance. By design, there are only four possible return values of the call to load the file. Those possible values are:
 
 \begin{itemize}
 	\item \textbf{\texttt{AllOk}}: Such value is returned if there was found no error.
@@ -1505,10 +1507,26 @@ The LibOpenCIF library provides to the user some special fields defined under th
 All these fields are intended to provide extra information to the reader when using the library, and to be able to identify the library if needed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{How to validate a single string}
+\subsection{How to validate and clean a single string}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The \textbf{\texttt{File}} class provides a public and static member function intended to be used by the reader to validate, on demand, a single string. The validation performed can tell to the reader if such string represents a valid CIF command.
+
+To do such operation, the user can use the static member functions \textbf{\texttt{isCommandValid}} and \textbf{\texttt{cleanCommand}} to validate and clean a string command, respectively.
+
+The first member function, \textbf{\texttt{isCommandValid}}, takes as argument a single \textbf{\texttt{string}} class instance. This member function will apply the Finiste State Machine found within the library and will return a bool value. A \textbf{\texttt{true}} value means that the string represent a valid CIF command. A \textbf{\texttt{false}} value means that the string doesn't represent a valid CIF command.
+
+Once a command is validated, the user can use the second member function to clean the string. The member function \textbf{\texttt{cleanCommand}} takes as argument a previously validated string and performs all the cleaning operations needed.
+
+\IconNote
+	{warning}
+	{Not validating the commands}
+	{Is never recommended to try to clean a command that hasn't been validated previously. Even if the user has manually validated the command, the rules applied to the strings can differ.}
+	
+\IconNote
+	{error}
+	{Cleaning non-validated commands}
+	{If the user calls the cleaning member function with a string that has not been validated, such string can contain errors. The cleaning member function doesn't perform any validation process, so, if an error is found (due to an error in the string), the application running can crash.}
 
 \renewcommand\chapterillustration{images/chapter03-cover}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

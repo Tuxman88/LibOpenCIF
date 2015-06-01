@@ -26,7 +26,7 @@
 \contentsline {section}{\numberline {2.6}Using the class instances created}{32}
 \contentsline {section}{\numberline {2.7}Extra components accesible by the user}{35}
 \contentsline {subsection}{\numberline {2.7.1}Information about the library}{35}
-\contentsline {subsection}{\numberline {2.7.2}How to validate a single string}{36}
+\contentsline {subsection}{\numberline {2.7.2}How to validate and clean a single string}{36}
 \contentsline {chapter}{\chapternumberline {3}Technical documentation}{37}
 \contentsline {section}{\numberline {3.1}The CIF format}{38}
 \contentsline {section}{\numberline {3.2}Validation of a CIF file}{38}

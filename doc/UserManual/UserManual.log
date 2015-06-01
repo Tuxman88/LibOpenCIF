@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.21)  6 FEB 2015 12:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.31)  31 MAY 2015 20:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **UserManual.tex
 (./UserManual.tex
 LaTeX2e <2011/06/27>
-Babel <3.9k> and hyphenation patterns for 5 languages loaded.
+Babel <3.9k> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/memoir/memoir.cls
 Document Class: memoir 2013/05/30 v3.7b configurable book, report, article docu
 ment class
@@ -1277,166 +1277,181 @@ Package pdftex.def Info: images/icon-error.png used on input line 539.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [6 <./images/icon-info.png> <./images/icon-warning.png> <./images/icon-error.p
 ng>]
-<images/chapter02-cover.jpg, id=62, 1027.84pt x 770.88pt>
+<images/chapter02-cover.jpg, id=63, 1027.84pt x 770.88pt>
 File: images/chapter02-cover.jpg Graphic file (type jpg)
 
 <use images/chapter02-cover.jpg>
-Package pdftex.def Info: images/chapter02-cover.jpg used on input line 571.
+Package pdftex.def Info: images/chapter02-cover.jpg used on input line 573.
 (pdftex.def)             Requested size: 614.59148pt x 460.94362pt.
  [7
 
  <./images/chapter02-cover.jpg>]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 583.
+(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 585.
  [8]
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 657.
+Package pdftex.def Info: images/icon-info.png used on input line 659.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 683.
+Package pdftex.def Info: images/icon-warning.png used on input line 685.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [9]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 707.
+Package pdftex.def Info: images/icon-warning.png used on input line 709.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 714.
+Package pdftex.def Info: images/icon-info.png used on input line 716.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 719.
+Package pdftex.def Info: images/icon-info.png used on input line 721.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-error.png Graphic file (type png)
  <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 730.
+Package pdftex.def Info: images/icon-error.png used on input line 732.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [10]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 748.
+Package pdftex.def Info: images/icon-warning.png used on input line 750.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 753.
+Package pdftex.def Info: images/icon-info.png used on input line 755.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [11]
 (./examples/chapter2-example1.cc [12])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 862.
+Package pdftex.def Info: images/icon-info.png used on input line 864.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [13]
 (./examples/chapter2-example2.cc)
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 891.
+Package pdftex.def Info: images/icon-warning.png used on input line 893.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 914.
+Package pdftex.def Info: images/icon-warning.png used on input line 916.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 921.
+Package pdftex.def Info: images/icon-info.png used on input line 923.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [14]
 (./examples/chapter2-example3.cc) [15] (./examples/chapter2-example4.cc
 [16])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1006.
+Package pdftex.def Info: images/icon-info.png used on input line 1008.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [17]
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1068.
+Package pdftex.def Info: images/icon-info.png used on input line 1070.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 
 (./examples/chapter2-example5.cc [18])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1079.
+Package pdftex.def Info: images/icon-info.png used on input line 1081.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [19]
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1119.
+Package pdftex.def Info: images/icon-error.png used on input line 1121.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1124.
+Package pdftex.def Info: images/icon-info.png used on input line 1126.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [20]
 (./examples/chapter2-example6.cc)
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1149.
+Package pdftex.def Info: images/icon-info.png used on input line 1151.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [21]
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1203.
+Package pdftex.def Info: images/icon-error.png used on input line 1205.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1212.
+Package pdftex.def Info: images/icon-warning.png used on input line 1214.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [22]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1244.
+Package pdftex.def Info: images/icon-warning.png used on input line 1246.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1249.
+Package pdftex.def Info: images/icon-warning.png used on input line 1251.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [23]
 (./examples/chapter2-example7.cc [24])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1292.
+Package pdftex.def Info: images/icon-info.png used on input line 1294.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1297.
+Package pdftex.def Info: images/icon-error.png used on input line 1299.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [25]
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1314.
+Package pdftex.def Info: images/icon-info.png used on input line 1316.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1325.
+Package pdftex.def Info: images/icon-warning.png used on input line 1327.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  (./examples/chapter2-example8.cc [26] [27])
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1346.
+Package pdftex.def Info: images/icon-warning.png used on input line 1348.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  (./examples/chapter2-example9.cc [28] [29])
 (./examples/chapter2-example10.cc [30] [31]) [32] [33]
-(./examples/chapter2-example11.cc [34]) [35] [36]
-<images/chapter03-cover.jpg, id=159, 1027.84pt x 770.88pt>
+(./examples/chapter2-example11.cc [34]) [35]
+Overfull \hbox (4.68819pt too wide) in paragraph at lines 1515--1516
+[]\OT1/lmr/m/n/10.95 To do such op-er-a-tion, the user can use the static mem-b
+er func-tions \OT1/lmtt/b/n/10.95 isCommandValid \OT1/lmr/m/n/10.95 and \OT1/lm
+tt/b/n/10.95 cleanCommand
+ []
+
+File: images/icon-warning.png Graphic file (type png)
+<use images/icon-warning.png>
+Package pdftex.def Info: images/icon-warning.png used on input line 1524.
+(pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
+File: images/icon-error.png Graphic file (type png)
+ <use images/icon-error.png>
+Package pdftex.def Info: images/icon-error.png used on input line 1529.
+(pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
+ [36]
+<images/chapter03-cover.jpg, id=160, 1027.84pt x 770.88pt>
 File: images/chapter03-cover.jpg Graphic file (type jpg)
 
 <use images/chapter03-cover.jpg>
-Package pdftex.def Info: images/chapter03-cover.jpg used on input line 1523.
+Package pdftex.def Info: images/chapter03-cover.jpg used on input line 1541.
 (pdftex.def)             Requested size: 614.59148pt x 460.94362pt.
  [37
 
@@ -1444,7 +1459,7 @@ Package pdftex.def Info: images/chapter03-cover.jpg used on input line 1523.
 [39] [40] [41]
 \GPT@outputbox=\box64
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 1797.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 1815.
 
  [42
 
@@ -1454,17 +1469,17 @@ LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
 
  (./UserManual.aux) ) 
 Here is how much of TeX's memory you used:
- 20794 strings out of 494963
- 394335 string characters out of 6179576
- 711689 words of memory out of 5000000
- 23584 multiletter control sequences out of 15000+600000
- 87119 words of font info for 58 fonts, out of 8000000 for 9000
- 40 hyphenation exceptions out of 8191
- 60i,18n,68p,800b,2364s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 20796 strings out of 495025
+ 394362 string characters out of 6181515
+ 711547 words of memory out of 5000000
+ 23577 multiletter control sequences out of 15000+600000
+ 87430 words of font info for 59 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 60i,18n,68p,730b,2364s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-maths
 y.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/t
-exlive/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texlive/texmf-di
-st/fonts/enc/dvips/lm/lm-rmtt.enc}</usr/share/texlive/texmf-dist/fonts/type1/pu
+exlive/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texlive/texmf-dist
+/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/lm/lmbsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/share/texlive/texmf-
@@ -1478,11 +1493,12 @@ f-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
 hare/texlive/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/lm/lmtk10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/l
-m/lmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on UserManual.pdf (46 pages, 10733284 bytes).
+m/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on UserManual.pdf (46 pages, 10756618 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 166 compressed objects within 2 object streams
+ 248 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
