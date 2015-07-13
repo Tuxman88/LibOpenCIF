@@ -771,13 +771,6 @@ After running the \textbf{\texttt{rm}} command as root, the system might ask you
 
 If the previous steps were performed correctly and none error was found, the library was completely and successfuly uninstalled from your system.
 
-%\begin{figure}
-%	\centering
-%	\label{fig:union-pn}
-%	\includegraphics[scale=0.35, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
-%	\caption{Some figure.}
-%\end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Compiling a program with the library}\label{Compiling-a-program}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1545,6 +1538,44 @@ All the contents are explained as precisely and with as much detail as possible,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In this section, the reader will learn information related to the CIF format itself. Here, will be explained various concepts related to how the format works. However, this section is not an official technical description of the format. The reader can find online various sites where the format is explained in greatter detail.
+
+The CIF format describes the physical layout of an Integrated Circuit design. An Integrated Circuit design can be seen as a collection of cells. Each cell can be seen, in turn, as a smaller collection of other cells, up until we reach a point where a cell is a very basic and specific mathematical operation, like an AND or an OR. These basic components, in turn, are made from various layers of materials, each being composed by some basic figures, like squares, rectangles, circles and polygons. A CIF file is just one file format created to store such physical distribution (layout) of figures that form an Integrated Circuit design. In the figure \ref{fig:layers} can be seen an example of this concept, where a basic cell (an inversor) is separated in all the different layers (materials) that form it.
+
+\begin{figure}
+	\centering
+	\label{fig:layers}
+	\includegraphics[scale=0.35, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
+	\caption{Basic inversor where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
+\end{figure}
+
+All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The commands can be of various types. The most basic commmands are those that define basic figures. Such basic figures are:
+
+\begin{itemize}
+\item Round Flash
+\item Box
+\item Wire
+\item Polygon
+\end{itemize}
+
+The first figure, a Round Flash, in a CIF file can be seen as a mere \textbf{circle}. The circle, however, has some properties that need to be specified, and those are:
+
+\begin{itemize}
+\item Position
+\item Diameter
+\end{itemize}
+
+The position of a Round Flash can be specified by its coordinates, which defines the position of the circle, relative to the lower left corner of the design (the X axis increases to the right, and the Y axis increases to the top). The diameter defines how wide the circle is. A position, in the CIF format, can be seen as a \textbf{point}. A diamenter, in the CIF format, can be seen as an \textbf{integer}. So, a Round Flash command can be defined in BNF as follows:\\
+
+\texttt{'R' [Blank] Integer Separator Point}\\
+
+The command must start with a constant capital R character, optionally followed by one or more \textbf{Blank} characters. Then, comes an \textbf{Integer} value, having one or more \textbf{Separator} characters between it and the following \textbf{Point}.
+
+A \textbf{Blank} character can be defined as any ASCII character, except digits (\textbf{\textit{0-9}}), upper case characters (\textbf{\textit{A-Z}}), minus (-), parentheses (\textbf{\textit{'('}} or \textbf{\textit{')'}}) or semicolons (\textbf{\textit{';'}}). A \textbf{Separator} can be defined as a \textbf{Blank} character or an upper case character (\textbf{\textit{A-Z}}). In this document, the previous definition doesn't introduce contradictions since the \textbf{Separator} must override the \textit{upper case} character restriction of the \textbf{Blank} characters.
+
+An \textbf{Integer} value can be defined as any sequence of digits (0-9). Is important to note that the CIF format doesn't provide a direct restriction of the length of the values, so, in theory, a file can define an infinitely large number and still be valid for the CIF format. This detail is adressed in later sections. In this case, since this value is the diameter of the Round Flash, it can't be negative.
+
+A \textbf{Point} can be defined as two \textbf{Integer} values, that can be negative (start with a minus character), and that need to have at least one \textbf{Separator} character between them.
+ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Validation of a CIF file}\label{Validation-of-a-cif-file}
