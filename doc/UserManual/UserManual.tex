@@ -418,7 +418,7 @@ LibOpenCIF is a C++ library intended to help the users with the task of reading 
 
 For GNU/Linux and Mac OS X systems, the library can be compiled and installed into the system. After that, will be available as a static library. This means that any program compiled with it will be able to run even if the library is uninstalled from the system. This is also due to the fact that the library is very small.
 
-For Microsoft Windows (and, in general, for all the systems if needed) the library has a two-file presentation. This means that, instead of compiling the library into a DLL file, can be added directly to the file structure of programs as a regular piece of code (a source and header files are included). This means that all kinds of projects in C++ can use the library. This presentation is intented to help Microsoft Windows users, and also, if required, be of use for other systems.
+For Microsoft Windows (and, in general, for all the systems if needed) the library has a two-file presentation. This means that, instead of compiling the library into a DLL file, can be added directly to the file structure of programs as a regular piece of code (a source and header files are included). This means that all kinds of projects in C++ can use the library. This presentation is intended to help Microsoft Windows users, and also, if required, be of use for other systems.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Why create LibOpenCIF?}\label{Why-create-LibOpenCIF}
@@ -437,7 +437,7 @@ The LibOpenCIF library is intended to be able to:
 \begin{itemize}
 	\item Open a desired CIF file.
 	
-	\item Try to load its contents, validating them using a specialy designed Finite State Machine.
+	\item Try to load its contents, validating them using a specially designed Finite State Machine.
 	
 	\item Clean and format the contents of the file loaded into easy-to-process strings.
 	
@@ -445,10 +445,10 @@ The LibOpenCIF library is intended to be able to:
 	
 	\item Provide a manual or full-automatic loading process.
 	
-	\item Be partialy relaxed or completely strict when validating the contents of the file.
+	\item Be partially relaxed or completely strict when validating the contents of the file.
 \end{itemize}
 
-Also, the library can provide to the user these next services, being them not directly intented to:
+Also, the library can provide to the user these next services, being them not directly intended to:
 
 \begin{itemize}
 	\item If the input file has the expected format, the user can read its contents directly into memory using class instances.\footnote{There is no automatic detection of which command is going to be loaded, that is a task left to the user. So, when using this capability, the user needs to know in advance which command is going to be the next, so he can use the correct class instance.}
@@ -457,11 +457,11 @@ Also, the library can provide to the user these next services, being them not di
 	\item Is possible to clean commands (in string form).
 \end{itemize}
 
-Finally, the library isn't intented to provide these services, since they are beyond the original scope of the design:
+Finally, the library isn't intended to provide these services, since they are beyond the original scope of the design:
 
 \begin{itemize}
-	\item The library will never convert values into floating point representations.\footnote{The values on an integrated circuit design, by definition, need floating point values for positions and sizes. Since those values are very important, and any error related to precision can affect negatively a design, the CIF format doesn't handle directly those values. In exchange, the format manages all of those values using \textbf{\textit{fractions}}, making the values error-less and leaving the convertion and precision in hands of the reader.} All of the values found in the input file will be stored and provided to the user in form of fractions.
-	\item Validation of the design stored (looking for missing commands, logical errors, unused cells, cyclic calls, etc). The library is intented only to load and validate the commands, not the structure of the design. That is a task for which the user is responsible.
+	\item The library will never convert values into floating point representations.\footnote{The values on an integrated circuit design, by definition, need floating point values for positions and sizes. Since those values are very important, and any error related to precision can affect negatively a design, the CIF format doesn't handle directly those values. In exchange, the format manages all of those values using \textbf{\textit{fractions}}, making the values error-less and leaving the conversion and precision in hands of the reader.} All of the values found in the input file will be stored and provided to the user in form of fractions.
+	\item Validation of the design stored (looking for missing commands, logical errors, unused cells, cyclic calls, etc). The library is intended only to load and validate the commands, not the structure of the design. That is a task for which the user is responsible.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -475,7 +475,7 @@ There are various reasons why you can choose LibOpenCIF above other solutions to
 	\item You can customize and extend the library. If the library can do more for you, and you know how to extend the library, then you can do it. Being released under the GPL license means that you can modify and extend the library as much as you want. You just need to give the proper credits to the original author.
 	\item You will not need to implement this complex task by yourself. Most of the public projects that manage circuit designs in CIF format (Open Source or private) use their own routines to load the contents of the files. If you are starting a new project, you can have this library as a starting point.
 	\item Easy to use. The library was designed to be as simple as possible.
-	\item Portable. The library is programmed using pure standard C++. That means that you will not need external libraries to compile it, making the library platform independant.
+	\item Portable. The library is programmed using pure standard C++. That means that you will not need external libraries to compile it, making the library platform independent.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -491,17 +491,17 @@ Is expected to be released a new library version for other major languages, sinc
 Is expected that the user reads all the contents of this document, and even in that case, the themes are ordered in incremental order. There are the contents expected to be covered in this document:
 
 \begin{itemize}
-	\item Chapter 2 (User documentation): In this chapter, the user will learn basic aspects of the usage of the library, from how to install and uninstall it, to how to compile and use the capabilities provided in example programs. All of the themes covered are platform independent, exept for the ones related to how to install, uninstall and compile (examples for every major operative system considered are provided).
-	\item Chapter 3 (Technical documentation): In this chapter, the user will learn advanced topics related to the operation and design of the library. Among other themes, will be explained in detail how the library loads and validates the contents of the files (complete Finite State Machine included), how the commands are cleaned, the reasons behind the design desicions and a complete UML map of the classes and their relations.
+	\item Chapter 2 (User documentation): In this chapter, the user will learn basic aspects of the usage of the library, from how to install and uninstall it, to how to compile and use the capabilities provided in example programs. All of the themes covered are platform independent, except for the ones related to how to install, uninstall and compile (examples for every major operative system considered are provided).
+	\item Chapter 3 (Technical documentation): In this chapter, the user will learn advanced topics related to the operation and design of the library. Among other themes, will be explained in detail how the library loads and validates the contents of the files (complete Finite State Machine included), how the commands are cleaned, the reasons behind the design decisions and a complete UML map of the classes and their relations.
 \end{itemize}
 
 In the document, when speaking about code, the user can expect to see sections like this one:
 
 \lstinputlisting[caption={Example program}, style=CPPStyle]{examples/chapter1-example1.cc}
 
-In the previous example, can be seen how the code will look once an example is provided. The code is in C++. The code examples are intended to be stored in plain text files. Those code files can have various filename extentions, depending if they are source or header files. Some of the supported file extentions for C++ source files are \textbf{.cc, .C,} and \textbf{.cpp}. All of them are valid (the second one has the problem of being easily confused with a C language source code file). In this document, we will be using the \textbf{.cc} file extention for source files, and the \textbf{.hh} file extention for the header files (instead of the popular \textbf{.hpp} used by some projects). 
+In the previous example, can be seen how the code will look once an example is provided. The code is in C++. The code examples are intended to be stored in plain text files. Those code files can have various filename extensions, depending if they are source or header files. Some of the supported file extensions for C++ source files are \textbf{.cc, .C,} and \textbf{.cpp}. All of them are valid (the second one has the problem of being easily confused with a C language source code file). In this document, we will be using the \textbf{.cc} file extension for source files, and the \textbf{.hh} file extension for the header files (instead of the popular \textbf{.hpp} used by some projects). 
 
-In this document, the user will also find system commands. Those system commands are intented to be entered and executed in terminal emulators. In GNU/Linux, Apple Mac OS X and similar systems, some examples of those terminal emulators are Konsole, Gnome Terminal, XTERM and Terminal. In Microsoft Windows systems, there are, at least, two options to use by the user: the Windows CMD or Windows PowerShell are the most common choices on terminals on these systems.
+In this document, the user will also find system commands. Those system commands are intended to be entered and executed in terminal emulators. In GNU/Linux, Apple Mac OS X and similar systems, some examples of those terminal emulators are Konsole, Gnome Terminal, XTERM and Terminal. In Microsoft Windows systems, there are, at least, two options to use by the user: the Windows CMD or Windows PowerShell are the most common choices on terminals on these systems.
 
 When needed, there will be shown to the user system commands. The next is an example of a command for GNU/Linux, Apple Mac OS X or similar systems:
 
@@ -519,7 +519,7 @@ The previous example shows how a command can be executed and some of the output.
 > 
 \end{lstlisting}
 
-The previous example shows how a command can be exeucted for Microsoft Windows systems. These commands can be identified as to be executed in such systems because the command starts with a \textbf{\textgreater} character. Such caracter is commonly used in terminals of these systems.
+The previous example shows how a command can be executed for Microsoft Windows systems. These commands can be identified as to be executed in such systems because the command starts with a \textbf{\textgreater} character. Such character is commonly used in terminals of these systems.
 
 Finally, in this document, the user will find some special notes intended to help understanding some special concepts or critical information. The next boxes take care of various information types:
 
@@ -578,7 +578,7 @@ In this chapter, the user will learn all the concepts and procedures needed to u
 
 The installation procedure is used only when a static library is needed, and such version is intended to be used only on the GNU/Linux and Apple Mac OS X systems. The library  is not intended to be installed on Microsoft Windows systems, since in such systems the library must be used as a two-file part of the user projects (see section \ref{Compiling-On-Windows} to learn how to compile a project using the library).
 
-These installation steps are intended to be used with the source version of the library. If the user already have a pre-compiled version (as static or dinamic library), follow its specific steps to install the library.
+These installation steps are intended to be used with the source version of the library. If the user already have a pre-compiled version (as static or dynamic library), follow its specific steps to install the library.
 
 To being able to install the library, the user need to have some components before starting.
 
@@ -655,7 +655,7 @@ $
 
 \IconNote
 	{info}
-	{Compilling in 32 bit and 64 bit systems}
+	{Compiling in 32 bit and 64 bit systems}
 	{As can be noticed, the command output in the example displays some references to \textbf{\texttt{lib64}}. Such references can be different if the user is compiling for a 32 bit system (these examples where captured in a 64 bit machine).}
 
 After running the command, run this new one in the same folder:
@@ -769,7 +769,7 @@ $
 
 After running the \textbf{\texttt{rm}} command as root, the system might ask you if you really want to remove the file. Answer yes (since it is no longer needed).
 
-If the previous steps were performed correctly and none error was found, the library was completely and successfuly uninstalled from your system.
+If the previous steps were performed correctly and none error was found, the library was completely and successfully uninstalled from your system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Compiling a program with the library}\label{Compiling-a-program}
@@ -949,7 +949,7 @@ $ gcc main.cc -o program.bin libopencif.o
 $
 \end{lstlisting}
 
-The first command compiles the source file of the library into object code (with \textbf{\texttt{.o}} file extention). The second command creates the final binary file, compiling the main source file and linking it with the object code file created previously.
+The first command compiles the source file of the library into object code (with \textbf{\texttt{.o}} file extension). The second command creates the final binary file, compiling the main source file and linking it with the object code file created previously.
 
 To run the binary file, use the following command:
 
@@ -1080,12 +1080,12 @@ When loading the file, the member function \textbf{\texttt{loadFile}} is respons
 	
 	\item Syntax validation. The second operation is the loading of the file itself. Using a  \textbf{Finite State Machine} designed to perform this task, the contents of the file are loaded, character by character, and validated by the aforementioned \textbf{Finite State Machine}. This step can face two problems. The first one is finding an incorrect command. In such case, the value \textbf{\texttt{IncorrectInputFile}} will be returned. The second problem can be detecting the lack of an End command, and in this case, the value \textbf{\texttt{IncompleteInputFile}} will be returned.
 	
-	\item Command cleaning. The third step on the loading chain is the command cleaning. If none error was found in the previous steps, all the commands found in the file are cleaned. This means that the commands are formated to match a specific series of rules defined by the library author (more of this in the section \ref{Cleaning-process-of-commands}). This step can't fail since all the loaded commands were validated by the previous step, so, this step can't generate an error.
+	\item Command cleaning. The third step on the loading chain is the command cleaning. If none error was found in the previous steps, all the commands found in the file are cleaned. This means that the commands are formatted to match a specific series of rules defined by the library author (more of this in the section \ref{Cleaning-process-of-commands}). This step can't fail since all the loaded commands were validated by the previous step, so, this step can't generate an error.
 	
-	\item Command convertion. The fourth and last step on the loading chain is the command convertion. Here, all the commands loaded in the step two, that were already cleaned in the step three, are parsed and converted into class instances. Since the commands for this step are already validated and cleaned, this step can't generate an error.
+	\item Command conversion. The fourth and last step on the loading chain is the command conversion. Here, all the commands loaded in the step two, that were already cleaned in the step three, are parsed and converted into class instances. Since the commands for this step are already validated and cleaned, this step can't generate an error.
 \end{itemize}
 
-If the loading process finds an error (like a syntax validation error), the whole loading chain will stop, so the remaining steps will not be performed. This is the default behavior, but the reader has the choice to omit some of the errors and instruct the member function to load as much as possible. To do so, the reader can pass to the call to \textbf{\texttt{loadFile}} a special argument value that makes it skip as many errors as possible.
+If the loading process finds an error (like a syntax validation error), the whole loading chain will stop, so the remaining steps will not be performed. This is the default behaviour, but the reader has the choice to omit some of the errors and instruct the member function to load as much as possible. To do so, the reader can pass to the call to \textbf{\texttt{loadFile}} a special argument value that makes it skip as many errors as possible.
 
 To instruct the call to \textbf{\texttt{loadFile}} to skip as many errors as possible, the reader can use one of two possible values defined as enum constants within the \textbf{\texttt{File}} class:
 
@@ -1111,14 +1111,14 @@ After this, the operation of syntax validation can find invalid commands. To ski
 \IconNote
 	{error}
 	{Forcing the load of a file}
-	{Even if possible, is recommended that the reader doesn't use the error skiping capabilities of the library when using the automatic loading. Instead of that, is highly recommended to use the manual loading (see later sections).}
+	{Even if possible, is recommended that the reader doesn't use the error skipping capabilities of the library when using the automatic loading. Instead of that, is highly recommended to use the manual loading (see later sections).}
 	
 \IconNote
 	{info}
 	{Catching the result}
-	{Even if the library is loading as much information as possible (skiping errors), the call to \textbf{\texttt{loadFile}} will return a value describing the result of the operation. Is recommended to store such return value and do something according to it.}
+	{Even if the library is loading as much information as possible (skipping errors), the call to \textbf{\texttt{loadFile}} will return a value describing the result of the operation. Is recommended to store such return value and do something according to it.}
 	
-In later sections will be discused how to use the information loaded by the \textbf{\texttt{File}} class.
+In later sections will be discussed how to use the information loaded by the \textbf{\texttt{File}} class.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Manual loading}\label{Manual-loading}
@@ -1140,8 +1140,8 @@ OpenCIF::File cif_file;
 
 \IconNote
 	{info}
-	{Using dinamic memory}
-	{The reader can use dinamic memory if needed. All the classes support the creation of instances as pointers. In our examples, we are using regular variables just for simplicity.}
+	{Using dynamic memory}
+	{The reader can use dynamic memory if needed. All the classes support the creation of instances as pointers. In our examples, we are using regular variables just for simplicity.}
 
 In this case, we are creating a variable named \textbf{\texttt{cif\_file}}. Such class instance will help us to load the CIF file.
 
@@ -1195,7 +1195,7 @@ else if ( status == OpenCIF::File::CantOpenInputFile )
 \IconNote
 	{error}
 	{Opening the input file}
-	{This operation is critical. If the input file can't be opened, there is nothing that the library can do to continue. Is responsability of the reader to validate the result of the call and take the needed actions to try to solve the problem.}
+	{This operation is critical. If the input file can't be opened, there is nothing that the library can do to continue. Is responsibility of the reader to validate the result of the call and take the needed actions to try to solve the problem.}
 	
 Once the file is opened, the following step to do is to load and validate the contents of the file. To do so, the \textbf{\texttt{File}} class offers to the reader a member function named \textbf{\texttt{validateSyntax}}. Such member function, when called, will try to load character by character the contents of the file and validate them using a \textbf{Finite State Machine} designed for this task.
 
@@ -1206,7 +1206,7 @@ The job of the aforementioned member function is to load into memory the command
 	{Commands loaded, not cleaned}
 	{Up to this point, the commands loaded into memory are \textbf{valid}, but they have the same format as in the CIF file itself. This means that its not recommended to use them yet.}
 	
-The call to the member function \textbf{\texttt{validateSyntax}} can return three different values. All of them, as with the call to \textbf{\texttt{openFile}}, are constant values defined as an enum structure under the \textbf{\texttt{File}} class and are accesible without an instance. The possible return values of this call are:
+The call to the member function \textbf{\texttt{validateSyntax}} can return three different values. All of them, as with the call to \textbf{\texttt{openFile}}, are constant values defined as an enum structure under the \textbf{\texttt{File}} class and are accessible without an instance. The possible return values of this call are:
 
 \begin{itemize}
 	\item \textbf{\texttt{AllOk}}: This value is returned if the call ends without problems and none error was found when validating the contents of the file.
@@ -1236,7 +1236,7 @@ else if ( status == OpenCIF::File::IncorrectInputFile )
 \IconNote
 	{warning}
 	{No End commands}
-	{Even when the lack of an End command isn't an error by itself, the CIF format defines the need of such command to know when a file ends. The reader has the responsability of taking the needed actions if such event is present (like continuing or stoping the loading).}
+	{Even when the lack of an End command isn't an error by itself, the CIF format defines the need of such command to know when a file ends. The reader has the responsibility of taking the needed actions if such event is present (like continuing or stopping the loading).}
 	
 \IconNote
 	{warning}
@@ -1245,7 +1245,7 @@ else if ( status == OpenCIF::File::IncorrectInputFile )
 	
 As part of the loading and validation process, the \textbf{\texttt{File}} class stores in memory all the commands found and validated. Even if an error is found, the commands loaded remains on memory and can be used by the user if needed.
 
-The next step on the loading process is the command cleaning. This step refers to the process of formating the loaded commands with special rules defined by the author. The cleaning process removes any unnecessary characters from the commands and adds/removes whitespaces as needed. Refer to the section \ref{Cleaning-process-of-commands} for more information about the cleaning process.
+The next step on the loading process is the command cleaning. This step refers to the process of formatting the loaded commands with special rules defined by the author. The cleaning process removes any unnecessary characters from the commands and adds/removes whitespaces as needed. Refer to the section \ref{Cleaning-process-of-commands} for more information about the cleaning process.
 
 To perform the cleaning step, the reader must use the member function \textbf{\texttt{cleanCommands}}. Such member function will clean any command stored in memory. Since the commands loaded into memory are already validated, this operation isn't expected to generate any kind of error, so, the reader will not need to take care of any return value:
 
@@ -1253,7 +1253,7 @@ To perform the cleaning step, the reader must use the member function \textbf{\t
 cif_file.cleanCommands ();
 \end{lstlisting}
 
-The final step on the loading process is the convertion of the commands loaded into class instances. To perform such operation, the reader needs to use the member function \textbf{\texttt{convertCommands}}. This will create a new class instance for every command loaded while storing them in a new list (in the same order).
+The final step on the loading process is the conversion of the commands loaded into class instances. To perform such operation, the reader needs to use the member function \textbf{\texttt{convertCommands}}. This will create a new class instance for every command loaded while storing them in a new list (in the same order).
 
 \begin{lstlisting}[frame=single,style=CPPStyle]
 cif_file.convertCommands ();
@@ -1301,7 +1301,7 @@ Babcharacters1000,,1000this.is.an.example2000ofvalid.commands2000that.are.ugly;
 
 Obviously, a CAD application or any software that creates CIF files, isn't expected to create commands like this one (with "trash" as separation characters). However, this doesn't prevent that the CAD applications use a wide variety of characters to separate components of the commands, like commas, or to leave values togheter when possible.
 
-The second possible state of the commands are the \textbf{clean commands}. Such commands are the same as the raw commands, but formated following rules defined by the author (see section \ref{Cleaning-process-of-commands}).
+The second possible state of the commands are the \textbf{clean commands}. Such commands are the same as the raw commands, but formatted following rules defined by the author (see section \ref{Cleaning-process-of-commands}).
 
 \IconNote
 	{info}
@@ -1310,14 +1310,14 @@ The second possible state of the commands are the \textbf{clean commands}. Such 
 	
 To get access to the raw commands, the reader must use the manual loading process (see section \ref{Manual-loading}). The reader is not expected to get access to the raw commands if the automatic loading process is used.
 
-Using the manual loading process, the reader can have access to the raw commands right after the second step of the loading (on which the contents of the file are validated). After the call to \textbf{\texttt{validateSyntax}}, the commands found are already stored in memory and are accesible through the call to \textbf{\texttt{getRawCommands}}.
+Using the manual loading process, the reader can have access to the raw commands right after the second step of the loading (on which the contents of the file are validated). After the call to \textbf{\texttt{validateSyntax}}, the commands found are already stored in memory and are accessible through the call to \textbf{\texttt{getRawCommands}}.
 
 Is important to mention that, if the reader calls the member function \textbf{\texttt{cleanCommands}}, the raw commands will be \textbf{replaced} in memory with the clean ones. So, if the raw commands are needed by the reader, a call to \textbf{\texttt{getRawCommands}} must be performed before calling \textbf{\texttt{cleanCommands}} (which is highly recommended to perform before calling \textbf{\texttt{convertCommands}}).
 
 \IconNote
 	{warning}
 	{Calling \textbf{\texttt{cleanCommands}} before \textbf{\texttt{convertCommands}}}
-	{Don't forget to call \textbf{\texttt{cleanCommands}} before calling \textbf{\texttt{convertCommands}}. Please, remember that the later operation depends on the correct formating of the commands to convert into class instances.}
+	{Don't forget to call \textbf{\texttt{cleanCommands}} before calling \textbf{\texttt{convertCommands}}. Please, remember that the later operation depends on the correct formatting of the commands to convert into class instances.}
 
 The following working example shows how to load a CIF file and have access to both versions of the commands, raw and clean. In the example, the program is just printing to the standard output the commands, side by side, to see the differences.
 
@@ -1333,14 +1333,14 @@ RAW:   DF;
 CLEAN: D F ;
 \end{lstlisting}
 
-As can be seen, part of the formating done by the cleaning process is assigning whitespaces to separate the components of the commands. This is explained in detail in the section \ref{Cleaning-process-of-commands}.
+As can be seen, part of the formatting done by the cleaning process is assigning whitespaces to separate the components of the commands. This is explained in detail in the section \ref{Cleaning-process-of-commands}.
 
 \IconNote
 	{warning}
 	{Using the raw commands}
-	{The usage of the raw commands is responsability of the reader. The author will not provide direct support about how to manage such commands.}
+	{The usage of the raw commands is responsibility of the reader. The author will not provide direct support about how to manage such commands.}
 
-To use the clean commands, however, the author recommends the usage of \textbf{input streams}, one powerful mechanism of C++. This option can take full advantage of the formating done to the commands. A second approach can be using tokenizer algorithms to split the strings using the whitespaces as tokenizer character.
+To use the clean commands, however, the author recommends the usage of \textbf{input streams}, one powerful mechanism of C++. This option can take full advantage of the formatting done to the commands. A second approach can be using tokenizer algorithms to split the strings using the whitespaces as tokenizer character.
 
 The following example uses the first suggestion, printing to the standard output the \textbf{Box} commands only, while converting, on the fly, it's values to integers.
 
@@ -1371,7 +1371,7 @@ As the reader can see, the usage of the commands is possible and made easy thank
 \section{Using the class instances created}\label{Using-the-class-instances-created}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The final step when loading a CIF file is the convertion of the string commands found and cleaned into class instances. These class instances represent the commands themselves, and they are intended to ease even more the process of accessing the values of the commands.
+The final step when loading a CIF file is the conversion of the string commands found and cleaned into class instances. These class instances represent the commands themselves, and they are intended to ease even more the process of accessing the values of the commands.
 
 To access the class instances, the reader must use the \textbf{\texttt{getCommands}} member function. The prototype of such member function is as follows:
 
@@ -1381,7 +1381,7 @@ std::vector< OpenCIF::Command* > getCommands ( void ) const;
 
 As can be seen, the call will return an instance of a \textbf{\texttt{vector}} class instance. Such \textbf{\texttt{vector}} stores pointers to a class named \textbf{\texttt{Command}}, which is the base class to all the classes that represent commands.
 
-Using such pointers and the polymorphism mechanisms that C++ allows, the reader can validate the type of each command and cast it into a derivate class pointer and use it as needed.
+Using such pointers and the polymorphism mechanisms that C++ allows, the reader can validate the type of each command and cast it into a derivative class pointer and use it as needed.
 
 So, the first step is to get a copy of the vector of pointers. Such task is done as in the next example:
 
@@ -1392,7 +1392,7 @@ commands = cif_file.getCommands ();
 
 After getting the commands, the reader can iterate over the pointers and validate the type of the commands stored. In this case, to do such task, the class \textbf{\texttt{Command}} has a polymorphic member function named \textbf{\texttt{type}}. Such member function will return a value of type \textbf{\texttt{CommandType}}, which is an enum structure defined whithin the \textbf{\texttt{Command}} class and is public.
 
-The enum structure \textbf{\texttt{CommandType}} has various constants defined. The following is a list of the constants intented to be used by the user (the list is not complete, since there are other constants defined used only by the library). Every constant represents a unique command type that can be found within a CIF file:
+The enum structure \textbf{\texttt{CommandType}} has various constants defined. The following is a list of the constants intended to be used by the user (the list is not complete, since there are other constants defined used only by the library). Every constant represents a unique command type that can be found within a CIF file:
 
 \begin{itemize}
 	\item \textbf{\texttt{Call}}
@@ -1453,7 +1453,7 @@ switch ( command->type () )
 
 As can be seen, a way to validate the type of the command is to use a switch conditional structure. In this case, we are validating only those command types that represent final commands (those found in the CIF file). We are using the default option to skip the remaining command types that are not intended to be used by the user.
 
-The next step is being able to cast the \textbf{\texttt{Command}} class pointer into the correct class pointer. In this case, the casting can be done without the use of complex mechanisms. A simple explicit cast when copying the pointer is enough. The following code example shows to how to convert a \textbf{\texttt{Command}} base pointer into a \textbf{\texttt{BoxCommand}} derivate class pointer:
+The next step is being able to cast the \textbf{\texttt{Command}} class pointer into the correct class pointer. In this case, the casting can be done without the use of complex mechanisms. A simple explicit cast when copying the pointer is enough. The following code example shows to how to convert a \textbf{\texttt{Command}} base pointer into a \textbf{\texttt{BoxCommand}} derivative class pointer:
 
 \begin{lstlisting}[frame=single,style=CPPStyle]
 OpenCIF::Command* command_pointer;
@@ -1507,7 +1507,7 @@ The \textbf{\texttt{File}} class provides a public and static member function in
 
 To do such operation, the user can use the static member functions \textbf{\texttt{isCommandValid}} and \textbf{\texttt{cleanCommand}} to validate and clean a string command, respectively.
 
-The first member function, \textbf{\texttt{isCommandValid}}, takes as argument a single \textbf{\texttt{string}} class instance. This member function will apply the Finiste State Machine found within the library and will return a bool value. A \textbf{\texttt{true}} value means that the string represent a valid CIF command. A \textbf{\texttt{false}} value means that the string doesn't represent a valid CIF command.
+The first member function, \textbf{\texttt{isCommandValid}}, takes as argument a single \textbf{\texttt{string}} class instance. This member function will apply the Finite State Machine found within the library and will return a bool value. A \textbf{\texttt{true}} value means that the string represent a valid CIF command. A \textbf{\texttt{false}} value means that the string doesn't represent a valid CIF command.
 
 Once a command is validated, the user can use the second member function to clean the string. The member function \textbf{\texttt{cleanCommand}} takes as argument a previously validated string and performs all the cleaning operations needed.
 
@@ -1526,29 +1526,29 @@ Once a command is validated, the user can use the second member function to clea
 \chapter{Technical documentation}\label{Technical-documentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, the reader will be able to learn various topics about how the library works, the design desicions made and the reasons behind them.
+In this chapter, the reader will be able to learn various topics about how the library works, the design decisions made and the reasons behind them.
 
-This chaper is expected to be extensive, so, the recommendation for the reader is to read carefully the contents of every section to be able to understand the concepts and themes that follow each one.
+This chapter is expected to be extensive, so, the recommendation for the reader is to read carefully the contents of every section to be able to understand the concepts and themes that follow each one.
 
-All the contents are explained as precisely and with as much detail as possible, so all the contents can be undestood.
+All the contents are explained as precisely and with as much detail as possible, so all the contents can be understood.
 \newpage 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The CIF format}\label{The-CIF-format}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, the reader will learn information related to the CIF format itself. Here, will be explained various concepts related to how the format works. However, this section is not an official technical description of the format. The reader can find online various sites where the format is explained in greatter detail.
+In this section, the reader will learn information related to the CIF format itself. Here, will be explained various concepts related to how the format works. However, this section is not an official technical description of the format. The reader can find on-line various sites where the format is explained in greater detail.
 
-The CIF format describes the physical layout of an Integrated Circuit design. An Integrated Circuit design can be seen as a collection of cells. Each cell can be seen, in turn, as a smaller collection of other cells, up until we reach a point where a cell is a very basic and specific mathematical operation, like an AND or an OR. These basic components, in turn, are made from various layers of materials, each being composed by some basic figures, like squares, rectangles, circles and polygons. A CIF file is just one file format created to store such physical distribution (layout) of figures that form an Integrated Circuit design. In the figure \ref{fig:layers} can be seen an example of this concept, where a basic cell (an inversor) is separated in all the different layers (materials) that form it.
+The CIF format describes the physical layout of an Integrated Circuit design. An Integrated Circuit design can be seen as a collection of cells. Each cell can be seen, in turn, as a smaller collection of other cells, up until we reach a point where a cell is a very basic and specific mathematical operation, like an AND or an OR. These basic components, in turn, are made from various layers of materials, each being composed by some basic figures, like squares, rectangles, circles and polygons. A CIF file is just one file format created to store such physical distribution (layout) of figures that form an Integrated Circuit design. In the figure \ref{fig:layers} can be seen an example of this concept, where a basic cell (an inverter) is separated in all the different layers (materials) that form it.
 
 \begin{figure}
 	\centering
 	\label{fig:layers}
 	\includegraphics[scale=0.35, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
-	\caption{Basic inversor where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
+	\caption{Basic inverter where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
 \end{figure}
 
-All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The commands can be of various types. The most basic commmands are those that define basic figures. Such basic figures are:
+All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The commands can be of various types. The most basic commands are those that define basic figures. Such basic figures are:
 
 \begin{itemize}
 \item Round Flash
@@ -1564,7 +1564,7 @@ The first figure, a Round Flash, in a CIF file can be seen as a mere \textbf{cir
 \item Diameter
 \end{itemize}
 
-The position of a Round Flash can be specified by its coordinates, which defines the position of the circle, relative to the lower left corner of the design (the X axis increases to the right, and the Y axis increases to the top). The diameter defines how wide the circle is. A position, in the CIF format, can be seen as a \textbf{point}. A diamenter, in the CIF format, can be seen as an \textbf{integer}. So, a Round Flash command can be defined in BNF as follows:\\
+The position of a Round Flash can be specified by its coordinates, which defines the position of the circle, relative to the lower left corner of the design (the X axis increases to the right, and the Y axis increases to the top). The diameter defines how wide the circle is. A position, in the CIF format, can be seen as a \textbf{point}. A diameter, in the CIF format, can be seen as an \textbf{integer}. So, a Round Flash command can be defined in BNF as follows:\\
 
 \texttt{'R' [Blank] Integer Separator Point}\\
 
@@ -1572,9 +1572,11 @@ The command must start with a constant capital R character, optionally followed 
 
 A \textbf{Blank} character can be defined as any ASCII character, except digits (\textbf{\textit{0-9}}), upper case characters (\textbf{\textit{A-Z}}), minus (-), parentheses (\textbf{\textit{'('}} or \textbf{\textit{')'}}) or semicolons (\textbf{\textit{';'}}). A \textbf{Separator} can be defined as a \textbf{Blank} character or an upper case character (\textbf{\textit{A-Z}}). In this document, the previous definition doesn't introduce contradictions since the \textbf{Separator} must override the \textit{upper case} character restriction of the \textbf{Blank} characters.
 
-An \textbf{Integer} value can be defined as any sequence of digits (0-9). Is important to note that the CIF format doesn't provide a direct restriction of the length of the values, so, in theory, a file can define an infinitely large number and still be valid for the CIF format. This detail is adressed in later sections. In this case, since this value is the diameter of the Round Flash, it can't be negative.
+An \textbf{Integer} value can be defined as any sequence of digits (0-9). Is important to note that the CIF format doesn't provide a direct restriction of the length of the values, so, in theory, a file can define an infinitely large number and still be valid for the CIF format. This detail is addressed in later sections. In this case, since this value is the diameter of the Round Flash, it can't be negative.
 
 A \textbf{Point} can be defined as two \textbf{Integer} values, that can be negative (start with a minus character), and that need to have at least one \textbf{Separator} character between them.
+
+The next figure, the Box, is basically a rectangle. A \textbf{Box} requires the following properties to be defined  
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
