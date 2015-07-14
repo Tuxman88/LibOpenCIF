@@ -306,6 +306,7 @@
 \makeatletter
 \edef\orig@output{\the\output}
 \output{\setbox\@cclv\vbox{\unvbox\@cclv\vspace{0pt plus 20pt}}\orig@output}
+\global\let\tikz@ensure@dollar@catcode=\relax
 \makeatother
 
 \frontmatter
@@ -1544,40 +1545,51 @@ The CIF format describes the physical layout of an Integrated Circuit design. An
 \begin{figure}
 	\centering
 	\label{fig:layers}
-	\includegraphics[scale=0.35, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
 	\caption{Basic inverter where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
 \end{figure}
 
-All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The commands can be of various types. The most basic commands are those that define basic figures. Such basic figures are:
+All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The following text defines the complete \textbf{BNF} (Backus Naur Form) description of the format\footnote{The format described in this document is not exactly the same as that described in the official documentation. The \textbf{BNF} description is adapted to the purposes of this document.}. The BNF is described using the following rules:
 
 \begin{itemize}
-\item Round Flash
-\item Box
-\item Wire
-\item Polygon
+\item The curly brackets represent a repetition of one or more of its contents.
+\item The brackets represents that its contents are optional (can or can't be present).
+\item A character within apostrophes means that it is a literal character.
+\item The parentheses represent selection between its contents (separated by pipes).
 \end{itemize}
 
-The first figure, a Round Flash, in a CIF file can be seen as a mere \textbf{circle}. The circle, however, has some properties that need to be specified, and those are:
+\begin{verbatim}
+FILE ::= {COMMAND}
+BLANK ::= Any ASCII except D, U, '-', '(', ')' or ';'
+DIGIT ::= Any digit from '0' to '9'
+UPPER ::= Any character from 'A' to 'Z'
+SEP ::= An UPPER or BLANK
+POINT ::= ['-'] {DIGIT} {SEP} ['-'] {DIGIT}
+INTEGER ::= {DIGIT}
+LAYERCHAR ::= A DIGIT, UPPER or '_'
+EXTCHAR ::= Any ASCII character except ';'
+COMMENTCHAR ::= Any ASCII character except '(' or ')'
+COMMAND ::= [{BLANK}] ( PRIMITIVE | CONTROL | EXTENSION | COMMENT )
+PRIMITIVE ::= ( POLYGON | BOX | ROUNDFLASH | WIRE )
+CONTROL ::= ( LAYER | SYMSTART | SYMEND | SYMDEL | CALL | END )
+POLYGON ::= 'P' [{BLANK}] POINT [{SEP POINT}] [{SEP}] ';'
+BOX ::= 'B' [{BLANK}] INTEGER {SEP} INTEGER {SEP} POINT [ {SEP} POINT [{SEP}] ] ';'
+ROUNDFLASH ::= 'R' [{BLANK}] INTEGER {SEP} POINT [{SEP}] ';'
+WIRE ::= 'W' [{BLANK}] INTEGER {SEP} POINT [{SEP POINT}] [{SEP}] ';'
+LAYER ::= 'L' [{BLANK}] {LAYERCHAR} [{BLANK}] ';'
+SYMSTART ::= 'D' [{BLANK}] 'S' [{SEP}] INTEGER [{SEP} INTEGER {SEP} INTEGER] [{SEP}] ';'
+SYMEND ::= 'D' [{BLANK}] 'F' [{SEP}] ';'
+SYMDEL ::= 'D' [{BLANK}] 'D' [{BLANK}] INTEGER [{SEP}] ';'
+CALL ::= 'C' [{BLANK}] INTEGER [{ [{BLANK}] ( TRANS | MIRROR | ROTATION ) }] [{BLANK}] ';'
+TRANS ::= 'T' [{BLANK}] POINT
+MIRROR ::= 'M' [{BLANK}] ('X' | 'Y')
+ROTATION ::= 'R' [{BLANK}] POINT
+EXTENTION ::= DIGIT [{EXTCHAR}] ';'
+COMMENT ::= '(' [{COMMENTCHAR}] ')' [{BLANK}] ';'
+END ::= 'E' [ [{SEP}] ';' ]
+\end{verbatim}
 
-\begin{itemize}
-\item Position
-\item Diameter
-\end{itemize}
-
-The position of a Round Flash can be specified by its coordinates, which defines the position of the circle, relative to the lower left corner of the design (the X axis increases to the right, and the Y axis increases to the top). The diameter defines how wide the circle is. A position, in the CIF format, can be seen as a \textbf{point}. A diameter, in the CIF format, can be seen as an \textbf{integer}. So, a Round Flash command can be defined in BNF as follows:\\
-
-\texttt{'R' [Blank] Integer Separator Point}\\
-
-The command must start with a constant capital R character, optionally followed by one or more \textbf{Blank} characters. Then, comes an \textbf{Integer} value, having one or more \textbf{Separator} characters between it and the following \textbf{Point}.
-
-A \textbf{Blank} character can be defined as any ASCII character, except digits (\textbf{\textit{0-9}}), upper case characters (\textbf{\textit{A-Z}}), minus (-), parentheses (\textbf{\textit{'('}} or \textbf{\textit{')'}}) or semicolons (\textbf{\textit{';'}}). A \textbf{Separator} can be defined as a \textbf{Blank} character or an upper case character (\textbf{\textit{A-Z}}). In this document, the previous definition doesn't introduce contradictions since the \textbf{Separator} must override the \textit{upper case} character restriction of the \textbf{Blank} characters.
-
-An \textbf{Integer} value can be defined as any sequence of digits (0-9). Is important to note that the CIF format doesn't provide a direct restriction of the length of the values, so, in theory, a file can define an infinitely large number and still be valid for the CIF format. This detail is addressed in later sections. In this case, since this value is the diameter of the Round Flash, it can't be negative.
-
-A \textbf{Point} can be defined as two \textbf{Integer} values, that can be negative (start with a minus character), and that need to have at least one \textbf{Separator} character between them.
-
-The next figure, the Box, is basically a rectangle. A \textbf{Box} requires the following properties to be defined  
- 
+The previous definition explains, in BNF format, the format of a CIF file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Validation of a CIF file}\label{Validation-of-a-cif-file}

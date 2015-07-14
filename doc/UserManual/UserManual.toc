@@ -31,8 +31,8 @@
 \contentsline {section}{\numberline {3.1}The CIF format}{38}
 \contentsline {section}{\numberline {3.2}Validation of a CIF file}{39}
 \contentsline {subsection}{\numberline {3.2.1}Finite state machine used}{39}
-\contentsline {subsection}{\numberline {3.2.2}Considerations}{40}
-\contentsline {section}{\numberline {3.3}Loading of a CIF file}{40}
+\contentsline {subsection}{\numberline {3.2.2}Considerations}{39}
+\contentsline {section}{\numberline {3.3}Loading of a CIF file}{39}
 \contentsline {subsection}{\numberline {3.3.1}Cleaning process of commands}{40}
 \contentsline {subsubsection}{Numeric commands}{40}
 \contentsline {subsubsection}{Layer commands}{40}
@@ -44,8 +44,8 @@
 \contentsline {subsubsection}{Class: State}{40}
 \contentsline {subsubsection}{Class: FiniteStateMachine}{40}
 \contentsline {subsubsection}{Class: CIFFSM}{40}
-\contentsline {subsection}{\numberline {3.4.2}Command group of classes}{41}
-\contentsline {subsubsection}{Class: Point}{41}
+\contentsline {subsection}{\numberline {3.4.2}Command group of classes}{40}
+\contentsline {subsubsection}{Class: Point}{40}
 \contentsline {subsubsection}{Class: Size}{41}
 \contentsline {subsubsection}{Class: Fraction}{41}
 \contentsline {subsubsection}{Class: Transformation}{41}
@@ -57,8 +57,8 @@
 \contentsline {subsubsection}{Class: PositionBasedCommand}{41}
 \contentsline {subsubsection}{Class: BoxCommand}{41}
 \contentsline {subsubsection}{Class: RoundFlashCommand}{41}
-\contentsline {subsubsection}{Class: ControlCommand}{42}
-\contentsline {subsubsection}{Class: DefinitionStartCommand}{42}
+\contentsline {subsubsection}{Class: ControlCommand}{41}
+\contentsline {subsubsection}{Class: DefinitionStartCommand}{41}
 \contentsline {subsubsection}{Class: DefinitionDeleteCommand}{42}
 \contentsline {subsubsection}{Class: CallCommand}{42}
 \contentsline {subsubsection}{Class: DefinitionEndCommand}{42}
