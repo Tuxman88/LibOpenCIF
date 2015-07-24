@@ -1540,7 +1540,7 @@ All the contents are explained as precisely and with as much detail as possible,
 
 In this section, the reader will learn information related to the CIF format itself. Here, will be explained various concepts related to how the format works. However, this section is not an official technical description of the format. The reader can find on-line various sites where the format is explained in greater detail.
 
-The CIF format describes the physical layout of an Integrated Circuit design. An Integrated Circuit design can be seen as a collection of cells. Each cell can be seen, in turn, as a smaller collection of other cells, up until we reach a point where a cell is a very basic and specific mathematical operation, like an AND or an OR. These basic components, in turn, are made from various layers of materials, each being composed by some basic figures, like squares, rectangles, circles and polygons. A CIF file is just one file format created to store such physical distribution (layout) of figures that form an Integrated Circuit design. In the figure \ref{fig:layers} can be seen an example of this concept, where a basic cell (an inverter) is separated in all the different layers (materials) that form it.
+The CIF format describes the physical layout (appearance) of an Integrated Circuit design. An Integrated Circuit design can be seen as a collection of cells. Each cell can be seen, in turn, as a smaller collection of other cells, up until we reach a point where a cell is a very basic and specific mathematical operation, like an AND or an OR. These basic components, in turn, are made from various layers of materials, each being composed by some basic figures, like squares, rectangles, circles and polygons. A CIF file is just one file format created to store such physical distribution (layout) of figures that form an Integrated Circuit design. In the figure \ref{fig:layers} can be seen an example of this concept, where a basic cell (an inverter) is separated in all the different layers (materials) that form it.
 
 \begin{figure}
 	\centering
@@ -1548,6 +1548,63 @@ The CIF format describes the physical layout of an Integrated Circuit design. An
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
 	\caption{Basic inverter where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
 \end{figure}
+
+\subsection{Design coordinates}\label{Design-coordinates}
+
+An Integrated Circuit design can be seen as a 2D area where all the components that form it are placed in a Cartesian Plane. In the figure \ref{fig:iccoordinates} can be seen such plane, in which can be found an origin (coordinates \texttt{[0,0]}), X increases to the right (and goes negative to the left) and Y increases to the top (and goes negative to the bottom). Most of the Integrated Circuit designs are defined and positioned in the first quadrant (positive values for the coordinates)\footnote{Is important to note that, even if most designs are defined in the first Cartesian quadrant, nothing prevents them to be defined in any of the other three quadrants.}, so the lower left corner of the design, usually, falls in the \texttt{[0,0]} coordinate of the plane.
+
+\begin{figure}
+	\centering
+	\label{fig:iccoordinates}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image02}
+	\caption{Representation of the Cartesian Plane used in the Integrated Designs.}
+\end{figure}
+
+Having the previous detail explained, is important to have in mind that the designs are intended to represent real components that are really small. Such components use as measuring using the \textbf{micrometer} (\textbf{$\mu$}). This unit, even when it is really small, sometimes it not enough precision to represent coordinates nor sizes of pieces of the design, so, various components are measured in hundreds or even thousands of micrometer.
+
+As can be seen, the precision of values is really important when working with Integrated Circuit designs. That brings the importance of floating point values and how to represent them in a design (and, more important, how to store them).
+
+\subsection{Theorical and real precision of values}\label{Theorical-and-real-precision-of-values}
+
+As previously mentioned, an Integrated Circuit design is composed by various geometrical figures. Those figures need to be placed with a high level of precision. The previous detail brings a great challenge to any format intended to store an Integrated Circuit design. Even beyond details of how to store the design structure, how to place components, how to correctly organize all the elements, the biggest problem to solve is precision. Various formats available (like the GDSII or OASIS) store the positions and sizes of components using floating point values in binary form, but such method has its limitations.
+
+A floating point representation of a number in a design requires a nearly perfect representation of the original value. Such precision can be achieved using 32 bit floating point values, or even 64 bit floating point values, but even then, they have limitations about the length and real precision stored. Due to this complex problem of how to store a floating point value, the CIF format doesn't allow to use any value of such type. In a CIF file, all the values (positions and sizes) are stored as integer values, and if a floating point is required, an auxiliary \textbf{fraction} is used to scale the values (more of this later).
+
+The idea behind the previously defined concept, is that the CIF format doesn't restrict the precision allowed to be used, so, all the tasks related to the process of loading and conversion of the values, are left to the applications that are intended to use the CIF files. Since the format itself doesn't restrict in any way the length (and therefore, the precision) of a value, all the applications that interact with CIF files must apply their own rules to be able to read such values and convert them, as precisely as possible, to floating point representations of the original values.
+
+In a CIF file, even when using fractions to help represent high precision values, there is important to note that the values used in positions and sizes are, by themselves, \textbf{hundredths} of a \textbf{micrometer}. So, if a square is defined in a file as having a length of 100 units per side, we can say that such figure has a length of 1 $\mu$ per side. Also, as can be seen, this can be used to represent up to two decimal positions of a floating point value, this means that a value of 1234, in CIF format, represents a real value of 12.34 $\mu$.
+
+With the previous details defined, we can start to define the basic components found in a design: The Primitive Commands.
+
+\subsection{Commands found in a CIF file}\label{Commands-found-in-a-CIF-file}
+
+The first group of commands, named in this document as \textbf{Primitive Commands}, are those that allow us to define, place and control geometrical figures. The figures that can be used are:
+
+\begin{itemize}
+\item Box
+\item Polygon
+\item Wire
+\item Round Flash
+\end{itemize}
+
+A \textbf{Box} command defines a rectangle with some properties:
+
+\begin{itemize}
+\item Size
+\item Position
+\item Rotation
+\end{itemize}
+
+The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf{height} of such figure, and both values must be positive. The \textbf{position} of a \textbf{Box} is defined as the coordinates on which its \textbf{center} must be placed. The rotation of a Box is totally optional. The rotation is represented by the coordinates of a point. Such point, along with the center of the Box, forms an angle. Such angle is the rotation to be applied to the figure. There is important to note that all the rotations (no only for Boxes) are \textbf{counter-clockwise}, never \textbf{clockwise}. In the figure \ref{fig:boxrotation} can be seen an example, where a Box has a rotation described by the points [1,0], [1,1], [-1,-1] and [10,-1].
+
+\begin{figure}
+	\centering
+	\label{fig:boxrotation}
+	\includegraphics[scale=0.1, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image03}
+	\caption{Visualization of the effect of the rotation over a Box object.}
+\end{figure}
+
+\subsection{BNF representation of the format}\label{BNF-representation-of-the-format}
 
 All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The following text defines the complete \textbf{BNF} (Backus Naur Form) description of the format\footnote{The format described in this document is not exactly the same as that described in the official documentation. The \textbf{BNF} description is adapted to the purposes of this document.}. The BNF is described using the following rules:
 
@@ -1560,7 +1617,7 @@ All the components that form an Integrated Circuit design can be represented by 
 
 \begin{verbatim}
 FILE ::= {COMMAND}
-BLANK ::= Any ASCII except D, U, '-', '(', ')' or ';'
+BLANK ::= Any ASCII except DIGIT, UPPER, '-', '(', ')' or ';'
 DIGIT ::= Any digit from '0' to '9'
 UPPER ::= Any character from 'A' to 'Z'
 SEP ::= An UPPER or BLANK
@@ -1589,7 +1646,19 @@ COMMENT ::= '(' [{COMMENTCHAR}] ')' [{BLANK}] ';'
 END ::= 'E' [ [{SEP}] ';' ]
 \end{verbatim}
 
-The previous definition explains, in BNF format, the format of a CIF file.
+The previous definition explains, in BNF format, how a CIF file is structured. Some of the differences between the definition presented and the official definition are these:
+
+\begin{itemize}
+\item The order on which the format defines how components (specially the whitespaces) are used is different in order to try to prevent a non-deterministic definition.
+\item Since in the real world exists examples of production designs that doesn't respect the 4-character rule for the layer names, in our format we are not limiting the names to those 4 characters.
+\item The format doesn't have in consideration the possible contents of the file beyond the END command since such contents are not of interest for the design (but are not considered an error \textit{per se}).
+\item There must not be considered a non-deterministic problem the definition of the SEP character. The uppercase characters (A to Z) must override the definition of the BLANK character.
+\end{itemize}
+
+\IconNote
+	{info}
+	{Validating two points of view}
+	{Is recommended for the reader to take a look at the original documentation to compare our definition and the original one.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Validation of a CIF file}\label{Validation-of-a-cif-file}
