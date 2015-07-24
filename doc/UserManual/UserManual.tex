@@ -1506,7 +1506,7 @@ All these fields are intended to provide extra information to the reader when us
 
 The \textbf{\texttt{File}} class provides a public and static member function intended to be used by the reader to validate, on demand, a single string. The validation performed can tell to the reader if such string represents a valid CIF command.
 
-To do such operation, the user can use the static member functions \textbf{\texttt{isCommandValid}} and \textbf{\texttt{cleanCommand}} to validate and clean a string command, respectively.
+To do such operation, the user can use the static member functions \textbf{\texttt{isCommandValid}} and, after validating the command, \textbf{\texttt{cleanCommand}} to validate and clean a string command, respectively.
 
 The first member function, \textbf{\texttt{isCommandValid}}, takes as argument a single \textbf{\texttt{string}} class instance. This member function will apply the Finite State Machine found within the library and will return a bool value. A \textbf{\texttt{true}} value means that the string represent a valid CIF command. A \textbf{\texttt{false}} value means that the string doesn't represent a valid CIF command.
 
@@ -1545,7 +1545,7 @@ The CIF format describes the physical layout (appearance) of an Integrated Circu
 \begin{figure}
 	\centering
 	\label{fig:layers}
-	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image01}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image01}
 	\caption{Basic inverter where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
 \end{figure}
 
@@ -1556,7 +1556,7 @@ An Integrated Circuit design can be seen as a 2D area where all the components t
 \begin{figure}
 	\centering
 	\label{fig:iccoordinates}
-	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image02}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image02}
 	\caption{Representation of the Cartesian Plane used in the Integrated Designs.}
 \end{figure}
 
@@ -1600,9 +1600,52 @@ The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf
 \begin{figure}
 	\centering
 	\label{fig:boxrotation}
-	\includegraphics[scale=0.1, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter02-image03}
+	\includegraphics[scale=0.1, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image03}
 	\caption{Visualization of the effect of the rotation over a Box object.}
 \end{figure}
+
+A \textbf{Polygon} defines a list of points that form a figure. Such figure can be as complex or simple as needed. The CIF format doesn't set any kind of restriction about which kind of figures can be defined. The polygons formed closed, so the first and last point are implicitly closed and can be concave and have self-interceptions. The figure \ref{fig:polygon} shows a basic example of a closed \textbf{Polygon}.
+
+\begin{figure}
+	\centering
+	\label{fig:polygon}
+	\includegraphics[scale=0.15, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image04}
+	\caption{Visualization of an example of \textbf{Polygon}.}
+\end{figure}
+
+A \textbf{Wire} is similar to a \textbf{Polygon}. The \textbf{Wire} has the following properties:
+
+\begin{itemize}
+\item Width
+\item List of points
+\end{itemize}
+
+The \textbf{Wire} defines a list of points that aren't a polygon, they're just a path of points over which a stripe of material will be placed, and the width defines the width of such stripe. The figure \ref{fig:polygon} shows a basic example of a \textbf{Wire} that has four points and a specific width.
+
+\begin{figure}
+	\centering
+	\label{fig:wire}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image05}
+	\caption{Visualization of an example of \textbf{Wire}.}
+\end{figure}
+
+The \textbf{Round Flash} defines a circle. Such figure has two properties:
+
+\begin{itemize}
+\item Position
+\item Diameter
+\end{itemize}
+
+The \textbf{position} of a \textbf{Round Flash} corresponds to its center, while the \textbf{diameter} is its size. The figure \ref{fig:roundflash} shows a basic example of a \textbf{Round Flash}.
+
+\begin{figure}
+	\centering
+	\label{fig:roundflash}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image06}
+	\caption{Visualization of an example of \textbf{Round Flash}.}
+\end{figure}
+
+The \textbf{Box} and \textbf{Polygon} figures are usually used to represent the smaller components that are used in an Integrated Circuit design and its power connections, while the \textbf{Wire} and \textbf{Round Flash} are usually used to form the data connection between  the small components.
 
 \subsection{BNF representation of the format}\label{BNF-representation-of-the-format}
 
@@ -1634,10 +1677,10 @@ BOX ::= 'B' [{BLANK}] INTEGER {SEP} INTEGER {SEP} POINT [ {SEP} POINT [{SEP}] ] 
 ROUNDFLASH ::= 'R' [{BLANK}] INTEGER {SEP} POINT [{SEP}] ';'
 WIRE ::= 'W' [{BLANK}] INTEGER {SEP} POINT [{SEP POINT}] [{SEP}] ';'
 LAYER ::= 'L' [{BLANK}] {LAYERCHAR} [{BLANK}] ';'
-SYMSTART ::= 'D' [{BLANK}] 'S' [{SEP}] INTEGER [{SEP} INTEGER {SEP} INTEGER] [{SEP}] ';'
+SYMSTART ::= 'D' [{BLANK}]'S' [{SEP}] INTEGER [{SEP}INTEGER{SEP} INTEGER] [{SEP}] ';'
 SYMEND ::= 'D' [{BLANK}] 'F' [{SEP}] ';'
 SYMDEL ::= 'D' [{BLANK}] 'D' [{BLANK}] INTEGER [{SEP}] ';'
-CALL ::= 'C' [{BLANK}] INTEGER [{ [{BLANK}] ( TRANS | MIRROR | ROTATION ) }] [{BLANK}] ';'
+CALL ::= 'C' [{BLANK}] INTEGER [{[{BLANK}] (TRANS | MIRROR | ROTATION)}] [{BLANK}] ';'
 TRANS ::= 'T' [{BLANK}] POINT
 MIRROR ::= 'M' [{BLANK}] ('X' | 'Y')
 ROTATION ::= 'R' [{BLANK}] POINT
