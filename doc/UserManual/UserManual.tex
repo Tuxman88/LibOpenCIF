@@ -1560,13 +1560,13 @@ An Integrated Circuit design can be seen as a 2D area where all the components t
 	\caption{Representation of the Cartesian Plane used in the Integrated Designs.}
 \end{figure}
 
-Having the previous detail explained, is important to have in mind that the designs are intended to represent real components that are really small. Such components use as measuring using the \textbf{micrometer} (\textbf{$\mu$}). This unit, even when it is really small, sometimes it not enough precision to represent coordinates nor sizes of pieces of the design, so, various components are measured in hundreds or even thousands of micrometer.
+Having the previous detail explained, is important to have in mind that the designs are intended to represent real components that are really small. Such components use as measuring unit the \textbf{micrometer} (\textbf{$\mu$}). This unit, even when it is really small, sometimes it not enough precision to represent coordinates nor sizes of pieces of the design, so, various components are measured in hundreds or even thousands of micrometer.
 
 As can be seen, the precision of values is really important when working with Integrated Circuit designs. That brings the importance of floating point values and how to represent them in a design (and, more important, how to store them).
 
 \subsection{Theorical and real precision of values}\label{Theorical-and-real-precision-of-values}
 
-As previously mentioned, an Integrated Circuit design is composed by various geometrical figures. Those figures need to be placed with a high level of precision. The previous detail brings a great challenge to any format intended to store an Integrated Circuit design. Even beyond details of how to store the design structure, how to place components, how to correctly organize all the elements, the biggest problem to solve is precision. Various formats available (like the GDSII or OASIS) store the positions and sizes of components using floating point values in binary form, but such method has its limitations.
+As previously mentioned, an Integrated Circuit design is composed by various geometrical figures. Those figures need to be placed with a high level of precision. The previous detail brings a great challenge to any format intended to store an Integrated Circuit design. Even beyond details of how to store the design structure, how to place components, how to correctly organize all the elements, the biggest problem to solve is precision. Various formats available (like the GDSII or OASIS) store the positions and sizes of components using floating point values in binary form, but such method has its limitations\footnote{However, in this document we will not touch other formats nor discuss if any is better than other, that is not the point of this document.} .
 
 A floating point representation of a number in a design requires a nearly perfect representation of the original value. Such precision can be achieved using 32 bit floating point values, or even 64 bit floating point values, but even then, they have limitations about the length and real precision stored. Due to this complex problem of how to store a floating point value, the CIF format doesn't allow to use any value of such type. In a CIF file, all the values (positions and sizes) are stored as integer values, and if a floating point is required, an auxiliary \textbf{fraction} is used to scale the values (more of this later).
 
@@ -1576,7 +1576,7 @@ In a CIF file, even when using fractions to help represent high precision values
 
 With the previous details defined, we can start to define the basic components found in a design: The Primitive Commands.
 
-\subsection{Commands found in a CIF file}\label{Commands-found-in-a-CIF-file}
+\subsection{Primitive Commands}\label{Primitive-Commands}
 
 The first group of commands, named in this document as \textbf{Primitive Commands}, are those that allow us to define, place and control geometrical figures. The figures that can be used are:
 
@@ -1595,7 +1595,7 @@ A \textbf{Box} command defines a rectangle with some properties:
 \item Rotation
 \end{itemize}
 
-The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf{height} of such figure, and both values must be positive. The \textbf{position} of a \textbf{Box} is defined as the coordinates on which its \textbf{center} must be placed. The rotation of a Box is totally optional. The rotation is represented by the coordinates of a point. Such point, along with the center of the Box, forms an angle. Such angle is the rotation to be applied to the figure. There is important to note that all the rotations (no only for Boxes) are \textbf{counter-clockwise}, never \textbf{clockwise}. In the figure \ref{fig:boxrotation} can be seen an example, where a Box has a rotation described by the points [1,0], [1,1], [-1,-1] and [10,-1].
+The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf{height} of such figure, and both values must be positive. The \textbf{position} of a \textbf{Box} is defined as the coordinates on which its \textbf{center} must be placed. The rotation of a Box is totally optional. The rotation is represented by the coordinates of a point. Such point, along with the center of the Box, forms an angle with respect of the X axis. Such angle is the rotation to be applied to the figure. There is important to note that all the rotations (no only for Boxes) are \textbf{counter-clockwise}, never \textbf{clockwise}. In the figure \ref{fig:boxrotation} can be seen an example, where a Box has a rotation described by the points [1,0], [1,1], [-1,-1] and [10,-1].
 
 \begin{figure}
 	\centering
@@ -1604,7 +1604,7 @@ The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf
 	\caption{Visualization of the effect of the rotation over a Box object.}
 \end{figure}
 
-A \textbf{Polygon} defines a list of points that form a figure. Such figure can be as complex or simple as needed. The CIF format doesn't set any kind of restriction about which kind of figures can be defined. The polygons formed closed, so the first and last point are implicitly closed and can be concave and have self-interceptions. The figure \ref{fig:polygon} shows a basic example of a closed \textbf{Polygon}.
+A \textbf{Polygon} defines a list of points that form a figure. Such figure can be as complex or simple as needed. The CIF format doesn't set any kind of restriction about which kind of figures can be defined. The polygons formed must be closed, so the first and last point are implicitly closed (there is no need that the first and last point be the same), can be concave and have self-interceptions. The figure \ref{fig:polygon} shows a basic example of a closed \textbf{Polygon}.
 
 \begin{figure}
 	\centering
@@ -1646,6 +1646,59 @@ The \textbf{position} of a \textbf{Round Flash} corresponds to its center, while
 \end{figure}
 
 The \textbf{Box} and \textbf{Polygon} figures are usually used to represent the smaller components that are used in an Integrated Circuit design and its power connections, while the \textbf{Wire} and \textbf{Round Flash} are usually used to form the data connection between  the small components.
+
+\subsection{Control Commands}\label{Control-Commands}
+
+The second group of commands, named in this document as \textbf{Control Commands}, are those that allow us to define, call, place and rotate those basic components of a design named \textbf{cells}.
+
+The first element to understand is a low-level cell . Such component represent a small group of figures (Box, Polygon, Wire or Round Flash or the \textbf{Layer} and \textbf{User Extension} commands, discussed later). This kind of cell represents small mathematical operations, like an inverter, an OR or an AND, and can be used multiple times in a single Integrated Circuit design. To define such component we need two CIF commands. The first one defines a start and a second defines and end. All the commands found within this two commands are considered part of this cell. These two commands are known in this document as \textbf{Definition Start} and \textbf{Definition End}.
+
+\IconNote
+	{warning}
+	{Cell or Symbol?}
+	{In the CIF formal technical documentation, the cells are named \textbf{Symbols}, but most of the applications, books and almost any other documentation refers to the cells as \textbf{cells}. This detail must be handled with care. In this document, we refer to the cells as \textbf{cells}.}
+	
+The \textbf{Definition Start} command have two properties. The first is mandatory, and is an ID that must be assigned to the cell defined, so, that cell can be referred by its unique ID. The second is optional and is formed by two integers (named A and B) that defines a constant \textbf{fraction} for which will be multiplied all the size and position values inside the cell definition (this multiplication is used to convert big integers into small and precise floating point values).
+
+The \textbf{Definition End} command doesn't need any properties, it just end the definition of a cell and must be preceded by a Definition Start command.
+
+\IconNote
+	{warning}
+	{Cells within cells}
+	{Is considered an error if a Definition Start command is found after another Definition Start command (before its closing Definition End is found).}
+	
+\IconNote
+	{info}
+	{Non-consecutive IDs}
+	{The CIF format doesn't restrict in any way the order of the IDs used to define cells. They can have any integer as long as such value has not yet been used by another cell and it must be positive.}
+
+The following command found in this group is a \textbf{Call} command. Such command is used to instantiate a previously defined cell. This behaves just like a function. The user can define small pieces of design (just like small pieces of code) and can use them whenever such component (of behaviour) is needed. As can be inferred, a cell can have calls o other cells that can, in turn, have calls to another cells, and so on.
+
+\IconNote
+	{warning}
+	{Cycles are not good}
+	{Even if in programming languages a function can be directly call himself, or indirectly call itself calling another function, in a CIF file, such call cycles are not possible and are considered an error since there is no code to stop such commands to call themselves infinitely.}
+	
+The \textbf{Call} command has two main group of properties. The first is mandatory and is the ID of the cell that must be called. Is important to note that such cell ID must be already defined when the Call command is found, in other case is considered an error. The second group of properties is a list of \textbf{Transformations} that can be applied to the cell called.
+
+If no transformations are applied to the cell, the cell is just used as defined, so, for example, if there are three calls to the same cell, without any transformation, can be considered that there are three cells overlapped in the same position. Even if such situation is not an error \textit{per se}, is obvious that positioning the same components in the same position over and over is of no help for a design, so, most calls have at least one Transformation applied to the cell.
+
+The transformations can be of three types: \textbf{Rotation}, \textbf{Translation} or \textbf{Mirror}.
+
+A \textbf{Translation} transformation adds a very specific value to all the X and Y coordinates of all the elements found within a cell, so this transformation is used to call cells to a specific place in a design. The values used for this transformation are integers that can be positive or negative.
+
+\IconNote
+	{info}
+	{Cell definitions}
+	{Most of the times, the low-level cells are defined so their lower left corners are placed in the origin coordinates ([0,0]). This is done to simplify the process of calling cells in a design.}
+	
+A \textbf{Rotation} transformation, as can be inferred by its name, is used to rotate a cell with respect of the origin coordinates of the whole design. In a similar way as how a Box is rotated, a cell rotation is defined using two integers (that can be positive or negative) and represent the angle the cell must be rotated. Also, as with the Box command, the rotation point can be arbitrary, so, any angle is allowed and it must be counter-clockwise.
+
+A \textbf{Mirror} transformation is used to flip a design horizontally or vertically by multiplying the coordinates of the cell components by -1 in X or Y, depending on the transformation used\footnote{Is important to note that, for example, if a figure is located in the center of the first quadrant and an Mirror transformation is applied to it horizontally, the result must be it being placed, horizontally flipped and located in the \textbf{second quadrant} (such behaviour is not an error, is expected).}.
+
+Another consideration with the transformations is that they no only apply to the figures defined within the cell called, they must be also applied to the Call commands found within this cell, so, they are applied recursively in the cell until no more Call commands are found. This is done to apply transformations no only to the top level cell, but to all the lower level cells.
+
+The next command found in this group is the \textbf{Definition Delete} command. 
 
 \subsection{BNF representation of the format}\label{BNF-representation-of-the-format}
 
