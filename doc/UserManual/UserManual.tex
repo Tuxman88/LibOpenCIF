@@ -35,6 +35,8 @@
 \usepackage{wallpaper}
 \usepackage{tikz}
 \usepackage{listings}
+\usepackage{embedfile}
+\usepackage{navigator}
 \usetikzlibrary{shapes,positioning}
 
 \usepackage[utf8]{inputenc}
@@ -1784,19 +1786,62 @@ After defining the contents of a CIF file, the next step is to understand how th
 \section{Validation of a CIF file}\label{Validation-of-a-cif-file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This library has the purpose of loading into memory the contents of a CIF file. Such operation requires a validation of the contents loaded to be sure that they are correct by themselves and that they meet the format considered. The validation is performed loading the CIF file byte by byte and passing each one into a \textbf{Finite State Machine} which is designed to validate the possible structure of the CIF file.
+This library has the purpose of loading into memory the contents of a CIF file. Such operation requires a validation of the contents loaded to be sure that they are correct and that they meet the format considered. The validation is performed loading the CIF file byte by byte and passing each one into a \textbf{Finite State Machine} which is designed to validate the possible structure of the CIF file.
+
+The basic idea of the loading and validation process can be seen in the figure \ref{fig:basicloading}.
+
+\begin{figure}
+	\centering
+	\label{fig:basicloading}
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image07}
+	\caption{Basic diagram of the loading process of a CIF file by this library.}
+\end{figure}
+
+The loading is performed reading one byte from the file and sending such byte to the Finite State Machine, which, in turn, having control of the current state, validates the transition needed, returning the new state to the loading function. The loading function, in turn, validates the state returned by the Finite State Machine. If the state is not an Error State, then the byte is correct. Also, the loading function validates if the returned state means that the loaded byte completed a valid command (which was being stored in a buffer). If such situation is reached, the command is moved to the list of valid commands and the buffer is cleared.
+
+Such process is repeated until the end of the file is reached, the End command is found or an error is detected.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Finite state machine used}\label{Finite-state-machine-used}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Finite state machine used
+Even more important that the process of how to read a byte from a file, the truly crucial detail, when validating a file using a Finite State Machine, is how such Finite State Machine is designed. In this case, the design was carefully designed, trying to include as much information as possible.
+
+The diagram of such design is too big for this document, so, in this document the reader can find the whole diagram embedded as a PNG image file, or, alternatively, the image must be available alongside this document.
+
+\embeddedfile{myfile}{FiniteStateMachine.png}
+
+The first thing the reader will be able to see is a little indication of how to interpret the connections between states in the diagram (see figure \ref{fig:fsmconnections}).
+
+\begin{figure}
+	\centering
+	\label{fig:fsmconnections}
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image08}
+	\caption{Basic diagram of the loading process of a CIF file by this library.}
+\end{figure}
+
+After that, comes a little section intended to understand the different groups of characters considered:
+
+\begin{description}
+\item[D]	Digits, characters from '0' to '9'.
+\item[U]	Uppercase characters, from 'A' to 'Z'.
+\item[B]	Blank characters, any ASCII character except digits, uppercase, minus (-), parentheses or semicolon.
+\item[C]	Comment characters, any ASCII character except parentheses.
+\item[S]	Separator characters, an uppercase character or Blank.
+\item[L]	Layer name characters, any digit, uppercase character or '_' character.
+\end{description}
+
+After checking the diagram, the reader can see three terminal states: 1, 91 and 92. The state 1 is the starting point of the diagram. Such state is in charge of skipping Blank characters (characters found between commands that are of no use for the design). Every row represents a possible command. All of them start in the state 1 when it detects the starting character of one of it. All the commands end with semicolon. The End command is special, it doesn't need to end with semicolon (state 91) or, after finding it, is just matter of skipping characters (state 92) until the end of the file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Considerations}\label{Considerations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Considerations
+There are some considerations that must be keep in mind at all times, because without them, the diagram can be considered to have flaws:
+
+\begin{enumerate}
+\item The comment command (state 89) isn't considering the fact that most applications support that a comment have internal parentheses. That is, that, meanwhile the parentheses are all closed before the comment command truly ends, there is no problem. That problem is solved in the implementation using some simple counters to know how many parentheses are left to close.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Loading of a CIF file}\label{Loading-of-a-CIF-file}

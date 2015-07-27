@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.14)  27 JUL 2015 12:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.14)  27 JUL 2015 17:16
 entering extended mode
 **UserManual.tex
 
@@ -776,6 +776,45 @@ File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\embedfile.sty"
+Package: embedfile 2011/04/13 v2.6 Embed files into PDF (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdfescape.sty"
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\navigator\navigator.sty"
+Package: navigator 2011/25/01 v.1.0 PDF links, outlines, etc.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\navigator\navigator.tex"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\yax\yax.tex"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\texapi\texapi.tex"
+\pi@temp_tokenA=\toks36
+\pi@temp_tokenB=\toks37
+\pi@dofor_count=\count169
+))
+\nav@outline_count=\count170
+))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\librarie
 s\tikzlibraryshapes.code.tex"
 File: tikzlibraryshapes.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
@@ -852,8 +891,8 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.0 (rcs-revision 1.7)
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks36
-\inpenc@posthook=\toks37
+\inpenc@prehook=\toks38
+\inpenc@posthook=\toks39
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -1081,7 +1120,7 @@ Language: english 2005/03/30 v3.3o English support from the babel system
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
 File: babel.def 2008/07/08 v3.8m Babel common definitions
-\babel@savecnt=\count169
+\babel@savecnt=\count171
 \U@D=\dimen201
 )
 \l@canadian = a dialect from \language\l@american 
@@ -1112,19 +1151,19 @@ Sidefootvsep and sidefootheight: 13.6pt and 539.9202pt
 
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\UserManual.
 aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 301.
-LaTeX Font Info:    ... okay on input line 301.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 301.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 303.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1133,25 +1172,25 @@ File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count170
+\scratchcounter=\count172
 \scratchdimen=\dimen202
 \scratchbox=\box63
-\nofMPsegments=\count171
-\nofMParguments=\count172
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count173
+\nofMPsegments=\count173
+\nofMParguments=\count174
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count175
 \MPscratchDim=\dimen203
-\MPnumerator=\count174
-\makeMPintoPDFobject=\count175
-\everyMPtoPDFconversion=\toks39
+\MPnumerator=\count176
+\makeMPintoPDFobject=\count177
+\everyMPtoPDFconversion=\toks41
 ) ABD: EveryShipout initializing macros
-\c@lstlisting=\count176
+\c@lstlisting=\count178
 
-<images/front-cover.png, id=4, 2711.12875pt x 1972.36874pt>
+<images/front-cover.png, id=8, 2711.12875pt x 1972.36874pt>
 File: images/front-cover.png Graphic file (type png)
 
 <use images/front-cover.png>
-Package pdftex.def Info: images/front-cover.png used on input line 354.
+Package pdftex.def Info: images/front-cover.png used on input line 356.
 (pdftex.def)             Requested size: 614.56956pt x 447.10446pt.
  [1
 
@@ -1194,35 +1233,35 @@ LaTeX Font Info:    Try loading font information for OT1+lmss on input line 38.
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [3])
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 371.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 373.
 
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 371.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 373.
 
  [4]
-<images/chapter01-cover.jpg, id=25, 1204.5pt x 903.375pt>
+<images/chapter01-cover.jpg, id=29, 1204.5pt x 903.375pt>
 File: images/chapter01-cover.jpg Graphic file (type jpg)
 
 <use images/chapter01-cover.jpg>
-Package pdftex.def Info: images/chapter01-cover.jpg used on input line 388.
+Package pdftex.def Info: images/chapter01-cover.jpg used on input line 390.
 (pdftex.def)             Requested size: 614.59933pt x 460.9495pt.
  [1
 
 
  <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/chap
 ter01-cover.jpg>] [2]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 439.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 441.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 439.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 441.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 455.
+(Font)              <9> on input line 457.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 455.
+(Font)              <5> on input line 457.
  [3] [4]
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1233,7 +1272,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 501
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 503
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmtt.fd"
@@ -1244,110 +1283,110 @@ apter1-example1.cc"
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <9> not available
 (Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 1.
 )
-LaTeX Font Info:    Try loading font information for OML+lmr on input line 523.
+LaTeX Font Info:    Try loading font information for OML+lmr on input line 525.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omllmr.fd"
 File: omllmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OML/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OML/lmm/b/it' tried instead on input line 523.
- <images/icon-info.png, id=44, 256.96pt x 256.96pt>
+(Font)              Font shape `OML/lmm/b/it' tried instead on input line 525.
+ <images/icon-info.png, id=48, 256.96pt x 256.96pt>
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 530.
+Package pdftex.def Info: images/icon-info.png used on input line 532.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [5]
-<images/icon-warning.png, id=53, 256.96pt x 256.96pt>
+<images/icon-warning.png, id=57, 256.96pt x 256.96pt>
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 535.
+Package pdftex.def Info: images/icon-warning.png used on input line 537.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 
-<images/icon-error.png, id=54, 256.96pt x 256.96pt>
+<images/icon-error.png, id=58, 256.96pt x 256.96pt>
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 540.
+Package pdftex.def Info: images/icon-error.png used on input line 542.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [6 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/i
 con-info.png> <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManua
 l/images/icon-warning.png> <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/
 doc/UserManual/images/icon-error.png>]
-<images/chapter02-cover.jpg, id=62, 1027.84pt x 770.88pt>
+<images/chapter02-cover.jpg, id=66, 1027.84pt x 770.88pt>
 File: images/chapter02-cover.jpg Graphic file (type jpg)
 
 <use images/chapter02-cover.jpg>
-Package pdftex.def Info: images/chapter02-cover.jpg used on input line 574.
+Package pdftex.def Info: images/chapter02-cover.jpg used on input line 576.
 (pdftex.def)             Requested size: 614.59148pt x 460.94362pt.
  [7
 
  <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/chap
 ter02-cover.jpg>]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 586.
+(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 588.
  [8]
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 660.
+Package pdftex.def Info: images/icon-info.png used on input line 662.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 686.
+Package pdftex.def Info: images/icon-warning.png used on input line 688.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [9]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 710.
+Package pdftex.def Info: images/icon-warning.png used on input line 712.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 717.
+Package pdftex.def Info: images/icon-info.png used on input line 719.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 722.
+Package pdftex.def Info: images/icon-info.png used on input line 724.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-error.png Graphic file (type png)
  <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 733.
+Package pdftex.def Info: images/icon-error.png used on input line 735.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [10]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 751.
+Package pdftex.def Info: images/icon-warning.png used on input line 753.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 756.
+Package pdftex.def Info: images/icon-info.png used on input line 758.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [11]
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example1.cc" [12])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 858.
+Package pdftex.def Info: images/icon-info.png used on input line 860.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [13]
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example2.cc")
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 887.
+Package pdftex.def Info: images/icon-warning.png used on input line 889.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 910.
+Package pdftex.def Info: images/icon-warning.png used on input line 912.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 917.
+Package pdftex.def Info: images/icon-info.png used on input line 919.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [14]
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
@@ -1356,86 +1395,86 @@ apter2-example3.cc") [15]
 apter2-example4.cc" [16])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1002.
+Package pdftex.def Info: images/icon-info.png used on input line 1004.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [17]
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1064.
+Package pdftex.def Info: images/icon-info.png used on input line 1066.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example5.cc" [18])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1075.
+Package pdftex.def Info: images/icon-info.png used on input line 1077.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [19]
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1115.
+Package pdftex.def Info: images/icon-error.png used on input line 1117.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1120.
+Package pdftex.def Info: images/icon-info.png used on input line 1122.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [20]
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example6.cc")
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1145.
+Package pdftex.def Info: images/icon-info.png used on input line 1147.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [21]
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1199.
+Package pdftex.def Info: images/icon-error.png used on input line 1201.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1208.
+Package pdftex.def Info: images/icon-warning.png used on input line 1210.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [22]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1240.
+Package pdftex.def Info: images/icon-warning.png used on input line 1242.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1245.
+Package pdftex.def Info: images/icon-warning.png used on input line 1247.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [23]
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example7.cc" [24])
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1288.
+Package pdftex.def Info: images/icon-info.png used on input line 1290.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1293.
+Package pdftex.def Info: images/icon-error.png used on input line 1295.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [25]
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1310.
+Package pdftex.def Info: images/icon-info.png used on input line 1312.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1321.
+Package pdftex.def Info: images/icon-warning.png used on input line 1323.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
 apter2-example8.cc" [26] [27])
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1342.
+Package pdftex.def Info: images/icon-warning.png used on input line 1344.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\examples/ch
@@ -1446,68 +1485,68 @@ apter2-example10.cc" [30] [31]) [32] [33]
 apter2-example11.cc" [34]) [35]
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1518.
+Package pdftex.def Info: images/icon-warning.png used on input line 1520.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-error.png Graphic file (type png)
 
 <use images/icon-error.png>
-Package pdftex.def Info: images/icon-error.png used on input line 1523.
+Package pdftex.def Info: images/icon-error.png used on input line 1525.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [36]
-<images/chapter03-cover.jpg, id=159, 1027.84pt x 770.88pt>
+<images/chapter03-cover.jpg, id=163, 1027.84pt x 770.88pt>
 File: images/chapter03-cover.jpg Graphic file (type jpg)
 
 <use images/chapter03-cover.jpg>
-Package pdftex.def Info: images/chapter03-cover.jpg used on input line 1535.
+Package pdftex.def Info: images/chapter03-cover.jpg used on input line 1537.
 (pdftex.def)             Requested size: 614.59148pt x 460.94362pt.
  [37
 
  <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/chap
 ter03-cover.jpg>]
-<images/chapter03-image01.png, id=163, 1015.795pt x 1150.2975pt>
+<images/chapter03-image01.png, id=167, 1015.795pt x 1150.2975pt>
 File: images/chapter03-image01.png Graphic file (type png)
 
 <use images/chapter03-image01.png>
-Package pdftex.def Info: images/chapter03-image01.png used on input line 1548.
+Package pdftex.def Info: images/chapter03-image01.png used on input line 1550.
 (pdftex.def)             Requested size: 203.1554pt x 230.05542pt.
 
-<images/chapter03-image02.png, id=165, 856.19875pt x 861.2175pt>
+<images/chapter03-image02.png, id=169, 856.19875pt x 861.2175pt>
 File: images/chapter03-image02.png Graphic file (type png)
 
 <use images/chapter03-image02.png>
-Package pdftex.def Info: images/chapter03-image02.png used on input line 1559.
+Package pdftex.def Info: images/chapter03-image02.png used on input line 1561.
 (pdftex.def)             Requested size: 171.23671pt x 172.24045pt.
  [38 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/
 chapter03-image01.png>] [39 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF
 /doc/UserManual/images/chapter03-image02.png>] <images/chapter03-image03.png, i
-d=178, 2660.94125pt x 3215.01125pt>
+d=182, 2660.94125pt x 3215.01125pt>
 File: images/chapter03-image03.png Graphic file (type png)
 
 <use images/chapter03-image03.png>
-Package pdftex.def Info: images/chapter03-image03.png used on input line 1603.
+Package pdftex.def Info: images/chapter03-image03.png used on input line 1605.
 (pdftex.def)             Requested size: 266.10971pt x 321.51996pt.
 
-<images/chapter03-image04.png, id=180, 902.37125pt x 1128.215pt>
+<images/chapter03-image04.png, id=184, 902.37125pt x 1128.215pt>
 File: images/chapter03-image04.png Graphic file (type png)
 
 <use images/chapter03-image04.png>
-Package pdftex.def Info: images/chapter03-image04.png used on input line 1612.
+Package pdftex.def Info: images/chapter03-image04.png used on input line 1614.
 (pdftex.def)             Requested size: 135.34984pt x 169.22495pt.
 
-<images/chapter03-image05.png, id=182, 1344.02126pt x 660.4675pt>
+<images/chapter03-image05.png, id=186, 1344.02126pt x 660.4675pt>
 File: images/chapter03-image05.png Graphic file (type png)
 
 <use images/chapter03-image05.png>
-Package pdftex.def Info: images/chapter03-image05.png used on input line 1628.
+Package pdftex.def Info: images/chapter03-image05.png used on input line 1630.
 (pdftex.def)             Requested size: 268.79948pt x 132.09116pt.
  [40] [41 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/im
 ages/chapter03-image03.png> <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF
 /doc/UserManual/images/chapter03-image04.png>] <images/chapter03-image06.png, i
-d=192, 427.5975pt x 584.1825pt>
+d=196, 427.5975pt x 584.1825pt>
 File: images/chapter03-image06.png Graphic file (type png)
 
 <use images/chapter03-image06.png>
-Package pdftex.def Info: images/chapter03-image06.png used on input line 1644.
+Package pdftex.def Info: images/chapter03-image06.png used on input line 1646.
 (pdftex.def)             Requested size: 85.51797pt x 116.83443pt.
  [42 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/
 chapter03-image05.png> <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/
@@ -1515,50 +1554,66 @@ UserManual/images/chapter03-image06.png>]
 File: images/icon-warning.png Graphic file (type png)
 
 <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1659.
+Package pdftex.def Info: images/icon-warning.png used on input line 1661.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1668.
+Package pdftex.def Info: images/icon-warning.png used on input line 1670.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1673.
+Package pdftex.def Info: images/icon-info.png used on input line 1675.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
 File: images/icon-warning.png Graphic file (type png)
  <use images/icon-warning.png>
-Package pdftex.def Info: images/icon-warning.png used on input line 1680.
+Package pdftex.def Info: images/icon-warning.png used on input line 1682.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [43]
 File: images/icon-info.png Graphic file (type png)
 
 <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1693.
+Package pdftex.def Info: images/icon-info.png used on input line 1695.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [44] [45]
 File: images/icon-info.png Graphic file (type png)
  <use images/icon-info.png>
-Package pdftex.def Info: images/icon-info.png used on input line 1777.
+Package pdftex.def Info: images/icon-info.png used on input line 1779.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
- [46] [47]
-[48] [49] [50] [51
+ [46]
+<images/chapter03-image07.png, id=216, 1631.09375pt x 909.3975pt>
+File: images/chapter03-image07.png Graphic file (type png)
 
-]
+<use images/chapter03-image07.png>
+Package pdftex.def Info: images/chapter03-image07.png used on input line 1796.
+(pdftex.def)             Requested size: 326.21297pt x 181.87628pt.
+ [47 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/
+chapter03-image07.png>]<<FiniteStateMachine.png>> <images/chapter03-image08.png
+, id=224, 779.16093pt x 243.15843pt>
+File: images/chapter03-image08.png Graphic file (type png)
+
+<use images/chapter03-image08.png>
+Package pdftex.def Info: images/chapter03-image08.png used on input line 1819.
+(pdftex.def)             Requested size: 389.57951pt x 121.57892pt.
+ [48 <C:/Users/Moises Chavez/Documents/GitHub/LibOpenCIF/doc/UserManual/images/
+chapter03-image08.png>] [49] [50] [51]
 \GPT@outputbox=\box64
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2049.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2084.
 
- [52]
+
+[52
+
+]
 \tf@toc=\write5
 
 ("C:\Users\Moises Chavez\Documents\GitHub\LibOpenCIF\doc\UserManual\UserManual.
 aux") ) 
 Here is how much of TeX's memory you used:
- 20424 strings out of 493921
- 391835 string characters out of 3144852
- 700805 words of memory out of 3000000
- 23306 multiletter control sequences out of 15000+200000
+ 21457 strings out of 493921
+ 413095 string characters out of 3144852
+ 729416 words of memory out of 3000000
+ 24303 multiletter control sequences out of 15000+200000
  87430 words of font info for 59 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  60i,18n,68p,894b,2364s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1583,9 +1638,9 @@ pe1/public/lm/lmsso10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
-Output written on UserManual.pdf (56 pages, 11017556 bytes).
+Output written on UserManual.pdf (56 pages, 12116254 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
+ 314 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 164 words of extra memory for PDF output out of 10000 (max. 10000000)
 
