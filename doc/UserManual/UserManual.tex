@@ -1595,7 +1595,7 @@ A \textbf{Box} command defines a rectangle with some properties:
 \item Rotation
 \end{itemize}
 
-The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf{height} of such figure, and both values must be positive. The \textbf{position} of a \textbf{Box} is defined as the coordinates on which its \textbf{center} must be placed. The rotation of a Box is totally optional. The rotation is represented by the coordinates of a point. Such point, along with the center of the Box, forms an angle with respect of the X axis. Such angle is the rotation to be applied to the figure. There is important to note that all the rotations (no only for Boxes) are \textbf{counter-clockwise}, never \textbf{clockwise}. In the figure \ref{fig:boxrotation} can be seen an example, where a Box has a rotation described by the points [1,0], [1,1], [-1,-1] and [10,-1].
+The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf{height} of such figure, and both values must be positive. The \textbf{position} of a \textbf{Box} is defined as the coordinates on which its \textbf{center} must be placed. The rotation of a Box is totally optional. The rotation is represented by the coordinates of a point. Such point, along with the center of the Box, forms an angle with respect of the X axis. Such angle is the rotation to be applied to the figure\footnote{If the Box has a rotation applied, it must rotate around its own center.} . There is important to note that all the rotations (no only for Boxes) are \textbf{counter-clockwise}, never \textbf{clockwise}. In the figure \ref{fig:boxrotation} can be seen an example, where a Box has a rotation described by the points [1,0], [1,1], [-1,-1] and [10,-1].
 
 \begin{figure}
 	\centering
@@ -1651,7 +1651,7 @@ The \textbf{Box} and \textbf{Polygon} figures are usually used to represent the 
 
 The second group of commands, named in this document as \textbf{Control Commands}, are those that allow us to define, call, place and rotate those basic components of a design named \textbf{cells}.
 
-The first element to understand is a low-level cell . Such component represent a small group of figures (Box, Polygon, Wire or Round Flash or the \textbf{Layer} and \textbf{User Extension} commands, discussed later). This kind of cell represents small mathematical operations, like an inverter, an OR or an AND, and can be used multiple times in a single Integrated Circuit design. To define such component we need two CIF commands. The first one defines a start and a second defines and end. All the commands found within this two commands are considered part of this cell. These two commands are known in this document as \textbf{Definition Start} and \textbf{Definition End}.
+The first element to understand is a low-level cell . Such component represent a small group of figures (Box, Polygon, Wire or Round Flash or the \textbf{Layer} and \textbf{User Extension} commands, discussed later). This kind of cell represents small mathematical operations, like an inverter, an OR or an AND, and can be used multiple times in a single Integrated Circuit design. To define such component we need two CIF commands. The first one defines a start and a second defines an end. All the commands found within this two commands are considered part of this cell. These two commands are known in this document as \textbf{Definition Start} and \textbf{Definition End}.
 
 \IconNote
 	{warning}
@@ -1672,7 +1672,7 @@ The \textbf{Definition End} command doesn't need any properties, it just end the
 	{Non-consecutive IDs}
 	{The CIF format doesn't restrict in any way the order of the IDs used to define cells. They can have any integer as long as such value has not yet been used by another cell and it must be positive.}
 
-The following command found in this group is a \textbf{Call} command. Such command is used to instantiate a previously defined cell. This behaves just like a function. The user can define small pieces of design (just like small pieces of code) and can use them whenever such component (of behaviour) is needed. As can be inferred, a cell can have calls o other cells that can, in turn, have calls to another cells, and so on.
+The following command found in this group is a \textbf{Call} command. Such command is used to instantiate a previously defined cell. This behaves just like a function. The user can define small pieces of design (just like small pieces of code) and can use them whenever such component (of behaviour) is needed. As can be inferred, a cell can have calls to other cells that can, in turn, have calls to another cells, and so on.
 
 \IconNote
 	{warning}
@@ -1698,11 +1698,31 @@ A \textbf{Mirror} transformation is used to flip a design horizontally or vertic
 
 Another consideration with the transformations is that they no only apply to the figures defined within the cell called, they must be also applied to the Call commands found within this cell, so, they are applied recursively in the cell until no more Call commands are found. This is done to apply transformations no only to the top level cell, but to all the lower level cells.
 
-The next command found in this group is the \textbf{Definition Delete} command. 
+The next command found in this group is the \textbf{Definition Delete} command. As far as the author experience can prove, this command is not extensively used in the Integrated Circuit designs. It is used to remove a previously defined cell, so its ID is available to use again and its contents are not available. This command is useful if the CIF file is being processed command by command (in a linear way) so that cells that are not going to be used again in the design can be safety deleted (freeing memory from the reading device or program). Even if this command is not widely used in today designs, the support must be provided.
+
+The Definition Delete command has one mandatory property, and it is the ID of the cell (that must be already defined) to delete. When deleting, is expected to delete only the direct contents of the cell referred, not the cells mentioned in call commands found within the deleted cell.
+
+The last command found in this group is the \textbf{End} command. Such command is intended to mark the \textbf{end of the file}. Even if the file has contents later, if this command is found, the reading application or device must consider that the design is over.
+
+\subsection{RAW content commands}\label{RAW-content-commands}
+
+This group of commands include those which contents are user-defined and that doesn't require any validation from the reading application or device. Any interpretation performed over the contents of these commands are directly dependant of the reading application or device, so, are not covered by the format itself and can be not compatible between applications.
+
+The first command found in this group is the \textbf{User Extension} command. This command is intended to provide a way to extend the functionality and capabilities of the format, allowing to define new commands that are application dependant. These commands allow, in some common situations, to define the name of cells and to define connection points, port names and other details that are equally important in a design, but that the CIF format, \textit{per se}, doesn't allow to define.
+
+The second and last command of this group is the \textbf{Comment} command. These commands are intended to introduce comment lines on a design to store information not directly used in the design, like author name, date on which the design was stored, or a description of the design.
+
+\subsection{Layer command}\label{Layer-command}
+
+An Integrated Circuit design is composed, as discussed, by geometrical figures that represent components of a design. Those figures must be made of some material and such material must be defined. In a CIF file, exist the \textbf{Layer} command, that allow the reader application to know of which material are made the figures it is reading.
+
+When reading a CIF file, once the reader finds a Layer command, the following Primitive Commands that it finds can be considered to be made of the material specified by the previously found Layer command. To change the material of which a figure is made, a new Layer command must be placed. As can be seen, all the Primitive commands found after a Layer command are made of the material specified unless a new Layer command is found.
+
+The Layer command has one mandatory property. Such property is the name of the material to use. The initial definition of this command states that the name must be formed with 4 characters, but, since various applications using the CIF format doesn't respect this restriction (using names shorter or longer than 4 characters), this library, when validating a CIF file, it will not have in consideration the length of the material names\footnote{Is also important to note that most applications use their own set of material names even if there exist a standard that respects the 4-char rule.}.
 
 \subsection{BNF representation of the format}\label{BNF-representation-of-the-format}
 
-All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands}. The following text defines the complete \textbf{BNF} (Backus Naur Form) description of the format\footnote{The format described in this document is not exactly the same as that described in the official documentation. The \textbf{BNF} description is adapted to the purposes of this document.}. The BNF is described using the following rules:
+All the components that form an Integrated Circuit design can be represented by the CIF format using the supported \textbf{commands} that where previously described. The CIF commands need to be represented and identified using as less characters as possible. So, the solution used by the format is to represent every command with a specific character. The following text defines the complete \textbf{BNF} (Backus Naur Form) description of the format\footnote{The format described in this document is not exactly the same as that described in the official documentation. The \textbf{BNF} description is adapted to the purposes of this document.}. The BNF is described using the following rules:
 
 \begin{itemize}
 \item The curly brackets represent a repetition of one or more of its contents.
@@ -1756,11 +1776,15 @@ The previous definition explains, in BNF format, how a CIF file is structured. S
 	{Validating two points of view}
 	{Is recommended for the reader to take a look at the original documentation to compare our definition and the original one.}
 
+As can be seen, there is important to note that the CIF format defines that all the commands need to end using a semicolon\footnote{In the End command, the semicolon is optional but recommended.} and that most of the commands can be identified by their first character (an upper case character or a digit in the Expansion command).
+
+After defining the contents of a CIF file, the next step is to understand how this library is able to load and validate the commands found in it.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Validation of a CIF file}\label{Validation-of-a-cif-file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Validation of a CIF file
+This library has the purpose of loading into memory the contents of a CIF file. Such operation requires a validation of the contents loaded to be sure that they are correct by themselves and that they meet the format considered. The validation is performed loading the CIF file byte by byte and passing each one into a \textbf{Finite State Machine} which is designed to validate the possible structure of the CIF file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Finite state machine used}\label{Finite-state-machine-used}
