@@ -1845,13 +1845,29 @@ There are some considerations that must be keep in mind at all times, because wi
 
 The process of loading a CIF file, as described previously, is very straightforward. However, there is an important detail that need to be discussed. The Finite State Machine used to validate the contents of a file does just that: Validates the contents. The process of loading a file into memory requires not only reading the file byte by byte, but also being able to split the contents to create a list of valid commands (so that they can be accessed independently).
 
-The process of loading starts 
+The process of loading starts by opening the input CIF file in text mode (no binary mode). After that, the 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cleaning process of commands}\label{Cleaning-process-of-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Cleaning process of commands
+The process of cleaning a command is one of the most important steps when loading a CIF file. Even if the library can provide the user with valid commands, the user still can need to process a command, since the following example is completely valid:
+
+\begin{verbatim}
+Bthis.is.a0Valid.Command!0EVEN_ifyou.don't100believe100it;
+\end{verbatim}
+
+So, the command is ok. It respects the rules about the separation characters used between elements: The command is \textbf{correct}. Even in such situation, as can be seen, the user might need to continue processing the commands until the command ends as something really useful and easy to process, something like this:
+
+\begin{verbatim}
+B 0 0 100 100 ;
+\end{verbatim}
+
+Such format is obviously more clear and easy to read, and, when processing, such format can be used with a string stream or other resources because it is easy to split and, therefore, easy to process. In this library, the idea is to bring to the user an option to clean and format a CIF command into something easy to process. This is done, as mentioned in the User Documentation section of this document, with a call to the member function \textbf{cleanCommands} (when manually loading a file) or the member function \textbf{cleanCommand} (when manually cleaning a single command), both member functions of the class \textbf{File}.
+
+In the first case (\textbf{cleanCommands}), such call will iterate over the internal list of commands loaded and will apply the call to \textbf{cleanCommand} to each command loaded. That's right, just a for cycle, so, the hard work is done in the member function \textbf{cleanCommand}.
+
+When \textbf{cleanCommand} is called, it verifies the type of the command. This is done validating the first character of the string. This validation is done since the commands were 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numeric commands}\label{Numeric-commands}

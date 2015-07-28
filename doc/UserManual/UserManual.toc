@@ -49,8 +49,8 @@
 \contentsline {section}{\numberline {3.4}Converting strings into class instances}{49}
 \contentsline {subsection}{\numberline {3.4.1}Validation group of classes}{49}
 \contentsline {subsubsection}{Class: State}{49}
-\contentsline {subsubsection}{Class: FiniteStateMachine}{49}
-\contentsline {subsubsection}{Class: CIFFSM}{49}
+\contentsline {subsubsection}{Class: FiniteStateMachine}{50}
+\contentsline {subsubsection}{Class: CIFFSM}{50}
 \contentsline {subsection}{\numberline {3.4.2}Command group of classes}{50}
 \contentsline {subsubsection}{Class: Point}{50}
 \contentsline {subsubsection}{Class: Size}{50}
@@ -62,8 +62,8 @@
 \contentsline {subsubsection}{Class: PolygonCommand}{50}
 \contentsline {subsubsection}{Class: WireCommand}{50}
 \contentsline {subsubsection}{Class: PositionBasedCommand}{50}
-\contentsline {subsubsection}{Class: BoxCommand}{50}
-\contentsline {subsubsection}{Class: RoundFlashCommand}{50}
+\contentsline {subsubsection}{Class: BoxCommand}{51}
+\contentsline {subsubsection}{Class: RoundFlashCommand}{51}
 \contentsline {subsubsection}{Class: ControlCommand}{51}
 \contentsline {subsubsection}{Class: DefinitionStartCommand}{51}
 \contentsline {subsubsection}{Class: DefinitionDeleteCommand}{51}
@@ -75,4 +75,4 @@
 \contentsline {subsubsection}{Class: CommentCommand}{51}
 \contentsline {subsubsection}{Class: LayerCommand}{51}
 \contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{51}
-\contentsline {subsubsection}{Class: File}{51}
+\contentsline {subsubsection}{Class: File}{52}
