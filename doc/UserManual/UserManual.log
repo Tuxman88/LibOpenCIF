@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.14)  27 JUL 2015 17:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.14)  27 JUL 2015 18:37
 entering extended mode
 **UserManual.tex
 
@@ -1599,7 +1599,7 @@ Package pdftex.def Info: images/chapter03-image08.png used on input line 1819.
 chapter03-image08.png>] [49] [50] [51]
 \GPT@outputbox=\box64
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2084.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2094.
 
 
 [52
@@ -1638,7 +1638,7 @@ pe1/public/lm/lmsso10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
-Output written on UserManual.pdf (56 pages, 12116254 bytes).
+Output written on UserManual.pdf (56 pages, 12117389 bytes).
 PDF statistics:
  314 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

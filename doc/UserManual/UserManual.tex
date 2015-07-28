@@ -1828,7 +1828,7 @@ After that, comes a little section intended to understand the different groups o
 \item[B]	Blank characters, any ASCII character except digits, uppercase, minus (-), parentheses or semicolon.
 \item[C]	Comment characters, any ASCII character except parentheses.
 \item[S]	Separator characters, an uppercase character or Blank.
-\item[L]	Layer name characters, any digit, uppercase character or '_' character.
+\item[L]	Layer name characters, any digit, uppercase character or '\_' character.
 \end{description}
 
 After checking the diagram, the reader can see three terminal states: 1, 91 and 92. The state 1 is the starting point of the diagram. Such state is in charge of skipping Blank characters (characters found between commands that are of no use for the design). Every row represents a possible command. All of them start in the state 1 when it detects the starting character of one of it. All the commands end with semicolon. The End command is special, it doesn't need to end with semicolon (state 91) or, after finding it, is just matter of skipping characters (state 92) until the end of the file.
