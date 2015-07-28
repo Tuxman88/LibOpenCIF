@@ -1767,7 +1767,7 @@ The previous definition explains, in BNF format, how a CIF file is structured. S
 \begin{itemize}
 \item The order on which the format defines how components (specially the whitespaces) are used is different in order to try to prevent a non-deterministic definition.
 \item Since in the real world exists examples of production designs that doesn't respect the 4-character rule for the layer names, in our format we are not limiting the names to those 4 characters.
-\item The format doesn't have in consideration the possible contents of the file beyond the END command since such contents are not of interest for the design (but are not considered an error \textit{per se}).
+\item The format doesn't have in consideration the possible contents of the file beyond the End command since such contents are not of interest for the design (but are not considered an error \textit{per se}).
 \item There must not be considered a non-deterministic problem the definition of the SEP character. The uppercase characters (A to Z) must override the definition of the BLANK character.
 \end{itemize}
 
@@ -1803,7 +1803,7 @@ Such process is repeated until the end of the file is reached, the End command i
 \subsection{Finite state machine used}\label{Finite-state-machine-used}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Even more important that the process of how to read a byte from a file, the truly crucial detail, when validating a file using a Finite State Machine, is how such Finite State Machine is designed. In this case, the design was carefully designed, trying to include as much information as possible.
+Even more important that the process of how to read a byte from a file, the truly crucial detail, when validating a file using a Finite State Machine, is how such Finite State Machine is designed. In this case, the diagram was carefully designed, trying to include as much information as possible.
 
 The diagram of such design is too big for this document, so, the image must be available alongside this document.
 
@@ -1843,7 +1843,9 @@ There are some considerations that must be keep in mind at all times, because wi
 \section{Loading of a CIF file}\label{Loading-of-a-CIF-file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Loading of a CIF file
+The process of loading a CIF file, as described previously, is very straightforward. However, there is an important detail that need to be discussed. The Finite State Machine used to validate the contents of a file does just that: Validates the contents. The process of loading a file into memory requires not only reading the file byte by byte, but also being able to split the contents to create a list of valid commands (so that they can be accessed independently).
+
+The process of loading starts 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cleaning process of commands}\label{Cleaning-process-of-commands}
