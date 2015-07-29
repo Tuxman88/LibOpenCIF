@@ -1851,7 +1851,7 @@ The process of loading starts by opening the input CIF file in text mode (no bin
 \subsection{Cleaning process of commands}\label{Cleaning-process-of-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The process of cleaning a command is one of the most important steps when loading a CIF file. Even if the library can provide the user with valid commands, the user still can need to process a command, since the following example is completely valid:
+The process of cleaning a command is one of the most important steps when loading a CIF file. Even if the library can provide the user with valid commands, the user still will need to process a command, since the following example is completely valid:
 
 \begin{verbatim}
 Bthis.is.a0Valid.Command!0EVEN_ifyou.don't100believe100it;
@@ -1867,19 +1867,49 @@ Such format is obviously more clear and easy to read, and, when processing, such
 
 In the first case (\textbf{cleanCommands}), such call will iterate over the internal list of commands loaded and will apply the call to \textbf{cleanCommand} to each command loaded. That's right, just a for cycle, so, the hard work is done in the member function \textbf{cleanCommand}.
 
-When \textbf{cleanCommand} is called, it verifies the type of the command. This is done validating the first character of the string. This validation is done since the commands were 
+When \textbf{cleanCommand} is called, it verifies the type of the command. This is done validating the first character of the string. This validation is done since the commands were grouped depending of the kind of characters found within the commands themselves. This is done so the cleaning became easier for the library applying simpler cleaning functions. The following sections show all the different kind of commands identified (that must no be confused with the command grouping explained before) and how the library is cleaning them.
+
+The previously explained idea is placed in the code as can be seen in the following code block:
+
+\lstinputlisting[caption={\textbf{cleanCommand} full code snippet.}, style=CPPStyle]{examples/chapter3-example1.cc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numeric commands}\label{Numeric-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Numeric commands
+The first group, the numeric commands, are those which description and operation depends entirely on digits and minus characters. In this group are considered the Polygon, Wire, Box and Round Flash commands. These commands are cleaned in the same way. When the cleanCommand member function detects that the incoming command is of one of this types, it calls the member function \textbf{cleanNumericCommands}, so it performs the actual cleaning of the command.
+
+The member function cleanNumericCommand performs a very straightforward operation. The first step is to backup the command identifier (the first character of the command, a B, W, R or P character) directly into the final command and add a space after it. This is done since the command to clean, once cleaned, have its identifier removed. The second step is replacing all the characters in the string that forms the command, that are not digits or a dash, with spaces (this also replaces other whitespaces, like ENTERs, tabulators and other spaces, and it removes, also, the semicolon at the end of the command). This process is intended to convert something like this:
+
+\begin{verbatim}
+W1000,thisisatest,,,this,is,valid20000doingsomething,,,,,-10000,-10000,-500 X-4000;
+\end{verbatim}
+
+Into this:
+
+\begin{verbatim}
+ 1000                            20000                   -10000 -10000 -500  -4000 
+\end{verbatim}
+
+As can be seen, the idea is to first remove all the characters from the command string that are not expected to be there. After that, the next step is to format the command into this:
+
+\begin{verbatim}
+W 1000 20000 -10000 -10000 -500 -4000 ;
+\end{verbatim}
+
+The way it is done is passing the cleaned (but unformatted) string into an \textbf{istringstream} class instance, so we will be able to read the different components of the commands easily. Once created the instance of such class (configured with the cleaned string), the operation to perform is to read, word by word, from such instance until we find an EOF, moment on which we stop reading. For every word readed, we insert it into the final command string, with a trailing space.
+
+After completing the process, the last step is to add the final semicolon, which will complete the command and now the member function will be able to return the cleaned command to the caller.
+
+The previously behaviour can be seen in the following code block:
+
+\lstinputlisting[caption={\textbf{cleanNumericCommand} full code snippet.}, style=CPPStyle]{examples/chapter3-example2.cc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Layer commands}\label{Layer-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Layer commands
+The second group affects only the layer command. This group is cleaned with a call to \textbf{cleanLayerCommand}. Such member function
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Call commands}\label{Call-commands}
