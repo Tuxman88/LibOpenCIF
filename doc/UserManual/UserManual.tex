@@ -1843,49 +1843,198 @@ There are some considerations that must be keep in mind at all times, because wi
 \section{Loading of a CIF file}\label{Loading-of-a-CIF-file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Loading of a CIF file
+The loading of a CIF file, as considered, requires some options to be available to the user. One of such options is the process of loading a CIF file into memory and make the commands available to the user in string form and in class instance form. This design decision is intented to make the life of the user more easy, providing it with the required elements so the results can be used as needed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cleaning process of commands}\label{Cleaning-process-of-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Cleaning process of commands
+One of the major options provided to the user is the cleaning of the commands. Even if the library can provide to the user the raw (but validated) commands, they can be hard to process because the extra characters that can be found. So, one of the biggest implementations done is the cleaning process. Such option was partitioned according to small groups of commands that can be cleaned in the same way.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numeric commands}\label{Numeric-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Numeric commands
+The numeric commands are those that only contain their identification character and, after that, just numeric values. The commands considered to be numeric are:
+
+\begin{itemize}
+\item Polygon
+\item Box
+\item Wire
+\item RoundFlash
+\end{itemize}
+
+These commands can be cleaned in the same way. The basic operation is very easy to implement. The first step is to backup the identification character and assign it to a new empty string with a whitespace after it. The second step is to iterate over the characters of the command and replace all the characters that are not digits or minus ('-') with whitespaces. This process will remove any not required character from the string, leaving only the good ones. Since the command string was already validated by the Finite State Machine, we can safely assume that all the remaining characters are always command characters.
+
+The following string is an example of a "dirty" command:
+
+\begin{verbatim}
+W1000lol20000,,,this,is,valid20000xoxoxoxoxox-10000,-10000,-500example-4000;
+\end{verbatim}
+
+And so, the result of this first step is the following string:
+
+\begin{verbatim}
+ 1000   20000                20000            -10000 -10000 -500       -4000
+\end{verbatim}
+
+Now, as can be seen, the command might be cleaner, but it still has lots of whitespaces and it doesn't have a semicolon. The idea is to convert it into the following string:
+
+\begin{verbatim}
+W 1000 20000 20000 -10000 -10000 -500 -4000 ;
+\end{verbatim}
+
+The goal is to remove all the whitespaces and add one after the identification character and before the semicolon. Using the previously created string (that contains the identification character and a whitespace), we will start concatenating to it the remaining pieces of command (separated by single whitespaces). To do such operation, we start with a \textit{istringstream} class instance. We create it with the partially cleaned command as constructor argument.
+
+Using the previously created instance, we start to iterate over the process of extracting a word (a string) from the instance, until we reach the End Of File of such stream. Each word extracted will be contactenated to the temporal string (the one that has the identification character), with a trailing whitespace.
+
+After this loop, we just need to concatenate the final semicolon with a trailing whitespace.
+
+The last step on the cleaning process is to return the newly formed string to the caller.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Layer commands}\label{Layer-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Layer commands
+The Layer commands are those that only contain their identification character and, after that, only uppercase characters, underscores and digits.
+
+The basic operation is very easy to implement. The first step is to backup the identification character and assign it to a new empty string with a whitespace after it. Then, we manually replace the first character with a whitespace. The third step is to iterate over the characters of the command and replace all the characters that are not digits, uppercase characters or underscores with whitespaces. This process will remove any not required character from the string, leaving only the good ones. Since the command string was already validated by the Finite State Machine, we can safely assume that all the remaining characters are always command characters.
+
+The following string is an example of a "dirty" command:
+
+\begin{verbatim}
+Lthis.is,,and.examplePOLY_OTHERx;
+\end{verbatim}
+
+And so, the result of this first step is the following string:
+
+\begin{verbatim}
+                     POLY_OTHER  
+\end{verbatim}
+
+Now, as can be seen, the command might be cleaner, but it still has lots of whitespaces and it doesn't have a semicolon. The idea is to convert it into the following string:
+
+\begin{verbatim}
+L POLY_OTHER ;
+\end{verbatim}
+
+The goal is to remove all the whitespaces and add one after the identification character and before the semicolon. Using the previously created string (that contains the identification character and a whitespace), we will start concatenating to it the remaining pieces of command (separated by single whitespaces). To do such operation, we start with a \textit{istringstream} class instance. We create it with the partially cleaned command as constructor argument.
+
+Using the previously created instance, we start to iterate over the process of extracting a word (a string) from the instance, until we reach the End Of File of such stream. Each word extracted will be contactenated to the temporal string (the one that has the identification character), with a trailing whitespace.
+
+After this loop, we just need to concatenate the final semicolon with a trailing whitespace.
+
+The last step on the cleaning process is to return the newly formed string to the caller.
+
+\IconNote
+	{info}
+	{Multiple words in a layer name}
+	{The CIF format doesn't allow layer names to contain spaces (so, "POLY METAL" is invalid). The idea of using a istringstream isn't invalid since the command was already validated by the Finite State Machine, and is guaranteed that it has only one word.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Call commands}\label{Call-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Call commands
+The Call commands are those that only contain their identification character and, after that, only uppercase characters and digits.
+
+The basic operation is very easy to implement. The first step is to backup the identification character and assign it to a new empty string with a whitespace after it. Then, we manually replace the first character with a whitespace. The third step is to iterate over the characters of the command and replace all the characters that are not digits, uppercase characters or minus with whitespaces. This process will remove any not required character from the string, leaving only the good ones. Since the command string was already validated by the Finite State Machine, we can safely assume that all the remaining characters are always command characters.
+
+The following string is an example of a "dirty" command:
+
+\begin{verbatim}
+C1T20000 -20000R1000000 -59999MXexampleMY MXMXMXMYMXR100 100R100 100;
+\end{verbatim}
+
+And so, the result of this first step is the following string:
+
+\begin{verbatim}
+ 1T20000 -20000R1000000 -59999MX       MY MXMXMXMYMXR100 100R100 100 
+\end{verbatim}
+
+Now, as can be seen, the command might be cleaner, but it still has lots of whitespaces and other components of the command (like the Mirror options) are just too close (we need more whitespaces), and also it doesn't have a semicolon. The idea is to convert it into the following string:
+
+\begin{verbatim}
+C 1 T 20000 -20000 R 1000000 -59999 M X M Y M X M X M X M Y M X R 100 100 R 100 100 ;
+\end{verbatim}
+
+The goal is to remove all the whitespaces and add one after the identification character, before the semicolon and between the call options. Now, the cleaning process of this step is a little bit more complicated that the previousn ones. In this case, we need to split a string without clear indications of wherer we need to cut. To process the string, we will use some properties of the command format:
+
+\begin{enumerate}
+\item The numbers found in the command can't be togheter, that is, that between each one must be a whitespace or an uppercase character.
+\item There can't be two whitespaces togheter. If two or more whitespaces are found, we will remove all but the first.
+\item The uppercase characters (the call options) require to have whitespaces before and after them.
+\item The minus character requires a whitespace before it.
+\end{enumerate}
+
+The previously defined properties can be used to define a code block that is able to process the whole command, adding the required whitespaces and removing the extra ones:
+
+\lstinputlisting[caption={Implemented block of code using the properties of the Call Command.}, style=CPPStyle]{examples/chapter3-example3.cc}
+
+Using the previous code block, we can correctly format the contents of the Call Command. After this loop, we just need to concatenate the final semicolon with a trailing whitespace.
+
+The last step on the cleaning process is to return the newly formed string to the caller.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Definition control commands}\label{Definition-control-commands}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Definition control commands
+The Definition control commands are those that contain their identification characters and, after that, only digits.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Considerations}\label{Considerations2}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The basic operation is very easy to implement. The first step is to backup the first identification character and assign it to a new empty string with a whitespace after it. Then, we manually replace the first character with a whitespace. The third step is to iterate over the characters of the command and replace all the characters that are not digits or uppercase characters. This process will remove any not required character from the string, leaving only the good ones. Since the command string was already validated by the Finite State Machine, we can safely assume that all the remaining characters are always command characters.
 
-Considerations
+The following string is an example of a "dirty" command:
+
+\begin{verbatim}
+DxxxxxSlol100im,totally,correct;
+\end{verbatim}
+
+And so, the result of this first step is the following string:
+
+\begin{verbatim}
+      S   100                   
+\end{verbatim}
+
+Now, as can be seen, the command might be cleaner, but it still has lots of whitespaces and it doesn't have a semicolon. The idea is to convert it into the following string:
+
+\begin{verbatim}
+D S 100 ;
+\end{verbatim}
+
+The goal is to remove all the whitespaces and add one after the identification character, before the semicolon and between the call options. Now, the cleaning process of this step is a little bit more complicated that the previousn ones (but similar to the one found for the Call Command, just a little bit more simple). In this case, we need to split a string without clear indications of wherer we need to cut. To process the string, we will use some properties of the command format:
+
+\begin{enumerate}
+\item The numbers found in the command can't be togheter, that is, that between each one must be a whitespace or an uppercase character.
+\item There can't be two whitespaces togheter. If two or more whitespaces are found, we will remove all but the first.
+\item The uppercase characters (the second identification character) require to have whitespaces before and after them.
+\end{enumerate}
+
+The previously defined properties can be used to define a code block that is able to process the whole command, adding the required whitespaces and removing the extra ones:
+
+\lstinputlisting[caption={Implemented block of code using the properties of the Call Command.}, style=CPPStyle]{examples/chapter3-example4.cc}
+
+Using the previous code block, we can correctly format the contents of the Definition Commands. After this loop, we just need to concatenate the final semicolon with a trailing whitespace.
+
+The last step on the cleaning process is to return the newly formed string to the caller.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Expansion commands}\label{Expansion-commands}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Expansion commands are those that contain their identification characters and, after that, any character that the user might require.
+
+These commands are the easiest to process, since they only require to have their identification charcters separated. The followin is an example of valid command:
+
+\begin{verbatim}
+9 CORE;
+\end{verbatim}
+
+In this example, the Expansion command ID is "9", and its content "CORE" must be processed and validated by the application loading the file. The CIF format itself doesn't give any special meaning to the Expansion commands, so, in this library they are being as they are defined.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Converting strings into class instances}\label{Converting-strings-into-class-instances}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Converting strings into class instances
+In this last section of the document, the user will learn about the design of the classes that can be found within the library. Once the commands are totally validated and cleaned, they can be converted into class instances to be used by the user as needed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Validation group of classes}\label{Validation-group-of-classes}
