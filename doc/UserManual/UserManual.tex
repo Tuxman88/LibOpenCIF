@@ -36,8 +36,9 @@
 \usepackage{tikz}
 \usepackage{listings}
 \usetikzlibrary{shapes,positioning}
-
 \usepackage[utf8]{inputenc}
+
+\counterwithin{figure}{section}
 
 \usepackage[english]{babel}
 \selectlanguage{english} 
@@ -377,6 +378,8 @@ Version 1.2.0\par}
 \renewcommand\chapterillustration{images/chapter01-cover}
 \renewcommand{\chaptername}{Chapter}
 \renewcommand{\figurename}{Figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}\label{Introduction}
@@ -1544,9 +1547,9 @@ The CIF format describes the physical layout (appearance) of an Integrated Circu
 
 \begin{figure}
 	\centering
-	\label{fig:layers}
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image01}
 	\caption{Basic inverter where all its layers has been separated: a) Full cell, b) NWELL, c) NDIF, d) PDIF, e) NTIE, f) POLY, g) CONT, h) ALU1, i) REF.}
+	\label{fig:layers}
 \end{figure}
 
 \subsection{Design coordinates}\label{Design-coordinates}
@@ -1555,9 +1558,9 @@ An Integrated Circuit design can be seen as a 2D area where all the components t
 
 \begin{figure}
 	\centering
-	\label{fig:iccoordinates}
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image02}
 	\caption{Representation of the Cartesian Plane used in the Integrated Designs.}
+	\label{fig:iccoordinates}
 \end{figure}
 
 Having the previous detail explained, is important to have in mind that the designs are intended to represent real components that are really small. Such components use as measuring unit the \textbf{micrometer} (\textbf{$\mu$}). This unit, even when it is really small, sometimes it not enough precision to represent coordinates nor sizes of pieces of the design, so, various components are measured in hundreds or even thousands of micrometer.
@@ -1599,18 +1602,18 @@ The \textbf{size} of a \textbf{Box} is defined as the \textbf{width} and \textbf
 
 \begin{figure}
 	\centering
-	\label{fig:boxrotation}
 	\includegraphics[scale=0.1, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image03}
 	\caption{Visualization of the effect of the rotation over a Box object.}
+	\label{fig:boxrotation}
 \end{figure}
 
 A \textbf{Polygon} defines a list of points that form a figure. Such figure can be as complex or simple as needed. The CIF format doesn't set any kind of restriction about which kind of figures can be defined. The polygons formed must be closed, so the first and last point are implicitly closed (there is no need that the first and last point be the same), can be concave and have self-interceptions. The figure \ref{fig:polygon} shows a basic example of a closed \textbf{Polygon}.
 
 \begin{figure}
 	\centering
-	\label{fig:polygon}
 	\includegraphics[scale=0.15, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image04}
 	\caption{Visualization of an example of \textbf{Polygon}.}
+	\label{fig:polygon}
 \end{figure}
 
 A \textbf{Wire} is similar to a \textbf{Polygon}. The \textbf{Wire} has the following properties:
@@ -1624,9 +1627,9 @@ The \textbf{Wire} defines a list of points that aren't a polygon, they're just a
 
 \begin{figure}
 	\centering
-	\label{fig:wire}
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image05}
 	\caption{Visualization of an example of \textbf{Wire}.}
+	\label{fig:wire}
 \end{figure}
 
 The \textbf{Round Flash} defines a circle. Such figure has two properties:
@@ -1640,9 +1643,9 @@ The \textbf{position} of a \textbf{Round Flash} corresponds to its center, while
 
 \begin{figure}
 	\centering
-	\label{fig:roundflash}
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image06}
 	\caption{Visualization of an example of \textbf{Round Flash}.}
+	\label{fig:roundflash}
 \end{figure}
 
 The \textbf{Box} and \textbf{Polygon} figures are usually used to represent the smaller components that are used in an Integrated Circuit design and its power connections, while the \textbf{Wire} and \textbf{Round Flash} are usually used to form the data connection between  the small components.
@@ -1790,9 +1793,9 @@ The basic idea of the loading and validation process can be seen in the figure \
 
 \begin{figure}
 	\centering
-	\label{fig:basicloading}
 	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image07}
 	\caption{Basic diagram of the loading process of a CIF file by this library.}
+	\label{fig:basicloading}
 \end{figure}
 
 The loading is performed reading one byte from the file and sending such byte to the Finite State Machine, which, in turn, having control of the current state, validates the transition needed, returning the new state to the loading function. The loading function, in turn, validates the state returned by the Finite State Machine. If the state is not an Error State, then the byte is correct. Also, the loading function validates if the returned state means that the loaded byte completed a valid command (which was being stored in a buffer). If such situation is reached, the command is moved to the list of valid commands and the buffer is cleared.
@@ -1811,9 +1814,9 @@ The first thing the user will be able to see is a little indication of how to in
 
 \begin{figure}
 	\centering
-	\label{fig:fsmconnections}
 	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image08}
 	\caption{Basic diagram of the loading process of a CIF file by this library.}
+	\label{fig:fsmconnections}
 \end{figure}
 
 After that, comes a little section intended to understand the different groups of characters considered:
@@ -2034,37 +2037,115 @@ In this example, the Expansion command ID is "9", and its content "CORE" must be
 \section{Converting strings into class instances}\label{Converting-strings-into-class-instances}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this last section of the document, the user will learn about the design of the classes that can be found within the library. Once the commands are totally validated and cleaned, they can be converted into class instances to be used by the user as needed.
+Once the commands are totally validated and cleaned, they can be converted into class instances to be used by the user as needed. The classes are designed to be as simple as possible and to be able to be stored in a single \textit{vector} class instance (using polymorphism to call derivated instance member functions from base class pointers).
+
+All the classes are gouped in 3 main groups (depending on their usage): Commands, Validation and Loading.
+
+The classes will be explained according to their usage and importance. The first group to be explained is the Validation group since they are independent from the other two groups and are just a few classes (and, also, they are a dependence of the third group). The second group will be the Command classes, since they are the most numerous and are a dependence of the third group. Finally, the Loading group will be last one since it requires all the other classes.
+
+In the same way, in each group, the user can find the most basic classes explained first, and then, the most complex ones.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Validation group of classes}\label{Validation-group-of-classes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Validation group of classes
+The first group to be explained, the Validation group, is the one used to validate the contents of the CIF file. This group is composed by the State, FiniteStateMachine and CIFFSM classes, that provides the functionality required to validate the format and contents of the file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: State}\label{Class-State}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: State
+The first class to analyse is the State class. After analysing the problem of validation of a file, the final design demanded a Finite State Machine (FSM) to be used to correctly parse and validate the contents of the file. Being working in C++, the FSM required to be a class, and as a result of this, its states would be also classes. Also, having in mind the use of the whole ASCII set (validation of a file), the State class was designed with plain text files in mind. 
 
+A State was defined as a singular point in the whole FSM. Internally, the State will be able to recognize and support the complete set of ASCII characters (even the extended ones), and to be able to represent such set of options, the class will contain an array (or list) of \textit{int} values, 256 of them. Every element of the array will represent a single character in the ASCII set. Its value will represent the next state in the FSM in case that such character is loaded when being in this State. By default, all the elements of the array will be initialized with -1 (meaning a transition to error).
+
+Since there will be 256 possible transitions, there must be a way to add transitions more easily, considering the character set of a CIF file. To simplify the process of adding transitions, there is a member function that takes as argument a \textit{string} class instance and a single integer. The integer is the jump to perform in the FSM when any of the characters in the string is found. The following code block shows this idea applied in the library:
+
+\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example5.cc}
+
+The member function \textit{addOptions} requires two arguments. The first, a constant \textit{string} class instance, named \textbf{new\_options}, and the second, a constant \textit{int} value named \textbf{exit\_state}. When called, a \textit{for} cicle will iterate over the string characters. Each character will be converted into an integer value (to prevent warnings when compiling about convertion of types when accessing the array) and used to access the transitions array at some position (the ASCII value of the character). In such position (that, by default, can be found a -1, meaning transition to error) will be assigned the new jump to the following state.
+
+All the previously considered ideas can be seen in the UML design represented by the figure \ref{fig:class-state}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image09}
+	\caption{UML diagram of the \textbf{State} class.}
+	\label{fig:class-state}
+\end{figure}
+
+The member function \textit{addOptions} will be in charge of adding transitions to the State, but the complex part will be accesing such transitions. The idea behind the State is that the FSM will \textit{ask} to the current State where to go with the current character loaded from the file. To access the list of the transitions, an overloaded operator was added to the State class. Such operator (brackets) will be used to access the internal array of the State, returning the integer value stored in the expected position. For example, when a whitespace is loaded, it has an ASCII value of 32, and, as such, will be accessed the internal array in its index 32 (33rd position), and the value of such integer will be returned. The whole idea can be seen in the following code block:
+
+\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example6.cc}
+
+As can be seen, a \textit{char} value is expected to be provided as argument (the current loaded character from the file). Such value must be passed as constant to prevent internal modifications, and passed as reference to prevent performance problems of creation of copies in memory. Such value is converted into an \textit{int} value to access without warnings the array of transitions (in this case, named \textbf{state\_options}). The accessed value is then returned to the caller.
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: FiniteStateMachine}\label{Class-FiniteStateMachine}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: FiniteStateMachine
+The following class to explain is the \textit{FiniteStateMachine} class. It doesn't provide specific functionality related to the CIF format. This class will only provide a generic mechanism to represent and manage the FSM needed to validate the CIF format. The UML diagram found in the figure \ref{fig:class-fsm} details the main idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image10}
+	\caption{UML diagram of the \textbf{FiniteStateMachine} class.}
+	\label{fig:class-fsm}
+\end{figure}
+
+As can be seen, the class is intented to be a base class for the CIFFSM class, wich specializes it and adds the required functionality. The \textit{FiniteStateMachine} class provides the following components:
+
+\begin{description}
+\item \textbf{fsm\_current\_state} This protected attribute will be used to keep track of the current state when validating the CIF file.
+\item \textbf{fsm\_states} A list (a \textit{vector} class instance) of State class instances that will represent the whole set of states in the FSM.
+\item \textbf{reset} A member function intented to reset (or restart) the whole FSM (done by setting the current state to 1).
+\item \textbf{currentState} A member function intented to return the current state of the FSM.
+\item \textbf{add} A special member function that takes as arguments the current state from which to perform a jump, a string that represents the set of input characters to perform the jump with, and the destination state of the jump.
+\end{description}
+
+Is important to note that, as constructor argument, the class requires to be specified the ammount of states to create. This is in order to be able to perform configurations when adding the transitions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: CIFFSM}\label{Class-CIFFSM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: CIFFSM
+As mentioned previously, the \textit{FiniteStateMachine} class only provides the basic structure of the FSM required to validate a CIF file. The class \textit{CIFFSM} does that and specializes it to add the required functionality. The UML diagram found in the figure \ref{fig:class-ciffsm} details the idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image11}
+	\caption{UML diagram of the \textbf{CIFSM} class.}
+	\label{fig:class-ciffsm}
+\end{figure}
+
+Internally, the CIFFSM class will integrate the functionality provided by the FiniteStateMachine class.
+
+\begin{description}
+\item \textbf{parentheses} Counter used internally to keep track of open parentheses in the Comment command.
+\item \textbf{add} The first add member function is intended to be used when configuring the FSM for the CIF format. This member function takes as argument an integer (the initial state from wich to perform the jump), a \textit{string} class instance that contains a set of characters that represent the input expected to perform a jump, and an integer that represents the destination state of the jump.
+\item \textbf{add} The second add member function is intended to be used when configuring the FSM for the CIF format. The difference with the previous member function is that this one takes as second argument an \textit{enum} instance variable that represents a predefined set of characters.
+\item \textbf{Constructor} The constructor is in charge of calling the father class, initializing the ammount of states for this FSM (92. in this case). Also, the constructor is in charge of effectively calling the \textbf{add} member function in order to configure and set all the states and jumps defined by the FSM itself.
+\end{description}
+
+The \textit{enum} definition (named \textbf{Transition}) defines 9 sets of characters to be configured in the FSM when constructing the CIFFSM instance. These sets are:
+
+\begin{description}
+\item \textbf{Digit} These are the characters '0' to '9'.
+\item \textbf{UpperChar} These are the characters 'A' to 'Z'.
+\item \textbf{LowerChar} These are the characters 'a' to 'z'.
+\item \textbf{BlankChar} These are all the characters in the ASCII set that are not a digit, an uppercase character, minus ('-'), parentheses or semicolon.
+\item \textbf{UserChar} These are all the characters in the ASCII set that are not a semicolon.
+\item \textbf{CommentChar} All ASCII characters (from 0 to 255).
+\item \textbf{SeparatorChar} LowerChar or BlankChar.
+\item \textbf{LayerNameChar} Digit, UpperChar or underscore.
+\item \textbf{ExtentionChar} All ASCII characters, except semicolon.
+\end{description}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Command group of classes}\label{Command-group-of-classes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Command group of classes
+The Command group of classes is intended to group those classes that represents commands from the CIF format. These classes are intended to provide a more abstract and simple way to access the information contained in the commands.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Point}\label{Class-Point}
