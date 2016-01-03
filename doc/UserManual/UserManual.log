@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.10.11)  2 JAN 2016 23:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.10.11)  3 JAN 2016 17:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1541,36 +1541,37 @@ File: images/icon-info.png Graphic file (type png)
 Package pdftex.def Info: images/icon-info.png used on input line 1935.
 (pdftex.def)             Requested size: 28.44997pt x 28.44997pt.
  [50] (./examples/chapter3-example3.cc [51])
-[52] (./examples/chapter3-example4.cc) [53] [54]
-(./examples/chapter3-example5.cc)
-<images/chapter03-image09.png, id=245, 748.20706pt x 182.09206pt>
+[52] (./examples/chapter3-example4.cc) [53]
+<images/chapter03-image09.png, id=242, 748.20706pt x 182.09206pt>
 File: images/chapter03-image09.png Graphic file (type png)
 
 <use images/chapter03-image09.png>
-Package pdftex.def Info: images/chapter03-image09.png used on input line 2072.
+Package pdftex.def Info: images/chapter03-image09.png used on input line 2062.
 (pdftex.def)             Requested size: 374.10262pt x 91.04579pt.
- (./examples/chapter3-example6.cc) [55 <./images/chapter03-image09.png (PNG cop
-y)>]
+ [54] (./examples/chapter3-example5.cc)
+[55 <./images/chapter03-image09.png (PNG copy)>]
+(./examples/chapter3-example6.cc)
 <images/chapter03-image10.png, id=251, 588.0794pt x 245.85971pt>
 File: images/chapter03-image10.png Graphic file (type png)
 
 <use images/chapter03-image10.png>
 Package pdftex.def Info: images/chapter03-image10.png used on input line 2091.
 (pdftex.def)             Requested size: 294.03899pt x 122.92955pt.
-
-<images/chapter03-image11.png, id=253, 634.13382pt x 227.43794pt>
+ [56 <./images/chapter03-image10.png (PNG copy)>] (./examples/chapter3-example7
+.cc) (./examples/chapter3-example8.cc)
+<images/chapter03-image11.png, id=257, 634.13382pt x 227.43794pt>
 File: images/chapter03-image11.png Graphic file (type png)
 
 <use images/chapter03-image11.png>
-Package pdftex.def Info: images/chapter03-image11.png used on input line 2116.
+Package pdftex.def Info: images/chapter03-image11.png used on input line 2126.
 (pdftex.def)             Requested size: 317.06613pt x 113.71869pt.
- [56 <./images/chapter03-image10.png (PNG copy)>] [57 <./images/chapter03-image
-11.png (PNG copy)>] [58] [59]
+ [57] (./examples/chapter3-example9.cc
+[58 <./images/chapter03-image11.png (PNG copy)>]) [59] [60] [61]
 \GPT@outputbox=\box64
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2323.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2335.
 
- [60
+ [62
 
 ]
 \tf@toc=\write5
@@ -1579,13 +1580,13 @@ LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
 
 (./UserManual.aux) ) 
 Here is how much of TeX's memory you used:
- 20953 strings out of 494977
- 398158 string characters out of 6180182
- 723606 words of memory out of 5000000
- 23719 multiletter control sequences out of 15000+600000
+ 20990 strings out of 494977
+ 398997 string characters out of 6180182
+ 723712 words of memory out of 5000000
+ 23747 multiletter control sequences out of 15000+600000
  87430 words of font info for 59 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 61i,18n,68p,894b,2364s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,18n,68p,965b,2364s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sh
 are/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm
 /lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}</usr/share/texmf/f
@@ -1602,10 +1603,10 @@ nts/type1/public/lm/lmsso10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/
 type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></
 usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
-Output written on UserManual.pdf (64 pages, 11156623 bytes).
+Output written on UserManual.pdf (66 pages, 11165070 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
+ 350 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

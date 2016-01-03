@@ -2055,17 +2055,7 @@ The first group to be explained, the Validation group, is the one used to valida
 \subsubsection{Class: State}\label{Class-State}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The first class to analyse is the State class. After analysing the problem of validation of a file, the final design demanded a Finite State Machine (FSM) to be used to correctly parse and validate the contents of the file. Being working in C++, the FSM required to be a class, and as a result of this, its states would be also classes. Also, having in mind the use of the whole ASCII set (validation of a file), the State class was designed with plain text files in mind. 
-
-A State was defined as a singular point in the whole FSM. Internally, the State will be able to recognize and support the complete set of ASCII characters (even the extended ones), and to be able to represent such set of options, the class will contain an array (or list) of \textit{int} values, 256 of them. Every element of the array will represent a single character in the ASCII set. Its value will represent the next state in the FSM in case that such character is loaded when being in this State. By default, all the elements of the array will be initialized with -1 (meaning a transition to error).
-
-Since there will be 256 possible transitions, there must be a way to add transitions more easily, considering the character set of a CIF file. To simplify the process of adding transitions, there is a member function that takes as argument a \textit{string} class instance and a single integer. The integer is the jump to perform in the FSM when any of the characters in the string is found. The following code block shows this idea applied in the library:
-
-\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example5.cc}
-
-The member function \textit{addOptions} requires two arguments. The first, a constant \textit{string} class instance, named \textbf{new\_options}, and the second, a constant \textit{int} value named \textbf{exit\_state}. When called, a \textit{for} cicle will iterate over the string characters. Each character will be converted into an integer value (to prevent warnings when compiling about convertion of types when accessing the array) and used to access the transitions array at some position (the ASCII value of the character). In such position (that, by default, can be found a -1, meaning transition to error) will be assigned the new jump to the following state.
-
-All the previously considered ideas can be seen in the UML design represented by the figure \ref{fig:class-state}
+The first class to analyse is the State class. After analysing the problem of validation of a file, the final design demanded a Finite State Machine (FSM) to be used to correctly parse and validate the contents of the file. Being working in C++, the FSM required to be a class, and as a result of this, its states would be also classes. Also, having in mind the use of the whole ASCII set (validation of a file), the State class was designed with plain text files in mind. The UML diagram representing such class can be found in the figure \ref{fig:class-state}.
 
 \begin{figure}
 	\centering
@@ -2074,12 +2064,22 @@ All the previously considered ideas can be seen in the UML design represented by
 	\label{fig:class-state}
 \end{figure}
 
+A State was defined as a singular point in the whole FSM. Internally, the State will be able to recognize and support the complete set of ASCII characters (even the extended ones), and to be able to represent such set of options, the class will contain an array of \textit{int} values, 256 of them. Every element of the array will represent a single character in the ASCII set, that is, that the ASCII value of a character will be used to access directly the corresponding index in the array (for example, a whitespace, having an ASCII value of 32, will access the index 32). The value stored in each position will represent the next state in the FSM in case that such character is loaded when loading the file. By default, all the elements of the array will be initialized with -1, being such value a transition to an error.
+
+In the class found in the library, such array is named \textbf{output\_chars}, and is of type \textit{int}. This is done in this way because we need to be able to redirect to a negative state (never really added to the FSM, its value just means error), and, if we use the \textit{char} type for the array, we would need to work with signed characters, limiting the total ammount of states to wich we can redirect to just 128. Since the FSM might change in the future, in the library was used the \textit{int} type instead to be able to work with as many states as needed.
+
+Also, since the design requires to have a vast ammount of possible input characters to be considered, there must be a way to add transitions more easily. To simplify the process of adding transitions, there is a member function named \textbf{addOptions} that takes as argument a constant \textit{string} class instance as reference and a single integer, also as constant reference\footnote{The library uses constant references to avoid creating innecessary copies of instances in memory, and to avoid accidental modifications of data in memory.} . The integer is the jump to perform in the FSM when any of the characters in the string is found, also passed as a constant reference. The following code block shows this idea applied in the library:
+
+\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example5.cc}
+
+The first value passed, a \textit{string} class instance, named \textbf{new\_options}, and the second, an \textit{int} value named \textbf{exit\_state}, are the values required to add new transitions to a single state. When called, a \textit{for} cicle will iterate over the string characters. Each character will be converted into an integer value (to prevent warnings when compiling about convertion of types when accessing the array) and used to access the transitions array at some position (the ASCII value of the character). In such position (that, by default, can be found a -1, meaning transition to error) will be assigned the new jump to the following state.
+
 The member function \textit{addOptions} will be in charge of adding transitions to the State, but the complex part will be accesing such transitions. The idea behind the State is that the FSM will \textit{ask} to the current State where to go with the current character loaded from the file. To access the list of the transitions, an overloaded operator was added to the State class. Such operator (brackets) will be used to access the internal array of the State, returning the integer value stored in the expected position. For example, when a whitespace is loaded, it has an ASCII value of 32, and, as such, will be accessed the internal array in its index 32 (33rd position), and the value of such integer will be returned. The whole idea can be seen in the following code block:
 
 \lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example6.cc}
 
-As can be seen, a \textit{char} value is expected to be provided as argument (the current loaded character from the file). Such value must be passed as constant to prevent internal modifications, and passed as reference to prevent performance problems of creation of copies in memory. Such value is converted into an \textit{int} value to access without warnings the array of transitions (in this case, named \textbf{state\_options}). The accessed value is then returned to the caller.
- 
+As can be seen, a \textit{char} value is expected to be provided as argument (the current loaded character from the file). Such value is converted into an \textit{int} value to access without warnings the array of transitions. The accessed value is then returned to the caller.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: FiniteStateMachine}\label{Class-FiniteStateMachine}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2093,17 +2093,27 @@ The following class to explain is the \textit{FiniteStateMachine} class. It does
 	\label{fig:class-fsm}
 \end{figure}
 
-As can be seen, the class is intented to be a base class for the CIFFSM class, wich specializes it and adds the required functionality. The \textit{FiniteStateMachine} class provides the following components:
+As can be seen, the class is intented to be a base class for the CIFFSM class, wich specializes it and adds the required functionality.
 
-\begin{description}
-\item \textbf{fsm\_current\_state} This protected attribute will be used to keep track of the current state when validating the CIF file.
-\item \textbf{fsm\_states} A list (a \textit{vector} class instance) of State class instances that will represent the whole set of states in the FSM.
-\item \textbf{reset} A member function intented to reset (or restart) the whole FSM (done by setting the current state to 1).
-\item \textbf{currentState} A member function intented to return the current state of the FSM.
-\item \textbf{add} A special member function that takes as arguments the current state from which to perform a jump, a string that represents the set of input characters to perform the jump with, and the destination state of the jump.
-\end{description}
+The \textit{FiniteStateMachine} class provides a new protected attribute named \textbf{fsm\_current\_state}. This protected attribute will be used to keep track of the current state when validating the CIF file. This attribute must be of \textit{int} type to match the type used in the State class.
 
-Is important to note that, as constructor argument, the class requires to be specified the ammount of states to create. This is in order to be able to perform configurations when adding the transitions.
+A second protected attribute, \textbf{fsm\_states}, represents a list (a \textit{vector} class instance) of State class instances that will form the whole set of states in the FSM. This array doesn't have a specific size, so, when creating an instance of this class, it will required for the caller to set the ammount of states to be created (and added to this list).
+
+To control the FSM, the public member fucntion \textbf{reset} is intented to reset (or restart) the whole FSM (done by setting the current state to 1). This will help in case that such functionality is required.
+
+The public member function \textbf{currentState} can be used to return the current state of the FSM and keep track of its functionality.
+
+The private member function \textbf{add} is expected to be used only by those classes that extend this one. This member function takes as arguments the current state from which to perform a jump (as a constant reference to an \textit{int} value), a constant reference to a \textit{string} class instance that represents the set of input characters to perform the jump with, and the destination state of the jump, as a constant reference to an \textit{int} value. Is important to note that, even if this member function is implemented, the whole class is expected to be just a "skeleton" for others with more specific logic (so, this member function is private to prevent direct usage of the class). In the following code block, can be seen the main idea behind this member function:
+
+\lstinputlisting[caption={\textbf{add} code example.}, style=CPPStyle]{examples/chapter3-example7.cc}
+
+As can be seen, having the \textbf{fsm\_states} array of \textit{State} class instances, the first argument, \textbf{input\_state}, is used to access the right state from the whole FSM. Then, from such state, its member function \textbf{addOptions} is accessed to pass to it, as argument, the values of \textbf{input\_chars} and \textbf{output\_state}.
+
+Finally, this class is expected to provide a similar functionality to the caller as the \textit{State} class, providing access to an overloaded operator (brackets) to test a character with the current state and return the new state. All the previous functionality can be found in the following code block, wich performs all those operations in a single line:
+
+\lstinputlisting[caption={\textbf{add} code example.}, style=CPPStyle]{examples/chapter3-example8.cc}
+
+The line operates using some commodities allowed by the language, like the \textit{comma} operator. Using such operator, we will execute the instruction found in the left, and returning the value to its right. In the left, we have, first, an access to the \textbf{fsm\_states} array using the value of \textbf{fsm\_current\_state}. With that, the code is accessing the correct and actual state in the FSM. From such accessed state, its brackets overloaded operator is called to test the current character (\textbf{input\_char}). This call to its overloaded operator will return the next state in the FSM according to the configuration done and the current state and input. Such returned value (the next state), is then stored in the \textbf{fsm\_current\_state} attribute, and, as a final step in the whole line, the right side of the \textbf{comma} operator, returning the value of the \textbf{fsm\_current\_state} value itself.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: CIFFSM}\label{Class-CIFFSM}
@@ -2118,16 +2128,13 @@ As mentioned previously, the \textit{FiniteStateMachine} class only provides the
 	\label{fig:class-ciffsm}
 \end{figure}
 
-Internally, the CIFFSM class will integrate the functionality provided by the FiniteStateMachine class.
+Internally, the CIFFSM class will integrate the functionality provided by the FiniteStateMachine class, adding some new components.
 
-\begin{description}
-\item \textbf{parentheses} Counter used internally to keep track of open parentheses in the Comment command.
-\item \textbf{add} The first add member function is intended to be used when configuring the FSM for the CIF format. This member function takes as argument an integer (the initial state from wich to perform the jump), a \textit{string} class instance that contains a set of characters that represent the input expected to perform a jump, and an integer that represents the destination state of the jump.
-\item \textbf{add} The second add member function is intended to be used when configuring the FSM for the CIF format. The difference with the previous member function is that this one takes as second argument an \textit{enum} instance variable that represents a predefined set of characters.
-\item \textbf{Constructor} The constructor is in charge of calling the father class, initializing the ammount of states for this FSM (92. in this case). Also, the constructor is in charge of effectively calling the \textbf{add} member function in order to configure and set all the states and jumps defined by the FSM itself.
-\end{description}
+The first new element found is the private attribute \textbf{parentheses}, a counter of \textit{int} type used internally to keep track of open parentheses in the Comment command when validating such command.
 
-The \textit{enum} definition (named \textbf{Transition}) defines 9 sets of characters to be configured in the FSM when constructing the CIFFSM instance. These sets are:
+Next, can be found the private member function \textbf{add}. This member function is the same as the one found in the \textit{FiniteStateMachine} class. The only difference (or modification) is that its prototype is being re-defined in the interface of the class. This is done to keep it hidded from the caller, but to make it available to class itself\footnote{If class A has a private member function, and class B performs a public heritage from A, by default, class B will not be able to access the private member function of A, to, just re-defining such member of A as private in B, makes it available to B, but keeps it private to the outside.} .
+
+The second \textbf{add} member function (that is also private) is new, and is intended to be used when configuring the FSM for the CIF format. The difference with the previous member function is that this one takes as second argument an \textit{enum} instance variable that represents a predefined set of characters. Internally, the member functins uses a \textit{switch} structure to validate the value of the argument, and to perform the required operations. The \textit{enum} can be found with the following values defined:
 
 \begin{description}
 \item \textbf{Digit} These are the characters '0' to '9'.
@@ -2140,6 +2147,14 @@ The \textit{enum} definition (named \textbf{Transition}) defines 9 sets of chara
 \item \textbf{LayerNameChar} Digit, UpperChar or underscore.
 \item \textbf{ExtentionChar} All ASCII characters, except semicolon.
 \end{description}
+
+The main idea behind these values is to make it easier to configure the FSM in the class instance. Using such values, it becomes easier to configure the states.
+
+The \textbf{Constructor} is in charge of calling the father class, initializing the ammount of states for this FSM (92 in this case). Also, the constructor is in charge of effectively calling the \textbf{add} member function in order to configure and set all the states and jumps defined by the FSM itself. The following code block demonstrates how the states are set in the constructor:
+
+\lstinputlisting[caption={Constructor code example.}, style=CPPStyle]{examples/chapter3-example9.cc}
+
+In the library, the calls are grouped by command. That is, that all the states required to validate a specific command are groupes using comments.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Command group of classes}\label{Command-group-of-classes}
