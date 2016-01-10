@@ -2160,25 +2160,67 @@ In the library, the calls are grouped by command. That is, that all the states r
 \subsection{Command group of classes}\label{Command-group-of-classes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Command group of classes is intended to group those classes that represents commands from the CIF format. These classes are intended to provide a more abstract and simple way to access the information contained in the commands.
+The Command group of classes is intended to group those classes that represents commands from the CIF format. These classes are intended to provide a more abstract and simple way to access the information contained in the commands themselves.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Point}\label{Class-Point}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: Point
+The first class in this group is a very basic class that represents a single point in space of the design. This point can be a position or rotation angle. The UML diagram found in the figure \ref{fig:class-point} details the idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image12}
+	\caption{UML diagram of the \textbf{Point} class.}
+	\label{fig:class-point}
+\end{figure}
+
+As can be seen, the class just represent the X and Y coordinates of the desired point. The class provides two constructors. The firs one being the default constructor (without arguments), initializing both coordinate values in zeros. The second constructor initializes the point with the values passed as arguments.
+
+\IconNote
+	{info}
+	{Negative coordinates}
+	{Is important to remember that the coodinates of a point can be negative. By this reason, the coordinate values are defined as \textit{signed long int} values.}
+	
+The class also provides access to set the values after creation. This is done using one of the three member functions provided:
+
+\begin{itemize}
+\item \textbf{setX} This member function takes as argument a constant reference to a \textit{signed long int} value. The value is stored directly into the X component of the point.
+\item \textbf{setY} This member function takes as argument a constant reference to a \textit{signed long int} value. The value is stored directly into the Y component of the point.
+\item \textbf{set} This member function takes as argument two constant references to a \textit{signed long int} values. The values are stored directly into the X and Y components of the point.
+\end{itemize}
+
+Also, the class provides two member functions intented to retrieve the values of X and Y coordinate components. Those member functions are \textbf{getX} and \textbf{getY}. These member functions return signed \textit{long int} values when called.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Size}\label{Class-Size}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: Size
+The second class in this group is a very basic class that represents the size of a component (like a figure). The size represents length in X and Y coordinates, so it is very similar to the Point class previously explained. The UML diagram found in the figure \ref{fig:class-size} details the idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image13}
+	\caption{UML diagram of the \textbf{Size} class.}
+	\label{fig:class-size}
+\end{figure}
+
+The main difference between the Size and Point classes are just the names and data types. The Point class is focused in storage and management of an X-Y coodinate with the possibility of using negative values. The Size class is focused in storage and management of X-Y size components of a figure with the restriction of using unsigned values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Fraction}\label{Class-Fraction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: Fraction
+The third class in this group is a very basic class that represents the scaling factor of size and position values. Since the CIF format doesn't allow the use of floating point values, there is the need to represent fractionary values without decimals, and in this case, when defining a new Definition, there is possible to define the values of such fraction, wich is going to be applied to the values found within the Definition itself. The UML diagram found in the figure \ref{fig:class-fraction} details the idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image14}
+	\caption{UML diagram of the \textbf{Fraction} class.}
+	\label{fig:class-fraction}
+\end{figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Transformation}\label{Class-Transformation}
