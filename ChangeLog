@@ -5,7 +5,7 @@ LibOpenCIF - ChangeLog file
 
 * Interface: Improved interface for user.
 * Code: Improved error information provided to the user once an invalid char is found.
-* Code: Fixed logical error in File class, where the last command loaded into memory from the CIF file was cleaned, even when was not intended to be to.
+* Code: Fixed logical errors in File class, where the last command loaded into memory from the CIF file was cleaned, even when was not intended to be to.
 + Code: Added public static member function to the File class to validate a single string.
 + Code: Added public static member function to the File class to clean a single string.
 * Code: Fixed various warnings when compiling the library using flags to improve correcteness of code (-Wall -Werror -Wextra -pedantic -ansi).
