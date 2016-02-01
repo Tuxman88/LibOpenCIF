@@ -68,6 +68,17 @@ void OpenCIF::File::setCommands ( const std::vector< OpenCIF::Command* >& new_co
 }
 
 /*
+ * Member function to release the vector of commands.
+ */
+void OpenCIF::File::dropCommands ( void )
+{
+   std::vector< OpenCIF::Command* > temporal_vector;
+   file_commands = temporal_vector;
+   
+   return;
+}
+
+/*
  * Member function to set the path to the file.
  */
 void OpenCIF::File::setPath ( const std::string& new_path )

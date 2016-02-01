@@ -37,6 +37,7 @@
 \usepackage{listings}
 \usetikzlibrary{shapes,positioning}
 \usepackage[utf8]{inputenc}
+\usepackage{rotating}
 
 \counterwithin{figure}{section}
 
@@ -2051,6 +2052,8 @@ In the same way, in each group, the user can find the most basic classes explain
 
 The first group to be explained, the Validation group, is the one used to validate the contents of the CIF file. This group is composed by the State, FiniteStateMachine and CIFFSM classes, that provides the functionality required to validate the format and contents of the file.
 
+Is important to note that these classes, by themselves, doesn't validate the file of the user, but they are used by other classes that perform the opening and reading of the user's file.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: State}\label{Class-State}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2162,6 +2165,8 @@ In the library, the calls are grouped by command. That is, that all the states r
 
 The Command group of classes is intended to group those classes that represents commands from the CIF format. These classes are intended to provide a more abstract and simple way to access the information contained in the commands themselves.
 
+These classes are used when converting a \textit{vector} class instance of \textit{string} instances is ready to be converted into command instances.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Point}\label{Class-Point}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2192,6 +2197,12 @@ The class also provides access to set the values after creation. This is done us
 
 Also, the class provides two member functions intented to retrieve the values of X and Y coordinate components. Those member functions are \textbf{getX} and \textbf{getY}. These member functions return signed \textit{long int} values when called.
 
+The Point class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Point from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Point to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
+
+\lstinputlisting[caption={Overloaded operators of the Point class.}, style=CPPStyle]{examples/chapter3-example10.cc}
+
+As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the X coordinate value is inserted, then a single whitespace and, finally, the Y coordinate value.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Size}\label{Class-Size}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2207,11 +2218,17 @@ The second class in this group is a very basic class that represents the size of
 
 The main difference between the Size and Point classes are just the names and data types. The Point class is focused in storage and management of an X-Y coodinate with the possibility of using negative values. The Size class is focused in storage and management of X-Y size components of a figure with the restriction of using unsigned values.
 
+The Size class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Size from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Size to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
+
+\lstinputlisting[caption={Overloaded operators of the Size class.}, style=CPPStyle]{examples/chapter3-example11.cc}
+
+As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the widh value is inserted, then a single whitespace and, finally, the height value.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Fraction}\label{Class-Fraction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The third class in this group is a very basic class that represents the scaling factor of size and position values. Since the CIF format doesn't allow the use of floating point values, there is the need to represent fractionary values without decimals, and in this case, when defining a new Definition, there is possible to define the values of such fraction, wich is going to be applied to the values found within the Definition itself. The UML diagram found in the figure \ref{fig:class-fraction} details the idea behind the class.
+The third class in this group is the one that represents the scaling factor of size and position values in a Definition. Since the CIF format doesn't allow the use of floating point values, there is the need to represent fractionary values without decimals, and in this case, when defining a new Definition, there is possible to define the values of such fraction, wich is going to be applied to the values found within the Definition itself. The UML diagram found in the figure \ref{fig:class-fraction} details the idea behind the class.
 
 \begin{figure}
 	\centering
@@ -2220,13 +2237,57 @@ The third class in this group is a very basic class that represents the scaling 
 	\label{fig:class-fraction}
 \end{figure}
 
+In this case, the Fraction class contains two attributes of type \textit{unsigned long int}. This is because the fraction is intended to transform other integer values (that might already have sign) into floating point values. Because of that, the fractions don't require to have sign.
 
+The class has a \textbf{set} member function that takes as argument two constant references to \textit{unsigned long int} values. The first value is going to be stored as the \textbf{enumerator} of the fraction, while the second is going to be stored as the \textbf{denominator}.
+
+There is possible to set and get the denominator and numerator values independently. The class has a member function named \textbf{setNumerator} that takes as argument a constant reference to a \textit{unsigned long int} value, and a member function named \textbf{setDenominator} that takes the same value type as argument. In the same way, there is a member function \textbf{getNumerator} and a member function \textbf{getDenominator}. Both of these member functions return, when called, an \textit{unsigned long int} value.
+
+The Fraction class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Fraction from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Fractio to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
+
+\lstinputlisting[caption={Overloaded operators of the Fraction class.}, style=CPPStyle]{examples/chapter3-example12.cc}
+
+As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the numerator value is inserted, then a single whitespace and, finally, the denominator value.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Transformation}\label{Class-Transformation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: Transformation
+The Transformation class represents a single transformation required to be applied to a Cell in a Call command. All the possible transformations (Rotation, Displacement, Vertical Mirror and Horizontal Mirror) can be represented with this class. The UML diagram found in the figure \ref{fig:class-transformation} details the idea behind the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image15}
+	\caption{UML diagram of the \textbf{Transformation} class.}
+	\label{fig:class-transformation}
+\end{figure}
+
+By default the only consructor available initializes the class as a neutral\footnote{A displacement of zero in X and Y coordinates.} Displacement transformation (one of the most common transformations).
+
+To set and get the type of the instance, the class provides access to the setType and getType member functions. The set function takes as argument a constant reference to the type to set. The get function returns a copy of the type actually setted. 
+
+The types available can be found in an enum structure found within the class itself. The types available are:
+
+\begin{itemize}
+\item \textbf{Displacement} An addition to the coordinates of the elements found within a Call command.
+\item \textbf{Rotation} A rotation of the cell called by the Call command.
+\item \textbf{HorizontalMirroring} A multiplication by -1 of all the X coordinates of the cell called by the Call command.
+\item \textbf{VerticalMirroring} A multiplication by -1 of all the Y coordinates of the cell called by the Call command.
+\end{itemize}
+
+The Transformation class contains an attribute named \textbf{transformation\_point}, which is of type Point. This point is used to store the values related to the Displacement and Rotation types. 
+
+The class provides a get and set member functions to get the Point when the instance is configured as Displacement. These member functions are \textbf{setDisplacement} and \textbf{getDisplacement}. The first takes as argument a constant reference to a Point instance, while the second returns a copy of the same point.
+
+Also, the class provides a get and set member functions to get and set the Point when the instance is configured as a Rotation. These member functions are \textbf{setRotation} and \textbf{getRotation}. The first takes as argument a constant reference to a Point instance, while the second returns a copy of the same point.
+
+There is important to note that the previous four member functions work over the same attribute in the instance. That is, that both set member functions assign their arguments to the same attribute, and both get member functions return the same instance. This is done in order to provide a more simple interface to the user, providing more clear names depending on the type of the instance.
+
+The Transformation class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Transformation from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Transformation to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
+
+\lstinputlisting[caption={Overloaded operators of the Transformation class.}, style=CPPStyle]{examples/chapter3-example13.cc}
+
+As can be seen, when extracting, the expected format is a character that signals the transformation type (T, R or M), followed by a point (for Displacement and Rotation) or an X or Y (for Mirror). When inserting, the behaviour is similar: First, the character that defines the type of the instance, followed by the value asociated (a Point or a character).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Command}\label{Class-Command}
@@ -2340,13 +2401,151 @@ Class: LayerCommand
 \subsection{Loading group of classes}\label{Loading-group-of-classes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Loading group of classes
+The final group of classes contains only one class: The File class.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: File}\label{Class-File}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: File
+The File class performs the operations required to open, load, validate and transform a CIF file. The user is expected to only provide the path (full or relative) to the class and ask it to do all the job. The UML diagram found in the figure \ref{fig:class-file} shows the general idea behind the class. The table \ref{tab:File-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:File-Attributes} and \ref{tab:File-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.18, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image34}
+	\caption{UML diagram of the \textbf{File} class.}
+	\label{fig:class-file}
+\end{figure}
+
+\begin{table}\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{2cm} | p{13.5cm} |}
+	\hline
+	
+	\texttt{LoadStatus} & \parbox[t]{13.5cm}{Represents the final status of a loading process.\\
+	                                      \begin{itemize}
+						                  	\item \textbf{AllOk} The loading process requested completed without errors.
+						                    \item \textbf{CantOpenInputFile} The opening of the input file failed (the file path might be incorrect or the file doesn't have read permissions).
+						                    \item \textbf{IncompleteInputFile} The validated contents are correct, but the \textbf{End} command is missing.
+						                    \item \textbf{IncorrectInputFile} The input file has one or more errors in its contents.
+						                  \end{itemize}
+						                 } \\
+	
+	\hline		
+	
+	\texttt{LoadMethod} & \parbox[t]{13.5cm}{Defines if the library should try to load as much as possible (skipping errors) or stop when an error is found.\\
+	                                         \begin{itemize}
+						                    	\item \textbf{StopOnError} Stop the loading process if an error is found.
+						                        \item \textbf{ContinueOnError} Try to skip the errors found.
+						                     \end{itemize}
+						                    } \\
+	
+	\hline
+\end{tabular}
+\caption{Enum definitions in the \textbf{File} class.}
+\label{tab:File-Types}
+\end{table}
+
+\begin{table}\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{5.5cm} | p{10cm} |}
+	\hline
+	
+	\texttt{string file\_path} & Stores the path to the CIF file specified by the user. \\
+	
+	\hline
+
+	\texttt{ifstream file\_input} & Used to open and access the file specified by the user once open. \\
+	
+	\hline
+
+	\texttt{vector<Command*> file\_commands} & Stores pointers to the final commands available to the user once they are converted from clean strings. \\
+	
+	\hline
+
+	\texttt{vector<string> file\_raw\_commands} & Stores, in a first instance, the "dirty", but validated, commands of the CIF file. Then, when the commands are cleaned, is used to store the final and cleaned commands. \\
+	
+	\hline
+
+	\texttt{vector<string> file\_messages} & Stores all the error messages generated during the usage of the instance of the File class. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{File} class.}
+\label{tab:File-Attributes}
+\end{table}
+
+\begin{table}\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{9.8cm} | p{5.7cm} |}
+	\hline
+	
+	\texttt{explicit File (void)} & Explicit default constructor. Doesn't initialize values. \\
+	
+	\hline		
+	
+	\texttt{virtual ~File (void)} & Destructor. Deletes from memory the conents of \textbf{file\_commands}. \\
+	
+	\hline
+	
+	\texttt{void setPath (const string\&)} & Assigns to \textbf{file\_path} the path to the CIF file expected to be loaded. The path is not validated when assigned. The path can be relative or full.\\
+	
+	\hline
+	
+	\texttt{string getPath (void)} & Returns the path stored in \textbf{file\_path}. \\
+			
+	\hline
+	
+	\texttt{LoadStatus loadFile (const LoadMethod\& = StopOnError)} & Starts the automatic loading of the input file. With the argument StopOnError the loading stops after an error is found. With ContinueOnError the loading is performed skipping incorrect commands. Returns a value of type LoadStatus according to the results.\\
+
+	\hline
+	
+	\texttt{LoadStatus openFile (void)} & Tries to open the input file. Returns AllOk on success, CantOpenInputFile otherwize. \\
+	
+	\hline
+	
+	\texttt{LoadStatus validateSyntax (const LoadMethod\& = StopOnError)} & Starts the validation of the contents of the input file. With the argument StopOnError the loading stops after and error is found. With ContinueOnError the loading is performed skipping incorrect commands. Returns a value of type LoadStatus according to the results. \\
+	
+	\hline
+	
+	\texttt{void cleanCommands (void)} & Cleans the raw commands found in the input file. The commands are taken from file\_raw\_commands and stored there once cleaned (the contents are replaced). \\
+			
+	\hline
+	
+	\texttt{void convertCommands (void)} & Converts the cleaned commands into class instances, storing their pointers in \textbf{file\_commands}. The commands to convert must be already cleaned. \\
+			
+	\hline
+	
+	\texttt{void setCommands (const vector<Command*>\&)} & Assigns to \textbf{file\_commands} the vector passed as argument. The previous contents of the vector are not deleted from memory. \\
+	
+	\hline
+	
+	\texttt{vector<Command*> getCommands (void)} & Returns the value of \textbf{file\_commands}. \\
+	
+	\hline
+	
+	\texttt{void dropCommands (void)} & Assigns an empty vector to \textbf{file\_commands}. Doesn't delete from memory the previous contents of the vector. \\
+	
+	\hline
+	
+	\texttt{vector<string> getMessages (void)} & Returns the messages generated during the loading of the input file. \\
+	
+	\hline
+	
+	\texttt{vector<string> getRawCommands (void)} & Returns the contents of \textbf{file\_raw\_commands}. \\
+	
+	\hline
+	
+	\texttt{static bool isCommandValid (string)} & Validates a command (in string form) on demand. Takes as argument a command and returns true if the command is valid, false otherwize. \\
+	
+	\hline
+	
+	\texttt{static string cleanCommand (string)} & Cleans a command (in string form) on demand. Takes as argument the dirty command and returns a cleaned copy. The dirty command should be valid. \\
+			
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{File} class.}
+\label{tab:File-MemberFunctions}
+\end{table}
 
 \cleartoverso
 

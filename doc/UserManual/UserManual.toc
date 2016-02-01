@@ -54,25 +54,25 @@
 \contentsline {subsection}{\numberline {3.4.2}Command group of classes}{59}
 \contentsline {subsubsection}{Class: Point}{59}
 \contentsline {subsubsection}{Class: Size}{60}
-\contentsline {subsubsection}{Class: Fraction}{60}
-\contentsline {subsubsection}{Class: Transformation}{61}
-\contentsline {subsubsection}{Class: Command}{61}
-\contentsline {subsubsection}{Class: PrimitiveCommand}{61}
-\contentsline {subsubsection}{Class: PathBasedCommand}{61}
-\contentsline {subsubsection}{Class: PolygonCommand}{61}
-\contentsline {subsubsection}{Class: WireCommand}{61}
-\contentsline {subsubsection}{Class: PositionBasedCommand}{61}
-\contentsline {subsubsection}{Class: BoxCommand}{61}
-\contentsline {subsubsection}{Class: RoundFlashCommand}{61}
-\contentsline {subsubsection}{Class: ControlCommand}{62}
-\contentsline {subsubsection}{Class: DefinitionStartCommand}{62}
-\contentsline {subsubsection}{Class: DefinitionDeleteCommand}{62}
-\contentsline {subsubsection}{Class: CallCommand}{62}
-\contentsline {subsubsection}{Class: DefinitionEndCommand}{62}
-\contentsline {subsubsection}{Class: EndCommand}{62}
-\contentsline {subsubsection}{Class: RawContentCommand}{62}
-\contentsline {subsubsection}{Class: UserExtentionCommand}{62}
-\contentsline {subsubsection}{Class: CommentCommand}{62}
-\contentsline {subsubsection}{Class: LayerCommand}{62}
-\contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{62}
-\contentsline {subsubsection}{Class: File}{62}
+\contentsline {subsubsection}{Class: Fraction}{62}
+\contentsline {subsubsection}{Class: Transformation}{63}
+\contentsline {subsubsection}{Class: Command}{65}
+\contentsline {subsubsection}{Class: PrimitiveCommand}{65}
+\contentsline {subsubsection}{Class: PathBasedCommand}{65}
+\contentsline {subsubsection}{Class: PolygonCommand}{65}
+\contentsline {subsubsection}{Class: WireCommand}{65}
+\contentsline {subsubsection}{Class: PositionBasedCommand}{65}
+\contentsline {subsubsection}{Class: BoxCommand}{66}
+\contentsline {subsubsection}{Class: RoundFlashCommand}{66}
+\contentsline {subsubsection}{Class: ControlCommand}{66}
+\contentsline {subsubsection}{Class: DefinitionStartCommand}{66}
+\contentsline {subsubsection}{Class: DefinitionDeleteCommand}{66}
+\contentsline {subsubsection}{Class: CallCommand}{66}
+\contentsline {subsubsection}{Class: DefinitionEndCommand}{66}
+\contentsline {subsubsection}{Class: EndCommand}{66}
+\contentsline {subsubsection}{Class: RawContentCommand}{66}
+\contentsline {subsubsection}{Class: UserExtentionCommand}{66}
+\contentsline {subsubsection}{Class: CommentCommand}{66}
+\contentsline {subsubsection}{Class: LayerCommand}{66}
+\contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{66}
+\contentsline {subsubsection}{Class: File}{67}
