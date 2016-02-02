@@ -38,6 +38,7 @@
 \usetikzlibrary{shapes,positioning}
 \usepackage[utf8]{inputenc}
 \usepackage{rotating}
+\usepackage{longtable}
 
 \counterwithin{figure}{section}
 
@@ -2054,110 +2055,211 @@ The first group to be explained, the Validation group, is the one used to valida
 
 Is important to note that these classes, by themselves, doesn't validate the file of the user, but they are used by other classes that perform the opening and reading of the user's file.
 
+\newpage 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: State}\label{Class-State}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The first class to analyse is the State class. After analysing the problem of validation of a file, the final design demanded a Finite State Machine (FSM) to be used to correctly parse and validate the contents of the file. Being working in C++, the FSM required to be a class, and as a result of this, its states would be also classes. Also, having in mind the use of the whole ASCII set (validation of a file), the State class was designed with plain text files in mind. The UML diagram representing such class can be found in the figure \ref{fig:class-state}.
+The State class represents a single state in a whole Finite State Machine (FSM). This class is expected to be used only by the library, but is accessible by the user if a new FSM is being designed. The UML diagram found in the figure \ref{fig:class-state} shows the general idea behind the class. The tables \ref{tab:State-Attributes} and \ref{tab:State-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image09}
+	\includegraphics[scale=0.4, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image09}
 	\caption{UML diagram of the \textbf{State} class.}
 	\label{fig:class-state}
 \end{figure}
 
-A State was defined as a singular point in the whole FSM. Internally, the State will be able to recognize and support the complete set of ASCII characters (even the extended ones), and to be able to represent such set of options, the class will contain an array of \textit{int} values, 256 of them. Every element of the array will represent a single character in the ASCII set, that is, that the ASCII value of a character will be used to access directly the corresponding index in the array (for example, a whitespace, having an ASCII value of 32, will access the index 32). The value stored in each position will represent the next state in the FSM in case that such character is loaded when loading the file. By default, all the elements of the array will be initialized with -1, being such value a transition to an error.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{4cm} | p{11.5cm} |}
+	\hline
+	
+	\texttt{int state\_options[256]} & Represents the whole set of possible jumps (the whole ASCII set) that the state can perform. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{State} class.}
+\label{tab:State-Attributes}
+\end{table}
 
-In the class found in the library, such array is named \textbf{output\_chars}, and is of type \textit{int}. This is done in this way because we need to be able to redirect to a negative state (never really added to the FSM, its value just means error), and, if we use the \textit{char} type for the array, we would need to work with signed characters, limiting the total ammount of states to wich we can redirect to just 128. Since the FSM might change in the future, in the library was used the \textit{int} type instead to be able to work with as many states as needed.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit State (void)} & Explicit default constructor. Calls the \textbf{reset} member function. \\
+	
+	\hline
+	
+	\texttt{virtual ~State (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void reset (void)} & Assigns the value -1 to all the positions of \textbf{state\_options}. The value -1 represents a jump to an error state. \\
+	
+	\hline 
+	
+	\texttt{void addOptions (const string\& , const int\&)} & For each character in the string (first argument), its ASCII value is used to access a position in \textbf{state\_options} and assign the value of the jump state (second argument). \\
+	
+	\hline
+	
+	\texttt{int operator[] (const char\&)} & The argument expected is used to access a position in state\_options (according to its ASCII value) and returns the value stored in such position. \\ 
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{State} class.}
+\label{tab:State-MemberFunctions}
+\end{table}
 
-Also, since the design requires to have a vast ammount of possible input characters to be considered, there must be a way to add transitions more easily. To simplify the process of adding transitions, there is a member function named \textbf{addOptions} that takes as argument a constant \textit{string} class instance as reference and a single integer, also as constant reference\footnote{The library uses constant references to avoid creating innecessary copies of instances in memory, and to avoid accidental modifications of data in memory.} . The integer is the jump to perform in the FSM when any of the characters in the string is found, also passed as a constant reference. The following code block shows this idea applied in the library:
-
-\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example5.cc}
-
-The first value passed, a \textit{string} class instance, named \textbf{new\_options}, and the second, an \textit{int} value named \textbf{exit\_state}, are the values required to add new transitions to a single state. When called, a \textit{for} cicle will iterate over the string characters. Each character will be converted into an integer value (to prevent warnings when compiling about convertion of types when accessing the array) and used to access the transitions array at some position (the ASCII value of the character). In such position (that, by default, can be found a -1, meaning transition to error) will be assigned the new jump to the following state.
-
-The member function \textit{addOptions} will be in charge of adding transitions to the State, but the complex part will be accesing such transitions. The idea behind the State is that the FSM will \textit{ask} to the current State where to go with the current character loaded from the file. To access the list of the transitions, an overloaded operator was added to the State class. Such operator (brackets) will be used to access the internal array of the State, returning the integer value stored in the expected position. For example, when a whitespace is loaded, it has an ASCII value of 32, and, as such, will be accessed the internal array in its index 32 (33rd position), and the value of such integer will be returned. The whole idea can be seen in the following code block:
-
-\lstinputlisting[caption={\textbf{addOptions} code example.}, style=CPPStyle]{examples/chapter3-example6.cc}
-
-As can be seen, a \textit{char} value is expected to be provided as argument (the current loaded character from the file). Such value is converted into an \textit{int} value to access without warnings the array of transitions. The accessed value is then returned to the caller.
+\newpage 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: FiniteStateMachine}\label{Class-FiniteStateMachine}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The following class to explain is the \textit{FiniteStateMachine} class. It doesn't provide specific functionality related to the CIF format. This class will only provide a generic mechanism to represent and manage the FSM needed to validate the CIF format. The UML diagram found in the figure \ref{fig:class-fsm} details the main idea behind the class.
+The FiniteStateMachine class represents an abstract Finite State Machine (FSM). This class is expected to be used only by the library as the base for the specialized class intended to perform the validations on the input file. The UML diagram found in the figure \ref{fig:class-fsm} shows the general idea behind the class. The tables \ref{tab:FiniteStateMachine-Attributes} and \ref{tab:FiniteStateMachine-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image10}
+	\includegraphics[scale=0.4, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image10}
 	\caption{UML diagram of the \textbf{FiniteStateMachine} class.}
 	\label{fig:class-fsm}
 \end{figure}
 
-As can be seen, the class is intented to be a base class for the CIFFSM class, wich specializes it and adds the required functionality.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{4cm} | p{11.5cm} |}
+	\hline
+	
+	\texttt{int fsm\_current\_state} & Used to store the current state on the FSM once it is in use. \\
+	
+	\hline
+	
+	\texttt{vector<State> fsm\_states} & Stores the list of states that form the whole FSM. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{FiniteStateMachine} class.}
+\label{tab:FiniteStateMachine-Attributes}
+\end{table}
 
-The \textit{FiniteStateMachine} class provides a new protected attribute named \textbf{fsm\_current\_state}. This protected attribute will be used to keep track of the current state when validating the CIF file. This attribute must be of \textit{int} type to match the type used in the State class.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8cm} | p{7.5cm} |}
+	\hline
+	
+	\texttt{explicit FiniteStateMachine (const int\&)} & Explicit constructor. Expects as argument the total ammount of states that will form the final FSM and creates such number of instances of the State class. The instances are stored in fsm\_states. The value of fsm\_current\_state is initialized with the value of 1. \\
+	
+	\hline
+	
+	\texttt{virtual ~FiniteStateMachine (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void reset (void)} & Sets the value of fsm\_current\_state to 1. \\
+	
+	\hline
+	
+	\texttt{void add (const int\&, const string\&, const int\&)} & Configures a new transition between the existing states in the FSM. The first argument is the origin state. The second argument is the string that contains the input characters considered for the jump. The third argument is the destination of the jump. \\
+	
+	\hline
+	
+	\texttt{int currentState (void)} & Returns the value of fsm\_current\_state. \\
+	
+	\hline
+	
+	\texttt{int operator[] (const char\&)} & Takes as argument an input character to test it against the FSM itself. The operator access the current state stored in fsm\_states using the value of fsm\_current\_state. From the current state, it tests the input character (the argument) to get the index of the next state in the FSM. The index is stored in fsm\_current\_state and, finally, such value is returned to the caller. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{FiniteStateMachine} class.}
+\label{tab:FiniteStateMachine-MemberFunctions}
+\end{table}
 
-A second protected attribute, \textbf{fsm\_states}, represents a list (a \textit{vector} class instance) of State class instances that will form the whole set of states in the FSM. This array doesn't have a specific size, so, when creating an instance of this class, it will required for the caller to set the ammount of states to be created (and added to this list).
-
-To control the FSM, the public member fucntion \textbf{reset} is intented to reset (or restart) the whole FSM (done by setting the current state to 1). This will help in case that such functionality is required.
-
-The public member function \textbf{currentState} can be used to return the current state of the FSM and keep track of its functionality.
-
-The private member function \textbf{add} is expected to be used only by those classes that extend this one. This member function takes as arguments the current state from which to perform a jump (as a constant reference to an \textit{int} value), a constant reference to a \textit{string} class instance that represents the set of input characters to perform the jump with, and the destination state of the jump, as a constant reference to an \textit{int} value. Is important to note that, even if this member function is implemented, the whole class is expected to be just a "skeleton" for others with more specific logic (so, this member function is private to prevent direct usage of the class). In the following code block, can be seen the main idea behind this member function:
-
-\lstinputlisting[caption={\textbf{add} code example.}, style=CPPStyle]{examples/chapter3-example7.cc}
-
-As can be seen, having the \textbf{fsm\_states} array of \textit{State} class instances, the first argument, \textbf{input\_state}, is used to access the right state from the whole FSM. Then, from such state, its member function \textbf{addOptions} is accessed to pass to it, as argument, the values of \textbf{input\_chars} and \textbf{output\_state}.
-
-Finally, this class is expected to provide a similar functionality to the caller as the \textit{State} class, providing access to an overloaded operator (brackets) to test a character with the current state and return the new state. All the previous functionality can be found in the following code block, wich performs all those operations in a single line:
-
-\lstinputlisting[caption={\textbf{add} code example.}, style=CPPStyle]{examples/chapter3-example8.cc}
-
-The line operates using some commodities allowed by the language, like the \textit{comma} operator. Using such operator, we will execute the instruction found in the left, and returning the value to its right. In the left, we have, first, an access to the \textbf{fsm\_states} array using the value of \textbf{fsm\_current\_state}. With that, the code is accessing the correct and actual state in the FSM. From such accessed state, its brackets overloaded operator is called to test the current character (\textbf{input\_char}). This call to its overloaded operator will return the next state in the FSM according to the configuration done and the current state and input. Such returned value (the next state), is then stored in the \textbf{fsm\_current\_state} attribute, and, as a final step in the whole line, the right side of the \textbf{comma} operator, returning the value of the \textbf{fsm\_current\_state} value itself.
+\newpage 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: CIFFSM}\label{Class-CIFFSM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As mentioned previously, the \textit{FiniteStateMachine} class only provides the basic structure of the FSM required to validate a CIF file. The class \textit{CIFFSM} does that and specializes it to add the required functionality. The UML diagram found in the figure \ref{fig:class-ciffsm} details the idea behind the class.
+The CIFSM class is a specialized class intended to validate the contents of a CIF file. Extends the FiniteStateMachine class and extends the required elements to initialize the designed Finite State Machine. The UML diagram found in the figure \ref{fig:class-ciffsm} shows the general idea behind the class. The table \ref{tab:CIFFSM-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:CIFFSM-Attributes} and \ref{tab:CIFFSM-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image11}
+	\includegraphics[scale=0.4, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image11}
 	\caption{UML diagram of the \textbf{CIFSM} class.}
 	\label{fig:class-ciffsm}
 \end{figure}
 
-Internally, the CIFFSM class will integrate the functionality provided by the FiniteStateMachine class, adding some new components.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{2cm} | p{13.5cm} |}
+	\hline
+	
+	\texttt{Transition} & \parbox[t]{13.5cm}{Each value represents a small set of input values.\\
+	                                         \begin{itemize}
+						                  	 	\item \textbf{Digit} All the digit numbers, from '0' to '9'.
+						                     	\item \textbf{UpperChar} All the upper case characters, from 'A' to 'Z'.
+						                    	\item \textbf{LowerChar} All the lower case characters, from 'a' to 'z'.
+						                    	\item \textbf{BlankChar} Any character that is not a digit, an uppercase character, a minus, parentheses or semicolon.
+						                    	\item \textbf{UserChar} Any character that is not a semicolon.
+						                    	\item \textbf{CommentChar} Any character.
+						                    	\item \textbf{SeparatorChar} Lowercase characters or a BlankChar.
+						                    	\item \textbf{LayerNameChar} Any character that is a digit, an uppercase character or an underscore.
+						                    	\item \textbf{ExtentionChar} Any character that is not a semicolon.
+						                     \end{itemize}
+						                    } \\
+	
+	\hline		
+\end{tabular}
+\caption{Enum definitions in the \textbf{CIFFSM} class.}
+\label{tab:CIFFSM-Types}
+\end{table}
 
-The first new element found is the private attribute \textbf{parentheses}, a counter of \textit{int} type used internally to keep track of open parentheses in the Comment command when validating such command.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{5.5cm} | p{10cm} |}
+	\hline
+	
+	\texttt{int parentheses} & Used when validating, stores the ammount of open parentheses (and thus, remaining to close) when validating a comment. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{CIFFSM} class.}
+\label{tab:CIFFSM-Attributes}
+\end{table}
 
-Next, can be found the private member function \textbf{add}. This member function is the same as the one found in the \textit{FiniteStateMachine} class. The only difference (or modification) is that its prototype is being re-defined in the interface of the class. This is done to keep it hidded from the caller, but to make it available to class itself\footnote{If class A has a private member function, and class B performs a public heritage from A, by default, class B will not be able to access the private member function of A, to, just re-defining such member of A as private in B, makes it available to B, but keeps it private to the outside.} .
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{9.8cm} | p{5.7cm} |}
+	\hline
+	
+	\texttt{explicit CIFFSM (void)} & Explicit default constructor. In its initializer list, its FiniteStateMachine parent constructor is called, passing a value of 92, thus, creating 92 emtpy states for the FSM. Also, it initializes the value of \textbf{parentheses} with a value of 0. In the body, all the transitions are configured so that the instance created contains a fully configured FSM able to validate the contents of a CIF file. \\
+	
+	\hline
+	
+	\texttt{virtual ~CIFFSM (void)} & Destructor. Doesn't perform any deletion of instances nor states. \\
+	
+	\hline
+	
+	\texttt{int operator[] (const char\&)} & Takes as argument an input character from the CIF file to validate and applies it to its FiniteStateMachine base class using the same operator. The call keeps track of the parentheses opened to prevent logical errors when validating a comment. \\
+	
+	\hline
+	
+	\texttt{void add (const int\&, const string\&, const int\&)} & Provides the same functionality as the parent class FiniteStateMachine's add member function. This member function is just defined to change the visibility of such function to private. \\
+	
+	\hline
+	
+	\texttt{void add (const int\&, const Transition\&, const int\&)} & Overloaded member function that provides access to the usage of the Transition data types to define jumps to groups of characters. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{CIFFSM} class.}
+\label{tab:CIFFSM-MemberFunctions}
+\end{table}
 
-The second \textbf{add} member function (that is also private) is new, and is intended to be used when configuring the FSM for the CIF format. The difference with the previous member function is that this one takes as second argument an \textit{enum} instance variable that represents a predefined set of characters. Internally, the member functins uses a \textit{switch} structure to validate the value of the argument, and to perform the required operations. The \textit{enum} can be found with the following values defined:
-
-\begin{description}
-\item \textbf{Digit} These are the characters '0' to '9'.
-\item \textbf{UpperChar} These are the characters 'A' to 'Z'.
-\item \textbf{LowerChar} These are the characters 'a' to 'z'.
-\item \textbf{BlankChar} These are all the characters in the ASCII set that are not a digit, an uppercase character, minus ('-'), parentheses or semicolon.
-\item \textbf{UserChar} These are all the characters in the ASCII set that are not a semicolon.
-\item \textbf{CommentChar} All ASCII characters (from 0 to 255).
-\item \textbf{SeparatorChar} LowerChar or BlankChar.
-\item \textbf{LayerNameChar} Digit, UpperChar or underscore.
-\item \textbf{ExtentionChar} All ASCII characters, except semicolon.
-\end{description}
-
-The main idea behind these values is to make it easier to configure the FSM in the class instance. Using such values, it becomes easier to configure the states.
-
-The \textbf{Constructor} is in charge of calling the father class, initializing the ammount of states for this FSM (92 in this case). Also, the constructor is in charge of effectively calling the \textbf{add} member function in order to configure and set all the states and jumps defined by the FSM itself. The following code block demonstrates how the states are set in the constructor:
-
-\lstinputlisting[caption={Constructor code example.}, style=CPPStyle]{examples/chapter3-example9.cc}
-
-In the library, the calls are grouped by command. That is, that all the states required to validate a specific command are groupes using comments.
+\clearpage 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Command group of classes}\label{Command-group-of-classes}
@@ -2171,58 +2273,163 @@ These classes are used when converting a \textit{vector} class instance of \text
 \subsubsection{Class: Point}\label{Class-Point}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The first class in this group is a very basic class that represents a single point in space of the design. This point can be a position or rotation angle. The UML diagram found in the figure \ref{fig:class-point} details the idea behind the class.
+The Point class is a base class intended to represent a single CIF point. The values are stored in integers to preserve precision. The UML diagram found in the figure \ref{fig:class-point} shows the general idea behind the class. The table \ref{tab:CIFFSM-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:Point-Attributes} and \ref{tab:Point-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image12}
+	\includegraphics[scale=0.4, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image12}
 	\caption{UML diagram of the \textbf{Point} class.}
 	\label{fig:class-point}
 \end{figure}
 
-As can be seen, the class just represent the X and Y coordinates of the desired point. The class provides two constructors. The firs one being the default constructor (without arguments), initializing both coordinate values in zeros. The second constructor initializes the point with the values passed as arguments.
-
-\IconNote
-	{info}
-	{Negative coordinates}
-	{Is important to remember that the coodinates of a point can be negative. By this reason, the coordinate values are defined as \textit{signed long int} values.}
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{5.5cm} | p{10cm} |}
+	\hline
 	
-The class also provides access to set the values after creation. This is done using one of the three member functions provided:
+	\texttt{long int point\_x} & Stores the X coordinate of the point. \\
+	
+	\hline
+	
+	\texttt{long int point\_y} & Stores the Y coordinate of the point. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{Point} class.}
+\label{tab:Point-Attributes}
+\end{table}
 
-\begin{itemize}
-\item \textbf{setX} This member function takes as argument a constant reference to a \textit{signed long int} value. The value is stored directly into the X component of the point.
-\item \textbf{setY} This member function takes as argument a constant reference to a \textit{signed long int} value. The value is stored directly into the Y component of the point.
-\item \textbf{set} This member function takes as argument two constant references to a \textit{signed long int} values. The values are stored directly into the X and Y components of the point.
-\end{itemize}
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{9.2cm} | p{6.3cm} |}
+	\hline
+	
+	\texttt{explicit Point (void)} & Explicit default constructor. Initializes the point with the coordinates [0,0]. \\
+	
+	\hline
+	
+	\texttt{explicit Point (const long int\&, const long int\&)} & Explicit constructor. Takes as arguments two integers. The values are used to initialize the X and Y coordinates of the point. The first argument is assigned to the X coordinate, while the second is assigned to the Y coordinate. \\
+	
+	\hline
+	
+	\texttt{virtual ~Point (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void set (const long int\&, const long int\&)} & Takes as arguments two integers, which are assigned to the X and Y coordinates of the point. The first argument is assigned to the X coordinate, while the second is assigned to the Y coordinate. \\
+	
+	\hline
+	
+	\texttt{void setX (const long int\&)} & Takes as argument an intenger that is assigned directly to the X coordinate of the point. \\
+	
+	\hline
+	
+	\texttt{void setY (const long int\&)} & Takes as argument an integer that is assigned directly to the Y coordinate of the point. \\
+	
+	\hline
+	
+	\texttt{long int getX (void)} & Returns the value of point\_x (the X coordinate). \\
+	
+	\hline
+	
+	\texttt{long int getY (void)} & Returns the value of point\_y (the Y coordinate). \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, Point\&)} & Overloaded operator intended to extract text from an input stream and parse it into the values of a Point instance. The format expected is two integers (with or without negative characters, first the X coordinate and then the Y coordinate) separated with a single whitespace. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, const Point\&)} & Overloaded operator intended to insert text to an output stream. The values inserted are, in this order, the X coordinate and the Y coordinate, separated with a single whitespace. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{Point} class.}
+\label{tab:Point-MemberFunctions}
+\end{table}
 
-Also, the class provides two member functions intented to retrieve the values of X and Y coordinate components. Those member functions are \textbf{getX} and \textbf{getY}. These member functions return signed \textit{long int} values when called.
-
-The Point class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Point from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Point to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
-
-\lstinputlisting[caption={Overloaded operators of the Point class.}, style=CPPStyle]{examples/chapter3-example10.cc}
-
-As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the X coordinate value is inserted, then a single whitespace and, finally, the Y coordinate value.
+\clearpage 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Size}\label{Class-Size}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The second class in this group is a very basic class that represents the size of a component (like a figure). The size represents length in X and Y coordinates, so it is very similar to the Point class previously explained. The UML diagram found in the figure \ref{fig:class-size} details the idea behind the class.
+The Size class is a base class intended to represent the dimensions of an element of the CIF design that supports bidimensional size information (like the Box figure).. The values are stored in unsigned integers to preserve precision. The UML diagram found in the figure \ref{fig:class-size} shows the general idea behind the class. The table \ref{tab:Size-Attributes} and \ref{tab:Size-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image13}
+	\includegraphics[scale=0.4, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image13}
 	\caption{UML diagram of the \textbf{Size} class.}
 	\label{fig:class-size}
 \end{figure}
 
-The main difference between the Size and Point classes are just the names and data types. The Point class is focused in storage and management of an X-Y coodinate with the possibility of using negative values. The Size class is focused in storage and management of X-Y size components of a figure with the restriction of using unsigned values.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{5.5cm} | p{10cm} |}
+	\hline
+	
+	\texttt{unsigned long int size\_width} & Stores the with of the figure. \\
+	
+	\hline
+	
+	\texttt{unsigned long int size\_height} & Stores the height of the figure. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{Size} class.}
+\label{tab:Size-Attributes}
+\end{table}
 
-The Size class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Size from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Size to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{10.5cm} | p{5cm} |}
+	\hline
+	
+	\texttt{explicit Size (void)} & Explicit default constructor. Initializes the size with 0 in both dimensions. \\
+	
+	\hline
+	
+	\texttt{explicit Size (const unsigned long int\&, const unsigned long int\&)} & Explicit constructor. Initializes the size with the values passed as arguments. The first argument is stored in the width, while the second is stored in the height. \\
+	
+	\hline
+	
+	\texttt{virtual ~Size (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void set (const unsigned long int\&, const unsigned long int\&)} & Sets both width and height. The first argument is asigned to the width, while the second is asigned to the height. \\
+	
+	\hline	
+	
+	\texttt{void setWidth (const unsigned long int\&)} & Used to set the width of the size. \\
+	
+	\hline
+	
+	\texttt{unsigned long int getWidth (void)} & Returns the value of the width configured. \\
+	
+	\hline	
+	
+	\texttt{void setHeight (const unsigned long int\&)} & Used to set the height of the size. \\
+	
+	\hline
+	
+	\texttt{unsigned long int getHeight (void)} & Returns the value of the height configured. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, Size\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted into integers and stored in the Size instance provided. The format expected of the text is two integer values separated with a single whitespace. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, const Size\&)} & Overloaded operator intended to insert text to an output stream. The values inserted are the width and height (in that order) of the Size object provided. The format used is two integer values separated with a single whitespace. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{Size} class.}
+\label{tab:Size-MemberFunctions}
+\end{table}
 
-\lstinputlisting[caption={Overloaded operators of the Size class.}, style=CPPStyle]{examples/chapter3-example11.cc}
-
-As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the widh value is inserted, then a single whitespace and, finally, the height value.
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Fraction}\label{Class-Fraction}
@@ -2474,9 +2681,8 @@ The File class performs the operations required to open, load, validate and tran
 \label{tab:File-Attributes}
 \end{table}
 
-\begin{table}\footnotesize
-\centering
-\begin{tabular}{| >{\bfseries}p{9.8cm} | p{5.7cm} |}
+{\footnotesize
+\begin{longtable}{| >{\bfseries}p{9.8cm} | p{5.7cm} |}
 	\hline
 	
 	\texttt{explicit File (void)} & Explicit default constructor. Doesn't initialize values. \\
@@ -2542,10 +2748,26 @@ The File class performs the operations required to open, load, validate and tran
 	\texttt{static string cleanCommand (string)} & Cleans a command (in string form) on demand. Takes as argument the dirty command and returns a cleaned copy. The dirty command should be valid. \\
 			
 	\hline
-\end{tabular}
+	
+	\texttt{static string clearNumericCommand (string)} & Cleans numeric commands. The numeric commands are the PoligonCommand, BoxCommand, WireCommand and RoundFlashCommand. \\
+			
+	\hline
+	
+	\texttt{static string cleanLayerCommand (string)} & Cleans layer commands. The only command considered is the LayerCommand. \\
+	
+	\hline
+	
+	\texttt{static string cleanCallCommand (string)} & Cleans call commands. The only command considered is the CallCommand. \\
+	
+	\hline
+	
+	\texttt{static string cleanDefinitionCommand (string)} & Cleans definition commands. The definition commands are the DefinitionStart and DefinitionEnd commands. \\
+			
+	\hline
 \caption{Member functions of the \textbf{File} class.}
 \label{tab:File-MemberFunctions}
-\end{table}
+\end{longtable}
+}
 
 \cleartoverso
 

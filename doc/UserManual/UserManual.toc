@@ -48,31 +48,31 @@
 \contentsline {subsubsection}{Expansion commands}{54}
 \contentsline {section}{\numberline {3.4}Converting strings into class instances}{54}
 \contentsline {subsection}{\numberline {3.4.1}Validation group of classes}{54}
-\contentsline {subsubsection}{Class: State}{54}
+\contentsline {subsubsection}{Class: State}{55}
 \contentsline {subsubsection}{Class: FiniteStateMachine}{56}
 \contentsline {subsubsection}{Class: CIFFSM}{57}
 \contentsline {subsection}{\numberline {3.4.2}Command group of classes}{59}
 \contentsline {subsubsection}{Class: Point}{59}
-\contentsline {subsubsection}{Class: Size}{60}
-\contentsline {subsubsection}{Class: Fraction}{62}
-\contentsline {subsubsection}{Class: Transformation}{63}
-\contentsline {subsubsection}{Class: Command}{65}
-\contentsline {subsubsection}{Class: PrimitiveCommand}{65}
-\contentsline {subsubsection}{Class: PathBasedCommand}{65}
-\contentsline {subsubsection}{Class: PolygonCommand}{65}
-\contentsline {subsubsection}{Class: WireCommand}{65}
-\contentsline {subsubsection}{Class: PositionBasedCommand}{65}
-\contentsline {subsubsection}{Class: BoxCommand}{66}
-\contentsline {subsubsection}{Class: RoundFlashCommand}{66}
-\contentsline {subsubsection}{Class: ControlCommand}{66}
-\contentsline {subsubsection}{Class: DefinitionStartCommand}{66}
-\contentsline {subsubsection}{Class: DefinitionDeleteCommand}{66}
-\contentsline {subsubsection}{Class: CallCommand}{66}
-\contentsline {subsubsection}{Class: DefinitionEndCommand}{66}
-\contentsline {subsubsection}{Class: EndCommand}{66}
-\contentsline {subsubsection}{Class: RawContentCommand}{66}
-\contentsline {subsubsection}{Class: UserExtentionCommand}{66}
-\contentsline {subsubsection}{Class: CommentCommand}{66}
-\contentsline {subsubsection}{Class: LayerCommand}{66}
-\contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{66}
-\contentsline {subsubsection}{Class: File}{67}
+\contentsline {subsubsection}{Class: Size}{61}
+\contentsline {subsubsection}{Class: Fraction}{63}
+\contentsline {subsubsection}{Class: Transformation}{64}
+\contentsline {subsubsection}{Class: Command}{66}
+\contentsline {subsubsection}{Class: PrimitiveCommand}{66}
+\contentsline {subsubsection}{Class: PathBasedCommand}{66}
+\contentsline {subsubsection}{Class: PolygonCommand}{66}
+\contentsline {subsubsection}{Class: WireCommand}{66}
+\contentsline {subsubsection}{Class: PositionBasedCommand}{66}
+\contentsline {subsubsection}{Class: BoxCommand}{67}
+\contentsline {subsubsection}{Class: RoundFlashCommand}{67}
+\contentsline {subsubsection}{Class: ControlCommand}{67}
+\contentsline {subsubsection}{Class: DefinitionStartCommand}{67}
+\contentsline {subsubsection}{Class: DefinitionDeleteCommand}{67}
+\contentsline {subsubsection}{Class: CallCommand}{67}
+\contentsline {subsubsection}{Class: DefinitionEndCommand}{67}
+\contentsline {subsubsection}{Class: EndCommand}{67}
+\contentsline {subsubsection}{Class: RawContentCommand}{67}
+\contentsline {subsubsection}{Class: UserExtentionCommand}{67}
+\contentsline {subsubsection}{Class: CommentCommand}{67}
+\contentsline {subsubsection}{Class: LayerCommand}{67}
+\contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{67}
+\contentsline {subsubsection}{Class: File}{68}
