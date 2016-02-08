@@ -2435,7 +2435,7 @@ The Size class is a base class intended to represent the dimensions of an elemen
 \subsubsection{Class: Fraction}\label{Class-Fraction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The third class in this group is the one that represents the scaling factor of size and position values in a Definition. Since the CIF format doesn't allow the use of floating point values, there is the need to represent fractionary values without decimals, and in this case, when defining a new Definition, there is possible to define the values of such fraction, wich is going to be applied to the values found within the Definition itself. The UML diagram found in the figure \ref{fig:class-fraction} details the idea behind the class.
+The Fraction class is a base class intended to represent the scaling factor applied to sizes and positions in a Symbol. The values are stored in unsigned integers to preserve precision. The UML diagram found in the figure \ref{fig:class-fraction} shows the general idea behind the class. The table \ref{tab:Fraction-Attributes} and \ref{tab:Fraction-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
@@ -2444,23 +2444,79 @@ The third class in this group is the one that represents the scaling factor of s
 	\label{fig:class-fraction}
 \end{figure}
 
-In this case, the Fraction class contains two attributes of type \textit{unsigned long int}. This is because the fraction is intended to transform other integer values (that might already have sign) into floating point values. Because of that, the fractions don't require to have sign.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{5.5cm} | p{10cm} |}
+	\hline
+	
+	\texttt{unsigned long int fraction\_numerator} & Stores the numerator part of the fraction. \\
+	
+	\hline
+	
+	\texttt{unsigned long int fraction\_denominatort} & Stores the denominator part of the fraction. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{Fraction} class.}
+\label{tab:Fraction-Attributes}
+\end{table}
 
-The class has a \textbf{set} member function that takes as argument two constant references to \textit{unsigned long int} values. The first value is going to be stored as the \textbf{enumerator} of the fraction, while the second is going to be stored as the \textbf{denominator}.
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8cm} | p{7.5cm} |}
+	\hline
+	
+	\texttt{explicit Fraction (void)} & Explicit default constructor. Initializes the fraction with a value of 1/1 (a neutral fraction). \\
+	
+	\hline
+	
+	\texttt{explicit Fraction (const unsigned long int\&, const unsigned long int\&)} & Explicit constructor. Initializes the fraction with the values passed as arguments. The first argument if the numerator part of the fraction, while the second is the denominator. \\
+	
+	\hline
+	
+	\texttt{virtual ~Fraction (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void set (const unsigned long int\&, const unsigned long int\&)} & Sets both numerator and denominator in a single call. The first argument is the numerator, while the second is the denominator. \\
+	
+	\hline	
+	
+	\texttt{void setNumerator (const unsigned long int\&)} & Used to set the numerator part of the fraction. \\
+	
+	\hline
+	
+	\texttt{unsigned long int getNumerator (void)} & Returns the value of the numerator part of the fraction. \\
+	
+	\hline	
+	
+	\texttt{void setDenominator (const unsigned long int\&)} & Used to set the denominator part of the fraction. \\
+	
+	\hline
+	
+	\texttt{unsigned long int getDenominator (void)} & Returns the value of the denominator part of the fraction. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, Fraction\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted into integers and stored in the Fraction instance provided. The format expected of the text is two integer values separated with a single whitespace. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, const Size\&)} & Overloaded operator intended to insert text to an output stream. The values inserted are the numerator and denominator (in that order) of the Fraction object provided. The format used is two integer values separated with a single whitespace. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{Fraction} class.}
+\label{tab:Fraction-MemberFunctions}
+\end{table}
 
-There is possible to set and get the denominator and numerator values independently. The class has a member function named \textbf{setNumerator} that takes as argument a constant reference to a \textit{unsigned long int} value, and a member function named \textbf{setDenominator} that takes the same value type as argument. In the same way, there is a member function \textbf{getNumerator} and a member function \textbf{getDenominator}. Both of these member functions return, when called, an \textit{unsigned long int} value.
-
-The Fraction class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Fraction from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Fractio to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
-
-\lstinputlisting[caption={Overloaded operators of the Fraction class.}, style=CPPStyle]{examples/chapter3-example12.cc}
-
-As can be seen, when extracting, the expected format is two values separed by a blank character (a single space, enter, tabulator, etc). When inserting, the behaviour is similar: First, the numerator value is inserted, then a single whitespace and, finally, the denominator value.
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Transformation}\label{Class-Transformation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Transformation class represents a single transformation required to be applied to a Cell in a Call command. All the possible transformations (Rotation, Displacement, Vertical Mirror and Horizontal Mirror) can be represented with this class. The UML diagram found in the figure \ref{fig:class-transformation} details the idea behind the class.
+The Transformation class is a base class intended to represents a transformation that need to be applied to a Call command. The transformation uses a Point value to represent the displacement or rotation to apply. The UML diagram found in the figure \ref{fig:class-transformation} shows the general idea behind the class. The table \ref{tab:Transformation-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:Transformation-Attributes} and \ref{tab:Transformation-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
@@ -2469,38 +2525,202 @@ The Transformation class represents a single transformation required to be appli
 	\label{fig:class-transformation}
 \end{figure}
 
-By default the only consructor available initializes the class as a neutral\footnote{A displacement of zero in X and Y coordinates.} Displacement transformation (one of the most common transformations).
 
-To set and get the type of the instance, the class provides access to the setType and getType member functions. The set function takes as argument a constant reference to the type to set. The get function returns a copy of the type actually setted. 
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{3cm} | p{12.5cm} |}
+	\hline
+	
+	\texttt{TransformationType} & \parbox[t]{12.5cm}{Each value represents a different kind of transformation that can be applied to a call.\\
+	                                                 \begin{itemize}
+						                         	 	\item \textbf{Displacement} Addition to be applied to the X and Y coordinates of the figures contained in the called Symbol and sub-called Symbols.
+						                             	\item \textbf{Rotation} Rotation transformation applied to the called Symbol and sub-called Symbols.
+						                             	\item \textbf{HorizontalMirroring} Multiplication of the X coordinates of the called Symbol by -1.
+						                             	\item \textbf{VerticalMirroring} Multiplication of the Y coordinates of the called Symbol by -1.
+						                     \end{itemize}
+						                    } \\
+	
+	\hline		
+\end{tabular}
+\caption{Enum definitions in the \textbf{Transformation} class.}
+\label{tab:Transformation-Types}
+\end{table}
 
-The types available can be found in an enum structure found within the class itself. The types available are:
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{TransformationType transformation\_type} & Stores the type of the transformation. \\
+	
+	\hline
+	
+	\texttt{Point transformation\_point} & Stores the Point used as argument for the Displacement and Rotation transformations. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{Transformation} class.}
+\label{tab:Transformation-Attributes}
+\end{table}
 
-\begin{itemize}
-\item \textbf{Displacement} An addition to the coordinates of the elements found within a Call command.
-\item \textbf{Rotation} A rotation of the cell called by the Call command.
-\item \textbf{HorizontalMirroring} A multiplication by -1 of all the X coordinates of the cell called by the Call command.
-\item \textbf{VerticalMirroring} A multiplication by -1 of all the Y coordinates of the cell called by the Call command.
-\end{itemize}
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{10cm} | p{5.5cm} |}
+	\hline
+	
+	\texttt{explicit Transformation (void)} & Explicit default constructor. Initializes the transformation as a neutral Displacement (with a movement Point of [0,0]). \\
+	
+	\hline
+	
+	\texttt{virtual ~Transformation (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setType (const TransformationType\&)} & Sets the type of the Transformation instance. The current value of the internal Point is not changed. \\
+	
+	\hline	
+	
+	\texttt{TransformationType getType (void)} & Returns the value of the current configured type. \\
+	
+	\hline
+	
+	\texttt{void setRotation (const Point\&)} & Sets the new Point to store that represents the rotation to apply to a call. \\
+	
+	\hline	
+	
+	\texttt{Point getRotation (void)} & Returns the value of the Point used to represent the rotation to apply to a call. \\
+	
+	\hline
+	
+	\texttt{void setDisplacement (const Point\&)} & Sets the new Point to store that represents the addition in X and Y coordinates to apply to a call. \\
+	
+	\hline
+	
+	\texttt{Point getDisplacement (void)} & Returns the value of the Point used to represent the displacement to apply to a call. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, Transformation\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the Transformation instance provided. The format expected of the text is a single uppercase character representing the type of the transformation, followed by an argument, that can be another uppercase character (mirroring) or two integers separated by a whitespace (displacement and rotation). \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, const Transformation\&)} & Overloaded operator intended to insert text to an output stream. The values inserted are the type of the transformation (an uppercase character) followed by another uppercase character or two integers separated by a whitespace. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{Transformation} class.}
+\label{tab:Transformation-MemberFunctions}
+\end{table}
 
-The Transformation class contains an attribute named \textbf{transformation\_point}, which is of type Point. This point is used to store the values related to the Displacement and Rotation types. 
-
-The class provides a get and set member functions to get the Point when the instance is configured as Displacement. These member functions are \textbf{setDisplacement} and \textbf{getDisplacement}. The first takes as argument a constant reference to a Point instance, while the second returns a copy of the same point.
-
-Also, the class provides a get and set member functions to get and set the Point when the instance is configured as a Rotation. These member functions are \textbf{setRotation} and \textbf{getRotation}. The first takes as argument a constant reference to a Point instance, while the second returns a copy of the same point.
-
-There is important to note that the previous four member functions work over the same attribute in the instance. That is, that both set member functions assign their arguments to the same attribute, and both get member functions return the same instance. This is done in order to provide a more simple interface to the user, providing more clear names depending on the type of the instance.
-
-The Transformation class also provides two overloaded operators for flow extraction and insertion. The overloaded operator \textbf{>>} is used to load a Transformation from a \textbf{istream} class instance (such instance can be an open file, or the standard input). The second overloaded operator \textbf{<<} is used to write a Transformation to a \textbf{ostream} class instance (also, like an open file or the standard output). The following code block shows such operators as defined in the library.
-
-\lstinputlisting[caption={Overloaded operators of the Transformation class.}, style=CPPStyle]{examples/chapter3-example13.cc}
-
-As can be seen, when extracting, the expected format is a character that signals the transformation type (T, R or M), followed by a point (for Displacement and Rotation) or an X or Y (for Mirror). When inserting, the behaviour is similar: First, the character that defines the type of the instance, followed by the value asociated (a Point or a character).
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: Command}\label{Class-Command}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: Command
+The Command class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-command} shows the general idea behind the class. The table \ref{tab:Command-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:Command-Attributes} and \ref{tab:Command-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image16}
+	\caption{UML diagram of the \textbf{Transformation} class.}
+	\label{fig:class-command}
+\end{figure}
+
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{3cm} | p{12.5cm} |}
+	\hline
+	
+	\texttt{CommandType} & \parbox[t]{12.5cm}{Each value represents a different kind of command to represent.\\
+	                                          \begin{itemize}
+						                     	\item \textbf{PlainCommand} Type used by the Command class.
+						                       	\item \textbf{Primitive} Type used by the PrimitiveCommand class.
+						                       	\item \textbf{Control} Type used by the ControlCommand class.
+						                       	\item \textbf{RawContent} Type used by the RawContentCommand class.
+						                       	\item \textbf{PathBased} Type used by the PathBasedCommand class.
+						                       	\item \textbf{PositionBased} Type used by the PositionBasedCommand class.
+						                       	\item \textbf{DefinitionStart} Type used by the DefinitionStartCommand class.
+						                       	\item \textbf{DefinitionDelete} Type used by the DefinitionDeleteCommand class.
+						                       	\item \textbf{Call} Type used by the CallCommand class.
+						                       	\item \textbf{DefinitionEnd} Type used by the DefinitionEndCommand class.
+						                       	\item \textbf{Comment} Type used by the CommentCommand class.
+						                       	\item \textbf{UserExtension} Type used by the UserExtensionCommand class.
+						                       	\item \textbf{Polygon} Type used by the PolygonCommand class.
+						                       	\item \textbf{Wire} Type used by the WireCommand class.
+						                       	\item \textbf{Box} Type used by the BoxCommand class.
+						                       	\item \textbf{RoundFlash} Type used by the RoundFlashCommand class.
+						                       	\item \textbf{Layer} Type used by the LayerCommand class.
+						                       	\item \textbf{End} Type used by the EndCommand class.
+						                     \end{itemize}
+						                    } \\
+	
+	\hline		
+\end{tabular}
+\caption{Enum definitions in the \textbf{Command} class.}
+\label{tab:Command-Types}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{CommandType command\_type} & Stores the type of the command. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{Command} class.}
+\label{tab:Command-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit Command (void)} & Explicit default constructor. Initializes the Command instance as a PlainCommand. \\
+	
+	\hline
+	
+	\texttt{virtual ~Command (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual CommandType type (void)} & Returns the type of the command. Being a virtual member function, this call works with the derivated classes. \\
+	
+	\hline	
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+	
+	\texttt{virtual unsigned long int toULInt (const string\&)} & Utilitary member function intended to convert a value in string form to an unsigned long int value. \\
+	
+	\hline
+	
+	\texttt{virtual long int toLInt (const string\&)} & Utilitary member function intended to convert a value in string form to a long int value. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, Command*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, Command*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{Command} class.}
+\label{tab:Command-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: PrimitiveCommand}\label{Class-PrimitiveCommand}

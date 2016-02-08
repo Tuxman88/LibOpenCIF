@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.31)  1 FEB 2016 21:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.31)  7 FEB 2016 22:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1617,109 +1617,174 @@ File: images/chapter03-image14.png Graphic file (type png)
 <use images/chapter03-image14.png>
 Package pdftex.def Info: images/chapter03-image14.png used on input line 2442.
 (pdftex.def)             Requested size: 371.62277pt x 153.04198pt.
- (./examples/chapter3-example12.cc [63
 
- <./images/chapter03-image14.png (PNG copy)>])
-<images/chapter03-image15.png, id=293, 1576.89125pt x 808.01875pt>
+Underfull \hbox (badness 10000) in paragraph at lines 2452--2452
+[]|\OT1/lmtt/b/n/9 unsigned long int
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2456--2456
+[]|\OT1/lmtt/b/n/9 unsigned long int
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2473--2473
+[]|\OT1/lmtt/b/n/9 explicit Fraction (const unsigned long int&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2481--2481
+[]|\OT1/lmtt/b/n/9 void set (const unsigned long int&, const
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2501--2501
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2505--2505
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&, const
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[63
+
+ <./images/chapter03-image14.png (PNG copy)>] [64]
+<images/chapter03-image15.png, id=296, 1576.89125pt x 808.01875pt>
 File: images/chapter03-image15.png Graphic file (type png)
 
 <use images/chapter03-image15.png>
-Package pdftex.def Info: images/chapter03-image15.png used on input line 2467.
+Package pdftex.def Info: images/chapter03-image15.png used on input line 2523.
 (pdftex.def)             Requested size: 315.37267pt x 161.60088pt.
- [64 <./images/chapter03-image15.png (PNG copy)>] (./examples/chapter3-example1
-3.cc [65]) [66] [67]
-<images/chapter03-image34.png, id=308, 2117.9125pt x 1726.45pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 2541--2541
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2607--2607
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&, const
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[65
+
+ <./images/chapter03-image15.png (PNG copy)>] [66]
+<images/chapter03-image16.png, id=305, 1407.2575pt x 693.59125pt>
+File: images/chapter03-image16.png Graphic file (type png)
+
+<use images/chapter03-image16.png>
+Package pdftex.def Info: images/chapter03-image16.png used on input line 2625.
+(pdftex.def)             Requested size: 281.44652pt x 138.71579pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2657--2657
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[67
+
+ <./images/chapter03-image16.png (PNG copy)>] [68] [69
+
+]
+<images/chapter03-image34.png, id=318, 2117.9125pt x 1726.45pt>
 File: images/chapter03-image34.png Graphic file (type png)
 
 <use images/chapter03-image34.png>
-Package pdftex.def Info: images/chapter03-image34.png used on input line 2621.
+Package pdftex.def Info: images/chapter03-image34.png used on input line 2841.
 (pdftex.def)             Requested size: 381.20781pt x 310.74759pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2638--2638
+Underfull \hbox (badness 10000) in paragraph at lines 2858--2858
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2647--2647
+Underfull \hbox (badness 10000) in paragraph at lines 2867--2867
 
  []
 
 
-Underfull \hbox (badness 4832) in paragraph at lines 2716--2717
+Underfull \hbox (badness 4832) in paragraph at lines 2936--2937
 \OT1/lmr/m/n/9 file[]raw[]commands and stored there
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2732--2733
+Underfull \hbox (badness 10000) in paragraph at lines 2952--2953
 []|\OT1/lmr/m/n/9 Assigns an empty vec-tor to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2732--2733
+Underfull \hbox (badness 10000) in paragraph at lines 2952--2953
 \OT1/lmr/bx/n/9 file[]commands\OT1/lmr/m/n/9 . Doesn't delete
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2740--2741
+Underfull \hbox (badness 10000) in paragraph at lines 2960--2961
 []|\OT1/lmr/m/n/9 Returns the con-tents of
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 2752--2753
+Underfull \hbox (badness 1448) in paragraph at lines 2972--2973
 \OT1/lmr/m/n/9 mand, Box-Com-mand, WireCom-mand
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2765
+Underfull \vbox (badness 10000) detected at line 2985
  []
 
-[68 <./images/chapter03-image34.png (PNG copy)>] [69] [70] [71
-
-]
+[70] [71] [72] [73 <./images/chapter03-image34.png (PNG copy)>]
 \GPT@outputbox=\box69
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 2798.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 3018.
 
- [72]
+ [74
+
+]
 \tf@toc=\write5
 \openout5 = `UserManual.toc'.
 
 
-(./UserManual.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(./UserManual.aux) ) 
 Here is how much of TeX's memory you used:
- 21386 strings out of 494946
- 404399 string characters out of 6180179
- 733429 words of memory out of 5000000
- 24165 multiletter control sequences out of 15000+600000
+ 21353 strings out of 494946
+ 403959 string characters out of 6180179
+ 734149 words of memory out of 5000000
+ 24137 multiletter control sequences out of 15000+600000
  87430 words of font info for 59 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 61i,18n,68p,894b,2362s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-dis
-t/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm
--rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}</usr/share/texmf
--dist/fonts/type1/public/lm/lmbsy10.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/lm/lmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/
-share/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/lm/lmbxi10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi10.
-pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf-
-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/
-lm/lmr17.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/
-texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/
-share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/font
-s/type1/public/lm/lmsso10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy
-10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf
--dist/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on UserManual.pdf (76 pages, 11594022 bytes).
+ 61i,18n,68p,894b,2360s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/u
+sr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dist/fon
+ts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc
+}</usr/share/texmf-dist/fonts/type1/public/lm/lmbsy10.pfb></usr/share/texmf-dis
+t/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/lm
+/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/share/
+texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf-dist/fonts/type1
+/public/lm/lmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmib10.pfb>
+</usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/f
+onts/type1/public/lm/lmr17.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr
+6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-d
+ist/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm
+/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy9.pfb
+></usr/share/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf-dist
+/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/
+lmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on UserManual.pdf (78 pages, 11670566 bytes).
 PDF statistics:
- 402 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
+ 411 PDF objects out of 1000 (max. 8388607)
+ 262 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
 
