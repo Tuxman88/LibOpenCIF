@@ -2516,7 +2516,7 @@ The Fraction class is a base class intended to represent the scaling factor appl
 \subsubsection{Class: Transformation}\label{Class-Transformation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Transformation class is a base class intended to represents a transformation that need to be applied to a Call command. The transformation uses a Point value to represent the displacement or rotation to apply. The UML diagram found in the figure \ref{fig:class-transformation} shows the general idea behind the class. The table \ref{tab:Transformation-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:Transformation-Attributes} and \ref{tab:Transformation-MemberFunctions} details the interface of the class.
+The Transformation class is a base class intended to represent a transformation that need to be applied to a Call command. The transformation uses a Point value to represent the displacement or rotation to apply. The UML diagram found in the figure \ref{fig:class-transformation} shows the general idea behind the class. The table \ref{tab:Transformation-Types} shows the enum definitons found within the class itself, while the tables \ref{tab:Transformation-Attributes} and \ref{tab:Transformation-MemberFunctions} details the interface of the class.
 
 \begin{figure}
 	\centering
@@ -2726,49 +2726,509 @@ The Command class is a base class intended to be a base class for other more spe
 \subsubsection{Class: PrimitiveCommand}\label{Class-PrimitiveCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: PrimitiveCommand
+The PrimitiveCommand class is a base class intended to be a more specific base class for the commands used to represent graphic primitives, like the Wire and Polygon. The UML diagram found in the figure \ref{fig:class-primitive-command} shows the general idea behind the class. The class itself doesn't provide a new functionality, it only serves as an abstract base class. The table \ref{tab:PrimitiveCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image17}
+	\caption{UML diagram of the \textbf{PrimitiveCommand} class.}
+	\label{fig:class-primitive-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit PrimitiveCommand (void)} & Explicit default constructor. Initializes the PrimitiveCommand instance as a Primitive. \\
+	
+	\hline
+	
+	\texttt{virtual ~PrimitiveCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+\end{tabular}
+\caption{Member functions of the \textbf{PrimitiveCommand} class.}
+\label{tab:PrimitiveCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: PathBasedCommand}\label{Class-PathBasedCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: PathBasedCommand
+The PathBasedCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-path-based-command} shows the general idea behind the class. The tables \ref{tab:PathBasedCommand-Attributes} and \ref{tab:PathBasedCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image18}
+	\caption{UML diagram of the \textbf{Transformation} class.}
+	\label{fig:class-path-based-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{vector<Point> command\_points} & Stores the list of points used to represent the figure stored. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{PathBasedCommand} class.}
+\label{tab:PathBasedCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit PathBasedCommand (void)} & Explicit default constructor. Initializes the PathBasedCommand instance as a PathBased. \\
+	
+	\hline
+	
+	\texttt{virtual ~PathBasedCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setPoints (const vector<Point>\&)} & Sets a new vector of Point instances as the content of the command\_points attribute. The old stored points are deleted. \\
+	
+	\hline	
+	
+	\texttt{vector<Point> getPoints (void)} & Returns a copy of the command\_points attribute of the instance. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{PathBasedCommand} class.}
+\label{tab:PathBasedCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: PolygonCommand}\label{Class-PolygonCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: PolygonCommand
+The PolygonCommand class is a child class intended to be a final class to be used by the user. The UML diagram found in the figure \ref{fig:class-polygon-command} shows the general idea behind the class. The table \ref{tab:PolygonCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image19}
+	\caption{UML diagram of the \textbf{PolygonCommand} class.}
+	\label{fig:class-polygon-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit PolygonCommand (void)} & Explicit default constructor. Initializes the PolygonCommand instance as a Polygon. \\
+	
+	\hline
+	
+	\texttt{explicit PolygonCommand (const string\&)} & Explicit specialized constructor. Initializes the PolygonCommand instance as a Polygon while processing the input argument. The input string is expected to be a cleaned and valid Polygon command. \\
+	
+	\hline
+	
+	\texttt{virtual ~PolygonCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, PolygonCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, PolygonCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, PolygonCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, PolygonCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+\end{tabular}
+\caption{Member functions of the \textbf{PolygonCommand} class.}
+\label{tab:PolygonCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: WireCommand}\label{Class-WireCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: WireCommand
+The WireCommand class is a child class intended to be a final class intended to be used by the user. The UML diagram found in the figure \ref{fig:class-wire-command} shows the general idea behind the class. The tables \ref{tab:WireCommand-Attributes} and \ref{tab:WireCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image20}
+	\caption{UML diagram of the \textbf{WireCommand} class.}
+	\label{fig:class-wire-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{unsigned long int wire\_width} & Stores the width of the Wire figure. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{WireCommand} class.}
+\label{tab:WireCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit WireCommand (void)} & Explicit default constructor. Initializes the WireCommand instance as a Wire. \\
+	
+	\hline
+	
+	\texttt{explicit WireCommand (const string\&)} & Explicit specialized constructor. Initializes the WireCommand instance as a Wire while processing the input argument. The input string is expected to be a cleaned and valid Wire command. \\
+	
+	\hline
+	
+	\texttt{virtual ~WireCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setWidth (const unsigned long int\&)} & Sets the width of the Wire storing the value passed in the wire\_width attribute. \\
+	
+	\hline	
+	
+	\texttt{unsigned long int getWidth (void)} & Returns the width of the Wire figure, stored in the wire\_width attribute. \\
+	
+	\hline	
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, WireCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, WireCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, WireCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, WireCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{WireCommand} class.}
+\label{tab:WireCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: PositionBasedCommand}\label{Class-PositionBasedCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: PositionBasedCommand
+The PositionBasedCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-position-based-command} shows the general idea behind the class. The tables \ref{tab:PositionBasedCommand-Attributes} and \ref{tab:PositionBasedCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image21}
+	\caption{UML diagram of the \textbf{PositionBasedCommand} class.}
+	\label{fig:class-position-based-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{Point command\_position} & Stores the position where the center of the figure is located. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{PositionBasedCommand} class.}
+\label{tab:PositionBasedCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit PositionBasedCommand (void)} & Explicit default constructor. Initializes the PositionBasedCommand instance as a PositionBased. \\
+	
+	\hline
+	
+	\texttt{virtual ~PositionBasedCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setPosition (const Point\&)} & Sets the new position of the figure using the Point pased as argument. The value is stored in the attribute command\_position. The old value stored in the same attribute is deleted. \\
+	
+	\hline	
+	
+	\texttt{Point getPosition (void)} & Returns a copy of the command\_position attribute of the instance. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{PositionBasedCommand} class.}
+\label{tab:PositionBasedCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: BoxCommand}\label{Class-BoxCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: BoxCommand
+The BoxCommand class is a child class intended to be a final class intended to be used by the user. The UML diagram found in the figure \ref{fig:class-box-command} shows the general idea behind the class. The tables \ref{tab:BoxCommand-Attributes} and \ref{tab:BoxCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image22}
+	\caption{UML diagram of the \textbf{BoxCommand} class.}
+	\label{fig:class-box-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{Size box\_size} & Stores the size (width and height) of the figure. \\
+	
+	\hline
+	
+	\texttt{Size box\_rotation} & Stores the point used to form a rotation vector for the figure. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{BoxCommand} class.}
+\label{tab:BoxCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit BoxCommand (void)} & Explicit default constructor. Initializes the BoxCommand instance as a Box and sets a neutral rotation point of [1,0]. \\
+	
+	\hline
+	
+	\texttt{explicit BoxCommand (const string\&)} & Explicit specialized constructor. Initializes the BoxCommand instance as a Box while processing the input argument. The input string is expected to be a cleaned and valid Box command. \\
+	
+	\hline
+	
+	\texttt{virtual ~BoxCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setRotation (const Point\&)} & Sets the rotation vector for the figure. The argument Point is stored in the box\_rotation attrubute. The old value is deleted. \\
+	
+	\hline	
+	
+	\texttt{void setSize (const Size\&)} & Sets the size of the figure. The argument is stored in the box\_size attribute. The old value is deleted. \\
+	
+	\hline	
+	
+	\texttt{Size getSize (void)} & Returns a copy of the size of the figure stored in the box\_size attribute. \\
+		
+	\hline
+	
+	\texttt{Point getRotation (void)} & Returns a copy of the rotation vector of the figure stored in the box\_rotation attribute. \\
+		
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, BoxCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, BoxCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, BoxCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, BoxCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{BoxCommand} class.}
+\label{tab:BoxCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: RoundFlashCommand}\label{Class-RoundFlashCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: RoundFlashCommand
+The RoundFlashCommand class is a child class intended to be a final class intended to be used by the user. The UML diagram found in the figure \ref{fig:class-roundflash-command} shows the general idea behind the class. The tables \ref{tab:RoundFlashCommand-Attributes} and \ref{tab:RoundFlashCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image23}
+	\caption{UML diagram of the \textbf{RoundFlashCommand} class.}
+	\label{fig:class-roundflash-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{unsigned long int round\_diameter} & Stores the diameter of the figure. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{RoundFlashCommand} class.}
+\label{tab:RoundFlashCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit RoundFlashCommand (void)} & Explicit default constructor. Initializes the RoundFlashCommand instance as a RoundFlash and sets a default diameter of 1. \\
+	
+	\hline
+	
+	\texttt{explicit RoundFlashCommand (const string\&)} & Explicit specialized constructor. Initializes the RoundFlashCommand instance as a RoundFlash while processing the input argument. The input string is expected to be a cleaned and valid Round Flash command. \\
+	
+	\hline
+	
+	\texttt{virtual ~RoundFlashCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setDiameter (const unsigned long int\&)} & Sets the diameter of the figure. The argument is stored in the round\_diameter attrubute. The old value is deleted. \\
+	
+	\hline	
+	
+	\texttt{unsigned long int getDiameter (void)} & Returns a copy of the diameter of the figure stored in the round\_diameter attribute. \\
+		
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, RoundFlashCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, RoundFlashCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, RoundFlashCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, RoundFlashCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{RoundFlashCommand} class.}
+\label{tab:RoundFlashCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: ControlCommand}\label{Class-ControlCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: ControlCommand
+The ControlCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-control-command} shows the general idea behind the class. The tables \ref{tab:ControlCommand-Attributes} and \ref{tab:ControlCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image24}
+	\caption{UML diagram of the \textbf{ControlCommand} class.}
+	\label{fig:class-control-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{unsigned long int command\_id} & Stores the Identification Value of the command (the ID of the Cell to control). \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{ControlCommand} class.}
+\label{tab:ControlCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit ControlCommand (void)} & Explicit default constructor. Initializes the ControlCommand instance as a Control and sets the internal ID to control as 1 by default. \\
+	
+	\hline
+	
+	\texttt{virtual ~ControlCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setID (const unsigned long int&)} & Sets the new id of the figure using the Point pased as argument. The value is stored in the attribute command\_position. The old value stored in the same attribute is deleted. \\
+	
+	\hline	
+	
+	\texttt{Point getPosition (void)} & Returns a copy of the command\_position attribute of the instance. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{PositionBasedCommand} class.}
+\label{tab:ControlCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: DefinitionStartCommand}\label{Class-DefinitionStartCommand}
