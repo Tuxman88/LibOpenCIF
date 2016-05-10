@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.4.3)  8 MAY 2016 16:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.3.13)  9 MAY 2016 22:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1882,71 +1882,193 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [77
 
  <./images/chapter03-image23.png (PNG copy)>] [78]
-<images/chapter03-image34.png, id=367, 2117.9125pt x 1726.45pt>
+<images/chapter03-image24.png, id=367, 1034.86626pt x 499.8675pt>
+File: images/chapter03-image24.png Graphic file (type png)
+
+<use images/chapter03-image24.png>
+Package pdftex.def Info: images/chapter03-image24.png used on input line 3188.
+(pdftex.def)             Requested size: 206.96957pt x 99.97173pt.
+ [79
+
+ <./images/chapter03-image24.png (PNG copy)>] <images/chapter03-image25.png, id
+=373, 1513.655pt x 710.655pt>
+File: images/chapter03-image25.png Graphic file (type png)
+
+<use images/chapter03-image25.png>
+Package pdftex.def Info: images/chapter03-image25.png used on input line 3241.
+(pdftex.def)             Requested size: 302.72563pt x 142.12848pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3268--3268
+[]|\OT1/lmtt/b/n/9 explicit DefinitionStartCommand (const
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3292--3292
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3296--3296
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3300--3300
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3304--3304
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[80
+
+ <./images/chapter03-image25.png (PNG copy)>] [81]
+<images/chapter03-image26.png, id=383, 1529.715pt x 517.935pt>
+File: images/chapter03-image26.png Graphic file (type png)
+
+<use images/chapter03-image26.png>
+Package pdftex.def Info: images/chapter03-image26.png used on input line 3322.
+(pdftex.def)             Requested size: 305.93758pt x 103.58516pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3336--3336
+[]|\OT1/lmtt/b/n/9 explicit DefinitionDeleteCommand (const
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3352--3352
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3356--3356
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3360--3360
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3364--3364
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+[82
+
+ <./images/chapter03-image26.png (PNG copy)>]
+<images/chapter03-image27.png, id=389, 2249.40375pt x 701.62125pt>
+File: images/chapter03-image27.png Graphic file (type png)
+
+<use images/chapter03-image27.png>
+Package pdftex.def Info: images/chapter03-image27.png used on input line 3382.
+(pdftex.def)             Requested size: 449.87279pt x 140.32176pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3392--3392
+[]|\OT1/lmtt/b/n/9 vector<Transformation>
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3417--3417
+[]|\OT1/lmtt/b/n/9 void setTransformations (const
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3437--3437
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3441--3441
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3445--3445
+[]|\OT1/lmtt/b/n/9 friend istream& (::operator>>) (istream&,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3449--3449
+[]|\OT1/lmtt/b/n/9 friend ostream& (::operator<<) (ostream&,
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[83
+
+ <./images/chapter03-image27.png (PNG copy)>] [84]
+<images/chapter03-image34.png, id=399, 2117.9125pt x 1726.45pt>
 File: images/chapter03-image34.png Graphic file (type png)
 
 <use images/chapter03-image34.png>
-Package pdftex.def Info: images/chapter03-image34.png used on input line 3254.
+Package pdftex.def Info: images/chapter03-image34.png used on input line 3509.
 (pdftex.def)             Requested size: 381.20781pt x 310.74759pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 3271--3271
+Underfull \hbox (badness 10000) in paragraph at lines 3526--3526
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3280--3280
+Underfull \hbox (badness 10000) in paragraph at lines 3535--3535
 
  []
 
 
-Underfull \hbox (badness 4832) in paragraph at lines 3349--3350
+Underfull \hbox (badness 4832) in paragraph at lines 3604--3605
 \OT1/lmr/m/n/9 file[]raw[]commands and stored there
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3365--3366
+Underfull \hbox (badness 10000) in paragraph at lines 3620--3621
 []|\OT1/lmr/m/n/9 Assigns an empty vec-tor to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3365--3366
+Underfull \hbox (badness 10000) in paragraph at lines 3620--3621
 \OT1/lmr/bx/n/9 file[]commands\OT1/lmr/m/n/9 . Doesn't delete
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3373--3374
+Underfull \hbox (badness 10000) in paragraph at lines 3628--3629
 []|\OT1/lmr/m/n/9 Returns the con-tents of
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 3385--3386
+Underfull \hbox (badness 1448) in paragraph at lines 3640--3641
 \OT1/lmr/m/n/9 mand, Box-Com-mand, WireCom-mand
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3398
+Underfull \vbox (badness 10000) detected at line 3653
  []
 
-[79
+[85
 
-] [80 <./images/chapter03-image34.png (PNG copy)>] [81] [82] [83
+] [86] [87 <./images/chapter03-image34.png (PNG copy)>] [88] [89
 
 ]
 \GPT@outputbox=\box69
 LaTeX Font Info:    Font shape `OMS/lmr/bx/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 3431.
+(Font)              Font shape `OMS/lmsy/b/n' tried instead on input line 3686.
 
- [84]
+ [90]
 \tf@toc=\write5
 \openout5 = `UserManual.toc'.
 
 
 (./UserManual.aux) ) 
 Here is how much of TeX's memory you used:
- 21236 strings out of 494977
- 404219 string characters out of 6180184
- 730325 words of memory out of 5000000
- 23989 multiletter control sequences out of 15000+600000
+ 21279 strings out of 494977
+ 405553 string characters out of 6180183
+ 731356 words of memory out of 5000000
+ 24028 multiletter control sequences out of 15000+600000
  87430 words of font info for 59 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  61i,18n,68p,894b,2364s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1967,10 +2089,10 @@ pfb></usr/share/texmf/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></
 usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texmf/fonts/type1/p
 ublic/lm/lmtti10.pfb>
-Output written on UserManual.pdf (88 pages, 12130990 bytes).
+Output written on UserManual.pdf (94 pages, 12414574 bytes).
 PDF statistics:
- 464 PDF objects out of 1000 (max. 8388607)
- 291 compressed objects within 3 object streams
+ 496 PDF objects out of 1000 (max. 8388607)
+ 308 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 312 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 356 words of extra memory for PDF output out of 10000 (max. 10000000)
 

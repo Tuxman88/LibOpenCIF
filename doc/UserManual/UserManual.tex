@@ -3216,15 +3216,15 @@ The ControlCommand class is a base class intended to be a base class for other m
 	
 	\hline
 	
-	\texttt{void setID (const unsigned long int&)} & Sets the new id of the figure using the Point pased as argument. The value is stored in the attribute command\_position. The old value stored in the same attribute is deleted. \\
+	\texttt{void setID (const unsigned long int\&)} & Sets the new id of the figure as the value passed by argument. The value is stored in the attribute command\_id. The old value stored in the same attribute is deleted. \\
 	
 	\hline	
 	
-	\texttt{Point getPosition (void)} & Returns a copy of the command\_position attribute of the instance. \\
+	\texttt{unsigned long int getID (void)} & Returns a copy of the command\_id attribute of the instance. \\
 	
 	\hline
 \end{tabular}
-\caption{Member functions of the \textbf{PositionBasedCommand} class.}
+\caption{Member functions of the \textbf{ControlCommand} class.}
 \label{tab:ControlCommand-MemberFunctions}
 \end{table}
 
@@ -3234,19 +3234,227 @@ The ControlCommand class is a base class intended to be a base class for other m
 \subsubsection{Class: DefinitionStartCommand}\label{Class-DefinitionStartCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: DefinitionStartCommand
+The DefinitionStartCommand class is a child class intended to be a final class intended to be used by the user. The UML diagram found in the figure \ref{fig:class-definitionstart-command} shows the general idea behind the class. The tables \ref{tab:DefinitionStartCommand-Attributes} and \ref{tab:DefinitionStartCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image25}
+	\caption{UML diagram of the \textbf{DefinitionStartCommand} class.}
+	\label{fig:class-definitionstart-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{Fraction command\_ab} & Stores the scaling factor of the new Definition. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{DefinitionStartCommand} class.}
+\label{tab:DefinitionStartCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit DefinitionStartCommand (void)} & Explicit default constructor. Initializes the DefinitionStartCommand instance as a DefinitionStart and sets a default diameter of 1. \\
+	
+	\hline
+	
+	\texttt{explicit DefinitionStartCommand (const string\&)} & Explicit specialized constructor. Initializes the DefinitionStartCommand instance as a DefinitionStart while processing the input argument. The input string is expected to be a cleaned and valid Definition Start command. \\
+	
+	\hline
+	
+	\texttt{virtual ~DefinitionStartCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setAB (const Fraction\&)} & Sets the AB scaling factor to the value passed as parameter. The argument is stored in the command\_ab attrubute. The old value is deleted. \\
+	
+	\hline	
+	
+	\texttt{Fraction getAB (void)} & Returns a copy of the AB scaling factor of the Definition stored in the command\_ab attribute. \\
+		
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionStartCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionStartCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionStartCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionStartCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{DefinitionStartCommand} class.}
+\label{tab:DefinitionStartCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: DefinitionDeleteCommand}\label{Class-DefinitionDeleteCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: DefinitionDeleteCommand
+The DefinitionDeleteCommand class is a child class intended to be a final class intended to be used by the user. The UML diagram found in the figure \ref{fig:class-definitiondelete-command} shows the general idea behind the class. The table \ref{tab:DefinitionDeleteCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image26}
+	\caption{UML diagram of the \textbf{DefinitionDeleteCommand} class.}
+	\label{fig:class-definitiondelete-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{7.5cm} | p{8cm} |}
+	\hline
+	
+	\texttt{explicit DefinitionDeleteCommand (void)} & Explicit default constructor. Initializes the DefinitionDeleteCommand instance as a DefinitionDelete. \\
+	
+	\hline
+	
+	\texttt{explicit DefinitionDeleteCommand (const string\&)} & Explicit specialized constructor. Initializes the DefinitionDeleteCommand instance as a DefinitionDelete while processing the input argument. The input string is expected to be a cleaned and valid Definition Delete command. \\
+	
+	\hline
+	
+	\texttt{virtual ~DefinitionDelete (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionDeleteCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionDeleteCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionDeleteCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionDeleteCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{DefinitionDeleteCommand} class.}
+\label{tab:DefinitionDeleteCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: CallCommand}\label{Class-CallCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: CallCommand
+The CallCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-call-command} shows the general idea behind the class. The tables \ref{tab:CallCommand-Attributes} and \ref{tab:CallCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image27}
+	\caption{UML diagram of the \textbf{ControlCommand} class.}
+	\label{fig:class-call-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{vector<Transformation> call\_transformations} & Stores the transformations required to be applied to the Definition called. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{CallCommand} class.}
+\label{tab:CallCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit CallCommand (void)} & Explicit default constructor. Initializes the CallCommand instance as a Call. \\
+	
+	\hline
+	
+	\texttt{explicit CallCommand (const string\&)} & Explicit specialized constructor. Initializes the CallCommand instance as a Call while processing the input argument. The input string is expected to be a cleaned and valid Call command. \\
+	
+	\hline
+	
+	\texttt{virtual ~CallCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setTransformations (const vector<Transformation>\&)} & Sets a new list of transformations to be applied to the Definition. The value is stored in the attribute call\_transformations. The old value stored in the same attribute is deleted. \\
+	
+	\hline	
+	
+	\texttt{void addTransformation (const Transformation\&)} & Appends to the list of transformations to be applied to the Definition the one passed as argument. The value is stored at the end of the attribute call\_transformations. The old values stored in the same attribute are not modified. \\
+	
+	\hline	
+	
+	\texttt{vector<Transformation>\& getTransformations (void)} & Returns a reference to the call\_transformations attribute of the instance. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, CallCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, CallCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, CallCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, CallCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{CallCommand} class.}
+\label{tab:CallCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: DefinitionEndCommand}\label{Class-DefinitionEndCommand}
