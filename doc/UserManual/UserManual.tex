@@ -3460,37 +3460,375 @@ The CallCommand class is a base class intended to be a base class for other more
 \subsubsection{Class: DefinitionEndCommand}\label{Class-DefinitionEndCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: DefinitionEndCommand
+The DefinitionEndCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-definitionend-command} shows the general idea behind the class. The table \ref{tab:DefinitionEndCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image28}
+	\caption{UML diagram of the \textbf{DefinitionEndCommand} class.}
+	\label{fig:class-definitionend-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit DefinitionEndCommand (void)} & Explicit default constructor. Initializes the DefinitionEndCommand instance as a DefinitionEnd. \\
+	
+	\hline
+	
+	\texttt{explicit DefinitionEndCommand (const string\&)} & Explicit specialized constructor. Initializes the DefinitionEndCommand instance as a DefinitionEnd while processing the input argument. The input string is expected to be a cleaned and valid Definition End command. \\
+	
+	\hline
+	
+	\texttt{virtual ~DefinitionEndCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionEndCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionEndCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, DefinitionEndCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, DefinitionEndCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{DefinitionEndCommand} class.}
+\label{tab:DefinitionEndCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: EndCommand}\label{Class-EndCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: EndCommand
+The EndCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-end-command} shows the general idea behind the class. The table \ref{tab:EndCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image29}
+	\caption{UML diagram of the \textbf{EndCommand} class.}
+	\label{fig:class-end-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit EndCommand (void)} & Explicit default constructor. Initializes the EndCommand instance as an End. \\
+	
+	\hline
+	
+	\texttt{explicit EndCommand (const string\&)} & Explicit specialized constructor. Initializes the EndCommand instance as an End while processing the input argument. The input string is expected to be a cleaned and valid Definition End command. \\
+	
+	\hline
+	
+	\texttt{virtual ~EndCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, EndCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, EndCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, EndCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, EndCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{EndCommand} class.}
+\label{tab:EndCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: RawContentCommand}\label{Class-RawContentCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: RawContentCommand
+The RawContentCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-rawcontent-command} shows the general idea behind the class. The tables \ref{tab:RawContentCommand-Attributes} and \ref{tab:RawContentCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image30}
+	\caption{UML diagram of the \textbf{RawContentCommand} class.}
+	\label{fig:class-rawcontent-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{string command\_content} & Stores the contents of the command in string form. \\
+
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{RawContentCommand} class.}
+\label{tab:RawContentCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit RawContentCommand (void)} & Explicit default constructor. Initializes the RawContentCommand instance as a RawContent. \\
+	
+	\hline
+	
+	\texttt{virtual ~RawContentCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setContent (const string\&)} & Sets the new contents of the command as the value passed by argument. The value is stored in the attribute command\_contents. The old value stored in the same attribute is deleted. \\
+	
+	\hline	
+	
+	\texttt{string getContent (void)} & Returns a copy of the command\_contents attribute of the instance. \\
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{RawContentCommand} class.}
+\label{tab:RawContentCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: UserExtentionCommand}\label{Class-UserExtentionCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: UserExtentionCommand
+The UserExtentionCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-userextention-command} shows the general idea behind the class. The table \ref{tab:UserExtentionCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image31}
+	\caption{UML diagram of the \textbf{UserExtentionCommand} class.}
+	\label{fig:class-userextention-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit UserExtentionCommand (void)} & Explicit default constructor. Initializes the UserExtentionCommand instance as a UserExtention. \\
+	
+	\hline
+	
+	\texttt{explicit UserExtentionCommand (const string\&)} & Explicit specialized constructor. Initializes the UserExtentionCommand instance as a UserExtention while processing the input argument. The input string is expected to be a cleaned and valid User Extention command. \\
+	
+	\hline
+	
+	\texttt{virtual ~UserExtentionCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, UserExtentionCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, UserExtentionCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, UserExtentionCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, UserExtentionCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{UserExtentionCommand} class.}
+\label{tab:UserExtentionCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: CommentCommand}\label{Class-CommentCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: CommentCommand
+The CommentCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-comment-command} shows the general idea behind the class. The table \ref{tab:CommentCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image32}
+	\caption{UML diagram of the \textbf{UserExtentionCommand} class.}
+	\label{fig:class-comment-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit CommentCommand (void)} & Explicit default constructor. Initializes the CommentCommand instance as a Comment. \\
+	
+	\hline
+	
+	\texttt{explicit CommentCommand (const string\&)} & Explicit specialized constructor. Initializes the CommentCommand instance as a Comment while processing the input argument. The input string is expected to be a cleaned and valid Comment command. \\
+	
+	\hline
+	
+	\texttt{virtual ~CommentCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, CommentCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, CommentCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, CommentCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, CommentCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{CommentCommand} class.}
+\label{tab:CommentCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Class: LayerCommand}\label{Class-LayerCommand}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Class: LayerCommand
+The LayerCommand class is a base class intended to be a base class for other more specialized that can add specific functionality. The UML diagram found in the figure \ref{fig:class-layer-command} shows the general idea behind the class. The tables \ref{tab:LayerCommand-Attributes} and \ref{tab:LayerCommand-MemberFunctions} details the interface of the class.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2, clip=true, trim= 0pt 0pt 0pt 0pt]{images/chapter03-image33}
+	\caption{UML diagram of the \textbf{LayerCommand} class.}
+	\label{fig:class-layer-command}
+\end{figure}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{6.5cm} | p{9cm} |}
+	\hline
+	
+	\texttt{string layer\_name} & Stores the name of the material to use. \\
+	
+	\hline
+\end{tabular}
+\caption{Attributes of the \textbf{LayerCommand} class.}
+\label{tab:LayerCommand-Attributes}
+\end{table}
+
+\begin{table}[h]\footnotesize
+\centering
+\begin{tabular}{| >{\bfseries}p{8.5cm} | p{7cm} |}
+	\hline
+	
+	\texttt{explicit LayerCommand (void)} & Explicit default constructor. Initializes the LayerCommand instance as a Layer. \\
+	
+	\hline
+	
+	\texttt{explicit LayerCommand (const string\&)} & Explicit specialized constructor. Initializes the LayerCommand instance as a Layer while processing the input argument. The input string is expected to be a cleaned and valid Layer command. \\
+	
+	\hline
+	
+	\texttt{virtual ~LayerCommand (void)} & Destructor. Doesn't perform any operation. \\
+	
+	\hline
+	
+	\texttt{void setName (const string\&)} & Sets the name of the material. The argument is stored in the layer\_name attribute. The old value is deleted. \\
+	
+	\hline	
+	
+	\texttt{Size getName (void)} & Returns a copy of the name of the material stored in the layer\_name attribute. \\
+		
+	\hline
+	
+	\texttt{virtual void print (ostream\&)} & Virtual member function intended to print the contents of the command in string form. Being virtual, this member function is replaced in each derivated class to print the command according to the actual format. \\
+	
+	\hline
+	
+	\texttt{virtual void read (istream\&)} & Virtual member function intended to read the contents of the command from a string form. Being virtual, this member function is replaced in each derivated class to read the command according to the expected format. \\
+	
+	\hline	
+		
+	\texttt{friend istream\& (::operator>>) (istream\&, LayerCommand*)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, LayerCommand*)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend istream\& (::operator>>) (istream\&, LayerCommand\&)} & Overloaded operator intended to extract text from an input stream. The extracted text is converted and stored in the instance according to the derivated class that is using it. The format expected of the text depends on the derivated class used. \\
+	
+	\hline
+	
+	\texttt{friend ostream\& (::operator<<) (ostream\&, LayerCommand\&)} & Overloaded operator intended to insert text to an output stream. The values inserted depends on the derivated class used. \\	
+	
+	\hline
+\end{tabular}
+\caption{Member functions of the \textbf{LayerCommand} class.}
+\label{tab:LayerCommand-MemberFunctions}
+\end{table}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Loading group of classes}\label{Loading-group-of-classes}
