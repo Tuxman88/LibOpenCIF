@@ -39,6 +39,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{rotating}
 \usepackage{longtable}
+\usepackage{multirow}
+
 
 \counterwithin{figure}{section}
 
@@ -3992,6 +3994,169 @@ The File class performs the operations required to open, load, validate and tran
 	\hline
 \caption{Member functions of the \textbf{File} class.}
 \label{tab:File-MemberFunctions}
+\end{longtable}
+}
+
+\renewcommand\chapterillustration{images/chapter03-cover}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Apendix}\label{Apendix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Apendix introduction here
+\newpage 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Compatibility list}\label{Compatibility-list}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Complete table of systems on which the library was tested, and the results to expect when following correctly the instructions provided in this document.
+% Total: 15.5
+{\footnotesize
+\begin{longtable}{| >{\bfseries}p{3cm} | p{2cm} | p{1cm} | p{2cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
+	\hline
+	
+	\texttt{System}                               & Version                        & Arch   & Update date & CMake & GCC   & Works & Notes \\
+	
+	\hline
+	\hline
+	
+	\multirow{2}{*}{\texttt{Arch Linux}}          & \multirow{2}{*}{2016.05.01}    & i586   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                             
+	\hline
+	
+	\texttt{Bio-Linux}                            & 8                              & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\	
+	
+	\hline
+	
+	\texttt{CAELinux}                             & 2013                           & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\	
+	
+	\hline
+	
+	\multirow{6}{*}{\texttt{CentOS}}              & \multirow{2}{*}{7}             & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+																		           \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{6.7}           & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{5.11}          & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                             
+	\hline
+	
+	\texttt{Chakra}                               & 2016.02 "Ian"                  & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\	
+	
+	\hline
+	
+	\multirow{4}{*}{\texttt{Debian}}              & \multirow{2}{*}{8.4.0}         & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{7.9.0}         & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                            							       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	
+	\hline
+	
+	\multirow{2}{*}{\texttt{elementary OS}}       & \multirow{2}{*}{0.3.2 "Freya"} & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                             
+	\hline
+	
+	\multirow{2}{*}{\texttt{Fedora Security Lab}} & \multirow{2}{*}{24}            & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	
+	\hline
+	
+	\multirow{2}{*}{\texttt{Fedora Scientific}}   & \multirow{2}{*}{24}            & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	
+	\hline
+	
+	\multirow{4}{*}{\texttt{Fedora Workstation}}  & \multirow{2}{*}{23}            & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+												    						       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{22}            & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              							       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+
+	\hline	
+	
+	\multirow{4}{*}{\texttt{Linux Mint}}          & \multirow{2}{*}{17.3}          & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+												     						       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{13 LTS}        & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                            							       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+
+	\hline
+	
+	\multirow{2}{*}{\texttt{Mageia}}              & \multirow{2}{*}{5}             & i586   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+
+	\hline
+	
+	\multirow{2}{*}{\texttt{Manjaro}}             & \multirow{2}{*}{15.12}         & i686   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+											    							       \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+
+	\hline
+	                                         
+	\texttt{Open SUSE}                            & 8.4.0                          & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	  
+	\hline
+	
+	\texttt{Poseidon Linux}                       & 7                              & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\		
+	
+	\hline
+	
+	\multirow{6}{*}{\texttt{Scientific Linux}}    & 7                              & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{6}             & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8} 
+	                                              & \multirow{2}{*}{5}             & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & x86\_64& DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\	
+	
+	\hline
+	
+	\multirow{6}{*}{\texttt{Ubuntu Desktop}}      & \multirow{2}{*}{16.04 LTS}     & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+																		           \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{14.04 LTS}     & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & amd64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{12.04 LTS}     & i386   & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         							           \cline{3-8}
+	                                              &                                & and64  & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                             
+	\hline
+	
+	\multirow{4}{*}{\texttt{Zorin OS Core}}       & \multirow{2}{*}{11}            & x32    & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+																		           \cline{3-8}
+	                                              &                                & x64    & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                              \cline{2-8}
+	                                              & \multirow{2}{*}{9 LTS}         & x32    & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	                                         	 						           \cline{3-8}
+	                                              &                                & x64    & DUMMY       & DUMMY & DUMMY & DUMMY & DUMMY \\
+	
+	\hline
+\caption{Compatibility list for LibOpenCIF.}
+\label{tab:Compatibility-list-for-LibOpenCIF}
 \end{longtable}
 }
 

@@ -76,3 +76,5 @@
 \contentsline {subsubsection}{Class: LayerCommand}{93}
 \contentsline {subsection}{\numberline {3.4.3}Loading group of classes}{95}
 \contentsline {subsubsection}{Class: File}{95}
+\contentsline {chapter}{\chapternumberline {4}Apendix}{98}
+\contentsline {section}{\numberline {4.1}Compatibility list}{99}
