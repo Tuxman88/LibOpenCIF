@@ -31,17 +31,6 @@
 
 // To search over the contents of the original files, search for the word "FILE:"
 
-// FILE: opencif.h
-
-namespace OpenCIF
-{
-   const std::string LibraryVersion = "1.0.3";
-   const std::string LibraryName = "LibOpenCIF";
-   const std::string LibraryAuthor = "Moises Chavez-Martinez";
-   const std::string LibrarySupport = "moises.chavez.martinez@gmail.com";
-   const std::string LibraryCIFVersion = "2.0";
-}
-
 // FILE: command.h
 
 
@@ -437,7 +426,7 @@ namespace OpenCIF
 // FILE: definitiondeletecommand.h
 
 
-namespace OpenCIF { class DefinitionDeleteCommand; };
+namespace OpenCIF { class DefinitionDeleteCommand; }
 std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand& command );
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionDeleteCommand& command );
 std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionDeleteCommand* command );
@@ -829,6 +818,7 @@ namespace OpenCIF
          
          void setCommands ( const std::vector< OpenCIF::Command* >& new_commands );
          std::vector< OpenCIF::Command* > getCommands ( void ) const;
+         void dropCommands ( void );
          
          LoadStatus loadFile ( const LoadMethod& load_method = StopOnError ); // Whole process of loading a CIF file, from opening the file
                                                                               // to converting the commands into instances.
@@ -839,14 +829,16 @@ namespace OpenCIF
          
          std::vector< std::string > getMessages ( void );
          
-         std::vector < std::string > getRawCommands ( void ) const;
+         std::vector< std::string > getRawCommands ( void ) const;
+         
+         static std::string cleanCommand ( std::string command );
+         static bool isCommandValid ( std::string command );
          
       private:
-         std::string cleanCommand ( std::string command );
-         std::string clearNumericCommand ( std::string command );
-         std::string cleanLayerCommand ( std::string command );
-         std::string cleanCallCommand ( std::string command );
-         std::string cleanDefinitionCommand ( std::string command );
+         static std::string clearNumericCommand ( std::string command );
+         static std::string cleanLayerCommand ( std::string command );
+         static std::string cleanCallCommand ( std::string command );
+         static std::string cleanDefinitionCommand ( std::string command );
          
       private:
          std::string file_path;
@@ -855,6 +847,20 @@ namespace OpenCIF
          std::vector< std::string > file_raw_commands;
          std::vector< std::string > file_messages;
    };
+}
+
+// FILE: opencif.h
+
+namespace OpenCIF
+{
+   const std::string LibraryVersion = "1.2.0";
+   const std::string LibraryVersionMajor = "1";
+   const std::string LibraryVersionMinor = "2";
+   const std::string LibraryVersionPatch = "0";
+   const std::string LibraryName = "LibOpenCIF";
+   const std::string LibraryAuthor = "Moises Chavez-Martinez";
+   const std::string LibrarySupport = "moises.chavez.martinez@gmail.com";
+   const std::string LibraryCIFVersion = "2.0";
 }
 
 # endif

@@ -58,10 +58,7 @@ std::ostream& operator<< ( std::ostream& output_stream , OpenCIF::DefinitionEndC
 std::istream& operator>> ( std::istream& input_stream , OpenCIF::DefinitionEndCommand& command )
 {
    // Dummy call to prevent warnings about command not being used
-   if ( (&command) == 0 )
-   {
-      return ( input_stream );
-   }
+   command.read ( input_stream );
    
    return ( input_stream );
 }
