@@ -109,10 +109,10 @@ test programs for the library.
 
    So,  you have your first test program compiled and running. The next step is
 to,  actually,  use  the  library. To do so, you need to include the LibOpenCIF
-header file. You just need to add the line "# include <opencif/opencif.h":
+header file. You just need to add the line "# include <opencif>":
 
 1    # include <iostream>
-2    # include <opencif/opencif.h>
+2    # include <opencif>
 3
 4    using namespace std;
 5   
@@ -131,7 +131,7 @@ class instance. Such instance will help in the loading/validation of the file.
 So, to access the File class, you need to instantiate like this:
 
 1    # include <iostream>
-2    # include <opencif/opencif.h>
+2    # include <opencif>
 3
 4    using namespace std;
 5   
@@ -150,7 +150,7 @@ file, so, we need to add a new header: string
 
 1    # include <iostream>
 2    # include <string>
-3    # include <opencif/opencif.h>
+3    # include <opencif>
 4
 5    using namespace std;
 6   
@@ -166,7 +166,7 @@ member function of the File class instance:
 
 1    # include <iostream>
 2    # include <string>
-3    # include <opencif/opencif.h>
+3    # include <opencif>
 4
 5    using namespace std;
 6   
@@ -199,7 +199,7 @@ example, what happened with the operation:
 
 1    # include <iostream>
 2    # include <string>
-3    # include <opencif/opencif.h>
+3    # include <opencif>
 4
 5    using namespace std;
 6   
@@ -366,4 +366,6 @@ Detailed information
 --------------------
 
 To  get  detailed  information in a user manual and a technical manual, you can
-refer to the PDF documents found in the "doc" folder withing the package.
+refer to the documents found in the "doc" folder withing the package, or in the
+documentation  package (which contains more documentation about the library and
+its usage).

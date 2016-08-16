@@ -2,12 +2,14 @@ LibOpenCIF - INSTALL file
 =========================
 
 The  installation  of  the  LibOpenCIF library is no complex. Just follow these
-steps and the library should be compiled and installed without problems.
+steps  and  the library should be compiled and installed without problems. This
+instructions  only work for GNU/Linux and Apple macOS X systems. The library is
+not intended to be installed in Microsoft Windows systems.
 
 The  library  was  designed  to need no special dependences to compile. So, you
 just need to meet this points to be able to compile it:
 
-- G++ (GCC) >= 4.8
+- G++ (GCC) >= 4.0
 - CMake >= 2.6
 - Linux kernel >= 3.0
 

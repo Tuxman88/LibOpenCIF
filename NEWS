@@ -6,6 +6,7 @@ LibOpenCIF - NEWS file
 - Improved user interface for the user.
 - Improved error reporting.
 - Documentation: Documentation re-worked.
+- Fixed warnings for strict compilation.
 
 [1.1.1]
 

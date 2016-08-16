@@ -3,35 +3,33 @@ LibOpenCIF
 
 A library to read the contents of CIF (Caltech Intermediate Form) files.
 
-This library is writen in C++ using nothing more than the standard C++
-components (so, no extra libs needed). This library can help the user to
-read and validate the contents of a CIF file.
+This  library  is  writen  in  C++  using  nothing  more  than the standard C++
+components  (so,  no extra libs needed). This library can help the user to read
+and validate the contents of a CIF file.
 
 The latest release can be found in the [SourceForge] project page.
 
-The idea of this library is to be used as a building block for larger
-projects, where the reading and validation of the input files can take
-a lot of time.
+The idea of this library is to be used as a building block for larger projects,
+where the reading and validation of the input files can take a lot of time.
 
-The validation of the file is done using a finite state machine, based on
-the specification of the format dating to february 11, 1980 (CIF version
-2).
+The  validation  of the file is done using a finite state machine, based on the
+specification of the format dating to february 11, 1980 (CIF version 2).
 
-The result of the library, once readed the contents, is a C++ vector
-containing pointers to Command instances. Since the convertion of the
-values of the contents of the files (integers to float values) can be a
-little bit tricky, all the values are left as integers (of long long
-type, so there can be stored greater values). The conversion to float
-values (if needed) is left to the user.
+The result of the library, once readed the contents, is a C++ vector containing
+pointers  to  Command  instances.  Since  the  convertion  of the values of the
+contents  of  the  files (integers to float values) can be a little bit tricky,
+all  the values are left as integers (of long long type, so there can be stored
+greater values). The conversion to float values (if needed) is left to the user.
 
 Version
 =======
 
-1.2.0 - 2014/12/21
+1.2.0 - 2016/08/16
 
 * Interface: Improved interface for user.
 * Code: Improved error information provided to the user once a invalid char is found.
-* Documentation: Documentation re-worked.
+* Code: Fixed minor warnings when compiling the source in GNU/Linux when using strict options.
+* Documentation: Documentation re-worked and extended.
 
 1.1.1 - 2014/12/20
 
@@ -60,7 +58,8 @@ Version
 Tech
 ====
 
-LibOpenCIF is using some open-source technology solutions to compile and work efficiently.
+LibOpenCIF  is  using some open-source technology solutions to compile and work
+efficiently.
 
 * [CMake] - Tool used to the compilation of the project.
 
@@ -72,7 +71,7 @@ Read the INSTALL file.
 Dependencies
 ------------
 
-- G++ (GCC) >= 4.8
+- G++ (GCC) >= 4.0
 - CMake >= 2.6
 - Linux Kernel >= 3.0
 
